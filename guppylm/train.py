@@ -45,9 +45,14 @@ def evaluate(model, loader, device, max_batches=50):
     return total_loss / max(1, n)
 
 
-def train():
-    mc = GuppyConfig()
-    tc = TrainConfig()
+def train(mc=None, tc=None):
+    """Train GuppyLM, saving best/periodic/final checkpoints to tc.output_dir.
+
+    mc/tc default to GuppyConfig()/TrainConfig(). Returns a stats dict
+    (steps, elapsed_s, best_eval, train_losses) for callers like tools/benchmark.py.
+    """
+    mc = mc or GuppyConfig()
+    tc = tc or TrainConfig()
     device = get_device(tc)
     torch.manual_seed(tc.seed)
 
@@ -155,6 +160,7 @@ def train():
 
     elapsed = time.time() - t0
     print(f"\nDone! {elapsed:.0f}s, best eval: {best_eval:.4f}")
+    return {"steps": step, "elapsed_s": elapsed, "best_eval": best_eval, "train_losses": losses}
 
 
 if __name__ == "__main__":

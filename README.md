@@ -63,18 +63,18 @@ It's trained from scratch on 60K synthetic conversations across 60 topics, runs 
 
 ## Architecture
 
-| | |
-|---|---|
-| **Parameters** | 8.7M |
-| **Layers** | 6 |
-| **Hidden dim** | 384 |
-| **Heads** | 6 |
-| **FFN** | 768 (ReLU) |
-| **Vocab** | 4,096 (BPE) |
-| **Max sequence** | 128 tokens |
-| **Norm** | LayerNorm |
-| **Position** | Learned embeddings |
-| **LM head** | Weight-tied with embeddings |
+|                  |                             |
+| ---------------- | --------------------------- |
+| **Parameters**   | 8.7M                        |
+| **Layers**       | 6                           |
+| **Hidden dim**   | 384                         |
+| **Heads**        | 6                           |
+| **FFN**          | 768 (ReLU)                  |
+| **Vocab**        | 4,096 (BPE)                 |
+| **Max sequence** | 128 tokens                  |
+| **Norm**         | LayerNorm                   |
+| **Position**     | Learned embeddings          |
+| **LM head**      | Weight-tied with embeddings |
 
 Vanilla transformer. No GQA, no RoPE, no SwiGLU, no early exit. As simple as it gets.
 
@@ -83,6 +83,7 @@ Vanilla transformer. No GQA, no RoPE, no SwiGLU, no early exit. As simple as it 
 ## Personality
 
 Guppy:
+
 - Speaks in short, lowercase sentences
 - Experiences the world through water, temperature, light, vibrations, and food
 - Doesn't understand human abstractions
@@ -137,19 +138,18 @@ You can also invoke chat with a single prompt, and exit after the response:
 python -m guppylm chat --prompt "tell me a joke"
 ```
 
-
 ---
 
 ## Dataset
 
 **[arman-bd/guppylm-60k-generic](https://huggingface.co/datasets/arman-bd/guppylm-60k-generic)** on HuggingFace.
 
-| | |
-|---|---|
-| Samples | 60,000 (57K train / 3K test) |
-| Format | `{"input": "...", "output": "...", "category": "..."}` |
-| Categories | 60 |
-| Generation | Synthetic template composition |
+|            |                                                        |
+| ---------- | ------------------------------------------------------ |
+| Samples    | 60,000 (57K train / 3K test)                           |
+| Format     | `{"input": "...", "output": "...", "category": "..."}` |
+| Categories | 60                                                     |
+| Generation | Synthetic template composition                         |
 
 ```python
 from datasets import load_dataset

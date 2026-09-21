@@ -20,9 +20,9 @@ import sys
 
 import torch
 
-sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "guppylm"))
-from config import GuppyConfig
-from model import GuppyLM
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from guppylm.config import GuppyConfig
+from guppylm.model import GuppyLM
 
 
 def load_env():
@@ -49,6 +49,8 @@ def export_onnx(checkpoint_path, tokenizer_path, output_path, quantize=True, pus
     if os.path.exists(config_json):
         with open(config_json) as f:
             cfg = json.load(f)
+            # train.py writes {"model": {...}, "train": {...}}
+            cfg = cfg.get("model", cfg)
         config = GuppyConfig(
             vocab_size=cfg.get("vocab_size", 4096),
             max_seq_len=cfg.get("max_position_embeddings", cfg.get("max_seq_len", 128)),
@@ -93,6 +95,7 @@ def export_onnx(checkpoint_path, tokenizer_path, output_path, quantize=True, pus
             "logits": {0: "batch", 1: "seq_len"},
         },
         opset_version=17,
+        dynamo=False,  # TorchScript exporter: same graph as docs/model.onnx, no onnxscript dep
     )
 
     size_mb = os.path.getsize(output_path) / 1e6
