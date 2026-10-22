@@ -36,7 +36,7 @@ import torch  # noqa: E402
 from tokenizers import Tokenizer  # noqa: E402
 
 from guppylm.config import GuppyConfig, TrainConfig  # noqa: E402
-from guppylm.dataset import get_dataloader  # noqa: E402
+from guppylm.dataset import get_dataloader, subset_lines  # noqa: E402
 from guppylm.eval_cases import get_eval_cases  # noqa: E402
 from guppylm.model import GuppyLM  # noqa: E402
 from guppylm.train import evaluate, get_device, train  # noqa: E402
@@ -70,10 +70,10 @@ def ensure_data(regen):
         prepare()
 
 
-def data_stats(max_seq_len):
+def data_stats(max_seq_len, limit=None, subset_seed=0):
     tok = Tokenizer.from_file(TOKENIZER_PATH)
-    with open(os.path.join(DATA_DIR, "train.jsonl")) as f:
-        lens = [len(tok.encode(json.loads(line)["text"]).ids) for line in f]
+    lines = subset_lines(os.path.join(DATA_DIR, "train.jsonl"), limit, subset_seed)
+    lens = [len(tok.encode(json.loads(line)["text"]).ids) for line in lines]
     return {
         "n_train": len(lens),
         "len_mean": statistics.mean(lens),
@@ -214,7 +214,8 @@ def cmd_run(args):
 
     mc = GuppyConfig(max_seq_len=args.max_seq_len)
     tc = TrainConfig(max_steps=args.steps, batch_size=args.batch_size, device=args.device,
-                     seed=args.seed, data_dir=DATA_DIR, output_dir=ckpt_dir)
+                     seed=args.seed, data_dir=DATA_DIR, output_dir=ckpt_dir,
+                     train_limit=args.train_limit, subset_seed=args.subset_seed)
     device = get_device(tc)
 
     ensure_data(args.regen_data)
@@ -225,7 +226,7 @@ def cmd_run(args):
                 "machine": platform.machine(), "processor": platform.processor()},
         "model_config": vars(mc),
         "train_config": {k: v for k, v in vars(tc).items() if k not in ("data_dir", "output_dir")},
-        "data": data_stats(mc.max_seq_len),
+        "data": data_stats(mc.max_seq_len, tc.train_limit, tc.subset_seed),
     }
     print(f"\n== data ==\n{json.dumps(results['data'], indent=2)}")
 
@@ -241,6 +242,8 @@ def cmd_run(args):
             "approx_tokens_per_s": stats["steps"] * tc.batch_size * n_tokens / stats["elapsed_s"],
             "best_eval_loss_50_batches": stats["best_eval"],
             "final_train_loss_avg100": statistics.mean(stats["train_losses"][-100:]),
+            "epochs": stats["steps"] * tc.batch_size / results["data"]["n_train"],
+            "eval_history": stats["eval_history"],
         }
     elif not os.path.exists(ckpt_dir):
         sys.exit(f"--skip-train but no checkpoints in {ckpt_dir}")
@@ -259,6 +262,21 @@ def cmd_run(args):
                                  mc.max_seq_len, tc.batch_size, shuffle=False)
     full = evaluate(model, eval_loader, device, max_batches=10**9)
     results["eval"] = {"best_step": ckpt["step"], "loss": full, "perplexity": math.exp(full)}
+
+    # Overfitting check: the harness benchmarks best_model.pt (early stopping), which hides
+    # overfitting. Also score final_model.pt, and both on the train set the run saw, in eval mode.
+    train_loader = get_dataloader(os.path.join(DATA_DIR, "train.jsonl"), TOKENIZER_PATH,
+                                  mc.max_seq_len, tc.batch_size, shuffle=False,
+                                  limit=tc.train_limit, subset_seed=tc.subset_seed)
+    results["eval"]["train_loss_eval_mode"] = evaluate(model, train_loader, device, max_batches=100)
+    final_path = os.path.join(ckpt_dir, "final_model.pt")
+    if os.path.exists(final_path):
+        fmodel, _, fckpt = load_model(final_path, device)
+        results["eval"]["final_step"] = fckpt["step"]
+        results["eval"]["final_loss"] = evaluate(fmodel, eval_loader, device, max_batches=10**9)
+        results["eval"]["final_train_loss_eval_mode"] = evaluate(fmodel, train_loader, device,
+                                                                 max_batches=100)
+        del fmodel
     print(json.dumps(results["eval"], indent=2))
 
     print("\n== latency ==")
@@ -319,6 +337,12 @@ def cmd_compare(args):
         ("steps/s", lambda r: get(r, "train", "steps_per_s", fmt="{:.1f}")),
         ("eval loss", lambda r: get(r, "eval", "loss")),
         ("eval ppl", lambda r: get(r, "eval", "perplexity", fmt="{:.3f}")),
+        ("train limit", lambda r: get(r, "train_config", "train_limit", fmt="{}")),
+        ("epochs", lambda r: get(r, "train", "epochs", fmt="{:.1f}")),
+        ("best step", lambda r: get(r, "eval", "best_step", fmt="{}")),
+        ("train loss (eval mode)", lambda r: get(r, "eval", "train_loss_eval_mode")),
+        ("final eval loss", lambda r: get(r, "eval", "final_loss")),
+        ("final train loss (eval mode)", lambda r: get(r, "eval", "final_train_loss_eval_mode")),
         ("truncated samples", lambda r: get(r, "data", "n_truncated", fmt="{}")),
         ("keyword hit", lambda r: get(r, "quality", "keyword_hit_rate", fmt="{:.1%}")),
         ("lowercase", lambda r: get(r, "quality", "lowercase_rate", fmt="{:.1%}")),
@@ -353,6 +377,9 @@ def main():
     r.add_argument("--batch-size", type=int, default=TrainConfig.batch_size)
     r.add_argument("--device", default=TrainConfig.device)
     r.add_argument("--seed", type=int, default=TrainConfig.seed)
+    r.add_argument("--train-limit", type=int, default=None,
+                   help="Train on a seeded random subset of N train examples (eval set unchanged)")
+    r.add_argument("--subset-seed", type=int, default=0)
     r.add_argument("--iters", type=int, default=30, help="Timed iterations per latency point")
     r.add_argument("--samples", type=int, default=5, help="Generations per eval case")
     r.add_argument("--skip-train", action="store_true")

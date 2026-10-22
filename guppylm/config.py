@@ -1,6 +1,7 @@
 """GuppyLM configuration."""
 
 from dataclasses import dataclass
+from typing import Optional
 
 
 @dataclass
@@ -34,3 +35,5 @@ class TrainConfig:
     seed: int = 42
     data_dir: str = "data"
     output_dir: str = "checkpoints"
+    train_limit: Optional[int] = None   # train on a seeded random subset of N examples
+    subset_seed: int = 0
