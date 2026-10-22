@@ -834,7 +834,10 @@ def _topic(user_msgs, guppy_templates, category):
     fills them once at import time, leaving each topic a fixed table of ~10 replies.
     """
     def gen():
-        return _make_sample(pick(user_msgs), pick(guppy_templates()), category)
+        # Half the time, follow with a second reply from the same topic, so a
+        # topic's ~10 templates yield ~100 combinations instead of 10 fixed replies.
+        first, second = pick_n(guppy_templates(), 2)
+        return _make_sample(pick(user_msgs), join_sentences(first, maybe(second)), category)
     gen.__name__ = f"gen_{category}"
     return gen
 
