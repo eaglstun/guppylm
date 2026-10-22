@@ -87,6 +87,11 @@ TWISTED = {
     ],
 }
 
+# Copy test: the confused template always echoes the user's noun in training.
+# Does the model echo a noun it never saw in that slot?
+ECHO_IN_LIST = ["taxes", "wifi", "homework", "the stock market"]
+ECHO_NOVEL = ["volcanoes", "jazz", "the moon", "a sandwich", "gravity", "chess"]
+
 PERSONA_WORDS = {
     "fish": ["water", "food", "swim", "bubble", "tank", "fin", "fish", "glass", "flake",
              "pellet", "gill", "rock", "filter", "gravel"],
@@ -157,7 +162,7 @@ def main():
     p.add_argument("--top-k", type=int, default=50)
     p.add_argument("--max-new", type=int, default=64)
     p.add_argument("--seed", type=int, default=0)
-    p.add_argument("--set", choices=["ood", "indist"], default="ood",
+    p.add_argument("--set", choices=["ood", "indist", "echo"], default="ood",
                    help="ood = the prompts above; indist = the persona's eval_cases prompts")
     args = p.parse_args()
 
@@ -171,6 +176,9 @@ def main():
         from guppylm import eval_cases, eval_cases_dog
         mod = eval_cases_dog if args.persona == "dog" else eval_cases
         prompts = [(c["category"], c["prompt"]) for c in mod.get_eval_cases()]
+    elif args.set == "echo":
+        prompts = ([("echo_in_list", f"what do you think about {t}") for t in ECHO_IN_LIST]
+                   + [("echo_novel", f"what do you think about {t}") for t in ECHO_NOVEL])
 
     rows = []
     for cat, prompt in prompts:
@@ -188,6 +196,12 @@ def main():
                for t in ("verbatim", "confused", "persona", "empty")}
     summary["n"] = len(flat)
     summary["unique_reply_rate"] = len({r["text"] for r in flat}) / len(flat)
+    if args.set == "echo":
+        for cat in ("echo_in_list", "echo_novel"):
+            rs = [row for row in rows if row["category"] == cat]
+            noun = lambda row: row["prompt"].split("about ", 1)[1]
+            hits = sum(noun(row) in r["text"] for row in rs for r in row["replies"])
+            summary[f"{cat}_echo_rate"] = hits / (len(rs) * args.samples)
     print("\nsummary", json.dumps(summary, indent=2))
     os.makedirs(os.path.dirname(os.path.abspath(args.out)), exist_ok=True)
     with open(args.out, "w") as f:
