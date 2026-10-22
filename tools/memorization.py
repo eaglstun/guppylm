@@ -214,6 +214,7 @@ def main():
             "sentence_in_train": sum(r["n_sent_in_train"] for r in rows) / max(1, tot_s),
             "distinct_replies": len({r["reply"] for r in rows}) / n,
         }
+        summ["confused_mode"] = sum(r["reply_category"] == "confused" for r in rows) / n
         if any("on_topic" in r for r in rows):
             scored = [r for r in rows if "on_topic" in r]
             summ["on_topic"] = sum(r["on_topic"] for r in scored) / len(scored)
