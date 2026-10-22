@@ -11,7 +11,7 @@ food- and walk-obsessed, smells everything, believes every sound is the doorbell
 or the mail carrier, and doesn't understand human abstractions. It never has a
 name: it is only ever "the dog" or "the springer spaniel".
 
-Character set is deliberately kept identical to the fish data (lowercase,
+Character set is deliberately kept the same as the fish data (lowercase,
 digits, space, period, apostrophe, hyphen): no commas, no question marks, no
 exclamation points, so both tokenizers end up with the same alphabet.
 
