@@ -157,7 +157,8 @@ def main():
     p.add_argument("--top-k", type=int, default=50)
     p.add_argument("--max-new", type=int, default=64)
     p.add_argument("--seed", type=int, default=0)
-    p.add_argument("--extra", help="JSON file of extra [category, prompt] pairs (e.g. in-distribution)")
+    p.add_argument("--set", choices=["ood", "indist"], default="ood",
+                   help="ood = the prompts above; indist = the persona's eval_cases prompts")
     args = p.parse_args()
 
     torch.manual_seed(args.seed)
@@ -166,9 +167,10 @@ def main():
     known = train_outputs(args.train)
 
     prompts = SHARED + TWISTED[args.persona]
-    if args.extra:
-        with open(args.extra) as f:
-            prompts = [tuple(x) for x in json.load(f)]
+    if args.set == "indist":
+        from guppylm import eval_cases, eval_cases_dog
+        mod = eval_cases_dog if args.persona == "dog" else eval_cases
+        prompts = [(c["category"], c["prompt"]) for c in mod.get_eval_cases()]
 
     rows = []
     for cat, prompt in prompts:
