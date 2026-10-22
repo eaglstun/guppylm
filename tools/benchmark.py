@@ -15,6 +15,8 @@ Usage:
     python tools/benchmark.py run --name baseline
     python tools/benchmark.py run --name ctx256 --max-seq-len 256
     python tools/benchmark.py run --name baseline --skip-train   # re-benchmark existing run
+    python tools/benchmark.py run --name tiny --n-layers 2 --d-model 64 --n-heads 4
+    python tools/benchmark.py curve --ckpt-dir runs/baseline/checkpoints --out curve.json
     python tools/benchmark.py compare                            # table of all runs
 """
 
@@ -207,12 +209,78 @@ def quality(model_cpu, samples_per_case, seed):
 
 # ── Commands ────────────────────────────────────────────────────────────────
 
+def model_config_from_args(args):
+    """GuppyConfig from CLI shape flags; unset flags keep the GuppyConfig defaults.
+
+    If --d-model is given without --ffn-hidden, the FFN keeps the default 2x ratio.
+    """
+    kw = {"max_seq_len": args.max_seq_len}
+    for k in ("d_model", "n_layers", "n_heads", "ffn_hidden"):
+        if getattr(args, k) is not None:
+            kw[k] = getattr(args, k)
+    if args.d_model is not None and args.ffn_hidden is None:
+        kw["ffn_hidden"] = 2 * args.d_model
+    mc = GuppyConfig(**kw)
+    if mc.d_model % mc.n_heads:
+        sys.exit(f"d_model {mc.d_model} is not divisible by n_heads {mc.n_heads}")
+    return mc
+
+
+def cmd_curve(args):
+    """Score a run's periodic checkpoints (step_N.pt) for loss + quality: a learning curve."""
+    device = get_device(TrainConfig(device=args.device))
+    ckpt_dir = args.ckpt_dir
+    steps = [int(s) for s in args.steps.split(",")]
+    tok_eval = None
+    rows = []
+    for step in steps:
+        path = os.path.join(ckpt_dir, f"step_{step}.pt")
+        if not os.path.exists(path):
+            path = os.path.join(ckpt_dir, "final_model.pt")
+            print(f"step_{step}.pt missing, using final_model.pt")
+        model, mc, ckpt = load_model(path, device)
+        if tok_eval is None:
+            tok_eval = get_dataloader(os.path.join(DATA_DIR, "eval.jsonl"), TOKENIZER_PATH,
+                                      mc.max_seq_len, TrainConfig.batch_size, shuffle=False)
+        loss = evaluate(model, tok_eval, device, max_batches=10**9)
+        model_cpu, _, _ = load_model(path, torch.device("cpu"))
+        q = quality(model_cpu, args.samples, args.seed)
+        extra = {}
+        for prompt in args.prompt:
+            torch.manual_seed(args.seed)
+            extra[prompt] = sample_replies(model_cpu, prompt, args.n_extra)
+        row = {"step": ckpt["step"], "eval_loss": loss, "perplexity": math.exp(loss),
+               "keyword_hit_rate": q["keyword_hit_rate"], "lowercase_rate": q["lowercase_rate"],
+               "examples": q["examples"], "extra_prompts": extra}
+        rows.append(row)
+        print(f"\n== step {row['step']} == loss {loss:.4f}  kw {q['keyword_hit_rate']:.1%}  "
+              f"lower {q['lowercase_rate']:.1%}")
+        for p, rs in extra.items():
+            for r in rs:
+                print(f"  {p!r} -> {r!r}")
+    if args.out:
+        with open(args.out, "w") as f:
+            json.dump({"ckpt_dir": ckpt_dir, "seed": args.seed, "rows": rows}, f, indent=2)
+        print(f"\nWrote {args.out}")
+
+
+@torch.no_grad()
+def sample_replies(model_cpu, prompt, n):
+    tok = Tokenizer.from_file(TOKENIZER_PATH)
+    ids = tok.encode(prompt_text(prompt)).ids
+    outs = []
+    for _ in range(n):
+        out, _ = model_cpu.generate(torch.tensor([ids]), max_new_tokens=64)
+        outs.append(tok.decode(out[0].tolist()[len(ids):]).split("<|im_end|>")[0].strip())
+    return outs
+
+
 def cmd_run(args):
     run_dir = os.path.join(RUNS_DIR, args.name)
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     os.makedirs(run_dir, exist_ok=True)
 
-    mc = GuppyConfig(max_seq_len=args.max_seq_len)
+    mc = model_config_from_args(args)
     tc = TrainConfig(max_steps=args.steps, batch_size=args.batch_size, device=args.device,
                      seed=args.seed, data_dir=DATA_DIR, output_dir=ckpt_dir)
     device = get_device(tc)
@@ -224,6 +292,7 @@ def cmd_run(args):
         "env": {"torch": torch.__version__, "device": str(device),
                 "machine": platform.machine(), "processor": platform.processor()},
         "model_config": vars(mc),
+        "params": GuppyLM(mc).param_count()[0],
         "train_config": {k: v for k, v in vars(tc).items() if k not in ("data_dir", "output_dir")},
         "data": data_stats(mc.max_seq_len),
     }
@@ -287,6 +356,12 @@ def cmd_run(args):
     results["quality"] = quality(model_cpu, args.samples, args.seed)
     q = results["quality"]
     print(f"keyword hit rate {q['keyword_hit_rate']:.1%}, lowercase {q['lowercase_rate']:.1%}")
+    if args.prompts:
+        q["extra_prompts"] = {}
+        for prompt in args.prompts:
+            torch.manual_seed(args.seed)
+            q["extra_prompts"][prompt] = sample_replies(model_cpu, prompt, 3)
+            print(f"  {prompt!r} -> {q['extra_prompts'][prompt]!r}")
     for p, r in list(q["examples"].items())[:5]:
         print(f"  {p!r} -> {r!r}")
 
@@ -314,6 +389,8 @@ def cmd_compare(args):
         return fmt.format(r) if r is not None else "-"
 
     rows = [
+        ("params", lambda r: get(r, "params", fmt="{:,}")),
+        ("layers x d_model", lambda r: f"{r['model_config']['n_layers']}x{r['model_config']['d_model']}"),
         ("max_seq_len", lambda r: get(r, "model_config", "max_seq_len", fmt="{}")),
         ("train time (s)", lambda r: get(r, "train", "elapsed_s", fmt="{:.0f}")),
         ("steps/s", lambda r: get(r, "train", "steps_per_s", fmt="{:.1f}")),
@@ -355,15 +432,37 @@ def main():
     r.add_argument("--seed", type=int, default=TrainConfig.seed)
     r.add_argument("--iters", type=int, default=30, help="Timed iterations per latency point")
     r.add_argument("--samples", type=int, default=5, help="Generations per eval case")
+    r.add_argument("--d-model", type=int, default=None, help=f"default {GuppyConfig.d_model}")
+    r.add_argument("--n-layers", type=int, default=None, help=f"default {GuppyConfig.n_layers}")
+    r.add_argument("--n-heads", type=int, default=None, help=f"default {GuppyConfig.n_heads}")
+    r.add_argument("--ffn-hidden", type=int, default=None,
+                   help=f"default {GuppyConfig.ffn_hidden}, or 2x --d-model when that is set")
+    r.add_argument("--prompts", nargs="*", default=[],
+                   help="Extra prompts to sample (3 replies each) into results.json")
     r.add_argument("--skip-train", action="store_true")
     r.add_argument("--regen-data", action="store_true")
     r.add_argument("--no-onnx", action="store_true")
     r.set_defaults(fn=cmd_run)
 
+    cv = sub.add_parser("curve", help="Score periodic checkpoints of a run (learning curve)")
+    cv.add_argument("--ckpt-dir", required=True)
+    cv.add_argument("--steps", default="500,1000,2000,4000,10000",
+                    help="Comma list; a missing step_N.pt falls back to final_model.pt")
+    cv.add_argument("--device", default=TrainConfig.device)
+    cv.add_argument("--seed", type=int, default=TrainConfig.seed)
+    cv.add_argument("--samples", type=int, default=5)
+    cv.add_argument("--prompt", action="append",
+                    default=None, help="Extra prompt to sample (repeatable)")
+    cv.add_argument("--n-extra", type=int, default=3, help="Replies per extra prompt")
+    cv.add_argument("--out", default=None, help="Write JSON here")
+    cv.set_defaults(fn=cmd_curve)
+
     c = sub.add_parser("compare", help="Print a table of all runs in runs/")
     c.set_defaults(fn=cmd_compare)
 
     args = p.parse_args()
+    if args.cmd == "curve" and args.prompt is None:
+        args.prompt = ["hi guppy", "what is the meaning of life", "tell me a joke"]
     args.fn(args)
 
 
