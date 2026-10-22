@@ -40,17 +40,24 @@ def train_tokenizer(texts, save_path, vocab_size=VOCAB_SIZE):
     return tokenizer
 
 
-def prepare(data_dir=DATA_DIR, n_samples=60000, eval_ratio=0.05):
+def prepare(data_dir=DATA_DIR, n_samples=60000, eval_ratio=0.05, persona="fish"):
     os.makedirs(data_dir, exist_ok=True)
 
     # 1. Generate data
-    print(f"Generating {n_samples} samples...")
-    from .generate_data import generate_dataset
-    generate_dataset(n_samples, eval_ratio)
+    print(f"Generating {n_samples} {persona} samples into {data_dir}...")
+    if persona == "dog":
+        from .generate_data_dog import generate_dataset
+        generate_dataset(n_samples, eval_ratio, out_dir=data_dir)
+    else:
+        # The fish generator (left untouched) always writes to ./data
+        if os.path.abspath(data_dir) != os.path.abspath("data"):
+            raise ValueError("the fish generator only writes to ./data")
+        from .generate_data import generate_dataset
+        generate_dataset(n_samples, eval_ratio)
 
     # 2. Read back all samples for tokenizer training
     texts = []
-    for name in ["data/train.jsonl", "data/eval.jsonl"]:
+    for name in [os.path.join(data_dir, "train.jsonl"), os.path.join(data_dir, "eval.jsonl")]:
         if os.path.exists(name):
             with open(name) as f:
                 for line in f:

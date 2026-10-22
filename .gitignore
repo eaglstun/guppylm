@@ -1,5 +1,6 @@
 # ── Generated data & models ─────────────────────────────────
 data/
+data_dog/
 dataset/
 checkpoints/
 runs/

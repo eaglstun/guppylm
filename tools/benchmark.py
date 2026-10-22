@@ -37,13 +37,20 @@ from tokenizers import Tokenizer  # noqa: E402
 
 from guppylm.config import GuppyConfig, TrainConfig  # noqa: E402
 from guppylm.dataset import get_dataloader  # noqa: E402
-from guppylm.eval_cases import get_eval_cases  # noqa: E402
+from guppylm import eval_cases as fish_eval_cases  # noqa: E402
+from guppylm import eval_cases_dog  # noqa: E402
 from guppylm.model import GuppyLM  # noqa: E402
 from guppylm.train import evaluate, get_device, train  # noqa: E402
 
 RUNS_DIR = os.path.join(ROOT, "runs")
+# DATA_DIR / TOKENIZER_PATH / PERSONA are reset by --data-dir and --persona in cmd_run.
 DATA_DIR = os.path.join(ROOT, "data")
 TOKENIZER_PATH = os.path.join(DATA_DIR, "tokenizer.json")
+PERSONA = "fish"
+
+
+def get_eval_cases():
+    return (eval_cases_dog if PERSONA == "dog" else fish_eval_cases).get_eval_cases()
 
 
 def prompt_text(user_msg):
@@ -67,7 +74,7 @@ def pctl(xs, p):
 def ensure_data(regen):
     if regen or not os.path.exists(TOKENIZER_PATH):
         from guppylm.prepare_data import prepare
-        prepare()
+        prepare(data_dir=DATA_DIR, persona=PERSONA)
 
 
 def data_stats(max_seq_len):
@@ -208,6 +215,10 @@ def quality(model_cpu, samples_per_case, seed):
 # ── Commands ────────────────────────────────────────────────────────────────
 
 def cmd_run(args):
+    global DATA_DIR, TOKENIZER_PATH, PERSONA
+    DATA_DIR = os.path.abspath(args.data_dir)
+    TOKENIZER_PATH = os.path.join(DATA_DIR, "tokenizer.json")
+    PERSONA = args.persona
     run_dir = os.path.join(RUNS_DIR, args.name)
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     os.makedirs(run_dir, exist_ok=True)
@@ -220,6 +231,8 @@ def cmd_run(args):
     ensure_data(args.regen_data)
     results = {
         "name": args.name,
+        "persona": PERSONA,
+        "data_dir": os.path.relpath(DATA_DIR, ROOT),
         "created": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "env": {"torch": torch.__version__, "device": str(device),
                 "machine": platform.machine(), "processor": platform.processor()},
@@ -358,6 +371,9 @@ def main():
     r.add_argument("--skip-train", action="store_true")
     r.add_argument("--regen-data", action="store_true")
     r.add_argument("--no-onnx", action="store_true")
+    r.add_argument("--data-dir", default=DATA_DIR, help="train/eval jsonl + tokenizer (default ./data)")
+    r.add_argument("--persona", choices=["fish", "dog"], default="fish",
+                   help="which generator (--regen-data) and eval cases to use")
     r.set_defaults(fn=cmd_run)
 
     c = sub.add_parser("compare", help="Print a table of all runs in runs/")
