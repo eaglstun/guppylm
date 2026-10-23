@@ -1641,8 +1641,8 @@ def to_openai(s):
 #  MAIN
 # ══════════════════════════════════════════════════════════════════════════════
 
-def generate_dataset(n_samples=60000, eval_ratio=0.05):
-    # All topics get equal weight — single-turn only
+def generate_dataset(n_samples=60000, eval_ratio=0.05, confused_weight=1.0):
+    # All topics get equal weight, except confused_weight scales gen_confused — single-turn only
     topics = [
         gen_greeting, gen_feeling, gen_temp_hot, gen_temp_cold, gen_food,
         gen_light, gen_water, gen_about, gen_confused, gen_tank, gen_noise,
@@ -1657,7 +1657,7 @@ def generate_dataset(n_samples=60000, eval_ratio=0.05):
         gen_age, gen_smart, gen_poop, gen_doctor, gen_singing, gen_tv,
     ]
     w = 1.0 / len(topics)
-    generators = [(g, w) for g in topics]
+    generators = [(g, w * confused_weight if g is gen_confused else w) for g in topics]
 
     total_w = sum(w for _, w in generators)
     generators = [(g, w / total_w) for g, w in generators]

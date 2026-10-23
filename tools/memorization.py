@@ -137,9 +137,13 @@ def main():
     ap.add_argument("--samples", type=int, default=3, help="generations per prompt")
     ap.add_argument("--n-eval-inputs", type=int, default=60)
     ap.add_argument("--seed", type=int, default=1234)
+    ap.add_argument("--data-dir", default=None,
+                    help="train/eval/tokenizer the checkpoint was built with (default: data/)")
+    ap.add_argument("--temperature", type=float, default=0.7)
+    ap.add_argument("--top-k", type=int, default=50, help="1 = greedy")
     args = ap.parse_args()
 
-    data_dir = os.path.join(ROOT, "data")
+    data_dir = args.data_dir or os.path.join(ROOT, "data")
     tok = Tokenizer.from_file(os.path.join(data_dir, "tokenizer.json"))
     train = load_pairs(os.path.join(data_dir, "train.jsonl"), args.train_limit, args.subset_seed)
     full_train = load_pairs(os.path.join(data_dir, "train.jsonl"), with_cat=True)
@@ -175,14 +179,16 @@ def main():
 
     model = load_model(args.ckpt)
     torch.manual_seed(args.seed)
-    report = {"ckpt": args.ckpt, "train_limit": args.train_limit, "samples": args.samples, "sets": {}}
+    report = {"ckpt": args.ckpt, "train_limit": args.train_limit, "samples": args.samples,
+              "temperature": args.temperature, "top_k": args.top_k, "sets": {}}
     for name, prompts in sets.items():
         rows = []
         for p in prompts:
             ids = tok.encode(prompt_text(p)).ids
             for _ in range(args.samples):
                 with torch.no_grad():
-                    out, _ = model.generate(torch.tensor([ids]), max_new_tokens=64)
+                    out, _ = model.generate(torch.tensor([ids]), max_new_tokens=64,
+                                            temperature=args.temperature, top_k=args.top_k)
                 text = tok.decode(out[0].tolist()[len(ids):]).split("<|im_end|>")[0].strip()
                 sents = sentences(text)
                 in_train = [s in train_sents for s in sents]

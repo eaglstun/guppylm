@@ -89,3 +89,34 @@ Sample replies to `do you know what a toaster is`-style prompts:
   the copy skill isn't learned; the model takes the cheaper route of matching the
   noun distribution. Untested next steps: raise the confused share, train longer, or
   check greedy decoding (the probe samples at temperature 0.7, top_k 50).
+
+## Follow-up 2: greedy decoding, 3x training, 10x confused share (measured)
+
+New options: `tools/memorization.py --data-dir/--temperature/--top-k` (the probe used to
+read `data/` unconditionally, so an older run must be pointed at its own saved data:
+`runs/fix-composed/data`, `runs/fix-nouns/data`), and
+`python -m guppylm prepare --confused-weight N`. `data/` now holds the weight-10 data.
+
+| run                         | eval loss | new noun named | known noun named | new noun, partial |
+| --------------------------- | --------: | -------------: | ---------------: | ----------------: |
+| fix-composed, greedy        |     0.471 |           0.00 |             0.93 |              0/30 |
+| fix-nouns, sampled          |     0.481 |           0.00 |             0.02 |              0/90 |
+| fix-nouns, greedy           |           |           0.00 |             0.00 |              1/30 |
+| fix-nouns-30k (30k steps)   |     0.482 |           0.00 |             0.00 |              0/90 |
+| fix-nouns-cw10, sampled     |     0.535 |           0.00 |             0.53 |              7/90 |
+| fix-nouns-cw10, greedy      |           |           0.00 |             0.80 |              4/30 |
+
+Eval loss is per run's own eval set; cw10's eval is 14% confused, so it isn't comparable.
+"Partial" = the reply contains the first 4 letters of a word (4+ letters) of the test noun.
+
+- **Greedy:** sampling wasn't hiding a copy skill. Ruled out.
+- **3x steps:** eval loss flat (0.481 to 0.482); slot fills get stranger
+  ("is a surprise surprise something that lives in water"). Ruled out.
+- **10x confused share** (8,266 train samples, about 7 per noun): known-noun copying
+  comes back (0.80 greedy) and two test nouns get half-copied: "basket" for basketball,
+  "a vacuum" for vacuum cleaner. Both overlap words in the training list ("basket",
+  "vacuuming"). No test noun with no training overlap was ever copied.
+- **Inferred:** the model copies a word from the prompt only if that word already
+  appeared in the reply slot in training. That is association between familiar tokens,
+  not a general copy operation. A general one would need either far more copy data or
+  an inductive bias this small model doesn't pick up in this setup.
