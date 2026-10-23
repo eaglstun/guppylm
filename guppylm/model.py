@@ -27,11 +27,11 @@ class Attention(nn.Module):
         qkv = self.qkv(x).reshape(B, T, 3, self.n_heads, self.head_dim).permute(2, 0, 3, 1, 4)
         q, k, v = qkv[0], qkv[1], qkv[2]
 
-        attn = (q @ k.transpose(-2, -1)) / math.sqrt(self.head_dim)
-        if mask is not None:
-            attn = attn.masked_fill(mask == 0, float("-inf"))
-        attn = self.dropout(F.softmax(attn, dim=-1))
-        return self.out((attn @ v).transpose(1, 2).contiguous().view(B, T, C))
+        # Fused attention: same math as softmax(qk^T / sqrt(d)) with the mask, then dropout.
+        y = F.scaled_dot_product_attention(
+            q, k, v, attn_mask=mask.bool() if mask is not None else None,
+            dropout_p=self.dropout.p if self.training else 0.0)
+        return self.out(y.transpose(1, 2).contiguous().view(B, T, C))
 
 
 class FFN(nn.Module):
