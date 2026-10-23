@@ -35,7 +35,8 @@ template data is the ceiling, so this one changes the data, not the model.
 | template fish (`fix-nouns`) |           n/a |        n/a |                  n/a |               0.00 |                 0.00 |              n/a |                   n/a |
 | aq-chat, 1.5k steps         |         2.223 |       0.00 |                 0.54 |               0.00 |                 0.53 |             0.42 |                  0.25 |
 | aq-chat-5k (best @4.5k)     |         2.062 |       0.00 |                 0.77 |               0.00 |                 0.48 |             0.67 |                  0.06 |
-| **aq-chat-rename**, 4.5k    |         2.068 |   **0.71** |             **0.94** |               0.18 |                 0.63 |         **0.75** |                  0.06 |
+| aq-chat-rename, 4.5k        |         2.068 |       0.71 |                 0.94 |               0.18 |                 0.63 |             0.75 |                  0.06 |
+| **aq-chat-full**, 6k        |         2.087 |   **0.69** |             **0.96** |           **0.35** |             **0.98** |         **0.75** |              **0.75** |
 
 n per cell: names 48, made-up nouns 40, species 24, memory 16. Differences under ~15 points
 are within noise at these sizes.
@@ -53,14 +54,29 @@ are within noise at these sizes.
   training, says "I am Quilliam, and I am fierce. I live in a burrow in the reef."
 - **Memory across turns is still weak** (1 of 16): asked its name back, it says "My name is Bee."
 
+- **Noun and memory augmentation** (`aq-chat-full`: `--rename-copies 2 --noun-copies 2
+  --memory-copies 1`, 30,200 train dialogues). `--noun-copies` swaps the mentioned human thing
+  for an invented noun ("a pizza" -> "a wobplon") in the 1,949 dialogues where the assistant
+  names it. `--memory-copies` prefixes the first user turn with a fact (invented name, a color, a
+  number, a friend's name; the probe's exact values are excluded) and appends a question about it
+  with a short templated answer. Memory goes from 1 of 16 to 12 of 16 ("Your shell was purple.",
+  "Your friend is Gus.", "You said seven."); the misses are all Bartholomew ("Your name is
+  Bartholwwit."). Made-up nouns: first 3 letters 0.63 -> 0.98, exact 0.18 -> 0.35 ("A florbix?
+  I have never seen one ... Did the florbix take you on a fun ride?"). Names unchanged within noise.
+- **Side effect:** the templated memory answers leak. "I remember." shows up in replies to
+  "What is your name?" ("I am Marble. I remember. I found a small shell."), and one color answer
+  came out "Yellow! A purple shell." The templates are few and short, so the model memorized them,
+  the original problem in miniature. More varied answers (written by a model, not templates) would
+  fix it.
+
 ## Inferred
 
 - The renaming result is the same lesson as the 31-noun template fish, one level up: with ~150
   training names the model can get by with "say a name from my list". Thousands of invented names
   make that impossible, so it learns to copy. Variety in the slot is what teaches the copy.
-- Memory is weak for the same reason: user-stated facts recalled later are rare in the data.
-  The same trick should work (inject "My name is X" / "I found a purple shell" turns with
-  invented values and a later question).
+- Memory was weak for the same reason: user-stated facts recalled later were rare in the data.
+  Injecting them fixed most of it. Long held-out names (Bartholomew, 6 tokens) still break
+  partway, in memory and in names alike: the copy holds for 3 to 4 tokens, then drifts.
 
 ## Caveats
 
@@ -76,6 +92,8 @@ python3 tools/aquarium/prep.py tokenizer && python3 tools/aquarium/prep.py stori
 python3 tools/aquarium/train_aq.py pretrain --out runs/aq-pre --steps 15000
 python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-rename \
     --steps 4500 --eval-every 500 --rename-copies 2
+python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-full \
+    --steps 6000 --eval-every 500 --rename-copies 2 --noun-copies 2 --memory-copies 1
 python3 tools/aquarium/probe.py runs/aq-chat-rename/best.pt --out runs/aq-chat-rename/probe.json
 (cd tools/aquarium && python3 partial.py ../../runs/aq-chat-rename/probe.json)
 ```

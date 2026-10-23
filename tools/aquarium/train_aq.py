@@ -82,6 +82,69 @@ def renamed(row, rng):
             "turns": [{**t, "content": pat.sub(new, t["content"])} for t in row["turns"]]}
 
 
+NOUN_SYLLABLES = "glim bet snor ket wob ble quaz tro fip nik dax plon zor mib vant rux".split()
+
+
+def made_up_noun(rng):
+    return "".join(rng.choice(NOUN_SYLLABLES) for _ in range(rng.randint(2, 3)))
+
+
+def article(word):
+    return "an" if word[0] in "aeiou" else "a"
+
+
+def noun_swapped(row, rng):
+    """The same dialogue with the mentioned human thing swapped for an invented noun."""
+    words = row["thing"].split(" ", 1)
+    phrase = words[1] if words[0] in ("a", "an", "the") and len(words) > 1 else row["thing"]
+    new = made_up_noun(rng)
+    with_art = re.compile(rf"\b(a|an|A|An)\s+{re.escape(phrase)}\b", re.I)
+    bare = re.compile(rf"\b{re.escape(phrase)}\b", re.I)
+
+    def sub(text):
+        text = with_art.sub(lambda m: (article(new).capitalize() if m.group(1)[0] == "A" else article(new)) + " " + new, text)
+        return bare.sub(new, text)
+
+    return {**row, "thing": new, "turns": [{**t, "content": sub(t["content"])} for t in row["turns"]]}
+
+
+# Facts the user states up front and is asked about at the end. Values that the memory
+# probe uses (Bartholomew, purple, seven, Gus, shell, brothers) are kept out.
+COLORS = "red orange yellow green blue pink white black silver gold brown gray teal golden".split()
+OBJECTS = "rock feather acorn button leaf marble spoon key ribbon cup ball sock coin".split()
+NUMBERS = "two three four five six eight nine ten eleven twelve".split()
+THINGS_OWNED = "cats sisters hats books kites bikes cousins goldfish plants toys".split()
+ANIMALS = "a crab, a dolphin, a seal, a turtle, an otter, a puffin, a frog, a duck".split(", ")
+
+
+def remembered(row, rng):
+    """The dialogue with a fact stated in the first user turn and asked about at the end."""
+    kind = rng.choice(["name", "color", "number", "friend"])
+    if kind == "name":
+        v = made_up_name(rng)
+        fact = rng.choice([f"My name is {v}.", f"I'm {v}, by the way.", f"Hi, I am {v}."])
+        q = rng.choice(["What is my name?", "Do you remember my name?", "Who am I?"])
+        a = rng.choice([f"Your name is {v}.", f"You are {v}!", f"You told me. You are {v}.", f"{v}! I remember."])
+    elif kind == "color":
+        c, o = rng.choice(COLORS), rng.choice(OBJECTS)
+        fact = rng.choice([f"I found a {c} {o} today.", f"Look, I have a {c} {o}."])
+        q = rng.choice([f"What color was the {o}?", f"Do you remember what color my {o} was?"])
+        a = rng.choice([f"It was {c}.", f"Your {o} was {c}.", f"{c.capitalize()}! A {c} {o}."])
+    elif kind == "number":
+        n, t = rng.choice(NUMBERS), rng.choice(THINGS_OWNED)
+        fact = rng.choice([f"I have {n} {t}.", f"Guess what, I have {n} {t} at home."])
+        q = rng.choice([f"How many {t} do I have?", f"Do you remember how many {t} I have?"])
+        a = rng.choice([f"You have {n} {t}.", f"{n.capitalize()} {t}!", f"You said {n}."])
+    else:
+        v, animal = made_up_name(rng), rng.choice(ANIMALS)
+        fact = rng.choice([f"My friend is {animal} named {v}.", f"I have a friend, {animal} called {v}."])
+        q = rng.choice(["What is my friend's name?", "Do you remember my friend's name?"])
+        a = rng.choice([f"Your friend is {v}.", f"{v}, {animal}!", f"You said your friend is {v}."])
+    turns = [dict(t) for t in row["turns"]]
+    turns[0]["content"] = fact + " " + turns[0]["content"]
+    return {**row, "turns": turns + [{"role": "user", "content": q}, {"role": "assistant", "content": a}]}
+
+
 def chat_ids(tok, system, turns, open_assistant=False):
     """Token ids and a per-token "train on this" mask for a chat. The same builder is
     used for training and sampling, so both see identical token boundaries."""
@@ -193,6 +256,10 @@ def main():
     ap.add_argument("--story-mix", type=float, default=0.15, help="finetune: share of story rows per batch")
     ap.add_argument("--rename-copies", type=int, default=0,
                     help="finetune: extra copies of each train dialogue with an invented creature name")
+    ap.add_argument("--noun-copies", type=int, default=0,
+                    help="finetune: extra copies of dialogues that mention a human thing, swapped for an invented noun")
+    ap.add_argument("--memory-copies", type=int, default=0,
+                    help="finetune: extra copies with a user fact stated first and asked about last")
     ap.add_argument("--eval-every", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=42)
     a = ap.parse_args()
@@ -221,7 +288,11 @@ def main():
         val_rows, train_rows = rows[:n_val], rows[n_val:]
         held = load_dialogues([os.path.join(D, "dialogues_eval.jsonl")]) if os.path.exists(
             os.path.join(D, "dialogues_eval.jsonl")) else []
-        train_rows = train_rows + [renamed(r, prng) for _ in range(a.rename_copies) for r in train_rows]
+        base = train_rows
+        nounable = [r for r in base if r.get("thing")]
+        train_rows = (base + [renamed(r, prng) for _ in range(a.rename_copies) for r in base]
+                      + [noun_swapped(r, prng) for _ in range(a.noun_copies) for r in nounable]
+                      + [remembered(renamed(r, prng), prng) for _ in range(a.memory_copies) for r in base])
         enc = lambda rs: [encode_chat(tok, r, a.seq) for r in rs]  # noqa: E731
         train_ex, val_ex, held_ex = enc(train_rows), enc(val_rows), enc(held)
         print(f"dialogues: train {len(train_ex):,}, val {len(val_ex):,}, held-out personas {len(held_ex):,}; "
