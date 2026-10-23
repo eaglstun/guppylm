@@ -116,14 +116,7 @@ SOUNDS = [
     "crack", "slam", "tap", "boom", "vibration",
 ]
 
-HUMAN_THINGS = [
-    "politics", "money", "the internet", "email", "taxes", "a phone",
-    "driving", "a movie", "school", "work", "a computer", "math",
-    "reading", "the news", "social media", "cooking", "shopping",
-    "a job", "rent", "the stock market", "a meeting", "homework",
-    "an app", "a password", "wifi", "bluetooth", "a podcast",
-    "cryptocurrency", "a spreadsheet", "an alarm clock", "a car",
-]
+from guppylm.human_things import HUMAN_THINGS  # noqa: E402  (~1,150 nouns; see that module)
 
 
 # ══════════════════════════════════════════════════════════════════════════════

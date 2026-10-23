@@ -61,3 +61,31 @@ Verbatim is measured against each model's own train set.
 - Expand `HUMAN_THINGS` from 31 to a few thousand nouns, and test whether the copy skill
   appears. That's the one place the data could teach composition rather than recall.
 - Paraphrase user prompts (714 distinct inputs is the real limit on new phrasings).
+
+## Follow-up: 1,146 nouns (run `fix-nouns`, measured)
+
+`HUMAN_THINGS` moved to `guppylm/human_things.py`: the original 31 plus about 1,100
+everyday nouns, with the copy probe's 10 test nouns and close variants kept out.
+Regenerated data: 941 confused train samples over 1,146 nouns, so most nouns appear
+once or never. Unique train inputs went from 714 to 1,358. Same config, 10k steps,
+one seed. Eval loss 0.481. The probe used the same settings as above.
+
+| set               | metric                    | fixed (31 nouns) | fix-nouns |
+| ----------------- | ------------------------- | ---------------: | --------: |
+| copy_probe (new)  | names the thing           |             0.00 |      0.00 |
+|                   | has a never-seen sentence |             0.20 |      0.82 |
+| copy_known (31)   | names the thing           |             0.57 |      0.02 |
+| novel paraphrases | sentence in train         |             0.95 |      0.78 |
+
+Sample replies to `do you know what a toaster is`-style prompts:
+"i don't know what a busy is", "i don't understand spreadsheets",
+"i have no idea what mountain pan means".
+
+- **Measured:** copying did not appear. The model learned that a noun goes in the slot
+  and fills it with a noun it saw in training, not the noun in the prompt. It now fails
+  on the 31 known nouns too, since none of them is common enough to memorize anymore.
+  The jump in never-seen sentences is wrong nouns in familiar templates, not new prose.
+- **Inferred:** at 9M params, 10k steps, and about 940 examples (1.6% of the data),
+  the copy skill isn't learned; the model takes the cheaper route of matching the
+  noun distribution. Untested next steps: raise the confused share, train longer, or
+  check greedy decoding (the probe samples at temperature 0.7, top_k 50).
