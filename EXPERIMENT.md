@@ -23,7 +23,7 @@ template data is the ceiling, so this one changes the data, not the model.
   one of 6 system-prompt phrasings, user (35% another sea creature, else a human), topic,
   optional human thing to mention, 1 to 4 exchanges.
   - 6,000 dialogues written by 14 Claude Haiku agents from spec files.
-  - 573 by Ollama `qwen3-coder:30b` (the generator kept running overnight; later runs can use more).
+  - Ollama `qwen3-coder:30b`: 573 for the runs through `aq-chat-full`, 6,015 for `aq-chat-v2`.
   - Unique assistant sentences: Haiku 88.5%, Ollama 93.1%. The template fish's data: 3.5%.
 - **Probe** (`tools/aquarium/probe.py`, `partial.py`): every test uses words never in training.
   4 samples per prompt, temperature 0.7, top-k 40, seed 0, CPU.
@@ -36,7 +36,8 @@ template data is the ceiling, so this one changes the data, not the model.
 | aq-chat, 1.5k steps         |         2.223 |       0.00 |                 0.54 |               0.00 |                 0.53 |             0.42 |                  0.25 |
 | aq-chat-5k (best @4.5k)     |         2.062 |       0.00 |                 0.77 |               0.00 |                 0.48 |             0.67 |                  0.06 |
 | aq-chat-rename, 4.5k        |         2.068 |       0.71 |                 0.94 |               0.18 |                 0.63 |             0.75 |                  0.06 |
-| **aq-chat-full**, 6k        |         2.087 |   **0.69** |             **0.96** |           **0.35** |             **0.98** |         **0.75** |              **0.75** |
+| aq-chat-full, 6k            |         2.087 |       0.69 |                 0.96 |               0.35 |                 0.98 |             0.75 |                  0.75 |
+| **aq-chat-v2**, 7k          |     **1.869** |   **0.56** |             **0.83** |           **0.58** |             **0.98** |         **0.75** |              **0.81** |
 
 n per cell: names 48, made-up nouns 40, species 24, memory 16. Differences under ~15 points
 are within noise at these sizes.
@@ -69,6 +70,22 @@ are within noise at these sizes.
   the original problem in miniature. More varied answers (written by a model, not templates) would
   fix it.
 
+- **Leak fix and more data** (`aq-chat-v2`): the templated memory answers were replaced by
+  1,920 persona-voiced (fact, question, answer) triples written by Haiku agents (`data_aq/memory/`,
+  99.4% unique answers, "I remember" in 0.2%), and Ollama data grew from 573 to 6,015 dialogues
+  (54,064 train dialogues after augmentation). 7,000 steps, still improving at the end. "remember"
+  in the 176 non-memory replies: 2 -> 0. Chat val loss 2.087 -> 1.869 (the val set is resampled
+  each run, so this is indicative only). Made-up nouns exact 0.35 -> 0.58 ("A vorpelstick? I have
+  never seen one, but it sounds like a flat box with lines."). Memory 12 -> 13 of 16; Bartholomew
+  still drifts ("Bartholomewwook"), and "seven brothers" comes back as "seven brother".
+- **Names dipped**, 0.69 -> 0.56 (n=48, near the noise line). Two patterns in the misses:
+  - The copy stops at an English word boundary: Marbleton -> "Marble" (8 of 8, both runs),
+    Wobbleton -> "Wobble" (6 of 8 this run). Neither is a training name; the model copies the
+    first word-like piece and closes the name.
+  - "What is your name?" answered as if it were "What is my name?": "You are you, grandparent."
+    8 of 48 replies start "You are", up from 4. The memory copies add many "What is my name?" ->
+    "Your name is ..." pairs, and the two questions differ by one word.
+
 ## Inferred
 
 - The renaming result is the same lesson as the 31-noun template fish, one level up: with ~150
@@ -94,6 +111,8 @@ python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out ru
     --steps 4500 --eval-every 500 --rename-copies 2
 python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-full \
     --steps 6000 --eval-every 500 --rename-copies 2 --noun-copies 2 --memory-copies 1
+python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-v2 \
+    --steps 7000 --eval-every 500 --rename-copies 2 --noun-copies 2 --memory-copies 1
 python3 tools/aquarium/probe.py runs/aq-chat-rename/best.pt --out runs/aq-chat-rename/probe.json
 (cd tools/aquarium && python3 partial.py ../../runs/aq-chat-rename/probe.json)
 ```
