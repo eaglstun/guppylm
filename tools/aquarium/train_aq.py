@@ -67,9 +67,21 @@ SYLLABLES = ("bri del wick zan mor pel quin tob sar lum fen gor vix nal tup wib 
              "kel dro mun vel sto zib car thu lop nim gra bel orn ush").split()
 
 
+# A quarter of invented names start with a real word (Pebbleton, Cloverquin), so the model
+# learns not to stop copying at the first word boundary. Stems that begin a held-out name
+# (Marble, Wobble, Quill, Fizz, Zephyr, Tup) are left out.
+NAME_STEMS = ("pebble bubble coral kelp sandy puddle thistle copper button pickle maple cobble ripple "
+              "tumble bramble muffin pepper ginger clover sunny biscuit noodle dapple fiddle crumble "
+              "waffle nibble doodle jingle sprinkle barnacle bucket cricket hazel puffin velvet").split()
+NAME_TAILS = "ton quin wick by ford worth kin more ington ette ius bert ina ham ley ster bottom fern".split()
+
+
 def made_up_name(rng):
     while True:
-        name = "".join(rng.choice(SYLLABLES) for _ in range(rng.randint(2, 4))).capitalize()
+        if rng.random() < 0.25:
+            name = (rng.choice(NAME_STEMS) + rng.choice(NAME_TAILS)).capitalize()
+        else:
+            name = "".join(rng.choice(SYLLABLES) for _ in range(rng.randint(2, 4))).capitalize()
         if name not in EVAL_NAMES:
             return name
 
@@ -129,6 +141,10 @@ def load_memory_pool():
                     continue
                 need = {"name": "{V}", "color": "{C}", "number": "{N}", "friend": "{V}"}.get(d.get("kind"))
                 if need and all(isinstance(d.get(k), str) for k in ("fact", "question", "answer")) and need in d["answer"]:
+                    # "What name shall we go with?" could be about either speaker; keep only
+                    # name questions that are plainly about the user.
+                    if d["kind"] == "name" and not re.search(r"\b(my|me|I)\b", d["question"]):
+                        continue
                     pool.setdefault((d["persona"], d["kind"]), []).append(d)
     return pool
 
@@ -136,12 +152,48 @@ def load_memory_pool():
 MEMORY_POOL = {}
 
 
-def remembered(row, rng):
+def load_selfname_pool():
+    """persona -> Haiku-written {question, answer} where the creature says its own name {V}."""
+    pool = {}
+    for path in glob.glob(os.path.join(D, "selfname", "out_*.jsonl")):
+        with open(path) as f:
+            for line in f:
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                if (isinstance(d.get("question"), str) and isinstance(d.get("answer"), str)
+                        and "{V}" in d["answer"] and not re.search(r"\b(You are|Your name)\b", d["answer"])):
+                    pool.setdefault(d["persona"], []).append(d)
+    return pool
+
+
+SELFNAME_POOL = {}
+
+
+def asked_name(row, rng):
+    """The dialogue with the user asking the creature its own name at the end.
+
+    Balances the memory copies' "What is my name?" -> "Your name is ...", which had the
+    model answering "What is your name?" with "You are ...". A third of the time the user
+    also states their own name first, so both questions meet in one conversation."""
+    options = SELFNAME_POOL.get(row.get("persona"))
+    if not options:
+        return row
+    if rng.random() < 1 / 3:
+        row = remembered(row, rng, kind="name")
+    t = rng.choice(options)
+    turns = [dict(x) for x in row["turns"]]
+    return {**row, "turns": turns + [{"role": "user", "content": t["question"]},
+                                     {"role": "assistant", "content": t["answer"].replace("{V}", row["name"])}]}
+
+
+def remembered(row, rng, kind=None):
     """The dialogue with a fact stated in the first user turn and asked about at the end.
 
     Wording comes from the Haiku-written pool for this persona when there is one, so the
     answers vary in each creature's voice; the old fixed templates leaked ("I remember.")."""
-    kind = rng.choice(["name", "color", "number", "friend"])
+    kind = kind or rng.choice(["name", "color", "number", "friend"])
     vals = {"V": made_up_name(rng), "C": rng.choice(COLORS), "O": rng.choice(OBJECTS),
             "N": rng.choice(NUMBERS), "T": rng.choice(THINGS_OWNED), "A": rng.choice(ANIMALS)}
     options = MEMORY_POOL.get((row.get("persona"), kind))
@@ -281,6 +333,8 @@ def main():
                     help="finetune: extra copies of dialogues that mention a human thing, swapped for an invented noun")
     ap.add_argument("--memory-copies", type=int, default=0,
                     help="finetune: extra copies with a user fact stated first and asked about last")
+    ap.add_argument("--selfname-copies", type=int, default=0,
+                    help="finetune: extra copies with the creature asked its own name at the end")
     ap.add_argument("--eval-every", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=42)
     a = ap.parse_args()
@@ -312,11 +366,15 @@ def main():
         MEMORY_POOL.update(load_memory_pool())
         print(f"memory pool: {sum(len(v) for v in MEMORY_POOL.values())} Haiku triples, "
               f"{len(MEMORY_POOL)} persona/kind pairs", flush=True)
+        SELFNAME_POOL.update(load_selfname_pool())
+        print(f"self-name pool: {sum(len(v) for v in SELFNAME_POOL.values())} Haiku pairs, "
+              f"{len(SELFNAME_POOL)} personas", flush=True)
         base = train_rows
         nounable = [r for r in base if r.get("thing")]
         train_rows = (base + [renamed(r, prng) for _ in range(a.rename_copies) for r in base]
                       + [noun_swapped(r, prng) for _ in range(a.noun_copies) for r in nounable]
-                      + [remembered(renamed(r, prng), prng) for _ in range(a.memory_copies) for r in base])
+                      + [remembered(renamed(r, prng), prng) for _ in range(a.memory_copies) for r in base]
+                      + [asked_name(renamed(r, prng), prng) for _ in range(a.selfname_copies) for r in base])
         enc = lambda rs: [encode_chat(tok, r, a.seq) for r in rs]  # noqa: E731
         train_ex, val_ex, held_ex = enc(train_rows), enc(val_rows), enc(held)
         print(f"dialogues: train {len(train_ex):,}, val {len(val_ex):,}, held-out personas {len(held_ex):,}; "
