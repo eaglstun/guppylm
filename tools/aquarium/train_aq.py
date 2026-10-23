@@ -117,32 +117,53 @@ THINGS_OWNED = "cats sisters hats books kites bikes cousins goldfish plants toys
 ANIMALS = "a crab, a dolphin, a seal, a turtle, an otter, a puffin, a frog, a duck".split(", ")
 
 
+def load_memory_pool():
+    """(persona, kind) -> Haiku-written {fact, question, answer} with placeholders."""
+    pool = {}
+    for path in glob.glob(os.path.join(D, "memory", "out_*.jsonl")):
+        with open(path) as f:
+            for line in f:
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                need = {"name": "{V}", "color": "{C}", "number": "{N}", "friend": "{V}"}.get(d.get("kind"))
+                if need and all(isinstance(d.get(k), str) for k in ("fact", "question", "answer")) and need in d["answer"]:
+                    pool.setdefault((d["persona"], d["kind"]), []).append(d)
+    return pool
+
+
+MEMORY_POOL = {}
+
+
 def remembered(row, rng):
-    """The dialogue with a fact stated in the first user turn and asked about at the end."""
+    """The dialogue with a fact stated in the first user turn and asked about at the end.
+
+    Wording comes from the Haiku-written pool for this persona when there is one, so the
+    answers vary in each creature's voice; the old fixed templates leaked ("I remember.")."""
     kind = rng.choice(["name", "color", "number", "friend"])
-    if kind == "name":
-        v = made_up_name(rng)
-        fact = rng.choice([f"My name is {v}.", f"I'm {v}, by the way.", f"Hi, I am {v}."])
-        q = rng.choice(["What is my name?", "Do you remember my name?", "Who am I?"])
-        a = rng.choice([f"Your name is {v}.", f"You are {v}!", f"You told me. You are {v}.", f"{v}! I remember."])
-    elif kind == "color":
-        c, o = rng.choice(COLORS), rng.choice(OBJECTS)
-        fact = rng.choice([f"I found a {c} {o} today.", f"Look, I have a {c} {o}."])
-        q = rng.choice([f"What color was the {o}?", f"Do you remember what color my {o} was?"])
-        a = rng.choice([f"It was {c}.", f"Your {o} was {c}.", f"{c.capitalize()}! A {c} {o}."])
-    elif kind == "number":
-        n, t = rng.choice(NUMBERS), rng.choice(THINGS_OWNED)
-        fact = rng.choice([f"I have {n} {t}.", f"Guess what, I have {n} {t} at home."])
-        q = rng.choice([f"How many {t} do I have?", f"Do you remember how many {t} I have?"])
-        a = rng.choice([f"You have {n} {t}.", f"{n.capitalize()} {t}!", f"You said {n}."])
+    vals = {"V": made_up_name(rng), "C": rng.choice(COLORS), "O": rng.choice(OBJECTS),
+            "N": rng.choice(NUMBERS), "T": rng.choice(THINGS_OWNED), "A": rng.choice(ANIMALS)}
+    options = MEMORY_POOL.get((row.get("persona"), kind))
+    if options:
+        t = rng.choice(options)
+        fill = lambda s: re.sub(r"\{([VCONTA])\}", lambda m: vals[m.group(1)], s)  # noqa: E731
+        fact, q, a = fill(t["fact"]), fill(t["question"]), fill(t["answer"])
     else:
-        v, animal = made_up_name(rng), rng.choice(ANIMALS)
-        fact = rng.choice([f"My friend is {animal} named {v}.", f"I have a friend, {animal} called {v}."])
-        q = rng.choice(["What is my friend's name?", "Do you remember my friend's name?"])
-        a = rng.choice([f"Your friend is {v}.", f"{v}, {animal}!", f"You said your friend is {v}."])
+        fact, q, a = _template_memory(kind, vals, rng)
     turns = [dict(t) for t in row["turns"]]
     turns[0]["content"] = fact + " " + turns[0]["content"]
     return {**row, "turns": turns + [{"role": "user", "content": q}, {"role": "assistant", "content": a}]}
+
+
+def _template_memory(kind, v, rng):
+    if kind == "name":
+        return (f"My name is {v['V']}.", "What is my name?", f"Your name is {v['V']}.")
+    if kind == "color":
+        return (f"I found a {v['C']} {v['O']} today.", f"What color was the {v['O']}?", f"It was {v['C']}.")
+    if kind == "number":
+        return (f"I have {v['N']} {v['T']}.", f"How many {v['T']} do I have?", f"You have {v['N']} {v['T']}.")
+    return (f"My friend is {v['A']} named {v['V']}.", "What is my friend's name?", f"Your friend is {v['V']}.")
 
 
 def chat_ids(tok, system, turns, open_assistant=False):
@@ -288,6 +309,9 @@ def main():
         val_rows, train_rows = rows[:n_val], rows[n_val:]
         held = load_dialogues([os.path.join(D, "dialogues_eval.jsonl")]) if os.path.exists(
             os.path.join(D, "dialogues_eval.jsonl")) else []
+        MEMORY_POOL.update(load_memory_pool())
+        print(f"memory pool: {sum(len(v) for v in MEMORY_POOL.values())} Haiku triples, "
+              f"{len(MEMORY_POOL)} persona/kind pairs", flush=True)
         base = train_rows
         nounable = [r for r in base if r.get("thing")]
         train_rows = (base + [renamed(r, prng) for _ in range(a.rename_copies) for r in base]
