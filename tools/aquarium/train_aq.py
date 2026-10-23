@@ -12,6 +12,7 @@ import argparse
 import glob
 import json
 import math
+import re
 import os
 import random
 import sys
@@ -28,7 +29,7 @@ from tokenizers import Tokenizer  # noqa: E402
 
 from guppylm.config import GuppyConfig  # noqa: E402
 from guppylm.model import GuppyLM  # noqa: E402
-from personas import make_spec  # noqa: E402
+from personas import EVAL_NAMES, make_spec  # noqa: E402
 
 D = os.path.join(ROOT, "data_aq")
 IM_START, IM_END = 1, 2
@@ -60,6 +61,25 @@ def load_dialogues(paths):
                                            for i, t in enumerate(turns)):
                     rows.append(d)
     return rows
+
+
+SYLLABLES = ("bri del wick zan mor pel quin tob sar lum fen gor vix nal tup wib rok jas pim "
+             "kel dro mun vel sto zib car thu lop nim gra bel orn ush").split()
+
+
+def made_up_name(rng):
+    while True:
+        name = "".join(rng.choice(SYLLABLES) for _ in range(rng.randint(2, 4))).capitalize()
+        if name not in EVAL_NAMES:
+            return name
+
+
+def renamed(row, rng):
+    """The same dialogue with the creature's name swapped for an invented one everywhere."""
+    new = made_up_name(rng)
+    pat = re.compile(rf"\b{re.escape(row['name'])}\b")
+    return {**row, "name": new, "system": pat.sub(new, row["system"]),
+            "turns": [{**t, "content": pat.sub(new, t["content"])} for t in row["turns"]]}
 
 
 def chat_ids(tok, system, turns, open_assistant=False):
@@ -171,6 +191,8 @@ def main():
     ap.add_argument("--warmup", type=int, default=500)
     ap.add_argument("--dropout", type=float, default=None)
     ap.add_argument("--story-mix", type=float, default=0.15, help="finetune: share of story rows per batch")
+    ap.add_argument("--rename-copies", type=int, default=0,
+                    help="finetune: extra copies of each train dialogue with an invented creature name")
     ap.add_argument("--eval-every", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=42)
     a = ap.parse_args()
@@ -199,6 +221,7 @@ def main():
         val_rows, train_rows = rows[:n_val], rows[n_val:]
         held = load_dialogues([os.path.join(D, "dialogues_eval.jsonl")]) if os.path.exists(
             os.path.join(D, "dialogues_eval.jsonl")) else []
+        train_rows = train_rows + [renamed(r, prng) for _ in range(a.rename_copies) for r in train_rows]
         enc = lambda rs: [encode_chat(tok, r, a.seq) for r in rs]  # noqa: E731
         train_ex, val_ex, held_ex = enc(train_rows), enc(val_rows), enc(held)
         print(f"dialogues: train {len(train_ex):,}, val {len(val_ex):,}, held-out personas {len(held_ex):,}; "
@@ -225,6 +248,7 @@ def main():
     t0 = time.time()
     model.train()
     order = []
+    best = float("inf")
     for step in range(a.steps + 1):
         if step % a.eval_every == 0 or step == a.steps:
             ev = {"step": step, "story_val": eval_loss(story_val), "elapsed_s": round(time.time() - t0)}
@@ -240,7 +264,12 @@ def main():
                 for system, users in SAMPLE_SYSTEMS:
                     for u, r in sample(model, tok, device, system, users):
                         print(f"  > {u}\n    {r}", flush=True)
-            torch.save({"model": model.state_dict(), "config": vars(mc), "step": step}, os.path.join(a.out, "final.pt"))
+            ck = {"model": model.state_dict(), "config": vars(mc), "step": step}
+            torch.save(ck, os.path.join(a.out, "final.pt"))
+            score = ev["story_val"] if pre else ev["chat_val"]
+            if score < best:
+                best = score
+                torch.save(ck, os.path.join(a.out, "best.pt"))
             with open(os.path.join(a.out, "log.json"), "w") as f:
                 json.dump(log, f, indent=1)
         if step == a.steps:
