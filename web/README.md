@@ -12,3 +12,5 @@ No runtime library, no server: `guppy.js` is the tokenizer, the model (with a KV
   decoding matches PyTorch on the int8-rounded checkpoint token for token.
 - Speed: about 5 to 6 ms per token in Node on an M4 Max, including the prompt.
 - Long chats keep the last 432 tokens of the conversation, leaving room for an 80-token reply.
+
+Live at https://eaglstun.github.io/guppylm/ (the `gh-pages` branch is `git subtree split --prefix web` of this one).
