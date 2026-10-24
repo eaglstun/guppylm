@@ -39,6 +39,8 @@
   button:disabled { opacity: .5; cursor: default; }
   .ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
   #status { font-size: .8rem; color: var(--muted); }
+  footer { color: var(--muted); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
+  footer a { color: inherit; }
   @media (max-width: 520px) { .setup { grid-template-columns: 1fr; } .msg { max-width: 92%; } }
 </style>
 </head>
@@ -63,6 +65,13 @@
     <input id="input" placeholder="Say something to the fish" autocomplete="off" disabled>
     <button id="send" disabled>Send</button>
   </form>
+
+  <footer>
+    The aquarium fish from a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>: 8.9 million
+    parameters, pretrained on TinyStories, then fine-tuned on sea-creature chats written by Claude Haiku and a local
+    model. The weights are 9 MB of int8, and the whole thing runs in this tab with no server.
+    Source and write-up: <a href="https://github.com/eaglstun/guppylm/tree/exp/aquarium">eaglstun/guppylm, branch exp/aquarium</a>.
+  </footer>
 </main>
 <script type="module">
 const $ = id => document.getElementById(id);
