@@ -46,8 +46,12 @@ def main():
     sys.argv = sys.argv[1:]
 
     if cmd == "prepare":
+        import argparse
         from .prepare_data import prepare
-        prepare()
+        ap = argparse.ArgumentParser(prog="python -m guppylm prepare")
+        ap.add_argument("--confused-weight", type=float, default=1.0,
+                        help="scale the confused topic's share of the data")
+        prepare(confused_weight=ap.parse_args().confused_weight)
 
     elif cmd == "train":
         from .train import train

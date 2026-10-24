@@ -54,10 +54,10 @@ Output: night. i'll rest near the bottom. maybe tomorrow there will be pellets.
 
 ## Fields
 
-| Field | Type | Description |
-|-------|------|-------------|
-| `input` | string | User message |
-| `output` | string | Guppy's response |
+| Field      | Type   | Description                    |
+| ---------- | ------ | ------------------------------ |
+| `input`    | string | User message                   |
+| `output`   | string | Guppy's response               |
 | `category` | string | Topic category (60 categories) |
 
 ## Categories

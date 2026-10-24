@@ -2,6 +2,7 @@
 data/
 dataset/
 checkpoints/
+runs/
 *.pt
 *.bin
 *.onnx
@@ -53,3 +54,4 @@ Desktop.ini
 *.log
 *.tmp
 *.bak
+data_aq/

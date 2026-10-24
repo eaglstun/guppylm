@@ -45,9 +45,14 @@ def evaluate(model, loader, device, max_batches=50):
     return total_loss / max(1, n)
 
 
-def train():
-    mc = GuppyConfig()
-    tc = TrainConfig()
+def train(mc=None, tc=None):
+    """Train GuppyLM, saving best/periodic/final checkpoints to tc.output_dir.
+
+    mc/tc default to GuppyConfig()/TrainConfig(). Returns a stats dict
+    (steps, elapsed_s, best_eval, train_losses) for callers like tools/benchmark.py.
+    """
+    mc = mc or GuppyConfig()
+    tc = tc or TrainConfig()
     device = get_device(tc)
     torch.manual_seed(tc.seed)
 
@@ -60,6 +65,7 @@ def train():
     train_loader = get_dataloader(
         os.path.join(tc.data_dir, "train.jsonl"), tokenizer_path,
         mc.max_seq_len, tc.batch_size, shuffle=True,
+        limit=tc.train_limit, subset_seed=tc.subset_seed,
     )
     eval_loader = get_dataloader(
         os.path.join(tc.data_dir, "eval.jsonl"), tokenizer_path,
@@ -82,6 +88,7 @@ def train():
     model.train()
     step, best_eval = 0, float("inf")
     losses = []
+    eval_history = []  # (step, avg train loss over the interval, eval loss)
     t0 = time.time()
 
     print(f"\nTraining for {tc.max_steps} steps...")
@@ -125,6 +132,7 @@ def train():
                 avg_train = sum(losses[-tc.eval_interval:]) / min(len(losses), tc.eval_interval)
                 elapsed = time.time() - t0
                 print(f"{step:6d} | {lr:10.6f} | {avg_train:10.4f} | {el:10.4f} | {elapsed:7.1f}s")
+                eval_history.append((step, avg_train, el))
 
                 if el < best_eval:
                     best_eval = el
@@ -155,6 +163,8 @@ def train():
 
     elapsed = time.time() - t0
     print(f"\nDone! {elapsed:.0f}s, best eval: {best_eval:.4f}")
+    return {"steps": step, "elapsed_s": elapsed, "best_eval": best_eval, "train_losses": losses,
+            "eval_history": eval_history}
 
 
 if __name__ == "__main__":

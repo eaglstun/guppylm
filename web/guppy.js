@@ -1,0 +1,227 @@
+// GuppyLM in the browser: int8 weights, a KV cache, no dependencies.
+// Mirrors guppylm/model.py (pre-norm blocks, ReLU FFN, learned positions, tied head)
+// and the chat format of tools/aquarium/train_aq.py chat_ids().
+
+const IM_START = 1, IM_END = 2;
+
+// ---- tokenizer: byte-level BPE, read from the Hugging Face tokenizer.json ----
+
+function bytesToUnicode() {
+  const bs = [];
+  for (let i = 33; i <= 126; i++) bs.push(i);
+  for (let i = 161; i <= 172; i++) bs.push(i);
+  for (let i = 174; i <= 255; i++) bs.push(i);
+  const cs = bs.slice();
+  let n = 0;
+  for (let b = 0; b < 256; b++) {
+    if (!bs.includes(b)) { bs.push(b); cs.push(256 + n++); }
+  }
+  const enc = new Map(), dec = new Map();
+  bs.forEach((b, i) => { enc.set(b, String.fromCodePoint(cs[i])); dec.set(String.fromCodePoint(cs[i]), b); });
+  return { enc, dec };
+}
+
+const PRETOKEN = /'s|'t|'re|'ve|'m|'ll|'d| ?\p{L}+| ?\p{N}+| ?[^\s\p{L}\p{N}]+|\s+(?!\S)|\s+/gu;
+
+export class Tokenizer {
+  constructor(json) {
+    this.vocab = json.model.vocab;
+    this.inv = [];
+    for (const [s, id] of Object.entries(this.vocab)) this.inv[id] = s;
+    for (const t of json.added_tokens) this.inv[t.id] = t.content;
+    this.special = new Set(json.added_tokens.map(t => t.id));
+    this.ranks = new Map(json.model.merges.map((m, i) => [Array.isArray(m) ? m.join(" ") : m, i]));
+    const { enc, dec } = bytesToUnicode();
+    this.byteEnc = enc; this.byteDec = dec;
+    this.cache = new Map();
+    this.utf8 = new TextEncoder();
+    this.utf8dec = new TextDecoder();
+  }
+
+  bpe(word) {
+    if (this.cache.has(word)) return this.cache.get(word);
+    let parts = Array.from(word);
+    while (parts.length > 1) {
+      let best = -1, bestRank = Infinity;
+      for (let i = 0; i < parts.length - 1; i++) {
+        const r = this.ranks.get(parts[i] + " " + parts[i + 1]);
+        if (r !== undefined && r < bestRank) { bestRank = r; best = i; }
+      }
+      if (best < 0) break;
+      const a = parts[best], b = parts[best + 1], merged = [];
+      for (let i = 0; i < parts.length; i++) {
+        if (i < parts.length - 1 && parts[i] === a && parts[i + 1] === b) { merged.push(a + b); i++; }
+        else merged.push(parts[i]);
+      }
+      parts = merged;
+    }
+    const ids = parts.map(p => this.vocab[p]);
+    this.cache.set(word, ids);
+    return ids;
+  }
+
+  encode(text) {
+    const ids = [];
+    for (const m of text.matchAll(PRETOKEN)) {
+      const word = Array.from(this.utf8.encode(m[0]), b => this.byteEnc.get(b)).join("");
+      ids.push(...this.bpe(word));
+    }
+    return ids;
+  }
+
+  decode(ids) {
+    const bytes = [];
+    for (const id of ids) {
+      if (this.special.has(id)) continue;
+      for (const ch of this.inv[id]) bytes.push(this.byteDec.get(ch));
+    }
+    return this.utf8dec.decode(new Uint8Array(bytes));
+  }
+
+  chat(system, turns) {
+    const nl = this.encode("\n");
+    const ids = [IM_START, ...this.encode("system\n" + system), IM_END, ...nl];
+    for (const t of turns) {
+      ids.push(IM_START, ...this.encode(t.role + "\n"), ...this.encode(t.content), IM_END, ...nl);
+    }
+    ids.push(IM_START, ...this.encode("assistant\n"));
+    return ids;
+  }
+}
+
+// ---- model ----
+
+function readWeights(buf) {
+  const headerLen = new DataView(buf).getUint32(0, true);
+  const header = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 4, headerLen)));
+  const base = 4 + headerLen, t = {};
+  for (const d of header.tensors) {
+    const n = d.shape.reduce((a, b) => a * b, 1);
+    t[d.name] = d.dtype === "int8"
+      ? { q: new Int8Array(buf, base + d.offset, n), s: new Float32Array(buf, base + d.scale, d.shape[0]), rows: d.shape[0], cols: d.shape[1] }
+      : new Float32Array(buf, base + d.offset, n);
+  }
+  return { config: header.config, t };
+}
+
+// y = W x + b for an int8 matrix with a scale per output row
+function matvec(W, x, b, y) {
+  const { q, s, rows, cols } = W;
+  for (let r = 0, o = 0; r < rows; r++, o += cols) {
+    let acc = 0;
+    for (let c = 0; c < cols; c++) acc += q[o + c] * x[c];
+    y[r] = acc * s[r] + (b ? b[r] : 0);
+  }
+  return y;
+}
+
+function layerNorm(x, g, b, y) {
+  const n = x.length;
+  let mean = 0;
+  for (let i = 0; i < n; i++) mean += x[i];
+  mean /= n;
+  let v = 0;
+  for (let i = 0; i < n; i++) v += (x[i] - mean) ** 2;
+  const inv = 1 / Math.sqrt(v / n + 1e-5);
+  for (let i = 0; i < n; i++) y[i] = (x[i] - mean) * inv * g[i] + b[i];
+  return y;
+}
+
+export class Guppy {
+  constructor(buf) {
+    const { config, t } = readWeights(buf);
+    this.c = config; this.t = t;
+    const d = config.d_model, L = config.n_layers, T = config.max_seq_len;
+    this.hd = d / config.n_heads;
+    this.kcache = Array.from({ length: L }, () => new Float32Array(T * d));
+    this.vcache = Array.from({ length: L }, () => new Float32Array(T * d));
+    this.x = new Float32Array(d); this.h = new Float32Array(d); this.a = new Float32Array(d);
+    this.qkv = new Float32Array(3 * d); this.f = new Float32Array(config.ffn_hidden);
+    this.att = new Float32Array(T); this.logits = new Float32Array(config.vocab_size);
+    this.ids = [];  // tokens currently in the cache
+  }
+
+  // Run one token at position pos; returns logits only when asked (the head is 4096 x 384).
+  step(id, pos, wantLogits) {
+    const { c, t, x, h, a, qkv, f, att, hd } = this, d = c.d_model;
+    const te = t["tok_emb.weight"], pe = t["pos_emb.weight"];
+    for (let i = 0; i < d; i++) x[i] = te.q[id * d + i] * te.s[id] + pe.q[pos * d + i] * pe.s[pos];
+    for (let l = 0; l < c.n_layers; l++) {
+      const p = `blocks.${l}.`;
+      layerNorm(x, t[p + "norm1.weight"], t[p + "norm1.bias"], h);
+      matvec(t[p + "attn.qkv.weight"], h, t[p + "attn.qkv.bias"], qkv);
+      const K = this.kcache[l], V = this.vcache[l];
+      K.set(qkv.subarray(d, 2 * d), pos * d);
+      V.set(qkv.subarray(2 * d, 3 * d), pos * d);
+      const scale = 1 / Math.sqrt(hd);
+      for (let head = 0; head < c.n_heads; head++) {
+        const o = head * hd;
+        let max = -Infinity;
+        for (let j = 0; j <= pos; j++) {
+          let s = 0;
+          for (let k = 0; k < hd; k++) s += qkv[o + k] * K[j * d + o + k];
+          att[j] = s * scale;
+          if (att[j] > max) max = att[j];
+        }
+        let sum = 0;
+        for (let j = 0; j <= pos; j++) { att[j] = Math.exp(att[j] - max); sum += att[j]; }
+        for (let k = 0; k < hd; k++) h[o + k] = 0;
+        for (let j = 0; j <= pos; j++) {
+          const w = att[j] / sum;
+          for (let k = 0; k < hd; k++) h[o + k] += w * V[j * d + o + k];
+        }
+      }
+      matvec(t[p + "attn.out.weight"], h, t[p + "attn.out.bias"], a);
+      for (let i = 0; i < d; i++) x[i] += a[i];
+      layerNorm(x, t[p + "norm2.weight"], t[p + "norm2.bias"], h);
+      matvec(t[p + "ffn.up.weight"], h, t[p + "ffn.up.bias"], f);
+      for (let i = 0; i < f.length; i++) if (f[i] < 0) f[i] = 0;
+      matvec(t[p + "ffn.down.weight"], f, t[p + "ffn.down.bias"], a);
+      for (let i = 0; i < d; i++) x[i] += a[i];
+    }
+    if (!wantLogits) return null;
+    layerNorm(x, t["norm.weight"], t["norm.bias"], h);
+    return matvec(te, h, null, this.logits);
+  }
+
+  // Feed a prompt, reusing whatever prefix is already in the cache.
+  prefill(ids) {
+    let keep = 0;
+    while (keep < this.ids.length && keep < ids.length - 1 && this.ids[keep] === ids[keep]) keep++;
+    this.ids = ids.slice(0, keep);
+    let logits = null;
+    for (let i = keep; i < ids.length; i++) {
+      logits = this.step(ids[i], i, i === ids.length - 1);
+      this.ids.push(ids[i]);
+    }
+    return logits;
+  }
+
+  *generate(prompt, { maxNew = 80, temperature = 0.7, topK = 40, random = Math.random } = {}) {
+    const room = this.c.max_seq_len - maxNew;
+    if (prompt.length > room) prompt = prompt.slice(prompt.length - room);
+    let logits = this.prefill(prompt);
+    for (let n = 0; n < maxNew; n++) {
+      const id = temperature > 0 ? sampleTopK(logits, temperature, topK, random) : argmax(logits);
+      if (id === IM_END) return;
+      yield id;
+      logits = this.step(id, this.ids.length, true);
+      this.ids.push(id);
+    }
+  }
+}
+
+function argmax(v) {
+  let best = 0;
+  for (let i = 1; i < v.length; i++) if (v[i] > v[best]) best = i;
+  return best;
+}
+
+function sampleTopK(logits, temperature, k, random) {
+  const idx = Array.from(logits.keys()).sort((a, b) => logits[b] - logits[a]).slice(0, k);
+  const max = logits[idx[0]] / temperature;
+  const p = idx.map(i => Math.exp(logits[i] / temperature - max));
+  let r = random() * p.reduce((a, b) => a + b, 0);
+  for (let i = 0; i < k; i++) { r -= p[i]; if (r <= 0) return idx[i]; }
+  return idx[k - 1];
+}

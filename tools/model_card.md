@@ -53,19 +53,19 @@ Guppy> ok sleep time. i was following a bubble but now i'll stop. goodnight tank
 
 ## Architecture
 
-| | |
-|---|---|
-| **Parameters** | 8.7M |
-| **Type** | Vanilla transformer (from scratch) |
-| **Layers** | 6 |
-| **Hidden dim** | 384 |
-| **Heads** | 6 |
-| **FFN** | 768 (ReLU) |
-| **Vocab** | 4,096 (BPE) |
-| **Max sequence** | 128 tokens |
-| **Norm** | LayerNorm |
-| **Position** | Learned embeddings |
-| **LM head** | Weight-tied with embeddings |
+|                  |                                    |
+| ---------------- | ---------------------------------- |
+| **Parameters**   | 8.7M                               |
+| **Type**         | Vanilla transformer (from scratch) |
+| **Layers**       | 6                                  |
+| **Hidden dim**   | 384                                |
+| **Heads**        | 6                                  |
+| **FFN**          | 768 (ReLU)                         |
+| **Vocab**        | 4,096 (BPE)                        |
+| **Max sequence** | 128 tokens                         |
+| **Norm**         | LayerNorm                          |
+| **Position**     | Learned embeddings                 |
+| **LM head**      | Weight-tied with embeddings        |
 
 No GQA, no RoPE, no SwiGLU, no early exit. As simple as it gets.
 
