@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aquarium</title>
+<style>
+  :root {
+    --bg: #f4f1ea; --panel: #fffdf8; --ink: #1d2a33; --muted: #6b7680; --line: #ddd6c8;
+    --you: #1f6f8b; --you-ink: #fff; --fish: #e9f2f1; --accent: #e07a3f;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg: #0e1a22; --panel: #13232d; --ink: #e4ecef; --muted: #8d9ba3; --line: #24394a;
+            --you: #2c8fb0; --you-ink: #fff; --fish: #1a3140; --accent: #f0915a; }
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink);
+         font: 16px/1.45 ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
+  main { max-width: 680px; margin: 0 auto; padding: 20px 16px 32px; display: flex; flex-direction: column; min-height: 100vh; }
+  h1 { font-size: 1.4rem; margin: 0 0 2px; }
+  .sub { color: var(--muted); font-size: .9rem; margin: 0 0 16px; }
+  .setup { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: grid;
+           grid-template-columns: 1fr 1fr; gap: 10px; }
+  label { font-size: .78rem; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
+  select, input, textarea, button { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line);
+                                     border-radius: 10px; padding: 8px 10px; }
+  textarea { resize: vertical; min-height: 58px; font-size: .88rem; }
+  .wide { grid-column: 1 / -1; }
+  .row { display: flex; align-items: center; gap: 8px; }
+  .row input[type=range] { flex: 1; padding: 0; }
+  #log { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 18px 0; }
+  .msg { max-width: 85%; padding: 9px 13px; border-radius: 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .user { align-self: flex-end; background: var(--you); color: var(--you-ink); border-bottom-right-radius: 4px; }
+  .fish { align-self: flex-start; background: var(--fish); border-bottom-left-radius: 4px; }
+  .meta { font-size: .72rem; color: var(--muted); align-self: flex-start; margin-top: -6px; }
+  form { display: flex; gap: 8px; position: sticky; bottom: 12px; }
+  form input { flex: 1; background: var(--panel); }
+  button { background: var(--accent); color: #fff; border: 0; padding: 8px 16px; cursor: pointer; }
+  button:disabled { opacity: .5; cursor: default; }
+  .ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
+  #status { font-size: .8rem; color: var(--muted); }
+  @media (max-width: 520px) { .setup { grid-template-columns: 1fr; } .msg { max-width: 92%; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Aquarium</h1>
+  <p class="sub">A 9-million-parameter sea creature, running entirely in your browser. <span id="status">Loading the fish…</span></p>
+
+  <div class="setup">
+    <label>Creature <select id="persona"></select></label>
+    <label>Name <input id="name" value="Pebble" autocomplete="off"></label>
+    <label class="wide">System prompt <textarea id="system"></textarea></label>
+    <label class="wide">Temperature
+      <span class="row"><input id="temp" type="range" min="0" max="1.2" step="0.05" value="0.7"><span id="tempv">0.7</span>
+      <button type="button" class="ghost" id="reset">New chat</button></span>
+    </label>
+  </div>
+
+  <div id="log"></div>
+
+  <form id="form">
+    <input id="input" placeholder="Say something to the fish" autocomplete="off" disabled>
+    <button id="send" disabled>Send</button>
+  </form>
+</main>
+<script type="module">
+const $ = id => document.getElementById(id);
+const worker = new Worker("worker.js", { type: "module" });
+const NAMES = { guppy: "Pebble", goldfish: "Biscuit", betta: "Duchess", clownfish: "Coral", octopus: "Juniper",
+  hermit_crab: "Marbleton", anglerfish: "Chip", seahorse: "Tilly", sea_turtle: "Tuppence", jellyfish: "Wobbleton",
+  pufferfish: "Puff", blue_whale: "Sprinkles", lobster: "Fizzgig", sea_star: "Shadow", reef_shark: "Fin",
+  manatee: "Bartholomew", narwhal: "Quilliam", mantis_shrimp: "Zephyrine" };
+let P, turns = [], busy = false, bubble = null;
+
+const label = k => k.replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
+function buildSystem() {
+  const p = P.personas[$("persona").value];
+  $("system").value = P.template.replace("{name}", $("name").value.trim() || "Pebble")
+    .replace("{species}", p.species).replace("{habitat}", p.habitat).replace("{traits}", p.traits);
+}
+function reset() { turns = []; $("log").innerHTML = ""; }
+function add(cls, text) {
+  const d = document.createElement("div"); d.className = "msg " + cls; d.textContent = text;
+  $("log").append(d); d.scrollIntoView({ block: "end" }); return d;
+}
+
+fetch("model/personas.json").then(r => r.json()).then(p => {
+  P = p;
+  for (const k of Object.keys(P.personas)) {
+    const o = document.createElement("option"); o.value = k;
+    o.textContent = label(k) + (P.held_out.includes(k) ? " (never seen in training)" : "");
+    $("persona").append(o);
+  }
+  buildSystem();
+});
+
+$("persona").onchange = () => { $("name").value = NAMES[$("persona").value] || "Pebble"; buildSystem(); reset(); };
+$("name").oninput = () => { buildSystem(); reset(); };
+$("system").oninput = reset;
+$("temp").oninput = () => $("tempv").textContent = $("temp").value;
+$("reset").onclick = reset;
+
+$("form").onsubmit = e => {
+  e.preventDefault();
+  const text = $("input").value.trim();
+  if (!text || busy) return;
+  $("input").value = ""; add("user", text);
+  turns.push({ role: "user", content: text });
+  busy = true; $("send").disabled = true;
+  bubble = add("fish", "…");
+  worker.postMessage({ type: "chat", system: $("system").value, turns, temperature: +$("temp").value });
+};
+
+worker.onmessage = ({ data }) => {
+  if (data.type === "ready") {
+    $("status").textContent = `Loaded ${(data.bytes / 1e6).toFixed(1)} MB.`;
+    $("input").disabled = false; $("send").disabled = false; $("input").focus();
+  } else if (data.type === "token") {
+    bubble.textContent = data.text; bubble.scrollIntoView({ block: "end" });
+  } else if (data.type === "done") {
+    bubble.textContent = data.text || "(says nothing, blows a bubble)";
+    turns.push({ role: "assistant", content: data.text });
+    const m = document.createElement("div"); m.className = "meta";
+    m.textContent = `${data.tokens} tokens in ${(data.ms / 1000).toFixed(1)} s, on your device`;
+    $("log").append(m);
+    busy = false; $("send").disabled = false; $("input").focus();
+  } else if (data.type === "error") {
+    $("status").textContent = "Couldn't load the fish: " + data.message;
+  }
+};
+</script>
+</body>
+</html>
