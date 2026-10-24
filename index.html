@@ -6,65 +6,173 @@
 <title>Aquarium</title>
 <style>
   :root {
-    --bg: #f4f1ea; --panel: #fffdf8; --ink: #1d2a33; --muted: #6b7680; --line: #ddd6c8;
-    --you: #1f6f8b; --you-ink: #fff; --fish: #e9f2f1; --accent: #e07a3f;
+    --bg: #fbf6ea; --paper: #fffdf6; --ink: #2a2622; --muted: #6f665c; --line: #2a2622;
+    --lid: #3a3f44; --glass: #cfe8ee; --sand: #ecd9a8; --wood: #d9b77c; --wood-dark: #a9824a;
+    --wall-1: #9cc3dc; --wall-2: #e7cf9f; --wall-3: #b9e2dc; --wall-4: #f2c6cf;
+    --you: #2f6f9f; --you-ink: #fff; --fish: #fffdf6; --accent: #e2553b; --glow: #ffe9a6;
   }
   @media (prefers-color-scheme: dark) {
-    :root { --bg: #0e1a22; --panel: #13232d; --ink: #e4ecef; --muted: #8d9ba3; --line: #24394a;
-            --you: #2c8fb0; --you-ink: #fff; --fish: #1a3140; --accent: #f0915a; }
+    :root {
+      --bg: #0d1820; --paper: #13232d; --ink: #eef3f4; --muted: #95a6ae; --line: #0a0f13;
+      --lid: #22282d; --glass: #12303d; --sand: #6b5a37; --wood: #7a5c33; --wood-dark: #4e3a1f;
+      --wall-1: #2b5876; --wall-2: #6a5530; --wall-3: #22605b; --wall-4: #6a3a4b;
+      --you: #2f86b8; --you-ink: #fff; --fish: #1b3341; --accent: #f06a4d; --glow: #a8822e;
+    }
   }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--bg); color: var(--ink);
-         font: 16px/1.45 ui-rounded, "SF Pro Rounded", system-ui, sans-serif; }
-  main { max-width: 680px; margin: 0 auto; padding: 20px 16px 32px; display: flex; flex-direction: column; min-height: 100vh; }
-  h1 { font-size: 1.4rem; margin: 0 0 2px; }
-  .sub { color: var(--muted); font-size: .9rem; margin: 0 0 16px; }
-  .setup { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: grid;
-           grid-template-columns: 1fr 1fr; gap: 10px; }
-  label { font-size: .78rem; color: var(--muted); display: flex; flex-direction: column; gap: 4px; }
-  select, input, textarea, button { font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line);
-                                     border-radius: 10px; padding: 8px 10px; }
-  textarea { resize: vertical; min-height: 58px; font-size: .88rem; }
-  .wide { grid-column: 1 / -1; }
+         font: 16px/1.45 ui-rounded, "SF Pro Rounded", "Nunito", system-ui, sans-serif; }
+  main { max-width: 760px; margin: 0 auto; padding: 20px 16px 32px; }
+
+  /* the sign over the door */
+  header { text-align: center; margin-bottom: 14px; }
+  h1 { display: inline-block; margin: 0; padding: 4px 22px 6px; font-size: 1.9rem; letter-spacing: .02em;
+       background: var(--wood); color: #3b2a12; border: 3px solid var(--line); border-radius: 12px;
+       box-shadow: 0 4px 0 var(--wood-dark); transform: rotate(-1.5deg); }
+  .sub { color: var(--muted); font-size: .92rem; margin: 12px auto 0; max-width: 34em; }
+  #status { display: inline-block; font-size: .8rem; }
+
+  .poster { margin: 0 0 18px; }
+  .poster img { width: 100%; height: auto; display: block; border-radius: 10px; border: 3px solid var(--line); }
+
+  /* the tank: a lid, glass sides, three floors of rooms */
+  .tank { position: relative; border: 3px solid var(--line); border-top: 0; border-radius: 0 0 10px 10px;
+          background: var(--glass); padding: 0 8px 8px; box-shadow: inset 0 0 0 4px rgba(255,255,255,.35); }
+  .tank::before { content: ""; display: block; height: 18px; margin: 0 -11px 8px; background: var(--lid);
+                  border: 3px solid var(--line); border-radius: 6px; }
+  .tank legend { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+  fieldset.tank { min-width: 0; margin: 0; }
+  .rooms { display: grid; grid-template-columns: repeat(6, 1fr); }
+  .room-pick { position: relative; }
+  .room-pick input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+  .room-pick span.box { display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+       height: 100%; min-height: 96px; padding: 10px 4px 6px; background: var(--wall-1);
+       border-right: 3px solid var(--wood-dark); border-bottom: 7px solid var(--wood);
+       box-shadow: inset 0 -2px 0 var(--wood-dark); text-align: center; transition: background .15s; }
+  .room-pick:nth-child(6n) span.box { border-right: 0; }
+  .room-pick:nth-child(4n+2) span.box { background: var(--wall-2); }
+  .room-pick:nth-child(4n+3) span.box { background: var(--wall-3); }
+  .room-pick:nth-child(4n) span.box { background: var(--wall-4); }
+  .critter { font-size: 2rem; line-height: 1; transition: transform .2s; }
+  .prop { position: absolute; top: 5px; right: 6px; font-size: 1.25rem; }
+  .tag { font-size: .7rem; margin-top: 4px; color: var(--ink); line-height: 1.15; }
+  .new { position: absolute; top: 5px; left: 5px; font-size: .58rem; font-weight: 700; text-transform: uppercase;
+         background: var(--accent); color: #fff; padding: 1px 5px; border-radius: 6px; transform: rotate(-6deg); }
+  .room-pick:hover .critter { transform: translateY(-3px) rotate(-6deg); }
+  .room-pick input:checked + span.box { background: var(--glow);
+       box-shadow: inset 0 -2px 0 var(--wood-dark), inset 0 0 0 3px var(--accent); }
+  .room-pick input:checked + span.box .critter { transform: scale(1.15); }
+  .room-pick input:focus-visible + span.box { outline: 3px solid var(--you); outline-offset: -3px; }
+
+  /* the room you are visiting */
+  .room { position: relative; overflow: hidden; margin-top: 18px; border: 3px solid var(--line); border-radius: 12px;
+          background: var(--wall-3); display: flex; flex-direction: column; min-height: 60vh; }
+  .room[data-wall="1"] { background: var(--wall-1); } .room[data-wall="2"] { background: var(--wall-2); }
+  .room[data-wall="3"] { background: var(--wall-3); } .room[data-wall="0"] { background: var(--wall-4); }
+  .bubbles { position: absolute; inset: 0; pointer-events: none; }
+  .bubbles i { position: absolute; bottom: -20px; border: 2px solid rgba(255,255,255,.75); border-radius: 50%;
+               animation: rise linear infinite; }
+  @keyframes rise { to { transform: translate(var(--drift), -75vh); opacity: 0; } }
+  .nameplate { position: relative; display: flex; align-items: center; gap: 12px; padding: 12px 14px;
+               border-bottom: 3px dashed rgba(42,38,34,.25); }
+  .nameplate .critter { font-size: 2.6rem; }
+  .nameplate label { flex: 1; font-size: .72rem; color: var(--muted); display: flex; flex-direction: column; gap: 2px; }
+  .nameplate input { font: inherit; font-size: 1.15rem; font-weight: 700; color: var(--ink); background: var(--paper);
+                     border: 2px solid var(--line); border-radius: 8px; padding: 4px 10px; max-width: 16em; }
+  .species { font-size: .85rem; color: var(--ink); opacity: .75; }
+
+  details { position: relative; margin: 10px 14px 0; background: var(--paper); border: 2px solid var(--line);
+            border-radius: 10px; padding: 6px 10px; font-size: .85rem; }
+  summary { cursor: pointer; color: var(--muted); }
+  details label { display: flex; flex-direction: column; gap: 4px; font-size: .75rem; color: var(--muted); margin-top: 8px; }
+  textarea, input[type=range] { font: inherit; color: var(--ink); }
+  textarea { resize: vertical; min-height: 58px; font-size: .85rem; background: var(--bg); border: 1px solid var(--muted);
+             border-radius: 8px; padding: 6px 8px; }
   .row { display: flex; align-items: center; gap: 8px; }
-  .row input[type=range] { flex: 1; padding: 0; }
-  #log { flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 18px 0; }
-  .msg { max-width: 85%; padding: 9px 13px; border-radius: 16px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  .row input[type=range] { flex: 1; }
+
+  #log { position: relative; flex: 1; display: flex; flex-direction: column; gap: 10px; padding: 16px 14px; }
+  .msg { max-width: 85%; padding: 9px 14px; border: 2px solid var(--line); border-radius: 18px;
+         white-space: pre-wrap; overflow-wrap: anywhere; }
   .user { align-self: flex-end; background: var(--you); color: var(--you-ink); border-bottom-right-radius: 4px; }
   .fish { align-self: flex-start; background: var(--fish); border-bottom-left-radius: 4px; }
-  .meta { font-size: .72rem; color: var(--muted); align-self: flex-start; margin-top: -6px; }
-  form { display: flex; gap: 8px; position: sticky; bottom: 12px; }
-  form input { flex: 1; background: var(--panel); }
-  button { background: var(--accent); color: #fff; border: 0; padding: 8px 16px; cursor: pointer; }
+  .meta { font-size: .72rem; color: var(--ink); opacity: .6; align-self: flex-start; margin-top: -6px; }
+  .thinking { display: inline-flex; gap: 5px; padding: 3px 0; }
+  .thinking b { width: 9px; height: 9px; border: 2px solid currentColor; border-radius: 50%;
+                animation: blub 1s ease-in-out infinite; }
+  .thinking b:nth-child(2) { animation-delay: .15s; } .thinking b:nth-child(3) { animation-delay: .3s; }
+  @keyframes blub { 50% { transform: translateY(-6px); opacity: .4; } }
+
+  form { position: relative; display: flex; gap: 8px; padding: 12px 14px 14px; background: var(--sand);
+         border-top: 3px solid var(--line); }
+  form input { flex: 1; min-width: 0; font: inherit; color: var(--ink); background: var(--paper);
+               border: 2px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+  button { font: inherit; font-weight: 700; background: var(--accent); color: #fff; border: 2px solid var(--line);
+           border-radius: 10px; padding: 8px 16px; cursor: pointer; box-shadow: 0 3px 0 var(--line); }
+  button:active { transform: translateY(2px); box-shadow: 0 1px 0 var(--line); }
   button:disabled { opacity: .5; cursor: default; }
-  .ghost { background: transparent; color: var(--muted); border: 1px solid var(--line); }
-  #status { font-size: .8rem; color: var(--muted); }
+  .ghost { background: var(--paper); color: var(--ink); padding: 4px 12px; font-size: .8rem; }
+
   footer { color: var(--muted); font-size: .78rem; margin-top: 18px; line-height: 1.5; }
   footer a { color: inherit; }
-  @media (max-width: 520px) { .setup { grid-template-columns: 1fr; } .msg { max-width: 92%; } }
+
+  @media (max-width: 600px) {
+    .rooms { grid-template-columns: repeat(3, 1fr); }
+    .room-pick:nth-child(6n) span.box { border-right: 3px solid var(--wood-dark); }
+    .room-pick:nth-child(3n) span.box { border-right: 0; }
+    .msg { max-width: 92%; }
+    h1 { font-size: 1.6rem; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bubbles { display: none; }
+    .thinking b, .critter { animation: none; transition: none; }
+  }
 </style>
 </head>
 <body>
 <main>
-  <h1>Aquarium</h1>
-  <p class="sub">A 9-million-parameter sea creature, running entirely in your browser. <span id="status">Loading the fish…</span></p>
+  <header>
+    <h1>The Aquarium</h1>
+    <p class="sub">Eighteen sea creatures share one 9-million-parameter brain, and it runs entirely in your browser.
+      Pick a room. <span id="status">Filling the tank…</span></p>
+  </header>
 
-  <div class="setup">
-    <label>Creature <select id="persona"></select></label>
-    <label>Name <input id="name" value="Pebble" autocomplete="off"></label>
-    <label class="wide">System prompt <textarea id="system"></textarea></label>
-    <label class="wide">Temperature
-      <span class="row"><input id="temp" type="range" min="0" max="1.2" step="0.05" value="0.7"><span id="tempv">0.7</span>
-      <button type="button" class="ghost" id="reset">New chat</button></span>
-    </label>
-  </div>
+  <figure class="poster">
+    <img src="aquarium-dollhouse.webp" width="1216" height="832"
+         alt="A cutaway of an aquarium built like a dollhouse, each room home to a different sea creature: a lobster in a rocky study, a manatee on a pink couch, a jellyfish by a dresser, octopuses, a seahorse, sea turtles, and clownfish in an anemone.">
+  </figure>
 
-  <div id="log"></div>
+  <fieldset class="tank">
+    <legend>Choose a creature</legend>
+    <div class="rooms" id="rooms"></div>
+  </fieldset>
 
-  <form id="form">
-    <input id="input" placeholder="Say something to the fish" autocomplete="off" disabled>
-    <button id="send" disabled>Send</button>
-  </form>
+  <section class="room" id="room" data-wall="1" aria-label="Chat">
+    <div class="bubbles" id="bubbles" aria-hidden="true"></div>
+    <div class="nameplate">
+      <span class="critter" id="who" aria-hidden="true">🐟</span>
+      <label>Name on the door
+        <input id="name" value="Pebble" autocomplete="off">
+        <span class="species" id="species"></span>
+      </label>
+    </div>
+
+    <details>
+      <summary>Behind the glass</summary>
+      <label>System prompt <textarea id="system"></textarea></label>
+      <label>Temperature
+        <span class="row"><input id="temp" type="range" min="0" max="1.2" step="0.05" value="0.7"><span id="tempv">0.7</span>
+        <button type="button" class="ghost" id="reset">New chat</button></span>
+      </label>
+    </details>
+
+    <div id="log" aria-live="polite"></div>
+
+    <form id="form">
+      <input id="input" placeholder="Tap on the glass…" autocomplete="off" disabled>
+      <button id="send" disabled>Send</button>
+    </form>
+  </section>
 
   <footer>
     The aquarium fish from a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>: 8.9 million
@@ -80,11 +188,18 @@ const NAMES = { guppy: "Pebble", goldfish: "Biscuit", betta: "Duchess", clownfis
   hermit_crab: "Marbleton", anglerfish: "Chip", seahorse: "Tilly", sea_turtle: "Tuppence", jellyfish: "Wobbleton",
   pufferfish: "Puff", blue_whale: "Sprinkles", lobster: "Fizzgig", sea_star: "Shadow", reef_shark: "Fin",
   manatee: "Bartholomew", narwhal: "Quilliam", mantis_shrimp: "Zephyrine" };
+// [creature, the furniture in its room]
+const ROOMS = { guppy: ["🐟", "🏰"], goldfish: ["🐠", "📺"], betta: ["🐟", "👑"], clownfish: ["🐠", "🪸"],
+  octopus: ["🐙", "📚"], hermit_crab: ["🦀", "🐚"], anglerfish: ["🐡", "💡"], seahorse: ["🐴", "🌿"],
+  sea_turtle: ["🐢", "🕰️"], jellyfish: ["🪼", "🪔"], pufferfish: ["🐡", "🎈"], blue_whale: ["🐋", "🛁"],
+  lobster: ["🦞", "🪨"], sea_star: ["⭐", "🛏️"], reef_shark: ["🦈", "🏋️"], manatee: ["🦭", "🛋️"],
+  narwhal: ["🦄", "🪞"], mantis_shrimp: ["🦐", "🥊"] };
 let P, turns = [], busy = false, bubble = null;
 
 const label = k => k.replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
+const current = () => document.querySelector("input[name=creature]:checked").value;
 function buildSystem() {
-  const p = P.personas[$("persona").value];
+  const p = P.personas[current()];
   $("system").value = P.template.replace("{name}", $("name").value.trim() || "Pebble")
     .replace("{species}", p.species).replace("{habitat}", p.habitat).replace("{traits}", p.traits);
 }
@@ -93,18 +208,38 @@ function add(cls, text) {
   const d = document.createElement("div"); d.className = "msg " + cls; d.textContent = text;
   $("log").append(d); d.scrollIntoView({ block: "end" }); return d;
 }
+function enter(k, i) {
+  $("who").textContent = (ROOMS[k] || ["🐟"])[0];
+  $("species").textContent = P.personas[k].species + (P.held_out.includes(k) ? ", new to the tank" : "");
+  $("room").dataset.wall = (i + 1) % 4;
+}
+
+// a few bubbles drifting up the back wall of the room
+for (let i = 0; i < 12; i++) {
+  const b = document.createElement("i"), s = 6 + Math.random() * 14;
+  b.style.cssText = `left:${Math.random() * 100}%;width:${s}px;height:${s}px;` +
+    `animation-duration:${7 + Math.random() * 8}s;animation-delay:${-Math.random() * 15}s;--drift:${Math.random() * 40 - 20}px`;
+  $("bubbles").append(b);
+}
 
 fetch("model/personas.json").then(r => r.json()).then(p => {
   P = p;
-  for (const k of Object.keys(P.personas)) {
-    const o = document.createElement("option"); o.value = k;
-    o.textContent = label(k) + (P.held_out.includes(k) ? " (never seen in training)" : "");
-    $("persona").append(o);
-  }
+  Object.keys(P.personas).forEach((k, i) => {
+    const [critter, prop] = ROOMS[k] || ["🐟", ""];
+    const l = document.createElement("label"); l.className = "room-pick";
+    l.innerHTML = `<input type="radio" name="creature" value="${k}"${i ? "" : " checked"}>` +
+      `<span class="box">${P.held_out.includes(k) ? '<span class="new">new</span>' : ""}` +
+      `<span class="prop" aria-hidden="true">${prop}</span><span class="critter" aria-hidden="true">${critter}</span>` +
+      `<span class="tag">${label(k)}</span></span>`;
+    l.querySelector("input").onchange = () => {
+      $("name").value = NAMES[k] || "Pebble"; enter(k, i); buildSystem(); reset();
+    };
+    $("rooms").append(l);
+  });
+  enter(Object.keys(P.personas)[0], 0);
   buildSystem();
 });
 
-$("persona").onchange = () => { $("name").value = NAMES[$("persona").value] || "Pebble"; buildSystem(); reset(); };
 $("name").oninput = () => { buildSystem(); reset(); };
 $("system").oninput = reset;
 $("temp").oninput = () => $("tempv").textContent = $("temp").value;
@@ -117,14 +252,15 @@ $("form").onsubmit = e => {
   $("input").value = ""; add("user", text);
   turns.push({ role: "user", content: text });
   busy = true; $("send").disabled = true;
-  bubble = add("fish", "…");
+  bubble = add("fish", "");
+  bubble.innerHTML = '<span class="thinking" aria-label="thinking"><b></b><b></b><b></b></span>';
   worker.postMessage({ type: "chat", system: $("system").value, turns, temperature: +$("temp").value });
 };
 
 worker.onmessage = ({ data }) => {
   if (data.type === "ready") {
-    $("status").textContent = `Loaded ${(data.bytes / 1e6).toFixed(1)} MB.`;
-    $("input").disabled = false; $("send").disabled = false; $("input").focus();
+    $("status").textContent = `Tank's full: ${(data.bytes / 1e6).toFixed(1)} MB of fish.`;
+    $("input").disabled = false; $("send").disabled = false;
   } else if (data.type === "token") {
     bubble.textContent = data.text; bubble.scrollIntoView({ block: "end" });
   } else if (data.type === "done") {
@@ -135,7 +271,7 @@ worker.onmessage = ({ data }) => {
     $("log").append(m);
     busy = false; $("send").disabled = false; $("input").focus();
   } else if (data.type === "error") {
-    $("status").textContent = "Couldn't load the fish: " + data.message;
+    $("status").textContent = "Couldn't fill the tank: " + data.message;
   }
 };
 </script>
