@@ -333,6 +333,7 @@ def main():
                     help="finetune: extra copies of dialogues that mention a human thing, swapped for an invented noun")
     ap.add_argument("--memory-copies", type=int, default=0,
                     help="finetune: extra copies with a user fact stated first and asked about last")
+    ap.add_argument("--max-dialogues", type=int, help="finetune: cap the distinct training dialogues before augmenting")
     ap.add_argument("--selfname-copies", type=int, default=0,
                     help="finetune: extra copies with the creature asked its own name at the end")
     ap.add_argument("--eval-every", type=int, default=1000)
@@ -361,6 +362,8 @@ def main():
         prng.shuffle(rows)
         n_val = max(200, len(rows) // 50)
         val_rows, train_rows = rows[:n_val], rows[n_val:]
+        if a.max_dialogues:
+            train_rows = train_rows[:a.max_dialogues]
         held = load_dialogues([os.path.join(D, "dialogues_eval.jsonl")]) if os.path.exists(
             os.path.join(D, "dialogues_eval.jsonl")) else []
         MEMORY_POOL.update(load_memory_pool())
