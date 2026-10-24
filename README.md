@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">GuppyLM</h1>
-<p align="center"><em>A ~9M parameter LLM that talks like a small fish.</em></p>
+<p align="center"><em>Two ~9M parameter fish: the original Guppy and Aquarium v4.</em></p>
 
 <p align="center">
   <a href="https://huggingface.co/datasets/arman-bd/guppylm-60k-generic"><img src="https://img.shields.io/badge/🤗_Dataset-guppylm--60k-blue" alt="Dataset"/></a>&nbsp;
@@ -16,7 +16,7 @@
   <a href="https://www.linkedin.com/pulse/build-your-own-language-model-5-minutes-i-made-mine-hossain--supif/"><img src="https://img.shields.io/badge/Article-LinkedIn-0A66C2?logo=linkedin" alt="LinkedIn Article"/></a>&nbsp;
   <a href="https://arman-bd.medium.com/build-your-own-llm-in-5-minutes-i-made-mine-talk-like-a-fish-e20c338a3d14"><img src="https://img.shields.io/badge/Article-Medium-000000?logo=medium" alt="Medium Article"/></a>
   <br/><br/>
-  <a href="https://arman-bd.github.io/guppylm/"><img src="https://img.shields.io/badge/Try_in-Browser-64ffda?style=for-the-badge&logo=webassembly&logoColor=white" alt="Browser Demo"/></a>
+  <a href="https://eaglstun.github.io/guppylm/"><img src="https://img.shields.io/badge/Try_Aquarium_v4-in_Browser-64ffda?style=for-the-badge&logo=webassembly&logoColor=white" alt="Aquarium v4 browser demo"/></a>
 </p>
 
 ---
@@ -55,13 +55,15 @@ Guppy> ok sleep time. i was following a bubble but now i'll stop. goodnight tank
 
 ## What is GuppyLM?
 
-GuppyLM is a tiny language model that pretends to be a fish named Guppy. It speaks in short, lowercase sentences about water, food, light, and tank life. It doesn't understand human abstractions like money, phones, or politics — and it's not trying to.
+The original GuppyLM is a tiny language model that pretends to be a fish named Guppy. It speaks in short, lowercase sentences about water, food, light, and tank life. It doesn't understand human abstractions like money, phones, or politics — and it's not trying to.
 
-It's trained from scratch on 60K synthetic conversations across 60 topics, runs on a single GPU in ~5 minutes, and produces a model small enough to run in a browser.
+The original model trains from scratch on 60K synthetic, single-turn conversations across 60 topics in about five minutes on a GPU. This fork also includes **Aquarium v4**: a similarly sized model pretrained on stories, then trained on multi-turn conversations with 18 aquatic personas (16 in training, two held out). It has a longer context and runs in the [fork's browser demo](https://eaglstun.github.io/guppylm/).
+
+The original notebooks and Hugging Face model remain linked below. Aquarium v4's browser weights are in `web/model/`; its training checkpoints and dialogue datasets are not committed.
 
 ---
 
-## Architecture
+## Original Guppy architecture
 
 |                  |                             |
 | ---------------- | --------------------------- |
@@ -78,9 +80,11 @@ It's trained from scratch on 60K synthetic conversations across 60 topics, runs 
 
 Vanilla transformer. No GQA, no RoPE, no SwiGLU, no early exit. As simple as it gets.
 
+Aquarium v4 keeps the six-layer, 384-wide architecture at 8.9M parameters. Its byte-level BPE tokenizer retains capitals, punctuation, and non-ASCII text, and its context grows from 128 to 512 tokens. See [EXPERIMENT.md](EXPERIMENT.md) for the earlier aquarium runs and measured probes.
+
 ---
 
-## Personality
+## Original Guppy personality
 
 Guppy:
 
@@ -98,9 +102,18 @@ Guppy:
 
 ### Try in Browser (no install needed)
 
-[![Try in Browser](https://img.shields.io/badge/Try_in-Browser-64ffda?logo=webassembly)](https://arman-bd.github.io/guppylm/)
+[![Try Aquarium v4 in Browser](https://img.shields.io/badge/Try_Aquarium_v4-in_Browser-64ffda?logo=webassembly)](https://eaglstun.github.io/guppylm/)
 
-Runs entirely in your browser via WebAssembly. Downloads a quantized ONNX model (~10 MB) and runs inference locally — no server, no API keys.
+Aquarium v4 runs entirely in your browser: a 9 MB int8 model, a plain-JavaScript runtime, and a Web Worker. No server or API key handles inference. Pick a creature and chat across turns. The [original Guppy browser demo](https://arman-bd.github.io/guppylm/) remains available upstream; it uses a separate ONNX/WebAssembly model.
+
+To serve this fork's browser build locally:
+
+```bash
+cd web
+python3 -m http.server 8765   # open http://127.0.0.1:8765
+```
+
+See [web/README.md](web/README.md) for the export command and runtime details.
 
 ### Chat with Guppy in Colab
 
@@ -140,7 +153,7 @@ python -m guppylm chat --prompt "tell me a joke"
 
 ---
 
-## Dataset
+## Original Guppy dataset
 
 **[arman-bd/guppylm-60k-generic](https://huggingface.co/datasets/arman-bd/guppylm-60k-generic)** on HuggingFace.
 
@@ -158,6 +171,12 @@ print(ds["train"][0])
 # {'input': 'hi guppy', 'output': 'hello. the water is nice today.', 'category': 'greeting'}
 ```
 
+The published 60K dataset is useful for learning the training pipeline, but its original generator had less variety than its comments claimed. In a 60K generation, **19.4% of complete replies were unique**, and **77% of evaluation input/output pairs also appeared in training**. Many template details were filled once when the module loaded, then reused. This fork fixes per-sample filling, composes two templates for half the replies, and removes exact train duplicates from evaluation. These fixes raise unique complete replies to **42.6%** in the measured regeneration; they do not make the original model a general-purpose chatbot. See [MEMORIZATION_FIX.md](MEMORIZATION_FIX.md) for the measurements and limitations.
+
+Aquarium v4 uses a different data path: TinyStories pretraining followed by generated multi-turn persona conversations, with varied names and unfamiliar nouns to teach copying. Its training tools are under `tools/aquarium/`. The exported model is ready to use in `web/`, while regenerating a training run requires the separate story and dialogue data described in [EXPERIMENT.md](EXPERIMENT.md).
+
+The v4 run adds TinyDialogues and a first stage of ocean conversations, with a 20,000-dialogue training cap. The exported int8 model's held-out persona loss was **2.0470**, compared with **2.0468** for its float checkpoint. Those are measurements for this run, not a claim that the fish understands every new name or remembers every conversation. Export details and parity checks are in [web/README.md](web/README.md).
+
 ---
 
 ## Project Structure
@@ -171,16 +190,24 @@ guppylm/
 ├── generate_data.py        Conversation data generator (60 topics)
 ├── eval_cases.py           Held-out test cases
 ├── prepare_data.py         Data prep + tokenizer training
+├── human_things.py         Expanded human-noun pool for experiments
 └── inference.py            Chat interface
 
 tools/
 ├── make_colab.py           Generates Colab notebooks
+├── aquarium/               Aquarium data, training, probes, and web export
 ├── export_onnx.py          Export model to ONNX (quantized uint8)
 ├── export_dataset.py       Push dataset to HuggingFace
 └── dataset_card.md         HuggingFace dataset README
 
+web/
+├── index.html              Aquarium browser demo
+├── guppy.js                Tokenizer, model runtime, KV cache, and sampler
+├── worker.js               Inference worker
+└── model/                 Aquarium v4 int8 weights, tokenizer, personas
+
 docs/
-├── index.html              Browser demo (ONNX + WASM)
+├── index.html              Original Guppy browser demo (ONNX + WASM)
 ├── download.sh             Download model.onnx + tokenizer from HF
 ├── model.onnx              Quantized uint8 (~10 MB)
 ├── tokenizer.json          BPE tokenizer
@@ -191,13 +218,13 @@ docs/
 
 ## Design Decisions
 
-**Why no system prompt?** Every training sample had the same one. A 9M model can't conditionally follow instructions — the personality is baked into the weights. Removing it saves ~60 tokens per inference.
+**Why no system prompt in the original Guppy?** Every training sample had the same character, so the prompt was redundant. Aquarium v4 varies the system prompt and demonstrates that a model of similar size can respond to different persona descriptions.
 
-**Why single-turn only?** Multi-turn degraded at turn 3-4 due to the 128-token context window. A fish that forgets is on-brand, but garbled output isn't. Single-turn is reliable.
+**Why is the original Guppy single-turn?** Its 128-token context limits longer chats. Aquarium v4 uses a 512-token context and multi-turn training.
 
 **Why vanilla transformer?** GQA, SwiGLU, RoPE, and early exit add complexity that doesn't help at 9M params. Standard attention + ReLU FFN + LayerNorm produces the same quality with simpler code.
 
-**Why synthetic data?** A fish character with consistent personality needs consistent training data. Template composition with randomized components (30 tank objects, 17 food types, 25 activities) generates ~16K unique outputs from ~60 templates.
+**Why synthetic data?** The original templates make every training example inspectable and let you trace behavior back to the curriculum. They also cap diversity: the original generation reused far more replies than expected. Aquarium v4 tests a different curriculum with varied dialogue rather than relying on a small set of finished sentences.
 
 ---
 
