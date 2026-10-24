@@ -23,7 +23,9 @@ template data is the ceiling, so this one changes the data, not the model.
   one of 6 system-prompt phrasings, user (35% another sea creature, else a human), topic,
   optional human thing to mention, 1 to 4 exchanges.
   - 6,000 dialogues written by 14 Claude Haiku agents from spec files.
-  - Ollama `qwen3-coder:30b`: 573 for the runs through `aq-chat-full`, 6,015 for `aq-chat-v2`.
+  - 6,000 more by 12 Haiku agents for `aq-chat-v3` (86% unique sentences, same as the first 6,000).
+  - Ollama `qwen3-coder:30b`: 573 for the runs through `aq-chat-full`, 6,015 for `aq-chat-v2`,
+    11,874 for `aq-chat-v3`, plus 300 held-out-persona dialogues (`dialogues_eval.jsonl`).
   - Unique assistant sentences: Haiku 88.5%, Ollama 93.1%. The template fish's data: 3.5%.
 - **Probe** (`tools/aquarium/probe.py`, `partial.py`): every test uses words never in training.
   4 samples per prompt, temperature 0.7, top-k 40, seed 0, CPU.
@@ -37,7 +39,8 @@ template data is the ceiling, so this one changes the data, not the model.
 | aq-chat-5k (best @4.5k)     |         2.062 |       0.00 |                 0.77 |               0.00 |                 0.48 |             0.67 |                  0.06 |
 | aq-chat-rename, 4.5k        |         2.068 |       0.71 |                 0.94 |               0.18 |                 0.63 |             0.75 |                  0.06 |
 | aq-chat-full, 6k            |         2.087 |       0.69 |                 0.96 |               0.35 |                 0.98 |             0.75 |                  0.75 |
-| **aq-chat-v2**, 7k          |     **1.869** |   **0.56** |             **0.83** |           **0.58** |             **0.98** |         **0.75** |              **0.81** |
+| aq-chat-v2, 7k              |         1.869 |       0.56 |                 0.83 |               0.58 |                 0.98 |             0.75 |                  0.81 |
+| **aq-chat-v3**, 15k (best @14k) | **1.729** | **0.92** |             **1.00** |           **0.68** |             **0.88** |         **0.71** |              **0.69** |
 
 n per cell: names 48, made-up nouns 40, species 24, memory 16. Differences under ~15 points
 are within noise at these sizes.
@@ -86,6 +89,26 @@ are within noise at these sizes.
     8 of 48 replies start "You are", up from 4. The memory copies add many "What is my name?" ->
     "Your name is ..." pairs, and the two questions differ by one word.
 
+- **Compound names, self-name copies, twice the data, twice the steps** (`aq-chat-v3`): a quarter
+  of invented names now start with a real word (Bubbleington, Crumbleham); `--selfname-copies 1`
+  appends "What is your name?" with a Haiku-written, persona-voiced answer (624 pairs), a third of
+  the time after the user has stated their own name; 24 memory triples whose name question could
+  be about either speaker were dropped. 23,874 base dialogues (130,975 after augmentation),
+  15,000 steps. Held-out-persona loss on the 300 eval dialogues: 2.123 (v2) -> 2.055.
+  - Names exact 0.56 -> 0.92. Marbleton 0 -> 8 of 8 ("Marbleton. I am a careful crab who likes to
+    look for better shells."), Wobbleton 2 -> 8 of 8. Replies to "What is your name?" that start
+    "You are": 8 -> 0. "remember" in non-memory replies: still 0.
+  - The one weak name is Tuppence (4 of 8, "I am Tuppal."). `tup` is one of the invented-name
+    syllables, so the model has a strong habit of continuing Tup- with a training syllable.
+  - Memory 13 -> 11 of 16, near noise, but the misses changed: Bartholomew now comes back exact
+    half the time ("You are Bartholomew."), and "purple" fails 3 of 4 ("A shell you found was
+    pink."). Purple is kept out of the 14 training colors, so the color slot is the
+    31-noun problem again: with 14 values, the model learned "say a color", not "copy the color".
+  - Made-up nouns exact 0.58 -> 0.68; real nouns 0.66 -> 0.52 (n=64, partly noise).
+- **Browser build** (`web/`, `tools/aquarium/export_web.py`): int8 weights with a scale per row,
+  9.04 MB, run by a dependency-free JS runtime with a KV cache. Held-out loss float vs int8:
+  2.0550 vs 2.0562. Greedy decoding matches PyTorch token for token; see `web/README.md`.
+
 ## Inferred
 
 - The renaming result is the same lesson as the 31-noun template fish, one level up: with ~150
@@ -113,6 +136,9 @@ python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out ru
     --steps 6000 --eval-every 500 --rename-copies 2 --noun-copies 2 --memory-copies 1
 python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-v2 \
     --steps 7000 --eval-every 500 --rename-copies 2 --noun-copies 2 --memory-copies 1
+python3 tools/aquarium/train_aq.py finetune --init runs/aq-pre/final.pt --out runs/aq-chat-v3 \
+    --steps 15000 --eval-every 1000 --rename-copies 2 --noun-copies 2 --memory-copies 1 --selfname-copies 1
+python3 tools/aquarium/export_web.py runs/aq-chat-v3/best.pt --out web/model
 python3 tools/aquarium/probe.py runs/aq-chat-rename/best.pt --out runs/aq-chat-rename/probe.json
 (cd tools/aquarium && python3 partial.py ../../runs/aq-chat-rename/probe.json)
 ```
