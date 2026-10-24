@@ -4,7 +4,8 @@
 
 Reads data_aq/tinydialogues/tinydialogue_age-*_train.txt, keeps conversations with only two
 speakers (Child plus one adult), takes an equal share from each age, and writes
-data_aq/tinydialogues/sample.jsonl as {"age", "turns": [{"speaker", "text"}]} plus stats.
+data_aq/tinydialogues/sample.jsonl as {"age", "turns": [{"speaker", "text"}]} plus stats, and
+chat.jsonl in the train_aq row format: the adult is the assistant, the child is the user.
 """
 
 import argparse
@@ -19,6 +20,33 @@ from tokenizers import Tokenizer
 D = os.path.join(os.path.dirname(__file__), "..", "..", "data_aq")
 TD = os.path.join(D, "tinydialogues")
 TURN = re.compile(r"\*\*(.+?)\*\*:\s*(.*)")
+STAGE = re.compile(r"\s*\*[^*]+\*\s*")  # *runs to pantry*
+AGES = {2: "two", 5: "five", 10: "ten"}
+
+
+def as_chat(row):
+    """Child turns become user, adult turns assistant; same-speaker runs merge, stage directions go."""
+    adult = next(x["speaker"] for x in row["turns"] if x["speaker"] != "Child")
+    if adult == "Younger Sibling":  # the toddler would be the assistant
+        return None
+    turns = []
+    for x in row["turns"]:
+        text = STAGE.sub(" ", x["text"]).strip()
+        if not text:
+            continue
+        role = "user" if x["speaker"] == "Child" else "assistant"
+        if turns and turns[-1]["role"] == role:
+            turns[-1]["content"] += " " + text
+        else:
+            turns.append({"role": role, "content": text})
+    while turns and turns[0]["role"] != "user":
+        turns.pop(0)
+    if len(turns) < 2:
+        return None
+    who = re.sub(r"\s*\d+$", "", adult.lower())
+    article = "an" if who[0] in "aeiou" else "a"
+    system = f"You are {article} {who}. You are talking with a {AGES.get(row['age'], str(row['age']))}-year-old child."
+    return {"system": system, "turns": turns, "source": "tinydialogues", "age": row["age"]}
 
 
 def parse(text):
@@ -65,7 +93,11 @@ def main():
     with open(os.path.join(TD, "sample.jsonl"), "w") as f:
         for r in out:
             f.write(json.dumps(r) + "\n")
-    print(f"wrote {len(out):,} conversations to {os.path.join(TD, 'sample.jsonl')}")
+    chats = [c for c in map(as_chat, out) if c]
+    with open(os.path.join(TD, "chat.jsonl"), "w") as f:
+        for c in chats:
+            f.write(json.dumps(c) + "\n")
+    print(f"wrote {len(out):,} conversations to sample.jsonl, {len(chats):,} to chat.jsonl")
 
 
 if __name__ == "__main__":

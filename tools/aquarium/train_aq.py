@@ -333,6 +333,7 @@ def main():
                     help="finetune: extra copies of dialogues that mention a human thing, swapped for an invented noun")
     ap.add_argument("--memory-copies", type=int, default=0,
                     help="finetune: extra copies with a user fact stated first and asked about last")
+    ap.add_argument("--dialogues", nargs="+", help="finetune: train on these jsonl files instead of the aquarium set")
     ap.add_argument("--max-dialogues", type=int, help="finetune: cap the distinct training dialogues before augmenting")
     ap.add_argument("--selfname-copies", type=int, default=0,
                     help="finetune: extra copies with the creature asked its own name at the end")
@@ -358,7 +359,8 @@ def main():
     stories = Stories(os.path.join(D, "ts_train.bin"), a.seq)
     stories_val = Stories(os.path.join(D, "ts_valid.bin"), a.seq)
     if not pre:
-        rows = load_dialogues([os.path.join(D, "dialogues.jsonl")] + glob.glob(os.path.join(D, "haiku", "out_*.jsonl")))
+        rows = load_dialogues(a.dialogues or [os.path.join(D, "dialogues.jsonl")]
+                              + glob.glob(os.path.join(D, "haiku", "out_*.jsonl")))
         prng.shuffle(rows)
         n_val = max(200, len(rows) // 50)
         val_rows, train_rows = rows[:n_val], rows[n_val:]
