@@ -108,11 +108,41 @@ function readWeights(buf) {
 function matvec(W, x, b, y) {
   const { q, s, rows, cols } = W;
   for (let r = 0, o = 0; r < rows; r++, o += cols) {
-    let acc = 0;
-    for (let c = 0; c < cols; c++) acc += q[o + c] * x[c];
-    y[r] = acc * s[r] + (b ? b[r] : 0);
+    let a0 = 0, a1 = 0, a2 = 0, a3 = 0, a4 = 0, a5 = 0, a6 = 0, a7 = 0;
+    const end = cols & ~7;
+    for (let c = 0; c < end; c += 8) {
+      a0 += q[o + c] * x[c];       a1 += q[o + c + 1] * x[c + 1];
+      a2 += q[o + c + 2] * x[c + 2]; a3 += q[o + c + 3] * x[c + 3];
+      a4 += q[o + c + 4] * x[c + 4]; a5 += q[o + c + 5] * x[c + 5];
+      a6 += q[o + c + 6] * x[c + 6]; a7 += q[o + c + 7] * x[c + 7];
+    }
+    for (let c = end; c < cols; c++) a0 += q[o + c] * x[c];
+    y[r] = (a0 + a1 + a2 + a3 + a4 + a5 + a6 + a7) * s[r] + (b ? b[r] : 0);
   }
   return y;
+}
+
+// Two prompt tokens share each weight read. Their attention remains causal.
+function matvec2(W, x0, x1, b, y0, y1) {
+  const { q, s, rows, cols } = W;
+  for (let r = 0, o = 0; r < rows; r++, o += cols) {
+    let a0 = 0, a1 = 0, a2 = 0, a3 = 0;
+    let z0 = 0, z1 = 0, z2 = 0, z3 = 0;
+    const end = cols & ~3;
+    for (let c = 0; c < end; c += 4) {
+      const q0 = q[o + c], q1 = q[o + c + 1], q2 = q[o + c + 2], q3 = q[o + c + 3];
+      a0 += q0 * x0[c];     z0 += q0 * x1[c];
+      a1 += q1 * x0[c + 1]; z1 += q1 * x1[c + 1];
+      a2 += q2 * x0[c + 2]; z2 += q2 * x1[c + 2];
+      a3 += q3 * x0[c + 3]; z3 += q3 * x1[c + 3];
+    }
+    for (let c = end; c < cols; c++) {
+      const v = q[o + c]; a0 += v * x0[c]; z0 += v * x1[c];
+    }
+    const bias = b ? b[r] : 0, scale = s[r];
+    y0[r] = (a0 + a1 + a2 + a3) * scale + bias;
+    y1[r] = (z0 + z1 + z2 + z3) * scale + bias;
+  }
 }
 
 function layerNorm(x, g, b, y) {
@@ -137,6 +167,13 @@ export class Guppy {
     this.vcache = Array.from({ length: L }, () => new Float32Array(T * d));
     this.x = new Float32Array(d); this.h = new Float32Array(d); this.a = new Float32Array(d);
     this.qkv = new Float32Array(3 * d); this.f = new Float32Array(config.ffn_hidden);
+    this.pair = {
+      x0: new Float32Array(d), x1: new Float32Array(d),
+      h0: new Float32Array(d), h1: new Float32Array(d),
+      a0: new Float32Array(d), a1: new Float32Array(d),
+      q0: new Float32Array(3 * d), q1: new Float32Array(3 * d),
+      f0: new Float32Array(config.ffn_hidden), f1: new Float32Array(config.ffn_hidden),
+    };
     this.att = new Float32Array(T); this.logits = new Float32Array(config.vocab_size);
     this.ids = [];  // tokens currently in the cache
   }
@@ -184,13 +221,75 @@ export class Guppy {
     return matvec(te, h, null, this.logits);
   }
 
+  attend(l, qkv, pos, h) {
+    const { c, hd, att } = this, d = c.d_model;
+    const K = this.kcache[l], V = this.vcache[l];
+    const scale = 1 / Math.sqrt(hd);
+    for (let head = 0; head < c.n_heads; head++) {
+      const o = head * hd;
+      let max = -Infinity;
+      for (let j = 0; j <= pos; j++) {
+        let s = 0;
+        for (let k = 0; k < hd; k++) s += qkv[o + k] * K[j * d + o + k];
+        att[j] = s * scale;
+        if (att[j] > max) max = att[j];
+      }
+      let sum = 0;
+      for (let j = 0; j <= pos; j++) { att[j] = Math.exp(att[j] - max); sum += att[j]; }
+      for (let k = 0; k < hd; k++) h[o + k] = 0;
+      for (let j = 0; j <= pos; j++) {
+        const w = att[j] / sum;
+        for (let k = 0; k < hd; k++) h[o + k] += w * V[j * d + o + k];
+      }
+    }
+  }
+
+  steps2(id0, id1, pos, wantLogits) {
+    const { c, t } = this, d = c.d_model;
+    const te = t["tok_emb.weight"], pe = t["pos_emb.weight"];
+    const { x0, x1, h0, h1, a0, a1, q0, q1, f0, f1 } = this.pair;
+    for (let i = 0; i < d; i++) {
+      x0[i] = te.q[id0 * d + i] * te.s[id0] + pe.q[pos * d + i] * pe.s[pos];
+      x1[i] = te.q[id1 * d + i] * te.s[id1] + pe.q[(pos + 1) * d + i] * pe.s[pos + 1];
+    }
+    for (let l = 0; l < c.n_layers; l++) {
+      const p = `blocks.${l}.`;
+      layerNorm(x0, t[p + "norm1.weight"], t[p + "norm1.bias"], h0);
+      layerNorm(x1, t[p + "norm1.weight"], t[p + "norm1.bias"], h1);
+      matvec2(t[p + "attn.qkv.weight"], h0, h1, t[p + "attn.qkv.bias"], q0, q1);
+      const K = this.kcache[l], V = this.vcache[l];
+      K.set(q0.subarray(d, 2 * d), pos * d);
+      V.set(q0.subarray(2 * d, 3 * d), pos * d);
+      K.set(q1.subarray(d, 2 * d), (pos + 1) * d);
+      V.set(q1.subarray(2 * d, 3 * d), (pos + 1) * d);
+      this.attend(l, q0, pos, h0);
+      this.attend(l, q1, pos + 1, h1);
+      matvec2(t[p + "attn.out.weight"], h0, h1, t[p + "attn.out.bias"], a0, a1);
+      for (let i = 0; i < d; i++) { x0[i] += a0[i]; x1[i] += a1[i]; }
+      layerNorm(x0, t[p + "norm2.weight"], t[p + "norm2.bias"], h0);
+      layerNorm(x1, t[p + "norm2.weight"], t[p + "norm2.bias"], h1);
+      matvec2(t[p + "ffn.up.weight"], h0, h1, t[p + "ffn.up.bias"], f0, f1);
+      for (let i = 0; i < f0.length; i++) { if (f0[i] < 0) f0[i] = 0; if (f1[i] < 0) f1[i] = 0; }
+      matvec2(t[p + "ffn.down.weight"], f0, f1, t[p + "ffn.down.bias"], a0, a1);
+      for (let i = 0; i < d; i++) { x0[i] += a0[i]; x1[i] += a1[i]; }
+    }
+    if (!wantLogits) return null;
+    layerNorm(x1, t["norm.weight"], t["norm.bias"], h1);
+    return matvec(te, h1, null, this.logits);
+  }
+
   // Feed a prompt, reusing whatever prefix is already in the cache.
   prefill(ids) {
     let keep = 0;
     while (keep < this.ids.length && keep < ids.length - 1 && this.ids[keep] === ids[keep]) keep++;
     this.ids = ids.slice(0, keep);
     let logits = null;
-    for (let i = keep; i < ids.length; i++) {
+    let i = keep;
+    for (; i + 1 < ids.length; i += 2) {
+      logits = this.steps2(ids[i], ids[i + 1], i, i + 1 === ids.length - 1);
+      this.ids.push(ids[i], ids[i + 1]);
+    }
+    for (; i < ids.length; i++) {
       logits = this.step(ids[i], i, i === ids.length - 1);
       this.ids.push(ids[i]);
     }
