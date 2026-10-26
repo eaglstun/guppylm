@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">GuppyLM</h1>
-<p align="center"><em>Two ~9M parameter fish: the original Guppy and Aquarium v4.</em></p>
+<p align="center"><em>Train a tiny fish model, chat with Aquarium v4, and explore how small these models can get.</em></p>
 
 <p align="center">
   <a href="https://huggingface.co/datasets/arman-bd/guppylm-60k-generic"><img src="https://img.shields.io/badge/🤗_Dataset-guppylm--60k-blue" alt="Dataset"/></a>&nbsp;
@@ -57,9 +57,25 @@ Guppy> ok sleep time. i was following a bubble but now i'll stop. goodnight tank
 
 The original GuppyLM is a tiny language model that pretends to be a fish named Guppy. It speaks in short, lowercase sentences about water, food, light, and tank life. It doesn't understand human abstractions like money, phones, or politics — and it's not trying to.
 
-The original model trains from scratch on 60K synthetic, single-turn conversations across 60 topics in about five minutes on a GPU. This fork also includes **Aquarium v4**: a similarly sized model pretrained on stories, then trained on multi-turn conversations with 18 aquatic personas (16 in training, two held out). It has a longer context and runs in the [fork's browser demo](https://eaglstun.github.io/guppylm/).
+The original model trains from scratch on 60K synthetic, single-turn conversations across 60 topics in about five minutes on a GPU. This fork also includes **Aquarium v4**: a similarly sized model pretrained on stories, then trained on multi-turn conversations with 18 aquatic personas (16 in training, two held out). It has a longer context and runs in the [fork's browser demo](https://eaglstun.github.io/guppylm/). Later Aquarium v5 and v5.1 checkpoints are research subjects for compression and behavior experiments; the live demo still runs v4.
 
 The original notebooks and Hugging Face model remain linked below. Aquarium v4's browser weights are in `web/model/`; its training checkpoints and dialogue datasets are not committed.
+
+---
+
+## What the experiments showed
+
+The [experiment guide](experiments/README.md) groups the detailed reports by question. These are measurements from different models and datasets, so losses and file sizes should be compared within each experiment.
+
+| Question | Result | Read more |
+| --- | --- | --- |
+| How small can the original Guppy get? | In a single-seed size sweep, the 1.07M-parameter 4×128 model remained recognizably Guppy (eval loss 0.408), while the 8.73M baseline scored 0.385. The 337K and 404K models failed the qualitative check. | [Size and learning curve](experiments/size.md) |
+| Is the original dataset testing generalization? | In the measured original generation, 77.3% of eval prompt/reply pairs also appeared in training. Fixing template filling and removing exact eval duplicates raised unique full replies from 19.4% to 42.6% in a regenerated dataset. | [Data diet](experiments/data.md), [generator fix](MEMORIZATION_FIX.md) |
+| Where does the original persona come from? | A dog model trained on rewritten templates reproduced the fish model's limits: neither copied the tested novel nouns, and both broke on prompts longer than roughly 40 tokens. | [Persona probes](experiments/persona.md) |
+| Can inference get faster? | The KV cache raised measured CPU generation from 369 to 1,166 tokens/s at 64 generated tokens for the original Guppy; the MPS gain in that test was smaller (153 to 171). | [Speed](experiments/speed.md) |
+| How far can Aquarium weights shrink? | On completed v5.1, a tuned 4-bit shape catalog used an estimated 3.568 MB at held-out loss 2.0897 (float: 2.0690). A tuned eight-weight E8 code used 2.550 MB of tensor payload at loss 2.2040. WebP and hybrid image/code representations were also tested, with separate quality and novel-noun checks. | [Quantization](QUANTIZATION.md), [compression index](experiments/README.md) |
+
+The reported compression sizes use different accounting (estimated packed payload, tensor payload, or actual file bytes). The detailed reports label each basis. None of the experimental v5/v5.1 formats replaces the browser's shipped v4 int8 weights.
 
 ---
 
@@ -225,7 +241,7 @@ docs/
 
 **Why is the original Guppy single-turn?** Its 128-token context limits longer chats. Aquarium v4 uses a 512-token context and multi-turn training.
 
-**Why vanilla transformer?** GQA, SwiGLU, RoPE, and early exit add complexity that doesn't help at 9M params. Standard attention + ReLU FFN + LayerNorm produces the same quality with simpler code.
+**Why vanilla transformer?** The original project uses standard attention, a ReLU FFN, and LayerNorm to make the training pipeline easy to inspect. This project has not established a controlled quality comparison against GQA, SwiGLU, RoPE, or early exit at this scale.
 
 **Why synthetic data?** The original templates make every training example inspectable and let you trace behavior back to the curriculum. They also cap diversity: the original generation reused far more replies than expected. Aquarium v4 tests a different curriculum with varied dialogue rather than relying on a small set of finished sentences.
 
