@@ -178,8 +178,10 @@
   <footer>
     Aquarium v4 is a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>,
     pretrained on <a href="https://huggingface.co/datasets/roneneldan/TinyStories/blob/main/TinyStoriesV2-GPT4-train.txt">TinyStoriesV2-GPT4</a>,
-    then fine-tuned on sea-creature chats written by Claude Haiku and local Ollama
+    then trained on <a href="https://huggingface.co/datasets/styfeng/TinyDialogues">TinyDialogues</a> and ocean conversations
+    before sea-creature chats written by Claude Haiku and local Ollama
     <a href="https://ollama.com/library/qwen3-coder:30b">qwen3-coder:30b</a>.
+    TinyStories windows stayed in the mix during both chat stages.
     Its matrices and embeddings use int8 weights with one float32 scale per row; biases and LayerNorms stay float32.
     The model file is 9,042,320 bytes (9.04 MB), and inference runs in this tab with no server.
     <a href="https://github.com/eaglstun/guppylm/blob/dev/web/README.md">Browser model details</a> and
