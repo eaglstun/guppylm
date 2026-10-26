@@ -1,36 +1,92 @@
 # Aquarium in the browser
 
-The aquarium fish (8.9M parameters) as a 9 MB int8 file, run by plain JavaScript in a Web Worker.
-No runtime library, no server: `guppy.js` is the tokenizer, the model (with a KV cache), and the sampler.
+The [live Aquarium page](https://eaglstun.github.io/guppylm/) runs an 8.9M-parameter
+sea-creature chat model in a Web Worker. The page serves a 9.04 MB int8 model file;
+`guppy.js` implements tokenization, inference with a KV cache, and sampling in plain
+JavaScript. Inference does not require a server or a runtime library.
 
-The shipped v4 checkpoint follows three stages: TinyStoriesV2-GPT4 pretraining (`aq-pre`),
-2,000 steps on TinyDialogues and ocean conversations (`aq-td`), then 15,000 steps of
-sea-creature chat fine-tuning (`aq-chat-v4`). Both chat stages kept a 15% mix of
-TinyStories windows.
+## Shipped model: Aquarium v4
 
-    python3 tools/aquarium/export_web.py runs/aq-chat-v4/best.pt --out web/model
-    cd web && python3 -m http.server 8765    # then open http://127.0.0.1:8765
+The v4 checkpoint was trained in three stages: TinyStoriesV2-GPT4 pretraining
+(`aq-pre`), 2,000 steps on TinyDialogues and ocean conversations (`aq-td`), and
+15,000 steps of sea-creature chat fine-tuning (`aq-chat-v4`). Both chat stages kept
+a 15% mix of TinyStories windows. See [the Aquarium experiment](../EXPERIMENT.md)
+for the training and behavior results.
 
-- Weights: matrices and both embeddings as int8 with a float32 scale per row; biases and LayerNorms in float32.
-  Held-out persona loss, float vs int8: 2.1227 vs 2.1230 (`aq-chat-v2`), 2.0550 vs 2.0562 (`aq-chat-v3`), 2.0468 vs 2.0470 (`aq-chat-v4`).
-- Parity: the JS tokenizer matches `tokenizers` on 752 strings (Chinese, emoji, accents included), and greedy
-  decoding matches PyTorch on the int8-rounded checkpoint token for token.
-- Speed: about 5 to 6 ms per token in Node on an M4 Max, including the prompt.
-- Long chats keep the last 432 tokens of the conversation, leaving room for an 80-token reply.
+To export a local v4 checkpoint and serve the page:
 
-Live at https://eaglstun.github.io/guppylm/ (the `gh-pages` branch is `git subtree split --prefix web` of this one).
+```bash
+python3 tools/aquarium/export_web.py runs/aq-chat-v4/best.pt --out web/model
+cd web
+python3 -m http.server 8765
+```
 
-## Experimental compressed weights
+Open <http://127.0.0.1:8765>. The published site comes from the `gh-pages`
+branch, which is built by splitting the `web/` subtree.
 
-`guppy_e8p.js` reads `model/guppy_e8.bin` (2.50 MB) or `model/guppy_e8_g128.bin`
-(2.59 MB) directly as 16-bit codes for eight-weight chunks. It keeps the weights compressed
-in memory, with a 512 KiB lookup table and fast Hadamard transforms. These binaries come
-from the v5 noun-continuation experiment; the live page still uses the v4 int8 model above.
+### What the int8 browser experiment showed
 
-`node tools/aquarium/quant/bench_e8p_runtime.mjs` from the repository root compares the
-compressed reader with an int8 export of the same model. The compressed reader matches the
-decoded Python model's logits to within 1.4e-5. On an M4 Max, it uses about 5 MB less
-counted resident memory after a 182-token run, with generation about 8% slower for the
-2.50 MB version and 19% slower for the 2.59 MB version. Phone WebView performance has
-not been measured. See [the quantization notes](../QUANTIZATION.md) for quality probes and
-the exact size accounting.
+Matrices and both embeddings use int8 weights with one float32 scale per row;
+biases and LayerNorms stay float32. These held-out persona losses show the
+quality change from rounding the same checkpoint to int8:
+
+| Checkpoint | Float loss | Int8 loss |
+| --- | ---: | ---: |
+| `aq-chat-v2` | 2.1227 | 2.1230 |
+| `aq-chat-v3` | 2.0550 | 2.0562 |
+| `aq-chat-v4` | 2.0468 | 2.0470 |
+
+The JavaScript tokenizer matched `tokenizers` on 752 strings, including Chinese,
+emoji, and accents. Greedy decoding matched PyTorch token for token on the
+int8-rounded checkpoint. In Node on an M4 Max, generation took about 5–6 ms per
+token, including the prompt. Long chats retain the last 432 conversation tokens,
+leaving room for an 80-token reply.
+
+**Finding:** int8 made the model practical to serve as a single browser file
+with negligible measured loss. These timing and parity checks were run locally;
+they do not establish phone WebView speed.
+
+## Experimental compressed reader: eight-weight codes
+
+`guppy_e8p.js` reads `model/guppy_e8.bin` (2,495,360 bytes) or
+`model/guppy_e8_g128.bin` (2,590,080 bytes) as 16-bit codes for eight-weight
+chunks. It retains compressed weights in memory, using a 512 KiB lookup table
+and fast Hadamard transforms. The tracked binaries came from a v5
+noun-continuation experiment. The live page still loads the v4 int8 file through
+`guppy.js`; this reader is a standalone experiment.
+
+Run `node tools/aquarium/quant/bench_e8p_runtime.mjs` from the repository root
+to compare a compressed payload with an int8 export of the **same decoded
+model**. On Node 24/M4 Max, a 102-token prompt followed by 80 generated tokens
+gave:
+
+| Same-model weight path | Prompt | 80 generation steps | Counted storage after 182 tokens |
+| --- | ---: | ---: | ---: |
+| Int8 re-export | 465–469 ms | 662–676 ms | 18.53 MB |
+| Direct 2.46 MB E8 | 539 ms | 713 ms | 13.23 MB |
+| Direct 2.55 MB E8 g128 | 604 ms | 807 ms | 13.52 MB |
+
+Direct JavaScript logits differed from the decoded Python model by at most
+1.34e-5 over 32 sequential tokens. Counted storage includes the weight buffer,
+lookup table, side tensors, scratch space, cached embeddings, and the same
+9.44 MB K/V cache on both paths. It excludes JavaScript object and allocator
+overhead.
+
+**Finding:** keeping E8 codes compressed saved about 5 MB of counted memory
+against an int8 export of the same model. In that paired run, generation was
+about 8% slower for per-row scales and 19% slower for g128 scales. Absolute
+Node timings varied across reruns, so compare codecs within one benchmark run.
+
+### Confirmation with the completed v5.1 checkpoint
+
+A separate v5.1 E8 g128 export produced another 2,590,080-byte browser binary.
+Its direct-code runtime matched Python reference logits across 32 tokens
+within 1.62e-5. In a paired Node 24/M4 Max run, 80 generated tokens took
+407.0 ms (196.6 tokens/s) with E8 versus 363.4 ms (220.1 tokens/s) with an
+int8 export of that same decoded model. Counted storage after 182 token IDs
+was 13.52 MB versus 18.53 MB. The v5.1 browser binary is a validation export,
+not the shipped page model.
+
+The v5.1 result repeats the memory saving with a generation slowdown. Phone
+WebView timing remains unmeasured. [Quantization notes](../QUANTIZATION.md)
+give the quality probes, size accounting, and the other codecs tested.
