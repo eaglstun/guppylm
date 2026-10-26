@@ -1,5 +1,6 @@
 # ── Generated data & models ─────────────────────────────────
 data/
+data_dog/
 dataset/
 checkpoints/
 runs/
@@ -10,6 +11,8 @@ runs/
 # ── Allow web/ assets for GitHub Pages ──────────────────────
 !docs/*.onnx
 !docs/*.json
+!web/model/guppy_e8.bin
+!web/model/guppy_e8_g128.bin
 
 # ── Python ──────────────────────────────────────────────────
 venv/

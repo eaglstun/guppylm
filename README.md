@@ -181,6 +181,9 @@ The v4 run adds TinyDialogues and a first stage of ocean conversations, with a 2
 
 ## Project Structure
 
+See [experiments/](experiments/README.md) for the model-size, data-diet, and
+compression measurements and their reusable scripts.
+
 ```
 guppylm/
 ├── config.py               Hyperparameters (model + training)

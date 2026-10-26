@@ -1,0 +1,63 @@
+{
+  "checkpoint": "/Users/eeaglstun/Documents/dev/guppylm/checkpoints/best_model.pt",
+  "matrix": "blocks.0.ffn.up.weight",
+  "shape": [
+    768,
+    384
+  ],
+  "eval_tokens": 1643,
+  "seed": 42,
+  "stride": 2,
+  "seed_pattern": "three_quarters",
+  "retained_fraction": 0.75,
+  "ca_steps": 4,
+  "train_steps": 200,
+  "rule_width": 16,
+  "fit_seconds": 4.489312957972288,
+  "reconstruction_seconds": 0.03378087468445301,
+  "neighbor_sign_agreement": {
+    "horizontal": 0.4972122609615326,
+    "vertical": 0.5093743205070496
+  },
+  "artifact_bytes": {
+    "fixed_ca": 29203,
+    "learned_ca": 30487
+  },
+  "storage_bytes": {
+    "original_fp32": 1179648,
+    "packed_1bit": 38400,
+    "sparse_zero_fill": 29184,
+    "fixed_ca": 29184,
+    "learned_ca": 30468
+  },
+  "storage_note": "One matrix only. Artifact bytes include a 19-byte header, packed seed signs, fp16 row scales, and fp32 rule parameters where applicable. Rule implementation is shared code. No full-model size or inference speed claim.",
+  "results": {
+    "original_fp32": {
+      "loss_nats_per_token": 0.3783803000656193,
+      "perplexity": 1.4599180442445878,
+      "eval_seconds": 0.19680633302778006
+    },
+    "packed_1bit": {
+      "loss_nats_per_token": 0.3802743355674999,
+      "perplexity": 1.4626858011377173,
+      "eval_seconds": 0.17517612501978874
+    },
+    "sparse_zero_fill": {
+      "loss_nats_per_token": 0.3890357316447262,
+      "perplexity": 1.4755572744794119,
+      "eval_seconds": 0.18149804091081023
+    },
+    "fixed_ca": {
+      "loss_nats_per_token": 0.40391707231703866,
+      "perplexity": 1.4976797426973443,
+      "eval_seconds": 0.1626134580001235,
+      "missing_sign_agreement": 0.5027262568473816
+    },
+    "learned_ca": {
+      "loss_nats_per_token": 0.4031224868969444,
+      "perplexity": 1.4964901808766533,
+      "eval_seconds": 0.16403200011700392,
+      "missing_sign_agreement": 0.5162760615348816
+    }
+  }
+}

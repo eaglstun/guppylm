@@ -64,14 +64,15 @@ class GuppyInference:
         print(f"GuppyLM loaded: {total/1e6:.1f}M params")
 
     def chat_completion(self, messages, temperature=0.7, max_tokens=64,
-                        top_k=50, **kwargs):
+                        top_k=50, use_cache=False, **kwargs):
         """Chat completion — takes messages, returns response."""
         prompt = self._format_prompt(messages)
         input_ids = self.tokenizer.encode(prompt).ids
         prompt_tokens = len(input_ids)
         input_t = torch.tensor([input_ids], dtype=torch.long, device=self.device)
 
-        output_t, _ = self.model.generate(input_t, max_tokens, temperature, top_k)
+        output_t, _ = self.model.generate(input_t, max_tokens, temperature, top_k,
+                                          use_cache=use_cache)
         output_text = self.tokenizer.decode(output_t[0].tolist()[prompt_tokens:])
         # Truncate at first <|im_end|> — don't let the model leak into the next turn
         if "<|im_end|>" in output_text:
@@ -104,12 +105,14 @@ def main():
     p.add_argument("--tokenizer", default="data/tokenizer.json")
     p.add_argument("--device", default="cpu")
     p.add_argument("--prompt", "-p", help="Single prompt mode: ask one question and exit")
+    p.add_argument("--kv-cache", action="store_true", help="Reuse attention keys and values")
     args = p.parse_args()
 
     engine = GuppyInference(args.checkpoint, args.tokenizer, args.device)
 
     if args.prompt:
-        result = engine.chat_completion([{"role": "user", "content": args.prompt}])
+        result = engine.chat_completion([{"role": "user", "content": args.prompt}],
+                                        use_cache=args.kv_cache)
         print(result["choices"][0]["message"]["content"])
         return
 
@@ -118,7 +121,8 @@ def main():
         inp = input("\nYou> ").strip()
         if inp.lower() in ("quit", "exit", "q"):
             break
-        result = engine.chat_completion([{"role": "user", "content": inp}])
+        result = engine.chat_completion([{"role": "user", "content": inp}],
+                                        use_cache=args.kv_cache)
         msg = result["choices"][0]["message"]
         if msg.get("content"):
             print(f"Guppy> {msg['content']}")

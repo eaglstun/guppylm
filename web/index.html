@@ -29,6 +29,9 @@
   h1 { display: inline-block; margin: 0; padding: 4px 22px 6px; font-size: 1.9rem; letter-spacing: .02em;
        background: var(--wood); color: #3b2a12; border: 3px solid var(--line); border-radius: 12px;
        box-shadow: 0 4px 0 var(--wood-dark); transform: rotate(-1.5deg); }
+  .model-tag { display: inline-block; max-width: 100%; margin: 14px auto 0; padding: 4px 10px;
+               background: var(--paper); border: 2px solid var(--line); border-radius: 8px;
+               font-size: .8rem; font-weight: 700; }
   .sub { color: var(--muted); font-size: .92rem; margin: 12px auto 0; max-width: 34em; }
   #status { display: inline-block; font-size: .8rem; }
 
@@ -135,7 +138,8 @@
 <main>
   <header>
     <h1>The Aquarium</h1>
-    <p class="sub">Eighteen sea creatures share one 9-million-parameter brain, and it runs entirely in your browser.
+    <div class="model-tag">Aquarium v4 &middot; 8.9M parameters &middot; 9.04 MB int8 model</div>
+    <p class="sub">Eighteen sea creatures share one model running entirely in your browser.
       Pick a room. <span id="status">Filling the tank…</span></p>
   </header>
 
@@ -172,10 +176,16 @@
   </section>
 
   <footer>
-    The aquarium fish from a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>: 8.9 million
-    parameters, pretrained on TinyStories, then fine-tuned on sea-creature chats written by Claude Haiku and a local
-    model. The weights are 9 MB of int8, and the whole thing runs in this tab with no server.
-    Source and write-up: <a href="https://github.com/eaglstun/guppylm/tree/exp/aquarium">eaglstun/guppylm, branch exp/aquarium</a>.
+    Aquarium v4 is a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>,
+    pretrained on <a href="https://huggingface.co/datasets/roneneldan/TinyStories/blob/main/TinyStoriesV2-GPT4-train.txt">TinyStoriesV2-GPT4</a>,
+    then trained on <a href="https://huggingface.co/datasets/styfeng/TinyDialogues">TinyDialogues</a> and ocean conversations
+    before sea-creature chats written by Claude Haiku and local Ollama
+    <a href="https://ollama.com/library/qwen3-coder:30b">qwen3-coder:30b</a>.
+    TinyStories windows stayed in the mix during both chat stages.
+    Its matrices and embeddings use int8 weights with one float32 scale per row; biases and LayerNorms stay float32.
+    The model file is 9,042,320 bytes (9.04 MB), and inference runs in this tab with no server.
+    <a href="https://github.com/eaglstun/guppylm/blob/dev/web/README.md">Browser model details</a> and
+    <a href="https://github.com/eaglstun/guppylm/tree/exp/aquarium">source and experiment notes</a>.
   </footer>
 </main>
 <script type="module">
@@ -185,6 +195,26 @@ const NAMES = { guppy: "Pebble", goldfish: "Biscuit", betta: "Duchess", clownfis
   hermit_crab: "Marbleton", anglerfish: "Chip", seahorse: "Tilly", sea_turtle: "Tuppence", jellyfish: "Wobbleton",
   pufferfish: "Puff", blue_whale: "Sprinkles", lobster: "Fizzgig", sea_star: "Shadow", reef_shark: "Fin",
   manatee: "Bartholomew", narwhal: "Quilliam", mantis_shrimp: "Zephyrine" };
+const STARTERS = {
+  guppy: "What's hiding behind your castle, Pebble?",
+  goldfish: "What can you see from your bowl, Biscuit?",
+  betta: "How do you show off your fins, Duchess?",
+  clownfish: "What's it like living in an anemone, Coral?",
+  octopus: "What puzzle are you solving today, Juniper?",
+  hermit_crab: "Have you found a new shell, Marbleton?",
+  anglerfish: "What does your light help you find, Chip?",
+  seahorse: "Where are you drifting today, Tilly?",
+  sea_turtle: "What did you see on your last journey, Tuppence?",
+  jellyfish: "Where is the current taking you, Wobbleton?",
+  pufferfish: "What makes you puff up, Puff?",
+  blue_whale: "Will you sing me an ocean song, Sprinkles?",
+  lobster: "What are your big claws good for, Fizzgig?",
+  sea_star: "What do you do in the tide pool, Shadow?",
+  reef_shark: "What's the fastest way around the reef, Fin?",
+  manatee: "Where do you find the best sea grass, Bartholomew?",
+  narwhal: "What is it like swimming under the ice, Quilliam?",
+  mantis_shrimp: "What colors can you see, Zephyrine?"
+};
 const art = k => `url(art/room-${k}.webp)`;
 let P, turns = [], busy = false, bubble = null;
 
@@ -203,6 +233,7 @@ function add(cls, text) {
 function enter(k) {
   $("who").style.backgroundImage = art(k);
   $("species").textContent = P.personas[k].species + (P.held_out.includes(k) ? ", new to the tank" : "");
+  $("input").value = STARTERS[k];
 }
 
 // a few bubbles drifting up the back wall of the room
