@@ -470,3 +470,133 @@ the 3.57 MB catalog's 2.0869, and its 3.29 MB / 2.2174 point is behind the 2.55 
 lattice's 2.1899. RGB triples have almost no natural channel correlation, so image
 color transforms add distortion. Image decoding would also expand the weights in RAM;
 the direct-code lattice runtime retains its compact representation during inference.
+
+| recipe | MB | before | tuned | steps |
+|---|---:|---:|---:|---:|
+| all 3-bit (d4 1x4096) | 3.57 | 2.0924 | 2.0773 | 2000 (600 gave 2.0774: converged) |
+| **mix: emb, attn.qkv, ffn.up at 3-bit; attn.out, ffn.down at 2-bit** | **3.24** | 2.1350 | **2.0926** | 2000 |
+
+## Summary (2026-10-26)
+
+The size/quality frontier, everything measured on the same 300 held-out dialogues:
+
+| fish | MB | loss | vs. shipped | notes |
+|---|---:|---:|---:|---|
+| fp32 original | 35.49 | 2.0468 | | |
+| shipped web (int8 per row) | 8.98 | 2.0470 | | lossless, 4 MB of slack |
+| GPTQ 4b g128 (no tune) | 4.85 | 2.0635 | 54% size | simplest format: nibbles + rulers |
+| **catalog d4 4096, rot + GPTQ + tune** | **3.57** | **2.0773** | **40% size** | quality pick |
+| **mix 3/2-bit, rot + GPTQ + tune** | **3.24** | **2.0926** | **36% size** | size pick |
+| mix: only emb at 3-bit, tuned | 2.69 | 2.1523 | 30% size | noticeably softer |
+| all 2-bit catalog, tuned | 2.46 | 2.2195 | 27% size | still talks, wanders more |
+| anything at 1 to 1.6 bpw | 1.4 to 2.0 | 3.3+ | | broken |
+
+Runtime (independent of the format): 4-accumulator `matvec` and blocked prompt processing,
+**1.3x faster generation (144 → 190 tok/s) and 1.8x faster prompts (540 → 303 ms)** in Node,
+bit-identical output.
+
+### What worked, in order of payoff
+
+1. **GPTQ** (error-correcting rounding with real activations). Every format, every size.
+2. **Shape catalogs (VQ) at 3 bits and below**, with d=4 shapes beating d=8 at this size.
+3. **Distillation fine-tune of the leftovers** with codes frozen. Up to half the remaining
+   gap at 2 bits; converges by ~600 steps.
+4. **Mixed precision** guided by a sensitivity scan: the embedding table needs 3 bits;
+   `attn.out` and `ffn.down` take 2 bits almost for free.
+5. **Rotation, but only for catalogs.**
+6. **Runtime loop changes** (separate from the file entirely).
+
+### What didn't
+
+- Rotation for plain rulers at 3 to 4 bits (slightly worse), and dense rotation everywhere.
+- Fitting curves to weights in groups (sorted or not): see the groups-of-8 notes below.
+- Long shapes (d8) and stacking three small catalogs.
+- More tuning steps past ~600 (converged), and anything near 1 bit per weight.
+- Blocks of more than 2 tokens in prompt processing (the kernel pairs tokens).
+
+### The groups-of-8 experiment that started this (scratchpad, 2026-10-24)
+
+Groups of 8 consecutive weights in a row, v4 fish, no GPTQ:
+
+| scheme | bpw | loss |
+|---|---:|---:|
+| straight line through the 8 in their real order | 4.0 | 7.765 ("once once once once") |
+| sort the 8, fit a 2-number bell-curve S-shape, store the order | 5.9 | 2.617 (talks, in character) |
+| 2-bit ruler per 8, for comparison | 6.0 | 2.429 |
+| sort the 8, keep the exact values, throw away the order | 32 | **8.594**, worst of all |
+
+Position beats precision: exact values in the wrong seats (shuffled only among 8
+neighbors) did worse than any rounding scheme. The sorted-curve idea works but pays ~15 bits
+per group to remember the order, so plain rounding beats it at the same size.
+
+### Not done yet
+
+- No packer or JS decoder for the catalog format exists; the sizes are computed, not files.
+- Speed is measured in Node, not in a browser (Safari/Chrome JITs differ).
+- Single model, single seed, single eval set.
+
+## Confirmation on the completed v5.1 checkpoint
+
+The completed `runs/aq-chat-v51/best.pt` has 8,873,472 parameters and 15,000 training
+steps. It is distinct from `runs/aq-chat-v51-stopped/`. We reran representative codecs
+with `AQ_QUANT_CKPT=runs/aq-chat-v51/best.pt`, the same held-out scoring code, and the
+same tokenizer. The full-size baseline scores 2.0690 held loss. These results check
+whether conclusions from the noun-continued v5 model transfer to v5.1; they do not
+assume that a codec trained on v5 can be reused with v5.1 weights.
+
+| v5.1 representation | Encoded bytes | Held-out loss |
+| ------------------- | ------------: | ------------: |
+| Full-size checkpoint | — | 2.0690 |
+| d4 4096-shape catalog, rotated GPTQ, untuned | 3,568,128 estimated | 2.1112 |
+| d4 4096-shape catalog, 600-step tune | 3,568,128 estimated | 2.0897 |
+| Generated-shell E8, 128-column scales, untuned | 2,549,760 tensor payload | 2.3425 |
+| Generated-shell E8, 128-column scales, 300-step tune | 2,549,760 tensor payload | 2.2040 |
+| Grayscale WebP quality 60 | 3,500,400 actual | 2.1849 |
+| Grayscale WebP quality 70 | 3,732,270 actual | 2.1597 |
+| Grayscale WebP quality 80 | 4,253,924 actual | 2.1056 |
+| Orthogonally mixed RGB JPEG quality 85 | 3,903,607 actual | 2.6285 |
+| Hybrid WebP/E8, untuned | 3,465,162 logical payload | 2.1316 |
+| Hybrid WebP/E8, 100-step tune | 3,465,162 logical payload | 2.1066 |
+
+The v5.1 hybrid selects WebP quality 80 for the tied embedding, every attention-output
+matrix, and every FFN-up matrix; quality 70 for block 0 FFN-down and block 5 QKV; the
+remaining target matrices use E8 codes with 128-column scales. Small tensors remain
+fp16. The 100-step tune freezes image pixels and E8 codes, changing only WebP row scales
+and small fp16 tensors. Loss was 2.1070 at 200 steps and 2.1076 at 300 steps, so the
+100-step checkpoint is selected by held loss. `stage20_hybrid_webp_e8.py` writes the
+selected payload as a 3,491,640-byte ZIP container; decoding it reproduced every scored
+tensor exactly (maximum difference 0.0) and the same 2.1066 held loss. The generic
+PyTorch container includes extra serialization overhead; the table counts the actual
+code, image, scale, and side-tensor bytes.
+
+| v5.1 model | Name | Persona | Noun | Memory | Unseen noun prompts |
+| ---------- | ---: | ------: | ---: | -----: | ------------------: |
+| Full-size | .979 | .750 | .635 | .875 | 9/40 |
+| d4 4096, tuned | .896 | .500 | .567 | .938 | 8/40 |
+| E8 g128, tuned | .896 | .542 | .442 | .625 | 8/40 |
+| Hybrid, untuned | .979 | .625 | .538 | .812 | 6/40 |
+| Hybrid, step 100 | .917 | .625 | .548 | .938 | 6/40 |
+| Hybrid, step 300 | .979 | .542 | .567 | .875 | 6/40 |
+
+The d4 catalog has lower v5.1 loss at about 103 KB more estimated payload, and it
+copies more unseen nouns than the hybrid in this small, sampled probe. The v5
+noun-continuation hybrid's loss advantage over d4 therefore did **not** transfer to
+v5.1. This confirms that codec choices must be reevaluated after training changes;
+the v5 and v5.1 payloads and measurements are model-specific. The d4 size is still an
+estimate without a packer; the hybrid ZIP is a real file. No browser runtime exists
+for the hybrid, and phone speed has not been measured.
+
+As a runtime check, `export_e8p_web.py` converted the v5.1 E8 g128 payload into a
+2,590,080-byte browser binary. The standalone direct-code JavaScript runtime matched
+Python reference logits across 32 tokens within 1.62e-5 (K/V cache differences below
+3.81e-6); paired prefill and token-by-token stepping matched exactly. On Node 24/M4 Max,
+the same-model E8 path generated 80 tokens in 407.0 ms (196.6 tokens/s), versus
+363.4 ms (220.1 tokens/s) for a freshly exported int8 version of the decoded model.
+Counted resident storage after 182 token IDs was 13.52 MB for E8 versus 18.53 MB for
+int8. These figures are Mac measurements of the E8 runtime, not hybrid runtime or
+phone measurements.
+
+Rerunning the earlier v5 g128 binary with the same runtime and benchmark gave 309.4 ms
+prompt and 411.7 ms generation, close to v5.1's 307.6/407.0 ms. The older absolute
+604/807 ms result above is sensitive to execution conditions; the cause of the timing
+difference was not isolated. Compare E8 and int8 within the same benchmark run.

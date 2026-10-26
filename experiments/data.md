@@ -29,18 +29,18 @@ eval loss 0.385, keyword hit rate 0.775.
 - `tools/quality_many.py`: keyword hit rate with 30 samples per case (480 replies)
   instead of the harness's 5 (80 replies).
 
-## Exact commands
+## Reproduce
 
 ```bash
-cd /Users/eeaglstun/Documents/dev/guppylm-exp-data
-G=/private/tmp/claude-501/-Users-eeaglstun-Documents-web-ericeaglstun-ai/f124945c-1d81-418b-a0c8-d0a95e2e49aa/scratchpad/guppy/gpu.sh
+# Run from the repository root with the project's Python dependencies installed.
 
 python3 tools/data_analysis.py --json runs/analysis/data_report.json
 
-# baseline checkpoints copied from the main checkout's runs/baseline/, then re-scored
-$G python3 tools/benchmark.py run --name baseline --skip-train --no-onnx
+# The original experiment re-scored an existing runs/baseline checkpoint.
+# Omit --skip-train to train a new baseline if that checkpoint is unavailable.
+python3 tools/benchmark.py run --name baseline --skip-train --no-onnx
 for n in 1000 5000 15000; do
-  $G python3 tools/benchmark.py run --name data$((n/1000))k --train-limit $n --no-onnx
+  python3 tools/benchmark.py run --name data$((n/1000))k --train-limit $n --no-onnx
 done
 
 for spec in baseline: data1k:1000 data5k:5000 data15k:15000; do

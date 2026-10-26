@@ -39,13 +39,19 @@ from tokenizers import Tokenizer  # noqa: E402
 
 from guppylm.config import GuppyConfig, TrainConfig  # noqa: E402
 from guppylm.dataset import get_dataloader, subset_lines  # noqa: E402
-from guppylm.eval_cases import get_eval_cases  # noqa: E402
+from guppylm import eval_cases as fish_eval_cases  # noqa: E402
+from guppylm import eval_cases_dog  # noqa: E402
 from guppylm.model import GuppyLM  # noqa: E402
 from guppylm.train import evaluate, get_device, train  # noqa: E402
 
 RUNS_DIR = os.path.join(ROOT, "runs")
 DATA_DIR = os.path.join(ROOT, "data")
 TOKENIZER_PATH = os.path.join(DATA_DIR, "tokenizer.json")
+PERSONA = "fish"
+
+
+def get_eval_cases():
+    return (eval_cases_dog if PERSONA == "dog" else fish_eval_cases).get_eval_cases()
 
 
 def prompt_text(user_msg):
@@ -69,7 +75,7 @@ def pctl(xs, p):
 def ensure_data(regen):
     if regen or not os.path.exists(TOKENIZER_PATH):
         from guppylm.prepare_data import prepare
-        prepare()
+        prepare(data_dir=DATA_DIR, persona=PERSONA)
 
 
 def data_stats(max_seq_len, limit=None, subset_seed=0):
@@ -228,6 +234,10 @@ def model_config_from_args(args):
 
 def cmd_curve(args):
     """Score a run's periodic checkpoints (step_N.pt) for loss + quality: a learning curve."""
+    global DATA_DIR, TOKENIZER_PATH, PERSONA
+    DATA_DIR = os.path.abspath(args.data_dir)
+    TOKENIZER_PATH = os.path.join(DATA_DIR, "tokenizer.json")
+    PERSONA = args.persona
     device = get_device(TrainConfig(device=args.device))
     ckpt_dir = args.ckpt_dir
     steps = [int(s) for s in args.steps.split(",")]
@@ -280,6 +290,10 @@ def sample_replies(model_cpu, prompt, n):
 
 
 def cmd_run(args):
+    global DATA_DIR, TOKENIZER_PATH, PERSONA
+    DATA_DIR = os.path.abspath(args.data_dir)
+    TOKENIZER_PATH = os.path.join(DATA_DIR, "tokenizer.json")
+    PERSONA = args.persona
     run_dir = os.path.join(RUNS_DIR, args.name)
     ckpt_dir = os.path.join(run_dir, "checkpoints")
     os.makedirs(run_dir, exist_ok=True)
@@ -293,6 +307,8 @@ def cmd_run(args):
     ensure_data(args.regen_data)
     results = {
         "name": args.name,
+        "persona": PERSONA,
+        "data_dir": os.path.relpath(DATA_DIR, ROOT),
         "created": time.strftime("%Y-%m-%dT%H:%M:%S"),
         "env": {"torch": torch.__version__, "device": str(device),
                 "machine": platform.machine(), "processor": platform.processor()},
@@ -471,6 +487,10 @@ def main():
     r.add_argument("--skip-train", action="store_true")
     r.add_argument("--regen-data", action="store_true")
     r.add_argument("--no-onnx", action="store_true")
+    r.add_argument("--data-dir", default=DATA_DIR,
+                   help="train/eval JSONL and tokenizer directory (default ./data)")
+    r.add_argument("--persona", choices=["fish", "dog"], default="fish",
+                   help="select data generator and evaluation cases")
     r.set_defaults(fn=cmd_run)
 
     cv = sub.add_parser("curve", help="Score periodic checkpoints of a run (learning curve)")
@@ -484,6 +504,10 @@ def main():
                     default=None, help="Extra prompt to sample (repeatable)")
     cv.add_argument("--n-extra", type=int, default=3, help="Replies per extra prompt")
     cv.add_argument("--out", default=None, help="Write JSON here")
+    cv.add_argument("--data-dir", default=DATA_DIR,
+                    help="evaluation JSONL and tokenizer directory (default ./data)")
+    cv.add_argument("--persona", choices=["fish", "dog"], default="fish",
+                    help="select evaluation cases")
     cv.set_defaults(fn=cmd_curve)
 
     c = sub.add_parser("compare", help="Print a table of all runs in runs/")
