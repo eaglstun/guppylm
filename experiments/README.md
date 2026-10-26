@@ -1,5 +1,7 @@
 # GuppyLM experiments
 
+[Aquarium v5.2 plan](v5_2_plan.md) tracks the next data, training, evaluation, and compression decisions.
+
 These reports preserve measurements from isolated experiment branches. They are
 research results, not changes to the shipped Aquarium model or GitHub Pages.
 
