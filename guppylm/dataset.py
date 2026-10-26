@@ -14,6 +14,8 @@ def subset_lines(path, limit=None, seed=0):
     The same (path, limit, seed) always yields the same subset, so analysis tools
     can reconstruct exactly what a --train-limit run saw.
     """
+    if limit is not None and limit <= 0:
+        raise ValueError("limit must be positive")
     with open(path) as f:
         lines = [line for line in f if line.strip()]
     if limit is not None and limit < len(lines):

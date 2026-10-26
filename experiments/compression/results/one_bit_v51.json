@@ -1,0 +1,577 @@
+{
+  "checkpoint": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/runs/aq-chat-v51/best.pt",
+  "aquarium_root": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium",
+  "heldout_dialogues": 300,
+  "assistant_tokens": 28800,
+  "loss_definition": "mean of batch assistant-token cross-entropy, matching quantlib.score",
+  "fp32_loss": 2.0690566539764403,
+  "int8_baseline_loss": 2.0687782168388367,
+  "quantization": "symmetric sign times per-row mean absolute weight; FP16 stored row scales",
+  "scope": "unique 2D parameters; tok_emb is tied to lm_head and counted once",
+  "actual_web_bytes": 9042320,
+  "size_note": "q1 bytes = ceil(weights/8) + 2*rows; q8 bytes = weights + 4*rows. Projected file size subtracts marginal payload savings from shipped guppy.bin, excluding any new header/decoder overhead.",
+  "experiment_seconds": 111.20795383304358,
+  "individual": [
+    {
+      "matrix": "tok_emb.weight",
+      "shape": [
+        4096,
+        384
+      ],
+      "loss": 3.811055302619934,
+      "delta_from_int8": 1.7422770857810974,
+      "int8_bytes": 1589248,
+      "one_bit_bytes": 204800,
+      "bytes_saved": 1384448
+    },
+    {
+      "matrix": "pos_emb.weight",
+      "shape": [
+        512,
+        384
+      ],
+      "loss": 2.6575993299484253,
+      "delta_from_int8": 0.5888211131095886,
+      "int8_bytes": 198656,
+      "one_bit_bytes": 25600,
+      "bytes_saved": 173056
+    },
+    {
+      "matrix": "blocks.0.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.326159715652466,
+      "delta_from_int8": 0.25738149881362915,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.0.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 3.1666538953781127,
+      "delta_from_int8": 1.097875678539276,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.0.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.4293465614318848,
+      "delta_from_int8": 0.3605683445930481,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.0.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.2985187768936157,
+      "delta_from_int8": 0.22974056005477905,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    },
+    {
+      "matrix": "blocks.1.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.4875067710876464,
+      "delta_from_int8": 0.4187285542488097,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.1.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 2.1182162284851076,
+      "delta_from_int8": 0.04943801164627093,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.1.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.1050456762313843,
+      "delta_from_int8": 0.03626745939254761,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.1.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.102042627334595,
+      "delta_from_int8": 0.033264410495758234,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    },
+    {
+      "matrix": "blocks.2.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.405652165412903,
+      "delta_from_int8": 0.33687394857406616,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.2.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 2.090171480178833,
+      "delta_from_int8": 0.02139326333999625,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.2.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.118599462509155,
+      "delta_from_int8": 0.049821245670318426,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.2.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.1090028047561646,
+      "delta_from_int8": 0.04022458791732797,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    },
+    {
+      "matrix": "blocks.3.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.1925952196121217,
+      "delta_from_int8": 0.123817002773285,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.3.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 2.094178581237793,
+      "delta_from_int8": 0.02540036439895621,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.3.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.117819356918335,
+      "delta_from_int8": 0.04904114007949811,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.3.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.0990161657333375,
+      "delta_from_int8": 0.03023794889450082,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    },
+    {
+      "matrix": "blocks.4.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.2799360513687135,
+      "delta_from_int8": 0.2111578345298768,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.4.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 2.1200018167495727,
+      "delta_from_int8": 0.051223599910735995,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.4.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.121453380584717,
+      "delta_from_int8": 0.052675163745880216,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.4.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.099870276451111,
+      "delta_from_int8": 0.031092059612274348,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    },
+    {
+      "matrix": "blocks.5.attn.qkv.weight",
+      "shape": [
+        1152,
+        384
+      ],
+      "loss": 2.198370623588562,
+      "delta_from_int8": 0.12959240674972516,
+      "int8_bytes": 446976,
+      "one_bit_bytes": 57600,
+      "bytes_saved": 389376
+    },
+    {
+      "matrix": "blocks.5.attn.out.weight",
+      "shape": [
+        384,
+        384
+      ],
+      "loss": 2.1055442810058596,
+      "delta_from_int8": 0.03676606416702288,
+      "int8_bytes": 148992,
+      "one_bit_bytes": 19200,
+      "bytes_saved": 129792
+    },
+    {
+      "matrix": "blocks.5.ffn.up.weight",
+      "shape": [
+        768,
+        384
+      ],
+      "loss": 2.1500214338302612,
+      "delta_from_int8": 0.08124321699142456,
+      "int8_bytes": 297984,
+      "one_bit_bytes": 38400,
+      "bytes_saved": 259584
+    },
+    {
+      "matrix": "blocks.5.ffn.down.weight",
+      "shape": [
+        384,
+        768
+      ],
+      "loss": 2.1044951677322388,
+      "delta_from_int8": 0.0357169508934021,
+      "int8_bytes": 296448,
+      "one_bit_bytes": 37632,
+      "bytes_saved": 258816
+    }
+  ],
+  "combinations": {
+    "int8": {
+      "one_bit_matrices": [],
+      "estimated_payload_bytes_saved_vs_int8": 0,
+      "projected_web_bytes_before_new_header": 9042320,
+      "loss": 2.0687782168388367
+    },
+    "greedy": {
+      "one_bit_matrices": [
+        "blocks.3.ffn.down.weight",
+        "blocks.3.attn.out.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 388608,
+      "projected_web_bytes_before_new_header": 8653712,
+      "loss": 2.1170139789581297
+    },
+    "all_matrices": {
+      "one_bit_matrices": [
+        "tok_emb.weight",
+        "pos_emb.weight",
+        "blocks.0.attn.qkv.weight",
+        "blocks.0.attn.out.weight",
+        "blocks.0.ffn.up.weight",
+        "blocks.0.ffn.down.weight",
+        "blocks.1.attn.qkv.weight",
+        "blocks.1.attn.out.weight",
+        "blocks.1.ffn.up.weight",
+        "blocks.1.ffn.down.weight",
+        "blocks.2.attn.qkv.weight",
+        "blocks.2.attn.out.weight",
+        "blocks.2.ffn.up.weight",
+        "blocks.2.ffn.down.weight",
+        "blocks.3.attn.qkv.weight",
+        "blocks.3.attn.out.weight",
+        "blocks.3.ffn.up.weight",
+        "blocks.3.ffn.down.weight",
+        "blocks.4.attn.qkv.weight",
+        "blocks.4.attn.out.weight",
+        "blocks.4.ffn.up.weight",
+        "blocks.4.ffn.down.weight",
+        "blocks.5.attn.qkv.weight",
+        "blocks.5.attn.out.weight",
+        "blocks.5.ffn.up.weight",
+        "blocks.5.ffn.down.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 7782912,
+      "projected_web_bytes_before_new_header": 1259408,
+      "loss": 6.241730690002441
+    },
+    "all_block_linears": {
+      "one_bit_matrices": [
+        "blocks.0.attn.qkv.weight",
+        "blocks.0.attn.out.weight",
+        "blocks.0.ffn.up.weight",
+        "blocks.0.ffn.down.weight",
+        "blocks.1.attn.qkv.weight",
+        "blocks.1.attn.out.weight",
+        "blocks.1.ffn.up.weight",
+        "blocks.1.ffn.down.weight",
+        "blocks.2.attn.qkv.weight",
+        "blocks.2.attn.out.weight",
+        "blocks.2.ffn.up.weight",
+        "blocks.2.ffn.down.weight",
+        "blocks.3.attn.qkv.weight",
+        "blocks.3.attn.out.weight",
+        "blocks.3.ffn.up.weight",
+        "blocks.3.ffn.down.weight",
+        "blocks.4.attn.qkv.weight",
+        "blocks.4.attn.out.weight",
+        "blocks.4.ffn.up.weight",
+        "blocks.4.ffn.down.weight",
+        "blocks.5.attn.qkv.weight",
+        "blocks.5.attn.out.weight",
+        "blocks.5.ffn.up.weight",
+        "blocks.5.ffn.down.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 6225408,
+      "projected_web_bytes_before_new_header": 2816912,
+      "loss": 5.495183610916138
+    },
+    "all_block_outputs": {
+      "one_bit_matrices": [
+        "blocks.0.attn.out.weight",
+        "blocks.0.ffn.down.weight",
+        "blocks.1.attn.out.weight",
+        "blocks.1.ffn.down.weight",
+        "blocks.2.attn.out.weight",
+        "blocks.2.ffn.down.weight",
+        "blocks.3.attn.out.weight",
+        "blocks.3.ffn.down.weight",
+        "blocks.4.attn.out.weight",
+        "blocks.4.ffn.down.weight",
+        "blocks.5.attn.out.weight",
+        "blocks.5.ffn.down.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 2331648,
+      "projected_web_bytes_before_new_header": 6710672,
+      "loss": 3.711618518829346
+    },
+    "token_embedding_only": {
+      "one_bit_matrices": [
+        "tok_emb.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 1384448,
+      "projected_web_bytes_before_new_header": 7657872,
+      "loss": 3.811055302619934
+    },
+    "position_embedding_only": {
+      "one_bit_matrices": [
+        "pos_emb.weight"
+      ],
+      "estimated_payload_bytes_saved_vs_int8": 173056,
+      "projected_web_bytes_before_new_header": 8869264,
+      "loss": 2.6575993299484253
+    }
+  },
+  "greedy_loss_budget": 0.05,
+  "greedy_decisions": [
+    {
+      "matrix": "blocks.3.ffn.down.weight",
+      "candidate_loss": 2.0990161657333375,
+      "accepted": true
+    },
+    {
+      "matrix": "blocks.4.ffn.down.weight",
+      "candidate_loss": 2.1375560760498047,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.1.ffn.down.weight",
+      "candidate_loss": 2.136592698097229,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.5.ffn.down.weight",
+      "candidate_loss": 2.1385486364364623,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.1.ffn.up.weight",
+      "candidate_loss": 2.141092133522034,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.2.ffn.down.weight",
+      "candidate_loss": 2.149346041679382,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.2.attn.out.weight",
+      "candidate_loss": 2.1252071619033814,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.3.ffn.up.weight",
+      "candidate_loss": 2.1390064001083373,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.2.ffn.up.weight",
+      "candidate_loss": 2.160062789916992,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.3.attn.out.weight",
+      "candidate_loss": 2.1170139789581297,
+      "accepted": true
+    },
+    {
+      "matrix": "blocks.4.ffn.up.weight",
+      "candidate_loss": 2.186032795906067,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.5.attn.out.weight",
+      "candidate_loss": 2.1576990365982054,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.5.ffn.up.weight",
+      "candidate_loss": 2.201036524772644,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.3.attn.qkv.weight",
+      "candidate_loss": 2.22026846408844,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.5.attn.qkv.weight",
+      "candidate_loss": 2.266078996658325,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.1.attn.out.weight",
+      "candidate_loss": 2.1714170932769776,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.4.attn.out.weight",
+      "candidate_loss": 2.1673829317092896,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.4.attn.qkv.weight",
+      "candidate_loss": 2.3466518402099608,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.0.attn.qkv.weight",
+      "candidate_loss": 2.38528459072113,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.2.attn.qkv.weight",
+      "candidate_loss": 2.5082056283950807,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.0.ffn.down.weight",
+      "candidate_loss": 2.3754496812820434,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.1.attn.qkv.weight",
+      "candidate_loss": 2.621442127227783,
+      "accepted": false
+    },
+    {
+      "matrix": "tok_emb.weight",
+      "candidate_loss": 3.9375462532043457,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.0.ffn.up.weight",
+      "candidate_loss": 2.552565026283264,
+      "accepted": false
+    },
+    {
+      "matrix": "pos_emb.weight",
+      "candidate_loss": 2.692065119743347,
+      "accepted": false
+    },
+    {
+      "matrix": "blocks.0.attn.out.weight",
+      "candidate_loss": 3.1793210029602053,
+      "accepted": false
+    }
+  ]
+}
