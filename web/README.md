@@ -19,3 +19,18 @@ TinyStories windows.
 - Long chats keep the last 432 tokens of the conversation, leaving room for an 80-token reply.
 
 Live at https://eaglstun.github.io/guppylm/ (the `gh-pages` branch is `git subtree split --prefix web` of this one).
+
+## Experimental compressed weights
+
+`guppy_e8p.js` reads `model/guppy_e8.bin` (2.50 MB) or `model/guppy_e8_g128.bin`
+(2.59 MB) directly as 16-bit codes for eight-weight chunks. It keeps the weights compressed
+in memory, with a 512 KiB lookup table and fast Hadamard transforms. These binaries come
+from the v5 noun-continuation experiment; the live page still uses the v4 int8 model above.
+
+`node tools/aquarium/quant/bench_e8p_runtime.mjs` from the repository root compares the
+compressed reader with an int8 export of the same model. The compressed reader matches the
+decoded Python model's logits to within 1.4e-5. On an M4 Max, it uses about 5 MB less
+counted resident memory after a 182-token run, with generation about 8% slower for the
+2.50 MB version and 19% slower for the 2.59 MB version. Phone WebView performance has
+not been measured. See [the quantization notes](../QUANTIZATION.md) for quality probes and
+the exact size accounting.
