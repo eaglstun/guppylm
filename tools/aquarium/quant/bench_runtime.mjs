@@ -2,7 +2,11 @@ import fs from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { performance } from 'node:perf_hooks';
 
-const original = execFileSync('git', ['show', 'HEAD:web/guppy.js'], { encoding: 'utf8' });
+const history = execFileSync('git', ['log', '--format=%H', '--', 'web/guppy.js'],
+  { encoding: 'utf8' }).trim().split('\n');
+const original = history.map(rev => execFileSync('git', ['show', `${rev}:web/guppy.js`],
+  { encoding: 'utf8' })).find(source => !source.includes('steps2('));
+if (!original) throw new Error('pre-optimization web/guppy.js was not found in Git history');
 const optimized = fs.readFileSync('web/guppy.js', 'utf8');
 const raw = fs.readFileSync('web/model/guppy.bin');
 const weights = raw.buffer.slice(raw.byteOffset, raw.byteOffset + raw.byteLength);
