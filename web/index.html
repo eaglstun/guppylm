@@ -173,8 +173,10 @@
 
   <footer>
     The aquarium fish from a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>: 8.9 million
-    parameters, pretrained on TinyStories, then fine-tuned on sea-creature chats written by Claude Haiku and a local
-    model. The weights are 9 MB of int8, and the whole thing runs in this tab with no server.
+    parameters, pretrained on <a href="https://huggingface.co/datasets/roneneldan/TinyStories/blob/main/TinyStoriesV2-GPT4-train.txt">TinyStoriesV2-GPT4</a>,
+    then fine-tuned on sea-creature chats written by Claude Haiku and local Ollama
+    <a href="https://ollama.com/library/qwen3-coder:30b">qwen3-coder:30b</a>. The weights are 9 MB of int8,
+    and the whole thing runs in this tab with no server.
     Source and write-up: <a href="https://github.com/eaglstun/guppylm/tree/exp/aquarium">eaglstun/guppylm, branch exp/aquarium</a>.
   </footer>
 </main>
@@ -185,6 +187,26 @@ const NAMES = { guppy: "Pebble", goldfish: "Biscuit", betta: "Duchess", clownfis
   hermit_crab: "Marbleton", anglerfish: "Chip", seahorse: "Tilly", sea_turtle: "Tuppence", jellyfish: "Wobbleton",
   pufferfish: "Puff", blue_whale: "Sprinkles", lobster: "Fizzgig", sea_star: "Shadow", reef_shark: "Fin",
   manatee: "Bartholomew", narwhal: "Quilliam", mantis_shrimp: "Zephyrine" };
+const STARTERS = {
+  guppy: "What's hiding behind your castle, Pebble?",
+  goldfish: "What can you see from your bowl, Biscuit?",
+  betta: "How do you show off your fins, Duchess?",
+  clownfish: "What's it like living in an anemone, Coral?",
+  octopus: "What puzzle are you solving today, Juniper?",
+  hermit_crab: "Have you found a new shell, Marbleton?",
+  anglerfish: "What does your light help you find, Chip?",
+  seahorse: "Where are you drifting today, Tilly?",
+  sea_turtle: "What did you see on your last journey, Tuppence?",
+  jellyfish: "Where is the current taking you, Wobbleton?",
+  pufferfish: "What makes you puff up, Puff?",
+  blue_whale: "Will you sing me an ocean song, Sprinkles?",
+  lobster: "What are your big claws good for, Fizzgig?",
+  sea_star: "What do you do in the tide pool, Shadow?",
+  reef_shark: "What's the fastest way around the reef, Fin?",
+  manatee: "Where do you find the best sea grass, Bartholomew?",
+  narwhal: "What is it like swimming under the ice, Quilliam?",
+  mantis_shrimp: "What colors can you see, Zephyrine?"
+};
 const art = k => `url(art/room-${k}.webp)`;
 let P, turns = [], busy = false, bubble = null;
 
@@ -203,6 +225,7 @@ function add(cls, text) {
 function enter(k) {
   $("who").style.backgroundImage = art(k);
   $("species").textContent = P.personas[k].species + (P.held_out.includes(k) ? ", new to the tank" : "");
+  $("input").value = STARTERS[k];
 }
 
 // a few bubbles drifting up the back wall of the room
