@@ -1,7 +1,8 @@
 # Aquarium v5.2: implementation and first screening result
 
 Worktree: `/private/tmp/guppylm-v52-impl`, branch `implement/v5_2`.
-Latest main was fetched and merged through **15484ff**. The frozen preparation,
+Latest main was fetched and merged through **6dc7248**, including the earlier
+**15484ff** findings review and the subsequent v5.1 browser deployment update. The frozen preparation,
 baseline evaluation, and two continuation screens ran from implementation revision
 **70e357d**. Subsequent changes tighten manifest/tokenizer checks, test access,
 reproducibility metadata, and static checks; they do not change the measured weights.
@@ -10,7 +11,8 @@ reproducibility metadata, and static checks; they do not change the measured wei
 the unchanged step-0 checkpoint. The v5.1 continuation improved the real-noun slice,
 but missed the invented-noun improvement threshold and the name non-regression floor.
 The v5 continuation did not improve real-noun copying. No locked-test outputs were
-sampled, no codec was selected, and no browser model was replaced.
+sampled, no codec was selected, and no v5.2 browser model was deployed.
+The v5.1 browser update from main was incorporated separately.
 
 ## Validation of the draft plan
 
@@ -165,8 +167,8 @@ a broader long-conversation test, and an exposure audit extending through pretra
 The four hand-template C source is a reproducible screening intervention only.
 The full A/B/C equal-budget runs, source-balance D, confirmation seed 73, human review,
 locked-test scoring, post-selection codec sweep, and phone measurements were **not run**.
-No v5.2 quality or compression improvement is claimed. The live browser remains v4;
-v5.1 remains the completed experimental reference, not a newly deployed model.
+No v5.2 quality or compression improvement is claimed. Latest main now ships the
+conventional v5.1 int8 browser export; the screened checkpoints do not replace it.
 
 Validation: nine tests pass, including cached inference, immutable manifests,
 parent/group isolation, token-weighted loss, exact CPU resume, train-only compression
