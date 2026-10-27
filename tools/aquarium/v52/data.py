@@ -161,3 +161,13 @@ def overlap_audit(rows):
 def proportions(rows):
     counts = collections.Counter(r["source"] for r in rows)
     return {k: {"rows": n, "share": n / max(1, len(rows))} for k, n in sorted(counts.items())}
+
+
+def assert_compatible_metadata(left, right, tokenizer_hash):
+    """Reject accidentally mixed experiment contracts or tokenizers."""
+    if left.get("contract_sha256") != right.get("contract_sha256"):
+        raise ValueError("Manifests belong to different evaluation contracts")
+    for metadata in (left, right):
+        expected = metadata.get("inputs", {}).get("tokenizer.json", {}).get("sha256")
+        if expected is not None and expected != tokenizer_hash:
+            raise ValueError("Tokenizer does not match frozen manifest")

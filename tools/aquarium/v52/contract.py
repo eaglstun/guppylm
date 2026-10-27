@@ -1,6 +1,7 @@
 """Predeclared behavioral probes; exact copying is not a voice-quality metric."""
 import random
 import re
+
 from .data import digest, normalized
 
 # These are separate wording families, not substitutions of the training questions.
@@ -52,7 +53,7 @@ def make_contract(corpus, seed=5202):
         for i in range(120):
             name = names[i % len(names)]
             system = f"You are {name}, a careful, practical hermit crab in a sandy tide pool. Stay in character."
-            def add(slice_name, users, expected=None, context=None, sys=system):
+            def add(slice_name, users, expected=None, context=None, sys=system, split=split):
                 row = {"split": split, "slice": slice_name, "system": sys, "users": users,
                        "context": context or [], "expected": expected, "seed": seed + len(cases) * 101}
                 row["uid"] = digest(row)
@@ -96,7 +97,7 @@ def make_contract(corpus, seed=5202):
 
 
 def invented_word(rng):
-    syllables = "va zo ni lu ke ra fo bu shi da pe mi ta go ne vi su cha do ri fa mo zu li be na ku ro ve sa".split()
+    syllables = ["va", "zo", "ni", "lu", "ke", "ra", "fo", "bu", "shi", "da", "pe", "mi", "ta", "go", "ne", "vi", "su", "cha", "do", "ri", "fa", "mo", "zu", "li", "be", "na", "ku", "ro", "ve", "sa"]
     return "".join(rng.choice(syllables) for _ in range(rng.randint(3, 5)))
 
 

@@ -1,0 +1,1042 @@
+{
+  "source_revision": "70e357d",
+  "main_revision": "15484ff",
+  "environment": {
+    "python": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]",
+    "torch": "2.14.1",
+    "tokenizers": "0.23.3",
+    "numpy": "2.2.6"
+  },
+  "runs": {
+    "v5": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": "79c67783215b3a1be6a5387cc26e482027b6acbb1a4a5f2bd921691e4359decb",
+      "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+      "lookup_manifest_sha256": null,
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.11388888888888889,
+          "ci95": [
+            0.06864822275782981,
+            0.1830832446432801
+          ],
+          "bootstrap_ci95": [
+            0.06937499999999999,
+            0.1638888888888889
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.4999999999999999,
+          "ci95": [
+            0.2992980081982122,
+            0.7007019918017876
+          ],
+          "bootstrap_ci95": [
+            0.3166666666666667,
+            0.6666666666666666
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.2333333333333333,
+          "ci95": [
+            0.09999999999999999,
+            0.4514275344563928
+          ],
+          "bootstrap_ci95": [
+            0.09999999999999999,
+            0.3833333333333333
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "raw_sha256": "19174f1c0257031d17a9712a2ce91bfc6bece21ad015b55a303533edead19fe8"
+    },
+    "v51": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": "98679a7caed3e8a9d7c1764e407e249a6099c8dd7ffba1994785097ef616918f",
+      "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+      "lookup_manifest_sha256": null,
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.075,
+          "ci95": [
+            0.03995711539596028,
+            0.1364091760599377
+          ],
+          "bootstrap_ci95": [
+            0.041666666666666664,
+            0.11666666666666665
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.004166666666666667,
+          "ci95": [
+            0.0,
+            0.053459773674825115
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0125
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5499999999999999,
+          "ci95": [
+            0.3420853424503422,
+            0.7418021417443756
+          ],
+          "bootstrap_ci95": [
+            0.3833333333333333,
+            0.7166666666666666
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.3833333333333333,
+          "ci95": [
+            0.2,
+            0.5981964602722329
+          ],
+          "bootstrap_ci95": [
+            0.2,
+            0.5666666666666667
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "raw_sha256": "2b1e5770ce6c90324ecb1158e26607ec8c146471f49b6ab3dd2def8a213b8e53"
+    },
+    "screen_v5_C": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": "36f9d6010c1ffb35bb21115f19dacbdff5a3344abc9075fd12855460f79d4875",
+      "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+      "lookup_manifest_sha256": null,
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.09444444444444443,
+          "ci95": [
+            0.05400405764158863,
+            0.1600448217869153
+          ],
+          "bootstrap_ci95": [
+            0.05555555555555555,
+            0.1361111111111111
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.029166666666666664,
+          "ci95": [
+            0.008229166666666673,
+            0.09272468083902732
+          ],
+          "bootstrap_ci95": [
+            0.008229166666666673,
+            0.05833333333333333
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5333333333333332,
+          "ci95": [
+            0.32763499420531195,
+            0.7282899952578333
+          ],
+          "bootstrap_ci95": [
+            0.3666666666666666,
+            0.7
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.38333333333333336,
+          "ci95": [
+            0.20606607660675835,
+            0.5981964602722329
+          ],
+          "bootstrap_ci95": [
+            0.2333333333333333,
+            0.5499999999999999
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.5138884746291572,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.5176561772823334,
+            "sources": {
+              "base": {
+                "loss": 1.3887533810111814,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.667658025082377,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7109707474592988,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.3607985897463275,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5852443099021911,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5852443099021911,
+            "sources": {
+              "story": {
+                "loss": 1.5852443099021911,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.06834884211421,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.066892671585083,
+            "sources": {
+              "historical": {
+                "loss": 2.06834884211421,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 200,
+          "development": {
+            "loss": 1.522407495219992,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.5266600161790849,
+            "sources": {
+              "base": {
+                "loss": 1.39615966604735,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.677146947328633,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7183700192483142,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.3732548614773792,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5862343311309814,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5862343311309814,
+            "sources": {
+              "story": {
+                "loss": 1.5862343311309814,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0756048962018556,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.074419903755188,
+            "sources": {
+              "historical": {
+                "loss": 2.0756048962018556,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 400,
+          "development": {
+            "loss": 1.5194075019139959,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.523690015077591,
+            "sources": {
+              "base": {
+                "loss": 1.3922864276337699,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.6748479296528693,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7165121177100349,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.3713483611056694,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5843685805797576,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5843685805797576,
+            "sources": {
+              "story": {
+                "loss": 1.5843685805797576,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0667932763033443,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065267336368561,
+            "sources": {
+              "historical": {
+                "loss": 2.0667932763033443,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "base": {
+          "examples": 4016,
+          "input_tokens": 1049084,
+          "target_tokens": 442904
+        },
+        "haiku": {
+          "examples": 4029,
+          "input_tokens": 899939,
+          "target_tokens": 356910
+        },
+        "songs": {
+          "examples": 1127,
+          "input_tokens": 213328,
+          "target_tokens": 90350
+        },
+        "varied_copy": {
+          "examples": 549,
+          "input_tokens": 61068,
+          "target_tokens": 12573
+        },
+        "family": {
+          "examples": 1079,
+          "input_tokens": 197950,
+          "target_tokens": 67659
+        },
+        "story": {
+          "examples": 2000,
+          "input_tokens": 1024000,
+          "target_tokens": 1024000
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 400,
+          "batch": 32,
+          "seq": 512,
+          "lr": 3e-05,
+          "warmup": 50,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "eval_every": 200,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "733044bce31b4d8fe436d859164ead8987246451f6d547f2e71be254f464eb15",
+          "dev_hash": "7b2b24fb8870428c2179cb83690bf423ccc368fdf28df7ad2540c624ea944f70",
+          "historical_hash": "defbbc8455fda366aa26eafa790161a6dab8c5c64f6e65aa78e6d41a1a51753a",
+          "init_hash": "79c67783215b3a1be6a5387cc26e482027b6acbb1a4a5f2bd921691e4359decb",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b7bcc79948b3fc46e43671831e68287e077e889a27642f1f0b18557bae3eb101",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6"
+        },
+        "fingerprint": "1fcb4db2c86f5a9c3c378cc96d0566414a491d5356f98fec340b0defdfd79e9c",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 56361,
+            "input_tokens": 12564460,
+            "assistant_tokens": 4985908,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 54722,
+            "input_tokens": 14268050,
+            "assistant_tokens": 6019005,
+            "truncated_rows": 92
+          },
+          "songs": {
+            "rows": 15219,
+            "input_tokens": 2892148,
+            "assistant_tokens": 1228138,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14919,
+            "input_tokens": 2773001,
+            "assistant_tokens": 959210,
+            "truncated_rows": 0
+          },
+          "varied_copy": {
+            "rows": 7384,
+            "input_tokens": 819557,
+            "assistant_tokens": 169503,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "inference_sha256": "90e2b03de56a479ba40ed474ab965ee749c34604c0070afa5d9082ed827a5886",
+      "selected_step": 0,
+      "raw_sha256": "72e8d74b6c49aaf197e58b3ca588fc1572eb9cc832cda65e60a8ed7bd09f870f"
+    },
+    "screen_v51_C": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": "f1325796e7c9c2b8bc2fed235b808308b5b64b3505650d5779fdb03725e9d3b1",
+      "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+      "lookup_manifest_sha256": null,
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.12777777777777777,
+          "ci95": [
+            0.07940372161635502,
+            0.19924388005090204
+          ],
+          "bootstrap_ci95": [
+            0.08055555555555555,
+            0.17777777777777776
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.016666666666666666,
+          "ci95": [
+            0.003579607073928591,
+            0.07404458481041426
+          ],
+          "bootstrap_ci95": [
+            0.004166666666666667,
+            0.03333333333333333
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.4999999999999999,
+          "ci95": [
+            0.2992980081982122,
+            0.7007019918017876
+          ],
+          "bootstrap_ci95": [
+            0.34958333333333336,
+            0.6666666666666665
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.3833333333333333,
+          "ci95": [
+            0.2060660766067583,
+            0.5981964602722329
+          ],
+          "bootstrap_ci95": [
+            0.21666666666666665,
+            0.5333333333333333
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.5165440611757472,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.5230006337165833,
+            "sources": {
+              "base": {
+                "loss": 1.3854381181138562,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.6641117880931569,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7536192335986536,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.390278228819823,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5846358954906463,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5846358954906463,
+            "sources": {
+              "story": {
+                "loss": 1.5846358954906463,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.072588471890324,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0690585494041445,
+            "sources": {
+              "historical": {
+                "loss": 2.072588471890324,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 200,
+          "development": {
+            "loss": 1.5245694368322882,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.5314133048057557,
+            "sources": {
+              "base": {
+                "loss": 1.392481522784381,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.6734100636917164,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7604038920786216,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.3999412469879695,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.58571338057518,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.58571338057518,
+            "sources": {
+              "story": {
+                "loss": 1.58571338057518,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0790680213893453,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0757402777671814,
+            "sources": {
+              "historical": {
+                "loss": 2.0790680213893453,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 400,
+          "development": {
+            "loss": 1.5214917378763186,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.5284299671649932,
+            "sources": {
+              "base": {
+                "loss": 1.388641339144627,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.6705231261220401,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.7589668559467566,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.399231859686427,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.583508688211441,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.583508688211441,
+            "sources": {
+              "story": {
+                "loss": 1.583508688211441,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.068796363419129,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0653268456459046,
+            "sources": {
+              "historical": {
+                "loss": 2.068796363419129,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "base": {
+          "examples": 4016,
+          "input_tokens": 1049084,
+          "target_tokens": 442904
+        },
+        "haiku": {
+          "examples": 4029,
+          "input_tokens": 899939,
+          "target_tokens": 356910
+        },
+        "songs": {
+          "examples": 1127,
+          "input_tokens": 213328,
+          "target_tokens": 90350
+        },
+        "varied_copy": {
+          "examples": 549,
+          "input_tokens": 61068,
+          "target_tokens": 12573
+        },
+        "family": {
+          "examples": 1079,
+          "input_tokens": 197950,
+          "target_tokens": 67659
+        },
+        "story": {
+          "examples": 2000,
+          "input_tokens": 1024000,
+          "target_tokens": 1024000
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 400,
+          "batch": 32,
+          "seq": 512,
+          "lr": 3e-05,
+          "warmup": 50,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "eval_every": 200,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "733044bce31b4d8fe436d859164ead8987246451f6d547f2e71be254f464eb15",
+          "dev_hash": "7b2b24fb8870428c2179cb83690bf423ccc368fdf28df7ad2540c624ea944f70",
+          "historical_hash": "defbbc8455fda366aa26eafa790161a6dab8c5c64f6e65aa78e6d41a1a51753a",
+          "init_hash": "98679a7caed3e8a9d7c1764e407e249a6099c8dd7ffba1994785097ef616918f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b7bcc79948b3fc46e43671831e68287e077e889a27642f1f0b18557bae3eb101",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6"
+        },
+        "fingerprint": "3877b99888c3663b61fae131fb9ca6ee4e281038d9ec0d668fb3678dff5a1b02",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 56361,
+            "input_tokens": 12564460,
+            "assistant_tokens": 4985908,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 54722,
+            "input_tokens": 14268050,
+            "assistant_tokens": 6019005,
+            "truncated_rows": 92
+          },
+          "songs": {
+            "rows": 15219,
+            "input_tokens": 2892148,
+            "assistant_tokens": 1228138,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14919,
+            "input_tokens": 2773001,
+            "assistant_tokens": 959210,
+            "truncated_rows": 0
+          },
+          "varied_copy": {
+            "rows": 7384,
+            "input_tokens": 819557,
+            "assistant_tokens": 169503,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "inference_sha256": "1d0d90495fcb4652cc2e07c489c5f89cd6e7959a868aa7547e43256cdfba6926",
+      "selected_step": 0,
+      "raw_sha256": "e261de97a089204c6cdf10ab9be3fba2e96d35ea375bef0cdbf796509e6d44fb"
+    },
+    "blind": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": null,
+      "tokenizer_sha256": null,
+      "lookup_manifest_sha256": null,
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.031019166418703486
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.16112515805281938
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.16112515805281938
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "raw_sha256": "68bc99298412aae2e0a11fffa7c2d6e7cf77083fa5db055b0daa5f9ad31a03c7"
+    },
+    "lookup": {
+      "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+      "checkpoint_sha256": null,
+      "tokenizer_sha256": null,
+      "lookup_manifest_sha256": "0e1370ff102ebf9e3dead2ff0a03f0793c14af0b7d0e00c7196512a34d65a647",
+      "split": "development",
+      "decoding": {
+        "temperature": 0.7,
+        "top_k": 40,
+        "max_new": 80,
+        "samples": 3
+      },
+      "summary": {
+        "real_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.031019166418703486
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.16112515805281938
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.16112515805281938
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      },
+      "manual_slices": [
+        "held_persona",
+        "missing_memory",
+        "song_family",
+        "voice"
+      ],
+      "raw_sha256": "3062da56bc5ee75cec749e4a67808ab679dcea0cbb0e7689dc13e8a2836a4335"
+    }
+  },
+  "paired_differences": {
+    "v51_vs_v5": {
+      "real_noun": {
+        "difference": -0.03888888888888888,
+        "paired_prompt_bootstrap_ci95": [
+          -0.08055555555555555,
+          -0.002777777777777777
+        ],
+        "prompts": 120
+      },
+      "invented_noun": {
+        "difference": 0.004166666666666667,
+        "paired_prompt_bootstrap_ci95": [
+          0.0,
+          0.0125
+        ],
+        "prompts": 80
+      },
+      "name": {
+        "difference": 0.05000000000000001,
+        "paired_prompt_bootstrap_ci95": [
+          -0.06666666666666667,
+          0.18333333333333332
+        ],
+        "prompts": 20
+      },
+      "memory": {
+        "difference": 0.15,
+        "paired_prompt_bootstrap_ci95": [
+          0.03333333333333333,
+          0.2833333333333333
+        ],
+        "prompts": 20
+      }
+    },
+    "v5_screen_vs_v5": {
+      "real_noun": {
+        "difference": -0.01944444444444444,
+        "paired_prompt_bootstrap_ci95": [
+          -0.049999999999999996,
+          0.011111111111111112
+        ],
+        "prompts": 120
+      },
+      "invented_noun": {
+        "difference": 0.029166666666666667,
+        "paired_prompt_bootstrap_ci95": [
+          0.008333333333333333,
+          0.05833333333333333
+        ],
+        "prompts": 80
+      },
+      "name": {
+        "difference": 0.03333333333333333,
+        "paired_prompt_bootstrap_ci95": [
+          -0.03333333333333333,
+          0.09999999999999999
+        ],
+        "prompts": 20
+      },
+      "memory": {
+        "difference": 0.15,
+        "paired_prompt_bootstrap_ci95": [
+          0.03333333333333333,
+          0.2833333333333333
+        ],
+        "prompts": 20
+      }
+    },
+    "v51_screen_vs_v51": {
+      "real_noun": {
+        "difference": 0.05277777777777778,
+        "paired_prompt_bootstrap_ci95": [
+          0.016666666666666666,
+          0.09166666666666666
+        ],
+        "prompts": 120
+      },
+      "invented_noun": {
+        "difference": 0.0125,
+        "paired_prompt_bootstrap_ci95": [
+          0.0,
+          0.029166666666666664
+        ],
+        "prompts": 80
+      },
+      "name": {
+        "difference": -0.05,
+        "paired_prompt_bootstrap_ci95": [
+          -0.11666666666666667,
+          0.016666666666666666
+        ],
+        "prompts": 20
+      },
+      "memory": {
+        "difference": 0.0,
+        "paired_prompt_bootstrap_ci95": [
+          -0.09999999999999999,
+          0.09999999999999999
+        ],
+        "prompts": 20
+      }
+    }
+  }
+}

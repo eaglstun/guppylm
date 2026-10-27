@@ -1,5 +1,8 @@
 # Aquarium v5.2 plan (draft)
 
+Implementation status and measured screening results: [v5.2 report](v52/README.md).
+The plan below remains the full experiment design; the report distinguishes executed work from pending gates.
+
 ## Goal and starting point
 
 Improve replies to new names, nouns, phrasings, and longer conversations without losing the fish's established voice. Keep the 8,873,472-parameter architecture for the first comparison so changes in data and training can be attributed. Start from the completed `aq-td/best.pt` (TinyStories pretraining, then 2,000 steps of TinyDialogues plus ocean dialogue, with a 15% story mix). TinyDialogues is the dialogue source; TinyStories is the earlier pretraining source and retained story mix. Compare against the completed 15,000-step v5 and v5.1 checkpoints, not the interrupted v5.1 run.

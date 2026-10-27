@@ -6,18 +6,27 @@ The learning rate is a pure function of completed steps and the frozen configura
 import argparse
 import collections
 import copy
+import importlib.metadata
 import json
 import math
 import os
 import random
+import sys
 import time
 from pathlib import Path
 
 import numpy as np
 import torch
 from tokenizers import Tokenizer
+
 from .. import train_aq as aq
-from .data import assert_disjoint, digest, file_hash, read_manifest
+from .data import (
+    assert_compatible_metadata,
+    assert_disjoint,
+    digest,
+    file_hash,
+    read_manifest,
+)
 
 
 def capture_rng(rng, prng, device):
@@ -101,14 +110,15 @@ def main():
     torch.manual_seed(a.seed)
     device = torch.device(a.device)
     rng, prng = np.random.default_rng(a.seed), random.Random(a.seed)
-    train, train_hash, _ = read_manifest(a.train, "train")
-    dev, dev_hash, _ = read_manifest(a.development, "development")
+    train, train_hash, train_metadata = read_manifest(a.train, "train")
+    dev, dev_hash, dev_metadata = read_manifest(a.development, "development")
     assert_disjoint(train, dev)
     historical, historical_hash = [], None
     if a.historical:
         historical, historical_hash, _ = read_manifest(a.historical, "historical")
     if not train or not dev:
         raise ValueError("Training and development manifests must be nonempty")
+    assert_compatible_metadata(train_metadata, dev_metadata, file_hash(a.data / "tokenizer.json"))
     tok = Tokenizer.from_file(str(a.data / "tokenizer.json"))
     init = torch.load(a.init, map_location="cpu", weights_only=False)
     config = aq.GuppyConfig(**{**init["config"], "dropout": a.dropout})
@@ -136,7 +146,8 @@ def main():
                   init_hash=file_hash(a.init), tokenizer_hash=file_hash(a.data / "tokenizer.json"),
                   stories_hash=file_hash(a.data / "ts_train.bin"), story_val_hash=file_hash(a.data / "ts_valid.bin"),
                   trainer_hash=file_hash(__file__), model_hash=file_hash(Path(aq.ROOT) / "guppylm/model.py"),
-                  legacy_hash=file_hash(aq.__file__), torch_version=torch.__version__, numpy_version=np.__version__)
+                  legacy_hash=file_hash(aq.__file__), torch_version=torch.__version__, numpy_version=np.__version__,
+                  tokenizers_version=importlib.metadata.version("tokenizers"), python_version=sys.version)
     fingerprint = digest(recipe)
     order, step, best, history = [], 0, float("inf"), []
     counts = collections.defaultdict(lambda: {"examples": 0, "input_tokens": 0, "target_tokens": 0})

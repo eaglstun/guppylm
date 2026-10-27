@@ -15,11 +15,18 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from guppylm.config import GuppyConfig
 from guppylm.model import GuppyLM
-from tools.aquarium.v52.data import (assert_disjoint, digest, read_manifest, split_rows,
-                                     write_manifest)
-from tools.aquarium.v52.train import losses
 from tools.aquarium.v52.contract import contains
-from tools.aquarium.v52.evaluate import cluster_ci
+from tools.aquarium.v52.data import (
+    assert_compatible_metadata,
+    assert_disjoint,
+    digest,
+    file_hash,
+    read_manifest,
+    split_rows,
+    write_manifest,
+)
+from tools.aquarium.v52.evaluate import cluster_ci, verify_selection
+from tools.aquarium.v52.train import losses
 
 
 def row(uid, word="hello", name="Pebble"):
@@ -58,6 +65,32 @@ class Manifests(unittest.TestCase):
         ci = cluster_ci([[1, 1, 1], [0, 0, 0]])
         self.assertEqual(ci["mean"], .5)
         self.assertEqual(ci["prompts"], 2)
+
+    def test_contract_and_tokenizer_compatibility(self):
+        meta = {"contract_sha256": "same", "inputs": {"tokenizer.json": {"sha256": "tokenizer"}}}
+        assert_compatible_metadata(meta, meta, "tokenizer")
+        with self.assertRaises(ValueError):
+            assert_compatible_metadata(meta, meta, "wrong")
+        with self.assertRaises(ValueError):
+            assert_compatible_metadata(meta, {**meta, "contract_sha256": "other"}, "tokenizer")
+
+    def test_locked_test_selection_is_bound_to_real_reports(self):
+        with tempfile.TemporaryDirectory() as directory:
+            d = Path(directory)
+            contract = {"cases": []}
+            report = {"contract_sha256": digest(contract), "checkpoint_sha256": "checkpoint", "split": "development"}
+            (d / "report.json").write_text(json.dumps(report))
+            (d / "rubric.json").write_text(json.dumps({"contract_sha256": digest(contract)}))
+            selection = {"contract_sha256": digest(contract), "checkpoint_sha256": "checkpoint",
+                         "development_report_path": "report.json", "development_report_sha256": file_hash(d / "report.json"),
+                         "rubric_path": "rubric.json", "rubric_sha256": file_hash(d / "rubric.json")}
+            (d / "selection.json").write_text(json.dumps(selection))
+            verify_selection(d / "selection.json", contract, "checkpoint")
+            with self.assertRaises(ValueError):
+                verify_selection(d / "selection.json", contract, "different weights")
+            (d / "report.json").write_text("changed")
+            with self.assertRaises(ValueError):
+                verify_selection(d / "selection.json", contract, "checkpoint")
 
     def test_loss_is_token_weighted(self):
         class Fake(torch.nn.Module):
@@ -104,13 +137,13 @@ assert len(q.calib_batches(2)) == 1
 assert q.score(q.model_from(q.SD)) > 0
 """
             result = subprocess.run([sys.executable, "-c", quant_test], cwd=ROOT, env=quant_env,
-                                    capture_output=True, text=True)
+                                    capture_output=True, text=True, check=False)
             self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             provenance = json.loads((d / "quant/calibration-0-2.json").read_text())
             self.assertEqual(set(provenance["ids"]), {"a", "b"})
             quant_env["AQ_QUANT_DEV_MANIFEST"] = str(d / "dev.json")
             rejected = subprocess.run([sys.executable, "-c", quant_test], cwd=ROOT, env=quant_env,
-                                      capture_output=True, text=True)
+                                      capture_output=True, text=True, check=False)
             self.assertNotEqual(rejected.returncode, 0)
             self.assertIn("compression_development", rejected.stderr)
             common = [sys.executable, "-m", "tools.aquarium.v52.train", "--train", str(d / "train.json"),
@@ -118,7 +151,7 @@ assert q.score(q.model_from(q.SD)) > 0
                       "--steps", "4", "--batch", "2", "--seq", "64", "--warmup", "1", "--dropout", ".2",
                       "--story-mix", ".5", "--eval-every", "2", "--device", "cpu", "--threads", "1"]
             def run(args):
-                result = subprocess.run(common + args, cwd=ROOT, capture_output=True, text=True)
+                result = subprocess.run(common + args, cwd=ROOT, capture_output=True, text=True, check=False)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             run(["--out", str(d / "full")])
             run(["--out", str(d / "resumed"), "--stop-after", "1"])

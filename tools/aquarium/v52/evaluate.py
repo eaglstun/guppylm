@@ -13,6 +13,7 @@ from pathlib import Path
 import numpy as np
 import torch
 from tokenizers import Tokenizer
+
 from .. import train_aq as aq
 from .contract import contains
 from .data import digest, file_hash, normalized, read_manifest
@@ -62,7 +63,7 @@ class Lookup:
     """Lexical retrieval baseline, never trained on evaluation responses."""
     def __init__(self, rows):
         self.pairs, self.index = [], collections.defaultdict(set)
-        stop = set("a an the i you your my is are was it to in of and what how do does me can".split())
+        stop = {"a", "an", "the", "i", "you", "your", "my", "is", "are", "was", "it", "to", "in", "of", "and", "what", "how", "do", "does", "me", "can"}
         self.words = lambda s: set(normalized(s).split()) - stop
         for row in rows:
             for i in range(0, len(row["turns"]), 2):
@@ -76,12 +77,32 @@ class Lookup:
     def __call__(self, query):
         words = self.words(query)
         candidates = set()
-        for word in sorted(words, key=lambda w: len(self.index.get(w, ())))[:5]:
+        for word in sorted(words, key=lambda w: (len(self.index.get(w, ())), w))[:5]:
             candidates.update(self.index.get(word, ()))
         if not candidates:
             return "Hello from the tide pool."
         best = max(sorted(candidates), key=lambda i: len(words & self.pairs[i][0]) / max(1, len(words | self.pairs[i][0])))
         return self.pairs[best][1]
+
+
+def verify_selection(path, contract, checkpoint_hash):
+    """Bind test access to actual, already written development and rubric artifacts."""
+    selection = json.loads(Path(path).read_text())
+    if (selection.get("contract_sha256") != digest(contract) or checkpoint_hash is None
+            or selection.get("checkpoint_sha256") != checkpoint_hash):
+        raise ValueError("Selection does not match the contract/checkpoint")
+    for key in ("development_report", "rubric"):
+        artifact = Path(selection[key + "_path"])
+        if not artifact.is_absolute():
+            artifact = Path(path).parent / artifact
+        if file_hash(artifact) != selection.get(key + "_sha256"):
+            raise ValueError(f"Selection {key} hash mismatch")
+        content = json.loads(artifact.read_text())
+        if content.get("contract_sha256") != digest(contract):
+            raise ValueError(f"Selection {key} contract mismatch")
+        if key == "development_report" and (content.get("split") != "development"
+                or content.get("checkpoint_sha256") != checkpoint_hash):
+            raise ValueError("Selection report must evaluate this checkpoint on development")
 
 
 def main():
@@ -104,11 +125,7 @@ def main():
     if a.split == "locked_test":
         if not a.selection:
             ap.error("Freeze --selection before opening locked test")
-        selection = json.loads(a.selection.read_text())
-        if (selection.get("contract_sha256") != digest(contract) or ck_hash is None
-                or selection.get("checkpoint_sha256") != ck_hash or not selection.get("development_report_sha256")
-                or not selection.get("rubric_sha256")):
-            ap.error("Selection must identify contract, checkpoint, development report and rubric hashes")
+        verify_selection(a.selection, contract, ck_hash)
     if a.out.exists():
         raise ValueError("Refusing to overwrite an evaluation result")
     torch.set_num_threads(a.threads)

@@ -34,17 +34,14 @@ if TRAIN_MANIFEST and not os.environ.get("AQ_QUANT_CKPT"):
 _manifest_train = _manifest_dev = None
 _manifest_hashes = {}
 if TRAIN_MANIFEST:
-    from tools.aquarium.v52.data import assert_disjoint, file_hash, read_manifest
+    from tools.aquarium.v52.data import assert_compatible_metadata, assert_disjoint, file_hash, read_manifest
     _manifest_train, th, tm = read_manifest(TRAIN_MANIFEST, "train")
     _manifest_dev, dh, dm = read_manifest(DEV_MANIFEST, "compression_development")
     assert_disjoint(_manifest_train, _manifest_dev)
     if not _manifest_train or not _manifest_dev:
         raise ValueError("Compression manifests must be nonempty")
     tokenizer_hash = file_hash(os.path.join(D, "tokenizer.json"))
-    for meta in (tm, dm):
-        expected = meta.get("inputs", {}).get("tokenizer.json", {}).get("sha256")
-        if expected and expected != tokenizer_hash:
-            raise ValueError("Compression tokenizer differs from frozen manifest")
+    assert_compatible_metadata(tm, dm, tokenizer_hash)
     _manifest_hashes = {"train": th, "development": dh, "tokenizer": tokenizer_hash,
                         "checkpoint": file_hash(os.environ["AQ_QUANT_CKPT"])}
 

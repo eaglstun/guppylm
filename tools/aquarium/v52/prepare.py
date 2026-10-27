@@ -1,14 +1,23 @@
 """Freeze auditable A/B/C inputs. Run as python -m tools.aquarium.v52.prepare."""
 import argparse
 import collections
-import glob
 import json
 import random
 import re
 from pathlib import Path
-from .data import (assert_disjoint, digest, file_hash, overlap_audit, proportions,
-                   read_source, split_rows, write_manifest, normalized)
-from .contract import contains, make_contract, varied_copy_rows
+
+from .contract import make_contract, varied_copy_rows
+from .data import (
+    assert_disjoint,
+    digest,
+    file_hash,
+    normalized,
+    overlap_audit,
+    proportions,
+    read_source,
+    split_rows,
+    write_manifest,
+)
 
 
 def main():
