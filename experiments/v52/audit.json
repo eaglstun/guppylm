@@ -1,0 +1,610 @@
+{
+ "inputs": {
+  "dialogues.jsonl": {
+   "sha256": "d72347a1b00fdad0234d57eeaeea6fd74b3397f5a456fb5ea60f5f129f57f06d",
+   "accepted": 11874,
+   "rejected": 0
+  },
+  "haiku/out_0.jsonl": {
+   "sha256": "c51ccf3991865ebc3bcac21422acdf7a2335d07fb06831ec2fc16038dc2d9861",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_1.jsonl": {
+   "sha256": "fab226bdf29a661648f9a27d92211d42cab1c7d6aa0898d19204e3fa8f653469",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_10.jsonl": {
+   "sha256": "e046e8f1581161a4a6843844a21aa63c5393d98c1b2d6fadc87dcddd17323ca1",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_11.jsonl": {
+   "sha256": "8f3775a65ed950b8165d68c294fce209eacabb09608b25f8f674b3bfa0c291a8",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_12.jsonl": {
+   "sha256": "f9504b87d8f50db3755b5a2592f2c21949c008ffbb2040d3cf082537c402af3e",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_13.jsonl": {
+   "sha256": "32e039a720fd14c9072e36e61e7a4c148872b7e964171fce3e1c25e3177f06d9",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_14.jsonl": {
+   "sha256": "43049f88c316cd78938897bd041ccb1ce6bb8796eae8649bf497c717ca69898a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_15.jsonl": {
+   "sha256": "43dbc994cf9a6bbefd5177dcafdde90da590495c1c56d5fafae609d86ba13652",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_16.jsonl": {
+   "sha256": "10cfcf329b0484afc344353e0ffff902c07e3703e80c3cef33053fddd9282748",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_17.jsonl": {
+   "sha256": "d08ba6bac6a1c0411aa7d5150d1b468e840176bbda204778988163a21c91c90a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_18.jsonl": {
+   "sha256": "b42f3968eb8069ab8cda8326f40b0720d755bbae64da50e7c35d5062ccee17ff",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_19.jsonl": {
+   "sha256": "484855324fef71e42db9bff3e65b47d6fd098764afc6058ccedd7e6d44a904eb",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_2.jsonl": {
+   "sha256": "807fd7da4edf9aff13b6c6fa41be01e693c5d27e5e181a2e1973c8cbf036f9bb",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_20.jsonl": {
+   "sha256": "d5ea379c87202c3665ada8fd1786f8271cfad73ae9d23b9e3b34800aef9f449d",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_21.jsonl": {
+   "sha256": "4eef1d0b1767dc87cc9c983b233b41f53cd952625d3a7d6006648a35d66201da",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_22.jsonl": {
+   "sha256": "2f74a3d9951240c9e35ce2d99c4ff48b4075ce3d961f80dd3b769546b89c6807",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_23.jsonl": {
+   "sha256": "7cf95c85aca75936779252f2b2ffa9eeeceb7d2b476d6338fae5797e52190d74",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_24.jsonl": {
+   "sha256": "b0a38391f2ed7b4575cc5420ee0c77c29d6ff8eb19365d72e7dfb233e2d03737",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_25.jsonl": {
+   "sha256": "c0ea75077d5a97645ce4862a930b2fa671c157e10b78049c4b713e93fc2c6d7a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_3.jsonl": {
+   "sha256": "0f576dbac15e345a022dacfbdc0e648523343243cdec08511503a9c58b0ef4a7",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_4.jsonl": {
+   "sha256": "fd8f8ede197b1b45a0c43cbd15a1314feaeee4a56006eb67e86bd07ad0254f17",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_5.jsonl": {
+   "sha256": "cf05e7a52ec2251e7f20e84d050b27092d22016f2534a650233f4b977cfa2965",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_6.jsonl": {
+   "sha256": "4e721d9658c7a3c2543b79271dc0e443b1a1deb5087c03a47b025b66bb62b148",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_7.jsonl": {
+   "sha256": "03d1ec1d3b268692f96ae92669bea244c7bc3ef22cc5e8b5caa0d5b773f9fe0f",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_8.jsonl": {
+   "sha256": "d407e371a9a17650a2b7dbbb706c4b87590a26255dc9ad732a31bef1bdfeda81",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_9.jsonl": {
+   "sha256": "c565e846f081415e099dbd5ad22323cdf128ff32372ef64fbbc172b15cbe54cb",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "songs/chat.jsonl": {
+   "sha256": "c78991660222949e6397887bb1e1a23dc55ac0edda5d964bba79d57bd1a0d3ad",
+   "accepted": 3200,
+   "rejected": 0
+  },
+  "family/chat.jsonl": {
+   "sha256": "620293fcf2bdd0b77e9870c3f51a2924ee45e396856d7239f1d3a80dc4f2dce0",
+   "accepted": 3157,
+   "rejected": 0
+  },
+  "tinydialogues/chat.jsonl": {
+   "sha256": "bc1fddd27308980aff3b1f458228c11b98943c7e96d9f658dfbfbc44fed00993",
+   "accepted": 9103,
+   "rejected": 10121
+  },
+  "ocean/chat.jsonl": {
+   "sha256": "7ce41b81800cc5c48ba3047fd81448d395068e0f075a299813e944cc75ad722f",
+   "accepted": 2000,
+   "rejected": 0
+  },
+  "tokenizer.json": {
+   "sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629"
+  },
+  "dialogues_eval.jsonl": {
+   "sha256": "2579158d64366623495d91fca8f7c13251cb9aa4a979de7ac718bb4e114f4adc"
+  },
+  "memory/out_0.jsonl": {
+   "sha256": "b05740c88fa337e3124677a9b3f0e688a2702a417147dd6e5e36fbb35b6735b9"
+  },
+  "memory/out_1.jsonl": {
+   "sha256": "2c00b3d9ab7879cc3e2581b1567d2fc829c47bd73d34a35b4f96876119527da7"
+  },
+  "memory/specs_0.jsonl": {
+   "sha256": "b549c3334e34bfff777331b0333e0dd1ea4e3858217883f3c60bb2fd3aa0a11f"
+  },
+  "memory/specs_1.jsonl": {
+   "sha256": "b8d09451d01a9c2ad01cb195f4de8f8bbf6234bb5163610b69fc2676f803a2cc"
+  },
+  "selfname/out_0.jsonl": {
+   "sha256": "4179664fb84e626852b4c2e4cf45faea1037064295d262ce7f292a462ee5381c"
+  },
+  "selfname/out_1.jsonl": {
+   "sha256": "f09d2317eb63d0b5e36d9b57e8d227bf8861174c68e8ec9869d1e9be817f9796"
+  },
+  "selfname/specs_0.jsonl": {
+   "sha256": "062b62219450bb21489104767c5ac046c486ccee5544abfa9f945b6d7a903818"
+  },
+  "selfname/specs_1.jsonl": {
+   "sha256": "b2036ad33da68e3a2bbd2a32343321fc2be557e0b5515276b0e30a42dd84a83e"
+  }
+ },
+ "rejected": [],
+ "duplicates_removed": 0,
+ "quarantined": 0,
+ "before_cap": {
+  "base": {
+   "rows": 11874,
+   "share": 0.3927756276669644
+  },
+  "family": {
+   "rows": 3157,
+   "share": 0.10442922827561113
+  },
+  "haiku": {
+   "rows": 12000,
+   "share": 0.39694353478217725
+  },
+  "songs": {
+   "rows": 3200,
+   "share": 0.10585160927524727
+  }
+ },
+ "after_cap": {
+  "base": {
+   "rows": 9952,
+   "share": 0.38235746119563546
+  },
+  "family": {
+   "rows": 2984,
+   "share": 0.11464576609804826
+  },
+  "haiku": {
+   "rows": 10048,
+   "share": 0.38604579683417856
+  },
+  "songs": {
+   "rows": 3044,
+   "share": 0.1169509758721377
+  }
+ },
+ "development": {
+  "base": {
+   "rows": 496,
+   "share": 0.40292445166531277
+  },
+  "family": {
+   "rows": 134,
+   "share": 0.10885458976441917
+  },
+  "haiku": {
+   "rows": 479,
+   "share": 0.3891145410235581
+  },
+  "songs": {
+   "rows": 122,
+   "share": 0.09910641754670999
+  }
+ },
+ "compression_development": {
+  "base": {
+   "rows": 109,
+   "share": 0.35275080906148865
+  },
+  "family": {
+   "rows": 39,
+   "share": 0.1262135922330097
+  },
+  "haiku": {
+   "rows": 127,
+   "share": 0.4110032362459547
+  },
+  "songs": {
+   "rows": 34,
+   "share": 0.11003236245954692
+  }
+ },
+ "overlap": {
+  "turns": {
+   "distinct": 139317,
+   "repeated": 2012,
+   "cross_split": 351,
+   "examples": [
+    {
+     "text": "do you have any friends",
+     "rows": 132
+    },
+    {
+     "text": "what do you eat",
+     "rows": 107
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 83
+    },
+    {
+     "text": "what about your friends",
+     "rows": 83
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 56
+    },
+    {
+     "text": "what do you like to do",
+     "rows": 44
+    },
+    {
+     "text": "what do they eat",
+     "rows": 40
+    },
+    {
+     "text": "what do you like to eat",
+     "rows": 40
+    },
+    {
+     "text": "what s your favorite thing to do",
+     "rows": 40
+    },
+    {
+     "text": "what about your family",
+     "rows": 35
+    }
+   ]
+  },
+  "wording": {
+   "distinct": 136026,
+   "repeated": 3087,
+   "cross_split": 545,
+   "examples": [
+    {
+     "text": "do you have any friends",
+     "rows": 132
+    },
+    {
+     "text": "what do you eat",
+     "rows": 107
+    },
+    {
+     "text": "thank you ENTITY",
+     "rows": 100
+    },
+    {
+     "text": "ENTITY what do you want to do tomorrow",
+     "rows": 93
+    },
+    {
+     "text": "thanks ENTITY",
+     "rows": 91
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 83
+    },
+    {
+     "text": "what about your friends",
+     "rows": 83
+    },
+    {
+     "text": "ENTITY what are you proud of",
+     "rows": 60
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 56
+    },
+    {
+     "text": "hi ENTITY i don t feel so good today my tummy hurts",
+     "rows": 45
+    }
+   ]
+  },
+  "response_8grams": {
+   "distinct": 1222856,
+   "repeated": 27553,
+   "cross_split": 4101,
+   "examples": [
+    {
+     "text": "i do not know that word but it",
+     "rows": 101
+    },
+    {
+     "text": "do not know that word but it sounds",
+     "rows": 100
+    },
+    {
+     "text": "not know that word but it sounds like",
+     "rows": 99
+    },
+    {
+     "text": "know that word but it sounds like a",
+     "rows": 98
+    },
+    {
+     "text": "i puff up when i am scared but",
+     "rows": 91
+    },
+    {
+     "text": "one two three four five six seven eight",
+     "rows": 86
+    },
+    {
+     "text": "i have never seen one but it sounds",
+     "rows": 78
+    },
+    {
+     "text": "i do not know that word but a",
+     "rows": 71
+    },
+    {
+     "text": "never seen one but it sounds like a",
+     "rows": 67
+    },
+    {
+     "text": "i puff up when i am scared of",
+     "rows": 66
+    }
+   ]
+  },
+  "names": {
+   "distinct": 142,
+   "repeated": 142,
+   "cross_split": 136,
+   "examples": [
+    {
+     "text": "misty",
+     "rows": 458
+    },
+    {
+     "text": "kelp",
+     "rows": 256
+    },
+    {
+     "text": "button",
+     "rows": 249
+    },
+    {
+     "text": "muffin",
+     "rows": 248
+    },
+    {
+     "text": "ollie",
+     "rows": 243
+    },
+    {
+     "text": "sky",
+     "rows": 243
+    },
+    {
+     "text": "cloud",
+     "rows": 242
+    },
+    {
+     "text": "max",
+     "rows": 240
+    },
+    {
+     "text": "reed",
+     "rows": 240
+    },
+    {
+     "text": "spot",
+     "rows": 239
+    }
+   ]
+  },
+  "nouns": {
+   "distinct": 75,
+   "repeated": 75,
+   "cross_split": 75,
+   "examples": [
+    {
+     "text": "a traffic jam",
+     "rows": 123
+    },
+    {
+     "text": "a scarf",
+     "rows": 118
+    },
+    {
+     "text": "a ticket",
+     "rows": 116
+    },
+    {
+     "text": "a train",
+     "rows": 114
+    },
+    {
+     "text": "the internet",
+     "rows": 112
+    },
+    {
+     "text": "a meeting",
+     "rows": 111
+    },
+    {
+     "text": "a balloon",
+     "rows": 110
+    },
+    {
+     "text": "a bicycle bell",
+     "rows": 110
+    },
+    {
+     "text": "a sandwich",
+     "rows": 110
+    },
+    {
+     "text": "a wedding",
+     "rows": 110
+    }
+   ]
+  }
+ },
+ "candidates": {
+  "A": {
+   "rows": 141221,
+   "removed_after_augmentation": 883,
+   "sources": {
+    "base": {
+     "rows": 54722,
+     "share": 0.38749194524893604
+    },
+    "family": {
+     "rows": 14919,
+     "share": 0.10564292845964836
+    },
+    "haiku": {
+     "rows": 56361,
+     "share": 0.39909786788083923
+    },
+    "songs": {
+     "rows": 15219,
+     "share": 0.10776725841057633
+    }
+   },
+   "sha256": "0e1370ff102ebf9e3dead2ff0a03f0793c14af0b7d0e00c7196512a34d65a647",
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 26028,
+    "rename": 52050,
+    "noun": 11087,
+    "memory": 26028,
+    "selfname": 26028
+   }
+  },
+  "B": {
+   "rows": 152282,
+   "removed_after_augmentation": 1786,
+   "sources": {
+    "base": {
+     "rows": 59675,
+     "share": 0.3918716591586662
+    },
+    "family": {
+     "rows": 14919,
+     "share": 0.09796955648073968
+    },
+    "haiku": {
+     "rows": 62469,
+     "share": 0.4102191985920857
+    },
+    "songs": {
+     "rows": 15219,
+     "share": 0.09993958576850842
+    }
+   },
+   "sha256": "c5b0f16a9b121ea66b7342a77eb3fb507417b56492e24c82eed1bd4920e8af64",
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 26028,
+    "rename": 52050,
+    "noun": 22148,
+    "memory": 26028,
+    "selfname": 26028
+   }
+  },
+  "C": {
+   "rows": 148605,
+   "removed_after_augmentation": 978,
+   "sources": {
+    "base": {
+     "rows": 54722,
+     "share": 0.368237946233303
+    },
+    "family": {
+     "rows": 14919,
+     "share": 0.10039366104774403
+    },
+    "haiku": {
+     "rows": 56361,
+     "share": 0.379267184818815
+    },
+    "songs": {
+     "rows": 15219,
+     "share": 0.1024124356515595
+    },
+    "varied_copy": {
+     "rows": 7384,
+     "share": 0.04968877224857845
+    }
+   },
+   "sha256": "733044bce31b4d8fe436d859164ead8987246451f6d547f2e71be254f464eb15",
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 26028,
+    "rename": 52050,
+    "noun": 11087,
+    "memory": 26028,
+    "selfname": 26028,
+    "hand_template_0": 1868,
+    "hand_template_1": 1869,
+    "hand_template_2": 1778,
+    "hand_template_3": 1869
+   }
+  }
+ },
+ "limitations": [
+  "8-word fragment and entity-normalized matching are lexical heuristics, not semantic deduplication.",
+  "Generator versions were not recorded historically; current source hashes cannot prove old inputs.",
+  "New held-persona probe excludes axolotl from fine-tuning, not prior-stage natural language exposure.",
+  "Full TinyStories training text is not screened for probe entities."
+ ]
+}

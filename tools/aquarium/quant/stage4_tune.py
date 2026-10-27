@@ -15,6 +15,8 @@ import argparse
 import math
 import os
 
+from quantlib import training_rows
+
 import numpy as np
 import torch
 import torch.nn.functional as F
@@ -123,7 +125,7 @@ def weights(final=False):
 record(name + " (before tune)", {k: v.detach() for k, v in weights(final=True).items()}, nbytes)
 
 # ---- distill
-rows = load_dialogues([os.path.join(D, "dialogues.jsonl")])
+rows = training_rows()
 ex = [encode_chat(tok, r, 512) for r in rows]
 rng = np.random.default_rng(1)
 teacher = model_from(base_sd())

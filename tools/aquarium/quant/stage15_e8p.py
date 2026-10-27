@@ -21,6 +21,8 @@ import os
 import sys
 import time
 
+from quantlib import training_rows
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -216,7 +218,7 @@ def tune(path, steps=600):
     nbytes = FIXED_BYTES + sum(SD[k].numel()//8 * 2 for k in TARGETS) + nscales*2 + 1024
     label = "E17 generated-shell 2bpw" + (f" g{scale_group}" if scale_group else "") + " +rot +gptq"
     record(label + " before tune", weights(final=True), nbytes)
-    rows = load_dialogues([os.path.join(D, "dialogues.jsonl")])
+    rows = training_rows()
     ex = [encode_chat(tok, r, 512) for r in rows]
     rng = np.random.default_rng(1)
     teacher = model_from(base_sd())
