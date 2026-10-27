@@ -1,0 +1,2331 @@
+{
+ "inputs": {
+  "dialogues.jsonl": {
+   "sha256": "d72347a1b00fdad0234d57eeaeea6fd74b3397f5a456fb5ea60f5f129f57f06d",
+   "accepted": 11874,
+   "rejected": 0
+  },
+  "haiku/out_0.jsonl": {
+   "sha256": "c51ccf3991865ebc3bcac21422acdf7a2335d07fb06831ec2fc16038dc2d9861",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_1.jsonl": {
+   "sha256": "fab226bdf29a661648f9a27d92211d42cab1c7d6aa0898d19204e3fa8f653469",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_10.jsonl": {
+   "sha256": "e046e8f1581161a4a6843844a21aa63c5393d98c1b2d6fadc87dcddd17323ca1",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_11.jsonl": {
+   "sha256": "8f3775a65ed950b8165d68c294fce209eacabb09608b25f8f674b3bfa0c291a8",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_12.jsonl": {
+   "sha256": "f9504b87d8f50db3755b5a2592f2c21949c008ffbb2040d3cf082537c402af3e",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_13.jsonl": {
+   "sha256": "32e039a720fd14c9072e36e61e7a4c148872b7e964171fce3e1c25e3177f06d9",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_14.jsonl": {
+   "sha256": "43049f88c316cd78938897bd041ccb1ce6bb8796eae8649bf497c717ca69898a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_15.jsonl": {
+   "sha256": "43dbc994cf9a6bbefd5177dcafdde90da590495c1c56d5fafae609d86ba13652",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_16.jsonl": {
+   "sha256": "10cfcf329b0484afc344353e0ffff902c07e3703e80c3cef33053fddd9282748",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_17.jsonl": {
+   "sha256": "d08ba6bac6a1c0411aa7d5150d1b468e840176bbda204778988163a21c91c90a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_18.jsonl": {
+   "sha256": "b42f3968eb8069ab8cda8326f40b0720d755bbae64da50e7c35d5062ccee17ff",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_19.jsonl": {
+   "sha256": "484855324fef71e42db9bff3e65b47d6fd098764afc6058ccedd7e6d44a904eb",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_2.jsonl": {
+   "sha256": "807fd7da4edf9aff13b6c6fa41be01e693c5d27e5e181a2e1973c8cbf036f9bb",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_20.jsonl": {
+   "sha256": "d5ea379c87202c3665ada8fd1786f8271cfad73ae9d23b9e3b34800aef9f449d",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_21.jsonl": {
+   "sha256": "4eef1d0b1767dc87cc9c983b233b41f53cd952625d3a7d6006648a35d66201da",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_22.jsonl": {
+   "sha256": "2f74a3d9951240c9e35ce2d99c4ff48b4075ce3d961f80dd3b769546b89c6807",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_23.jsonl": {
+   "sha256": "7cf95c85aca75936779252f2b2ffa9eeeceb7d2b476d6338fae5797e52190d74",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_24.jsonl": {
+   "sha256": "b0a38391f2ed7b4575cc5420ee0c77c29d6ff8eb19365d72e7dfb233e2d03737",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_25.jsonl": {
+   "sha256": "c0ea75077d5a97645ce4862a930b2fa671c157e10b78049c4b713e93fc2c6d7a",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_3.jsonl": {
+   "sha256": "0f576dbac15e345a022dacfbdc0e648523343243cdec08511503a9c58b0ef4a7",
+   "accepted": 250,
+   "rejected": 0
+  },
+  "haiku/out_4.jsonl": {
+   "sha256": "fd8f8ede197b1b45a0c43cbd15a1314feaeee4a56006eb67e86bd07ad0254f17",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_5.jsonl": {
+   "sha256": "cf05e7a52ec2251e7f20e84d050b27092d22016f2534a650233f4b977cfa2965",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_6.jsonl": {
+   "sha256": "4e721d9658c7a3c2543b79271dc0e443b1a1deb5087c03a47b025b66bb62b148",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_7.jsonl": {
+   "sha256": "03d1ec1d3b268692f96ae92669bea244c7bc3ef22cc5e8b5caa0d5b773f9fe0f",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_8.jsonl": {
+   "sha256": "d407e371a9a17650a2b7dbbb706c4b87590a26255dc9ad732a31bef1bdfeda81",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "haiku/out_9.jsonl": {
+   "sha256": "c565e846f081415e099dbd5ad22323cdf128ff32372ef64fbbc172b15cbe54cb",
+   "accepted": 500,
+   "rejected": 0
+  },
+  "songs/chat.jsonl": {
+   "sha256": "c78991660222949e6397887bb1e1a23dc55ac0edda5d964bba79d57bd1a0d3ad",
+   "accepted": 3200,
+   "rejected": 0
+  },
+  "family/chat.jsonl": {
+   "sha256": "620293fcf2bdd0b77e9870c3f51a2924ee45e396856d7239f1d3a80dc4f2dce0",
+   "accepted": 3157,
+   "rejected": 0
+  },
+  "tinydialogues/chat.jsonl": {
+   "sha256": "bc1fddd27308980aff3b1f458228c11b98943c7e96d9f658dfbfbc44fed00993",
+   "accepted": 9103,
+   "rejected": 10121
+  },
+  "ocean/chat.jsonl": {
+   "sha256": "7ce41b81800cc5c48ba3047fd81448d395068e0f075a299813e944cc75ad722f",
+   "accepted": 2000,
+   "rejected": 0
+  },
+  "tokenizer.json": {
+   "sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629"
+  },
+  "dialogues_eval.jsonl": {
+   "sha256": "2579158d64366623495d91fca8f7c13251cb9aa4a979de7ac718bb4e114f4adc"
+  },
+  "memory/out_0.jsonl": {
+   "sha256": "b05740c88fa337e3124677a9b3f0e688a2702a417147dd6e5e36fbb35b6735b9"
+  },
+  "memory/out_1.jsonl": {
+   "sha256": "2c00b3d9ab7879cc3e2581b1567d2fc829c47bd73d34a35b4f96876119527da7"
+  },
+  "memory/specs_0.jsonl": {
+   "sha256": "b549c3334e34bfff777331b0333e0dd1ea4e3858217883f3c60bb2fd3aa0a11f"
+  },
+  "memory/specs_1.jsonl": {
+   "sha256": "b8d09451d01a9c2ad01cb195f4de8f8bbf6234bb5163610b69fc2676f803a2cc"
+  },
+  "selfname/out_0.jsonl": {
+   "sha256": "4179664fb84e626852b4c2e4cf45faea1037064295d262ce7f292a462ee5381c"
+  },
+  "selfname/out_1.jsonl": {
+   "sha256": "f09d2317eb63d0b5e36d9b57e8d227bf8861174c68e8ec9869d1e9be817f9796"
+  },
+  "selfname/specs_0.jsonl": {
+   "sha256": "062b62219450bb21489104767c5ac046c486ccee5544abfa9f945b6d7a903818"
+  },
+  "selfname/specs_1.jsonl": {
+   "sha256": "b2036ad33da68e3a2bbd2a32343321fc2be557e0b5515276b0e30a42dd84a83e"
+  }
+ },
+ "rejected": [],
+ "duplicates_removed": 0,
+ "quarantined": 0,
+ "before_cap": {
+  "base": {
+   "rows": 11874,
+   "share": 0.3927756276669644
+  },
+  "family": {
+   "rows": 3157,
+   "share": 0.10442922827561113
+  },
+  "haiku": {
+   "rows": 12000,
+   "share": 0.39694353478217725
+  },
+  "songs": {
+   "rows": 3200,
+   "share": 0.10585160927524727
+  }
+ },
+ "after_cap": {
+  "base": {
+   "rows": 10054,
+   "share": 0.3881253860407659
+  },
+  "family": {
+   "rows": 2860,
+   "share": 0.11040765904879556
+  },
+  "haiku": {
+   "rows": 9946,
+   "share": 0.38395614576899323
+  },
+  "songs": {
+   "rows": 3044,
+   "share": 0.11751080914144534
+  }
+ },
+ "development": {
+  "base": {
+   "rows": 496,
+   "share": 0.40292445166531277
+  },
+  "family": {
+   "rows": 134,
+   "share": 0.10885458976441917
+  },
+  "haiku": {
+   "rows": 479,
+   "share": 0.3891145410235581
+  },
+  "songs": {
+   "rows": 122,
+   "share": 0.09910641754670999
+  }
+ },
+ "compression_development": {
+  "base": {
+   "rows": 109,
+   "share": 0.35275080906148865
+  },
+  "family": {
+   "rows": 39,
+   "share": 0.1262135922330097
+  },
+  "haiku": {
+   "rows": 127,
+   "share": 0.4110032362459547
+  },
+  "songs": {
+   "rows": 34,
+   "share": 0.11003236245954692
+  }
+ },
+ "overlap": {
+  "turns": {
+   "distinct": 139317,
+   "repeated": 2012,
+   "cross_split": 351,
+   "examples": [
+    {
+     "text": "do you have any friends",
+     "rows": 132
+    },
+    {
+     "text": "what do you eat",
+     "rows": 107
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 83
+    },
+    {
+     "text": "what about your friends",
+     "rows": 83
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 56
+    },
+    {
+     "text": "what do you like to do",
+     "rows": 44
+    },
+    {
+     "text": "what do they eat",
+     "rows": 40
+    },
+    {
+     "text": "what do you like to eat",
+     "rows": 40
+    },
+    {
+     "text": "what s your favorite thing to do",
+     "rows": 40
+    },
+    {
+     "text": "what about your family",
+     "rows": 35
+    }
+   ]
+  },
+  "wording": {
+   "distinct": 136026,
+   "repeated": 3087,
+   "cross_split": 545,
+   "examples": [
+    {
+     "text": "do you have any friends",
+     "rows": 132
+    },
+    {
+     "text": "what do you eat",
+     "rows": 107
+    },
+    {
+     "text": "thank you ENTITY",
+     "rows": 100
+    },
+    {
+     "text": "ENTITY what do you want to do tomorrow",
+     "rows": 93
+    },
+    {
+     "text": "thanks ENTITY",
+     "rows": 91
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 83
+    },
+    {
+     "text": "what about your friends",
+     "rows": 83
+    },
+    {
+     "text": "ENTITY what are you proud of",
+     "rows": 60
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 56
+    },
+    {
+     "text": "hi ENTITY i don t feel so good today my tummy hurts",
+     "rows": 45
+    }
+   ]
+  },
+  "response_8grams": {
+   "distinct": 1222856,
+   "repeated": 27553,
+   "cross_split": 4101,
+   "examples": [
+    {
+     "text": "i do not know that word but it",
+     "rows": 101
+    },
+    {
+     "text": "do not know that word but it sounds",
+     "rows": 100
+    },
+    {
+     "text": "not know that word but it sounds like",
+     "rows": 99
+    },
+    {
+     "text": "know that word but it sounds like a",
+     "rows": 98
+    },
+    {
+     "text": "i puff up when i am scared but",
+     "rows": 91
+    },
+    {
+     "text": "one two three four five six seven eight",
+     "rows": 86
+    },
+    {
+     "text": "i have never seen one but it sounds",
+     "rows": 78
+    },
+    {
+     "text": "i do not know that word but a",
+     "rows": 71
+    },
+    {
+     "text": "never seen one but it sounds like a",
+     "rows": 67
+    },
+    {
+     "text": "i puff up when i am scared of",
+     "rows": 66
+    }
+   ]
+  },
+  "names": {
+   "distinct": 142,
+   "repeated": 142,
+   "cross_split": 136,
+   "examples": [
+    {
+     "text": "misty",
+     "rows": 458
+    },
+    {
+     "text": "kelp",
+     "rows": 256
+    },
+    {
+     "text": "button",
+     "rows": 249
+    },
+    {
+     "text": "muffin",
+     "rows": 248
+    },
+    {
+     "text": "ollie",
+     "rows": 243
+    },
+    {
+     "text": "sky",
+     "rows": 243
+    },
+    {
+     "text": "cloud",
+     "rows": 242
+    },
+    {
+     "text": "max",
+     "rows": 240
+    },
+    {
+     "text": "reed",
+     "rows": 240
+    },
+    {
+     "text": "spot",
+     "rows": 239
+    }
+   ]
+  },
+  "nouns": {
+   "distinct": 75,
+   "repeated": 75,
+   "cross_split": 75,
+   "examples": [
+    {
+     "text": "a traffic jam",
+     "rows": 123
+    },
+    {
+     "text": "a scarf",
+     "rows": 118
+    },
+    {
+     "text": "a ticket",
+     "rows": 116
+    },
+    {
+     "text": "a train",
+     "rows": 114
+    },
+    {
+     "text": "the internet",
+     "rows": 112
+    },
+    {
+     "text": "a meeting",
+     "rows": 111
+    },
+    {
+     "text": "a balloon",
+     "rows": 110
+    },
+    {
+     "text": "a bicycle bell",
+     "rows": 110
+    },
+    {
+     "text": "a sandwich",
+     "rows": 110
+    },
+    {
+     "text": "a wedding",
+     "rows": 110
+    }
+   ]
+  }
+ },
+ "candidates": {
+  "A": {
+   "rows": 140200,
+   "removed_after_augmentation": 894,
+   "sources": {
+    "base": {
+     "rows": 55305,
+     "share": 0.394472182596291
+    },
+    "family": {
+     "rows": 14300,
+     "share": 0.10199714693295292
+    },
+    "haiku": {
+     "rows": 55377,
+     "share": 0.3949857346647646
+    },
+    "songs": {
+     "rows": 15218,
+     "share": 0.10854493580599144
+    }
+   },
+   "sha256": "20027221a3986b71ee196ae54c9177f817ba19ed2987f2aebbb659ab86f0c206",
+   "tokens": {
+    "base": {
+     "rows": 55305,
+     "input_tokens": 14387570,
+     "target_tokens": 6061207,
+     "target_share": 0.4636903318397726
+    },
+    "family": {
+     "rows": 14300,
+     "input_tokens": 2642303,
+     "target_tokens": 907737,
+     "target_share": 0.0694430780458809
+    },
+    "haiku": {
+     "rows": 55377,
+     "input_tokens": 12309153,
+     "target_tokens": 4874885,
+     "target_share": 0.3729351337663818
+    },
+    "songs": {
+     "rows": 15218,
+     "input_tokens": 2891539,
+     "target_tokens": 1227841,
+     "target_share": 0.09393145634796472
+    }
+   },
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 25904,
+    "rename": 51806,
+    "noun": 10682,
+    "memory": 25904,
+    "selfname": 25904
+   }
+  },
+  "B": {
+   "rows": 150849,
+   "removed_after_augmentation": 1819,
+   "sources": {
+    "base": {
+     "rows": 60332,
+     "share": 0.39994961849266486
+    },
+    "family": {
+     "rows": 14300,
+     "share": 0.09479678353850539
+    },
+    "haiku": {
+     "rows": 60999,
+     "share": 0.40437125867589446
+    },
+    "songs": {
+     "rows": 15218,
+     "share": 0.10088233929293532
+    }
+   },
+   "sha256": "053022d6605defc5a0efceb40d232afff014b8cb7c65ac8c4fc82e0d41e1bf88",
+   "tokens": {
+    "base": {
+     "rows": 60332,
+     "input_tokens": 15663777,
+     "target_tokens": 6596295,
+     "target_share": 0.4683388085201191
+    },
+    "family": {
+     "rows": 14300,
+     "input_tokens": 2642303,
+     "target_tokens": 907737,
+     "target_share": 0.06444958344489253
+    },
+    "haiku": {
+     "rows": 60999,
+     "input_tokens": 13498739,
+     "target_tokens": 5352578,
+     "target_share": 0.38003455015747506
+    },
+    "songs": {
+     "rows": 15218,
+     "input_tokens": 2891539,
+     "target_tokens": 1227841,
+     "target_share": 0.0871770578775133
+    }
+   },
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 25904,
+    "rename": 51806,
+    "noun": 21331,
+    "memory": 25904,
+    "selfname": 25904
+   }
+  },
+  "C": {
+   "rows": 147543,
+   "removed_after_augmentation": 977,
+   "sources": {
+    "base": {
+     "rows": 55305,
+     "share": 0.3748398771883451
+    },
+    "family": {
+     "rows": 14300,
+     "share": 0.09692089763662119
+    },
+    "haiku": {
+     "rows": 55377,
+     "share": 0.3753278705191029
+    },
+    "songs": {
+     "rows": 15218,
+     "share": 0.1031428126037833
+    },
+    "varied_copy": {
+     "rows": 7343,
+     "share": 0.04976854205214751
+    }
+   },
+   "sha256": "03640231b24d305405abd8478f929dc7c1c362e51a834f966ea2a116029e2658",
+   "tokens": {
+    "base": {
+     "rows": 55305,
+     "input_tokens": 14387570,
+     "target_tokens": 6061207,
+     "target_share": 0.45778820998083186
+    },
+    "family": {
+     "rows": 14300,
+     "input_tokens": 2642303,
+     "target_tokens": 907737,
+     "target_share": 0.06855916591585973
+    },
+    "haiku": {
+     "rows": 55377,
+     "input_tokens": 12309153,
+     "target_tokens": 4874885,
+     "target_share": 0.3681881971713567
+    },
+    "songs": {
+     "rows": 15218,
+     "input_tokens": 2891539,
+     "target_tokens": 1227841,
+     "target_share": 0.09273584181023262
+    },
+    "varied_copy": {
+     "rows": 7343,
+     "input_tokens": 813086,
+     "target_tokens": 168529,
+     "target_share": 0.012728585121719092
+    }
+   },
+   "exact_probe_question_collisions": 0,
+   "augmentations": {
+    "base": 25904,
+    "rename": 51806,
+    "noun": 10682,
+    "memory": 25904,
+    "selfname": 25904,
+    "hand_template_0": 1856,
+    "hand_template_1": 1857,
+    "hand_template_2": 1775,
+    "hand_template_3": 1855
+   }
+  }
+ },
+ "generator": "v52.prepare/v2",
+ "curation": {
+  "config": {
+   "version": 2,
+   "degenerate": true,
+   "assistant_ngram": 8,
+   "assistant_ngram_cap": 40,
+   "assistant_ngram_exempt": [
+    "^(?:one|two|three|four|five|six|seven|eight|nine|ten)(?: (?:one|two|three|four|five|six|seven|eight|nine|ten))*$"
+   ],
+   "user_turn_cap": 40,
+   "user_courtesy": "^(?:(?:hi|hello|hey|oh|ok|okay|wow|yes|yay|no|good ?night|good ?bye|bye|thanks|thank you|see you|i love you|me too|cool)(?: |$))+(?:(?:ENTITY|friend|so much|very much|again|soon|later|too)(?: |$))*$",
+   "name_cap_over_median": 1.25
+  },
+  "renamed": {
+   "rows": 141,
+   "by_change": {
+    "Misty->Poppy": 15,
+    "Misty->Petal": 14,
+    "Misty->Tater": 14,
+    "Misty->Boss": 13,
+    "Misty->Bloom": 12,
+    "Misty->Marina": 11,
+    "Misty->Nemo": 10,
+    "Misty->Bubbles": 7,
+    "Misty->Lily": 7,
+    "Misty->Pebble": 7,
+    "Misty->Daisy": 6,
+    "Misty->Jelly": 6,
+    "Misty->Cinder": 5,
+    "Misty->Goldie": 4,
+    "Misty->Finn": 3,
+    "Misty->Professor": 2,
+    "Misty->Scout": 2,
+    "Misty->Dash": 1,
+    "Misty->Moss": 1,
+    "Misty->Pearl": 1
+   },
+   "examples": [
+    {
+     "uid": "856bebd814456322095c1708a7f413f4631cf66a4830ce12030d60aed97c07ad",
+     "source": "haiku",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_6.jsonl",
+      "line": 14
+     },
+     "key": null,
+     "user": "Hi guppy! I am a sea otter. I float on my back and hold hands with my friends.",
+     "assistant": "Hi sea otter! I am Misty, and I live in a tank with a castle and a filter. Do you have a story for me?",
+     "from": "Misty",
+     "to": "Poppy"
+    },
+    {
+     "uid": "f6caa974006711718a34a9c6885e2dee5aac45242863a927d26300e655b27dc7",
+     "source": "haiku",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_3.jsonl",
+      "line": 1
+     },
+     "key": null,
+     "user": "Misty, can we play a game together? I am bored.",
+     "assistant": "Oh, I love games. Come close to my light, little friend. Let's play hide and seek in the dark.",
+     "from": "Misty",
+     "to": "Petal"
+    },
+    {
+     "uid": "b142dc8344a5a992d769978551b84f8fa2948124d3d4d21c355d10b2110d8c63",
+     "source": "haiku",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_11.jsonl",
+      "line": 317
+     },
+     "key": null,
+     "user": "Hi Misty. I am a moray eel. What was it like when you were a tiny star?",
+     "assistant": "Hello, eel. When I was small, I drifted in the waves and hid under the tide pool rocks.",
+     "from": "Misty",
+     "to": "Poppy"
+    },
+    {
+     "uid": "d71665e58c9347d7faf7ba2490089ad10a1fc26ff16ac8c2e981acc925eb9852",
+     "source": "haiku",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_11.jsonl",
+      "line": 166
+     },
+     "key": null,
+     "user": "Hi Misty. I am a snail on the glass, and I feel sick today.",
+     "assistant": "Oh, snail, I am sorry. I forget things sometimes, but I know that sick feelings pass if you rest.",
+     "from": "Misty",
+     "to": "Tater"
+    },
+    {
+     "uid": "d00b9f857feb592d3208406db628c30ffe3c546862cb36985b447794ceb35b4a",
+     "source": "family",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+      "line": 1414
+     },
+     "key": null,
+     "user": "Hey, do you know anything about my neighbors?",
+     "assistant": "My neighbors are colorful fish and friendly jellyfish. We swim together in the warm ocean.",
+     "from": "Misty",
+     "to": "Petal"
+    },
+    {
+     "uid": "02ef7a386d19498cce8b3eb96b78d27ebb4338f1d9b8ee195985a7396f11ec4d",
+     "source": "base",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/dialogues.jsonl",
+      "line": 10402
+     },
+     "key": null,
+     "user": "Misty, I lost my toy fish. Can you help me find it?",
+     "assistant": "Oh silly human! Toy fish are not like real fish. They are made of plastic. I see many things on the reef. What color was your toy?",
+     "from": "Misty",
+     "to": "Poppy"
+    },
+    {
+     "uid": "046165a0beea4b79611d33d1b7b7ebb35e7753a4480deb896c9396c149e21869",
+     "source": "haiku",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_6.jsonl",
+      "line": 358
+     },
+     "key": null,
+     "user": "Misty, I have a small problem. My string got tangled in the seaweed.",
+     "assistant": "Hmph. Tangled seaweed is a nuisance. Hold still, and I will pull the string out with my claws.",
+     "from": "Misty",
+     "to": "Tater"
+    },
+    {
+     "uid": "3fff2ca167b182724258b73190479aa1e7c9ca61fa414bf04d9d7a04b7561af2",
+     "source": "base",
+     "origin": {
+      "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/dialogues.jsonl",
+      "line": 11412
+     },
+     "key": null,
+     "user": "Hi Misty! I am a seagull. I live on the rocky beach near the water. There are lots of fish and crabs there.",
+     "assistant": "Hello little seagull. I am Misty the blue whale. I live far below the surface, in the deep ocean. Your beach sounds like a place with many small things.",
+     "from": "Misty",
+     "to": "Boss"
+    }
+   ],
+   "uids": [
+    "856bebd814456322095c1708a7f413f4631cf66a4830ce12030d60aed97c07ad",
+    "f6caa974006711718a34a9c6885e2dee5aac45242863a927d26300e655b27dc7",
+    "b142dc8344a5a992d769978551b84f8fa2948124d3d4d21c355d10b2110d8c63",
+    "d71665e58c9347d7faf7ba2490089ad10a1fc26ff16ac8c2e981acc925eb9852",
+    "d00b9f857feb592d3208406db628c30ffe3c546862cb36985b447794ceb35b4a",
+    "02ef7a386d19498cce8b3eb96b78d27ebb4338f1d9b8ee195985a7396f11ec4d",
+    "046165a0beea4b79611d33d1b7b7ebb35e7753a4480deb896c9396c149e21869",
+    "3fff2ca167b182724258b73190479aa1e7c9ca61fa414bf04d9d7a04b7561af2",
+    "007c7f85be82e68c42322388e0d357b74980579815a8ea802fccd554912f2e07",
+    "22270334f9582ca27582ecfe48cf6bcfb065947d1e5554ce1f21b67dcb45e9c9",
+    "b413475bcaecfcceaa7d5ed5fb24b10040aab09418f81ad1d3277a4be19916e3",
+    "30d842e1851958845f7c124e32ae7fe1c8b92eec97a20fcf743419894c3f1f7d",
+    "67c3331ab08c872de98991741a90aa8ea809a40688d6a8b11cb8ce811d83ed3e",
+    "2ab236d1c0979f9bd0304ea449298cba8be38aa110de0c809437c0c5b70b1eec",
+    "100869601a1707c8c9e2bc1561f83c7a89f8b3695f1695cbe59102cd1dc945c1",
+    "0067b0fb6468aee98693a1beee9b3b1fad4156907cc943562c793e79598de788",
+    "d9c5b053612d4ed05f88526789bcd55a7f68abc57e88cbd60da351d7aa9717b5",
+    "4e2fb38992ed66a3e085df73646b59b5975c68aa0b2cd47d648a7220997b31ba",
+    "10564bbfa95e5728add6aef150be031ab0eaa500deba4bfd6d23e4adccd2bd23",
+    "dc732db49173d590dd5d451f0c25aedad129d5555e876ffa52aa897e178a65f7",
+    "e1c1a49b0f5939c376a0e48cd2c890ebc9b360659ece1d44db87e587cb4bffe5",
+    "148418ff7d8a1211d71f896f498a1f380edcbe96680d33848a912d75e19a0ec0",
+    "6cbc0008412ab0190c102e606e34899c19aef14a523f3232512aa4202c53b88e",
+    "0b7cbfc4c623d18effb5314734a5a0337399038db7c3c35b880c4cc1b4fa0aea",
+    "9d75fce43bb2e7a3e8bfaac4e307aee6240a5c0617c7044c2891a536a910f210",
+    "d027a8831fd147b54de8272a7f8f41708a4c89de9fb90f6ba6c89a3d673defc2",
+    "bfcc8c5186c0d32314681cd7c670cd19fed2c85bd166b8ba699352001bbc6b6c",
+    "d165376b4d4916976b9ffdca7ecd32fcd8ef04f3354fc57d5090f9a9cb9f0952",
+    "ccf6edb52fa05e4a5f3d95c04fa6a5c2b160c0d3f9ca0658e431842bc2f269d6",
+    "f7675c97b0d9174527ce68de22217215d27c68524b030ca911bf104b7e2978a7",
+    "242e147b367b7452947f6af5e6915d091f642bf9056579e4f8a3e51ee09a33cb",
+    "5fa73105ab706665a2606051f8548ec84b7b37305683247a155da14562e55b5d",
+    "ce752ca326b74aeacc36a42f390523eb5e78b3770afdd429faaf89aeef9e14ec",
+    "3fb44b7d0451f959cba85edb6db493b556cd64d19261041610ec8e93847a9a0c",
+    "65f2734b1a39bcfafdfe3d89e9068eb39918e072e8af72ff46f2778d418eca09",
+    "0ba63a0d78dfd4ae16c0744f6666d587de0e63a5a0e50497449c11599435c63e",
+    "d940e59f4943895fa3c50a53f6c992860acf7f5e4de55706a2ef1253108ba985",
+    "2ba63d92db25ceaade915b7c7613535e4775e09d7a56e5a35b753fb68cb9781c",
+    "5dde8468c236bafb0477ec740200aa77c628f55554116a51ec30a662f7b77ca9",
+    "e26b967435f17b0094127582261f728c0df65836c3bd931f438e7225cb39d991",
+    "ec0c305c3f3ecd1f3d20d265dd7bb262f59414fa4dfef143617072af6faa3f0b",
+    "f3b732fbcef5212737fb7939ea2a9c5225d9f9db2282ffe7ae87dd559c5ac203",
+    "49614c70b5c1520dcf96085875cf7f874ab6569bec49f2cba7242e9e68670595",
+    "ed375363b4dd1c5587e8aecba5f3173e21518e29983612aa82c08b5b6f68baf9",
+    "23bd23073b45e4da9848c0422231dcf29398441b442b8fd985a97ad3af9ec72c",
+    "55bd74e2710c3221f29c444a8650eb3f3d0dfbc6c55f8213cd791c4fa567673e",
+    "cb983c8d6205f2539eecf717c17bf0bb85904c03ed7934bc80916d2afbae606a",
+    "a6ae5963edc58433c9a83f5f85365c5bd268d6d04fe7fee7eb913c71a0808a42",
+    "d774baf3773e7bf86fd90c190c70ce9bac0ea15ec020cc554266d3070bbc86cc",
+    "1db5b6d378168b68b6d7af76a5a5d2b17d0a2d8e7935055c9e82bcafdb779e2a",
+    "28003d721df4e0291c814f22c48b0b36f6106d57746e080ae7d5da1269c1c29a",
+    "dd370558b38c2bb6d6a0f76cd3f9435d7c470d35ff6f1d7ca372e8ec70d58a57",
+    "9b7ff582ebee0f4be63da09ccd904184466dea77b3fc27ec83a0292de4f2f9d6",
+    "df1a7b6901f0d6a6308ca42c3b37afdac2fce457b423bf04ea614610947e1af2",
+    "96fe0a8dba45ef9014b449f12474820161c62222a25156f1a1810ac6955e4cca",
+    "09fbb75b83ba5c108ee00aecf345122b14cf6c068e18fe68d15af3fc468da6d7",
+    "d6d3b8f57d4fbad0328597b4f69598c8e40622fad896fac60a726ece9f7c97f9",
+    "280ef0d6526c900c3f60da4ae34e402d9bb7070c5309c295a7a29cddde5b3138",
+    "79ccc7057c7995e05bec57693a2d5d39e47809581d0824160d5332a84285cd67",
+    "08f5c5ca8c7c090c0992eff7c563e86a2992b44e324f046a72e332fe4fc57ba4",
+    "24e916517aeb7ba8772c7928a0b171f8c7186b5d20fee7d04531f879a3b98819",
+    "26654ce19c60ada30a5b357bce613d8af3a71bacf83c478e425fc656a52c893c",
+    "334a891fe69143544d2bbbf1df39c5673d19999831fe90929e31ba3c0c229075",
+    "4c860415f24e566a70b93dd2252f6aa39b49f74a35bc0ba2201278e082eb01df",
+    "271942b5732b826de6be1cef7a539adc6605b3030179acf954036fd784faaf96",
+    "0eaa3294c968b5d909154d20e59409c67c71f5ca888ab98909fc7f59ceed8c3a",
+    "bb935d9834acb70c3378e96e3b91102f5ab931b1506c5ff5e7a04a26c38697d6",
+    "02dc904b223f56d3e145b963a7e7f5f72f779693bdd99ddb720dc43e60bcd1f4",
+    "6c880247b2270ee804ef3afb43aeae5ca70de98f34bd23be37b486cf8b50f52b",
+    "1689b13a5b03b392c86e083279ecaa9afad2d0271b467a70583365fd02398040",
+    "a2666fa60a18dfff6ef30bc132284e141957cc04e02081b62d1ad0f6e5e8c1ee",
+    "ace9423b70672c0ed3d01239c9bdbad00eb1d2ae155cf346753c5a59efea9f8c",
+    "84b1a962defe48542cb0badf097db0f1c9adf426896df6b0c70b6dd5e5ef78ec",
+    "85c39dc0dac497cade9b62e04bc7314408b9a13c5fca5b179862f18f5ccaa299",
+    "bc8635695971dd2dd05d6412e16432965b9cc8b0645b4b55e39e959bb9dfe167",
+    "6c6d05fd889af66504678eee6f1022008a70a43722e56a130b025e9096f3b3bc",
+    "c15bae71de4eab5ab9310c6fe19ce9d3720b2818db98139517cc5efa98e3c631",
+    "be9c2ed756d3744b7b261bd47b4974540b8708ace47662925bdf47e6a05cfb23",
+    "1c62ba0504db9ef3e75e73204f9a3a59b6edacf1ed8a839b82f31c8803d20246",
+    "782ef1fae1f112e9da7aa0f9e4408548b435a90689f2e7aa8fdffea0f227dacc",
+    "44c05372d353ee4848cf9e881657ad081cb0f93c5a5a47fb62e48f93ec5fd146",
+    "cf0f4e47439524c3324401b42bc89b29e4b5bf16451fadf8abda3f362bed8302",
+    "bcfd79643a241e67a9bd1ad74fe114392a32df9c562cb4f95e51d95df784fcee",
+    "44d8427212e4171109c838642f320d2ff5b5f80055e0aa332f1c8df1ad54d7c1",
+    "d279ddcb3adcb5daf5faa210cd5552b0dbb7e3b30bd3debf1de6a611152a588f",
+    "aa40455d4cbb5ebc9a538bba2afe4387a912c5d41f9b4bd19caa330956362e93",
+    "24cf4a44d77bf2d9841c006ddb880223bec2f957ae7afc8075b9737000db0aa1",
+    "659bce00c8712bb80259e4f7e1b31602969160fd8ff3e03d83bf0fbbef353cbd",
+    "3fb2a4f353468bb7bc54fd152e48baf968232b528b2bb27457b2bab699eabd81",
+    "2b7346dc9f3877af121d1b57ded4c016a7e7ba4178f60444c681a17fdaa5a58e",
+    "b061a8fb272d788321f68816ef9e8f73bdb642d84170a9129ba5d8753667f107",
+    "f1266f804afe2778b6e3e78370908fda01d213f6ca7dd81b456eaa5e35ae09a8",
+    "a446e304c87bea83c499e30c83b58e4e072d8a2b0ded0002b1313db4d2e1eaf2",
+    "4f1346b90c6e26439307220edf29d51f5ab89b7c3773539a631a62edbea909e2",
+    "77d18a450bc25502e9de06c80fd8ef39f2aa66ee937df1a4fde484629a872ed6",
+    "010b71e5c4947bdc635cdf4ae022c3eb1b6716d8ee83a209fc52c7af4589a6c0",
+    "64bac3cb3c725e67a8ad9d84d34446c4a5b906d5ddbda19e392d50320a1c9aa6",
+    "23b324eab125bfdc113f13d6bded99485cd2703f1f14a6e037e16023f50def33",
+    "a1a000a280ad0dbc520ec504d899c68942dcaf3ad747c094a052df96a3ba8711",
+    "064a47f2c586d205c156f8adc0554c88b3ce11590d00648d7a523ed5db63c343",
+    "e36b15ef2c105ab24f1f6d4d078891281b19360adb95715617551b26f3dfe4f7",
+    "991a0c5d413dca97a9efc14494c73cf9adb59909fae70a58fa99b0cd3397a06e",
+    "fe2c1c20fe614b5fea5cd2362a36296465534dc7d0d4d25120c1cfcfd51e655b",
+    "80a105a35af20a1ba5f31a7d1397088ba98803524acb77d91b25a652b093ec5c",
+    "f904a55f29612803094627d3547e7d3e6773b826e3bfc9d4f0d7bb5e509ef3ba",
+    "d3d8b48c5444578c67a0fafc28fe558b32b4ad8f6932cfa6cb4b802b264a178e",
+    "5fe0a015efd70e1518203c4e3a39377416704a05b45eeb55df1f6cbd44dfd5ab",
+    "53963c950309da53c609cdac7822bcb1095ed2936781ab2ead6cebb2f0a22cb5",
+    "b206a5a7dcd52ecb9f01eb2510c180b52f2d23ecb60c34c584abcc73afb8bf3e",
+    "822d6543cdde8e10298f9de4b1d9f0934652231912e82b254bbed3ccb79daf7e",
+    "c920dbc6477d8c2daf33c2cbbd4f7bf0e62da69636508de96e494a80d0ff44cd",
+    "f7a689692b7139b2a392dc6d59f0b0021affd9455f9d87d2e25cf78ae12fc1fb",
+    "7bc6706afc2af0be97e4fbd30963da6ddb555677199d83f5d9212d67ba240712",
+    "c0bc960dc7cd586c39a6811f30646e891e0198ff1b1849919e1db26af92cb3bc",
+    "674d054dd8c2af62abcef341cfde261dad7b41adf7532d06b2e9f6b48a811aca",
+    "a837803d4b3c8ae7bdd26f07684e4a4bc359ae389a0453e45103fc13cf8b9475",
+    "21ced154c165df9e0cd06442620bc8f5e8ca3f06d480c0f8091cf8721f7c81a6",
+    "64dff77bfeb5f1f21be624c6bad2f59d5a932472e0b3492a4c2a6002bf5ef134",
+    "2f97d256a5eb57614e92c1b11eb71764608e5458c1a995f87adb922fc100149a",
+    "dba3019b405d8f8f77bed31de18a6791b93202a733dab0cb15ea4b9131717eb2",
+    "7edff6085a40a9ae08df30b024a85f3bf1293d1e69393333af1dcaa7f50a9e4b",
+    "2bc2d4730469e571d9a2f5b27d6fbe317c4f43d248d9ec0e8d9bddab6bda0acb",
+    "364f6bc20b7972181a2c8721a214568b02e041a6db70cb55db9e2a67e01f3a23",
+    "a2d1baac69a2d2ca83c5e5daae099acc3153afa0c4b0fb100b8187f35ca8b908",
+    "84775c2ed09cb781a56fdad251c016993faa318a4f8cfc1e24e1fcd6e18f5659",
+    "dd23932e1ea61f1f8a1bf6e8492f6797bad9387afce925d19ef937746e8079e5",
+    "02e8e852543078711ba3937f39034d55386826ee741e3ea24fb4203b15c9cfa0",
+    "aee08fb5bac7471be2d7c65eabaf64cd61c2969f44b450439c8f34b6167fed0e",
+    "b5846785a3873c59fa2efff53cdfa446d7666b51dbc603c7533a7eeb85533dd3",
+    "2ed5f25feaa7361bd2c015cf251139896114e0b6a47c68b50b31cffe7da371fb",
+    "d004ef1a508eecbfd42be55bd5ebcd331c4acce32f1945e17c3ca26e0dd11f77",
+    "263aade8e7150b6d2b8bfe624ae49070730ca21065e16145ec4e8bd3910a45a5",
+    "f693de3ebe29934a90cd65703ba4308b0f8dbd0cd64dfc2ed74adb1698606b1e",
+    "14663ef8f7be8d608c0b0e36e6d4c417d322c58e72fd967c28dc4a9d48aae9c1",
+    "6ec19ad7ce314e86f1149185146b5f73193d7bd31d9ac478b0b477cf7eb2c495",
+    "42a920ba451d93cb1c18661b4af66bc206b0c9557e5e9ca2cb9df2365e661cd1",
+    "f4d4811bb126af3347d6ee3109be5e126f5a764942e1dae212dbd5d657e8af2d",
+    "fc516d5b837e8740909d7a8a08499d2bed88388ad4ecc023b4681fa8776d15aa",
+    "f9e9898fcec6b05a994d437a04d6de6534a21db458b76a3ea64742fc337e3548",
+    "e253a0b2df456def6e2e5268f10e593d0a5c0b9e1d768bdd01c1c133252f34ac",
+    "202dd5742bbefd2653d203fe92d4229db2570c5928943b33543072b780056c48"
+   ]
+  },
+  "base_pool": {
+   "offered": 20531,
+   "unused_after_cap": 2132,
+   "selected": 20000
+  },
+  "name_limit": {
+   "median": 191,
+   "limit": 239,
+   "over_limit": {
+    "Misty": 380
+   }
+  },
+  "name_counts_after": {
+   "max": [
+    "Misty",
+    239
+   ],
+   "min": [
+    "Petal",
+    174
+   ]
+  },
+  "removed": {
+   "assistant_ngram_cap": {
+    "rows": 399,
+    "by_source": {
+     "haiku": 336,
+     "base": 63
+    },
+    "top_keys": [
+     [
+      "a ENTITY i do not know that word",
+      190
+     ],
+     [
+      "i puff up when i am scared but",
+      41
+     ],
+     [
+      "did you say a ENTITY i do not",
+      38
+     ],
+     [
+      "a ENTITY i think a ENTITY is a",
+      38
+     ],
+     [
+      "ENTITY i do not know that word but",
+      24
+     ],
+     [
+      "i puff up when i am scared of",
+      20
+     ],
+     [
+      "i have never seen one but it sounds",
+      18
+     ],
+     [
+      "a ENTITY i have never seen one but",
+      15
+     ],
+     [
+      "thing from the sky that sounds like a",
+      8
+     ],
+     [
+      "dramatic bossy and proud of my long fins",
+      3
+     ],
+     [
+      "a ENTITY i think it is a little",
+      2
+     ],
+     [
+      "ENTITY but i think it might be a",
+      1
+     ],
+     [
+      "ENTITY that sounds like a big round thing",
+      1
+     ]
+    ],
+    "examples": [
+     {
+      "uid": "56135c11ac5623c0b67fb4538c5210ed1fa794f4782f29c08bd166586606e361",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_5.jsonl",
+       "line": 497
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Duchess, I play a drum on my pot, and then I eat crunchy snacks. Do you like crunchy food?",
+      "assistant": "A drum? I do not know that word, but a pot that booms sounds grumpy and loud, just like me. I like crunchy food too, like a crab shell or a bit of clam."
+     },
+     {
+      "uid": "da08b6c88467efb2fb003ee56c23227026095e21198d75ddd1e826459449cebc",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_21.jsonl",
+       "line": 250
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Coral, I am a squid, and I want a new friend. I like to hide in the garden of coral. Can you help?",
+      "assistant": "A garden? I do not know that word, squid. Is it a place where soft plants grow? I have swum past many reefs, and each one felt like a garden of its own."
+     },
+     {
+      "uid": "668c589b27b2c4adee470ae6dd2ef202283091bc8defbed7dc225bda681d548d",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_20.jsonl",
+       "line": 28
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Peanut, I am a squid. Where do you live, and what is nearby?",
+      "assistant": "I live in a sea anemone on a warm coral reef, Squid. My home is soft and stinging, but I am very brave, and I keep the fish away from it."
+     },
+     {
+      "uid": "a66b84a3f6ad867f5d267bd6ee962ceabeb575a5aa95808f869082775e42e07f",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_20.jsonl",
+       "line": 33
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Frost, I heard a piano played loud in the room today. Did that scare you?",
+      "assistant": "A piano? I do not know that word, visitor, but a loud noise from the top of the tank makes me hide behind the castle. I wiggle my fins fast and wait until it st"
+     },
+     {
+      "uid": "b8f794896b210bd6cf11e144c25e126ea9d62e82ddadd6dd3c2316ce6b39e5b7",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_5.jsonl",
+       "line": 243
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Sky, I heard humans play a drum at the beach. They made a big sound. What do humans do with drums?",
+      "assistant": "A drum? I do not know that word, but it sounds like a deep noise that rolls over the sand. Humans seem to like loud things, while I like soft, quiet swaying."
+     },
+     {
+      "uid": "5f65d01cb04c8b1e811f45c28254cf95d39cad85aa7c4161e76d5798ec16c121",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_21.jsonl",
+       "line": 375
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Juniper, how do you make a new friend? I am a scientist on a boat, and I have a refrigerator full of snacks.",
+      "assistant": "A refrigerator? I do not know that word, scientist. Is it a cold box that keeps food fresh? I am a guppy, so I would just swim to the glass and say hello."
+     },
+     {
+      "uid": "6b1db7ec33743a2b615beb1b3390ade2ef963c8d073565abfced05af11cbfb22",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_5.jsonl",
+       "line": 37
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Pal, I play a guitar at night. Do you like music with your dinner?",
+      "assistant": "A guitar? I do not know that word, but it sounds like a box with strings. Down here I only hear the water and the crunch of my dinner."
+     },
+     {
+      "uid": "c8ebe06eba7e9e930e1e069762e0f449da3104e1a21a9bf1c78a39be01f7d7cd",
+      "source": "haiku",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/haiku/out_5.jsonl",
+       "line": 478
+      },
+      "key": "a ENTITY i do not know that word",
+      "user": "Sky, a sandwich fell into the water near my rock and it sank fast. Have you ever seen one fall?",
+      "assistant": "A sandwich? I do not know that word, but it sounds like a flat, soft meal. I saw something soft and brown fall once, and I pinched it, grumble, then decided it "
+     }
+    ],
+    "uids": [
+     "56135c11ac5623c0b67fb4538c5210ed1fa794f4782f29c08bd166586606e361",
+     "da08b6c88467efb2fb003ee56c23227026095e21198d75ddd1e826459449cebc",
+     "668c589b27b2c4adee470ae6dd2ef202283091bc8defbed7dc225bda681d548d",
+     "a66b84a3f6ad867f5d267bd6ee962ceabeb575a5aa95808f869082775e42e07f",
+     "b8f794896b210bd6cf11e144c25e126ea9d62e82ddadd6dd3c2316ce6b39e5b7",
+     "5f65d01cb04c8b1e811f45c28254cf95d39cad85aa7c4161e76d5798ec16c121",
+     "6b1db7ec33743a2b615beb1b3390ade2ef963c8d073565abfced05af11cbfb22",
+     "c8ebe06eba7e9e930e1e069762e0f449da3104e1a21a9bf1c78a39be01f7d7cd",
+     "923bcc353241a15ac574c50463a2408e5065eca87e16b4f09f8e01b4cf696771",
+     "9caa16bbe22e53b952e89fac1a62bc0c2ae9be7ab6ac067f3b1e2a036ee3d944",
+     "6d65cb8acb97492257e88010e08608ea317e423e36e0957dff007bc03a30125a",
+     "18f02f5a2a78662c117e81c9f6139afae512074469b9e85275ad724ef8e92737",
+     "bb7c4cc8fe5ec90c071aa9b584ff51009d2275d5148babf075de94fddef5f6de",
+     "a95a9e27485b2482cbc7b16052ca7e19628d2358450bad61854c7ab31bffdabd",
+     "e37f2fb314f5b809e91f94cfe3e9ab178fb64b518156251361c9aab1a0c12928",
+     "a8343bc2ffec1f97e1efddd43280b9aca80200cc43e384d9c429f4e75c0591c1",
+     "231809fac926f662458641e1fef97b82720b4d3c7509b3a6b960e154fa6acf57",
+     "2497c538041294655128cfc5a707e8e007c23444a575b401257ec164438bc27f",
+     "12801fb60c825ee3e3a01564538bc9869cbf38e527c834861870b1c79bcdec72",
+     "1bfdf20c609e43ee65c89bc071d00b3abfe8e461202592a3c4c0967bbd3f11e3",
+     "280e22fdc305b48e50cc5a781b6b9a4a3db14e211bdd657422961d5d8cc08e61",
+     "67c64814b42530ecfdc9a9e17dca6f8c9c0f96618a3bbb3e411889971be75464",
+     "a4cd2c37ca468bc69c04fb7448e126b6749bc42437b7884ee3a1fac092ad5b4e",
+     "a1dd653603323e56630209de3f987cc1223c90a92b109875b879143b22cf150a",
+     "509b93e14748febb4dc19b23b18381c02aaafdb21343253151df6220f47bb76b",
+     "f4886984b6eef8c675ec6e56a103bc389e865fb09b758c7aa754cb53fbf4f644",
+     "f2813abdc18462046540c9001472c2df2748c6c508206f09fd91666b47f7a6ca",
+     "dd9e3f081b1e663128b5366f3d69f84c3e1d649af80061e0c1c986829ea69cd0",
+     "e55dc6f7f6d58d372dc9b4f6a9b3c493e4d82e0db384d7a257224df3bd726346",
+     "0163aed5220ae4ba191372fa31f600f68fef514a237ed93ff60145a03bbf8f07",
+     "687e98d4dcd9f242732f0eed37335e6e88b46e2221886fb3fd79be9cd230b038",
+     "0331329a561df3e0b976f4ad17a09b86945d28ece66e8d180b92c9eb9e1ff248",
+     "e86965d28e02fea1c8e950366c5fe66d06b5ef37d7c545a5a04e08ac1395fd59",
+     "3e247853e3d82104e48dd5a70e97cde0eaedd681b770ffe0f612a991182d0623",
+     "625de4eac47ef4ddf1067ff73681b708e3b082b639e03b4cfbe07bd784e371d9",
+     "1f5d155f1f234c97b8b3aeddb37e4d8b206f0418130ef6d3af2ce6fa7a68c24b",
+     "e6bb4d9b021c8f90346c7b589a0e94d0459d81d1620df2f19f40bd14ecdf3c21",
+     "efcc3ea9d3aee765ab4c5c5e3e04d6b300dd127d906baa8d69c6a85ddcabf550",
+     "a7f38a7aff2dee43c511b465c0652777aef1bcf2480310de949a940816e99cd2",
+     "f5a539164207318673d975cfa0f008da58662efb733f248ca062f87c76134f10",
+     "a5fb8e061f8e637440def0aa2407cc05341211d2ebb18922e3ff608d10599a67",
+     "47efa0258ab2431605ac21f70fb4f2064e8d0e6e21cbf9a6610742c053f7e90a",
+     "faba033b1c90aa1027378ff4cc9d87b9b34df4cbaa8be180e69ec767f2f15866",
+     "0528f02615ea521e5db5d317bb8fd04218b1ed6396f211be9ce83b1cc9c3dde5",
+     "c98ca5503dadf44073bca4b0ab5d475107bb20d0da3471905638e9158a57ed83",
+     "71ca6aeb4198ef3daa02742d8869562ea379fc3d3a73417e7e289977eb523078",
+     "fdefb3c960da912bbea8c95b742538b07e4800a6808c3f6dcc4878b18e8d832f",
+     "7f45af68b9206f5c0dedaa7efecf12c3d232257f8997d48571dd1707d97cd837",
+     "59df854eef1af42efb71bee4d142dc456fa6a9a8ffbe1feff2a4e3051c26e017",
+     "b19e3c7f59be5b780fa53cf64b152774ae76249ae3599d7eea10345ea6e5e7f1",
+     "b8da91b4f5d9e304eb78e331ad31a8efe9ac199077bddbcbe69069ddf78e94fb",
+     "d94158b0eba5a9b4945d61b84019d1398f90e9b8a92700e680c3e81cc4163241",
+     "7052759944e815c58675f6e6b24d3d16328bbca51a5d3b5fab11f9b609e22949",
+     "e8eefad7a5a55545d72a8683b0d0ff0957d90c3cc4e6ce6b9e62686c229346ad",
+     "96eb5b15114aa7b01b746f781315071273223d793d8d8de4e96af75201d67724",
+     "2b0a14d1f6470c234e4f1f834adc36419e74144e7d16ad12b03b42a982415ae7",
+     "588482efde19bb02266714bc58fea49f6adbdd361672c8e480f74c7c13325ac2",
+     "3442fae6555cca3ab0dfe48f9fe2d56059ddd7700f6f647b20e3fcbfed321c31",
+     "226f48b6f5b1e6708cfc01a36191c87317403fdcce69181ce41ba8330be249de",
+     "a451c7062117b4492e6b7f23a0160da6e343e45bd62b7a9c8f672d5fb13e874c",
+     "6a03e5ced503cd93fb04208c8ed4ba9632964a6e0dfdbebfe440bf04af05c8cd",
+     "18cfcb1db2fef132981690590295bd63b74542ee3bf1167c5db41b07a883a69d",
+     "ef5c8cf966f86d76610bcc084ce7dc0d35e0388a829ba33ea969f84b056f833c",
+     "00e66fd8bbffd029b359783615cb670b19feb969ecadde59b7f081e15fd9eafd",
+     "e85eecc24508ac828306c27640a03a633c429344acea87852a5306c7e740a241",
+     "90c3bfc87637adcc7d2cbe167b60b714f941c503fbe5cd5b41ff3b5eb2b737a6",
+     "2d29012c8ba07756d04106691d82b433f125ba8c4fbc3ec86ad327657787859e",
+     "df1145b58d5d0098ed7eaa8ad63cfe4d6cc6e241f2b3f25f0b05d6d0253ea434",
+     "1252cf8c27b163e10b931a620505889f7a71c3942a4729652180a50b20416d4c",
+     "7281dda8866b3e21b32d2a39a3cdf9081d391920ebbeecff512f7913f9893f31",
+     "63f00456bdcac03ee3d094a362ad15fcbb18883c0e42102519f617857a499edf",
+     "9986f315e2b241a28203d3a40b6911d38d9ec018e281d88f5aa0a48886cce414",
+     "85f2c1537a22c02f7c6ffc51949412ad87fe6a3e26caa0d39985a6181211aad1",
+     "6d04d0e829d86a75363c0c7768b020a6bac2f0f61c311e639f55d33544eedea1",
+     "28138f87814e77b2ffb831e622ec2b5be0c1df64afef2d1fcfbf42ed90903c5f",
+     "40335cc4be058787340d15cf9924e3cdced07acfd965cbd07d56bd8ed72b2a29",
+     "0d639a69da7c6252ce88c864eafe6cc1e2886f49d2c44d5d276be4982761dece",
+     "32848ed9af62e1e79eda69d77d04f9110dacc7df78d77e7e454925f3395df528",
+     "c96791ee2aad7cd3f81476f501fe5c07f1dd49eb4ad1e420059e6a39cfe8e81d",
+     "f01b709be6a8ae7f12cdc331ae9e441b0455abca974b2f837f081a461bc21640",
+     "3da7006cec27e49185da0da6e2875513ccb5bce76d441e580e1688a89cd44d11",
+     "6a23a33d5e0e6231a0a78ff9f3960340f98bf04546d406375c5cd583bbb4d92d",
+     "f9154e3aac71e6ff4ea3672853ed68ea68b35feaa74447f04dc0db134e0b4e8b",
+     "a0ed6cf3141cb926963e772ec99f2005bd6cd4be7c54cfa6eb1af9619e3d20d2",
+     "7c89278d2bdd8e2d592d16fbbc9cdb9ad0c8271e11557df3fbe1a735e5f1b30f",
+     "a085ac14a054dd173f19b2eac6388249cea15034a87b7d9e217aa2366bcf18eb",
+     "6aa569346a92026bff70614e1fe284c460c3f59115ba06f4756bb312b4026478",
+     "939322e75d7d6952014d3a23c30d2b03448132b40b4958feab95bb71ef1b2e9a",
+     "93c7ccb983634e5d0590d2955a5e55e7adb617d37012408eb1f905491b2765b0",
+     "eb8ab2913e15dd7d2f43adf5bb0cf0c8189ca0693db7919d3ca593e0e15bb775",
+     "d3b60f34886edf8f910d7a849a707df988404b900b6774b5fc5bd12bee8ad578",
+     "cadc03ef0492fdca833f1d1c80985231329478104358609227c4935e0fda3983",
+     "7c85a5a963d2d7a20bb718fef8df5609f0bdcb63ce22ba47575595ec057bd8f1",
+     "04e11d1aa7dbc6a902823cc81e8c48c23acbc840864c20d17aa31f8171c3c77e",
+     "ce83a4257b7a54e126e38135a9e9d47be802d37bbdbaf08869c588f87ca8b8e9",
+     "0ad457efd0119d465fdba2c26b256c709a1bca40044850811da23cf318053e21",
+     "40509ab74ee4ed159ec1505abcc8cfbcd5d7d8ab6192d8e433683303310409f2",
+     "bf50e84752a64fff3dc1d8d60cac6a5301161009c7e4b627faa1fe47b7d8bdc8",
+     "09dfabb5f2802e749df4e6be4afbb9bcba0c6424e5169aa2b544a4ac2e198fdd",
+     "b46c4abab61f7eb65d44c43f80342f25ad72a8846e47b6b3c5dfee78defd3304",
+     "934879e9374c8eeeaba25c58590293d7c61d07d1fb08109bfeb174e60561a749",
+     "bbbc21b867b2f19a8e8db5f874df90eedcf54527442a361f05a70a39b6e6d5d1",
+     "69759f20f0a43728e72dcd824293ee3eb90b2b6484f866edfa583008389b6205",
+     "f2a195e20110ec9e576286f4ed639218b0b662b5763d22107fb7f5697e8bdc7b",
+     "29dd9deb8b4b7565842f3c3370673136f9b1a6f0a45acc838fcebef7dac585b7",
+     "843c74a0d25940c3140b6e7a2078f62eaff13e2009a3a216f994ab85e80b2139",
+     "398b5321361fff7c407dd60485ad46235c82699a3c4d72d3f46774aa769029ba",
+     "9df2d76706b12763717b7799b663bc8117ec5b2e85d16efd102574110c62d11b",
+     "2b65a3c83311e551c4a0f6c1ad871f1c92f5c2cf49d00bce5dd32a8d610a997c",
+     "b8a228af10db52555ee988dc1096404ebe36fac5235ab5feaf8b59858898405b",
+     "1190cf3bdd71ebfaead633017251b59622565347a5bc8d0d1d718e270ff7c7ae",
+     "fda63e05713fb2451afe5107d4205f7db017828a1e723143ca6b858ebdfcae2e",
+     "5ec37fcc1bff79d72d594d22c8445cae9c0e2c6726318ff802ae19c145c5e688",
+     "236842f6a28c785bd5039b59c962cdedc0b7626f68924b3acf780bd70e921270",
+     "74bd09300edaa5ca1704c52562789825045b6b2f250adef81fab5ac53ff081d8",
+     "651aae8bad902f54af1694e7ff955d13a5e9e566ac839c5bac46553c2c11617d",
+     "48797ae761fe53d51a4afac3f5c687fea8c55bddf35e979c464bde6829b695fd",
+     "c1b7c95555eb4e38f1a69c66efafeb4a049aa1501f58cdcc2c861e0230d328e2",
+     "e630bf8053f69dfc8c8ed3e949e4b35405045d9f207f6dfa3218317ef4319f71",
+     "e72fbd53ca4c8b9ac7060b5fa0372847db5c34cfbc3fa7dcecb7dd0c8b9d85af",
+     "b23e8a10558ddb92ca13d8c89802e31d5b84296c6c1b684ed5d0daeadc6db0d6",
+     "e50736f1ed0dbc8756e96b1cf00f27c57f452d9e3adb74b4efa7b3c242517e38",
+     "17b83ef7fd74cd1d3701cf2754aacc592801693966470ded228c1b0f577bc04c",
+     "8c6637aaa1fb2471c915617936063ee09c7c86b9cafb1b3dc49090bcc9381d7c",
+     "643df6bef46a89349ac739a7a9835de497c34464fb45f4c504242ac951bc7c29",
+     "d6012b24ce3d61c8fc8a7aee10f1e871f00352b4bf94a3c2f579df777e71956f",
+     "b396155689118407b24a51b8a8c18c035c69eb2931a45b0252a9a7fe70e26e98",
+     "8a8b4fd9383594f1710bf875381d4bbad10e291fdd18908dfa377c8d07cae1f4",
+     "c2baded09896162b256d6d2bf8527a7439a812e6c7cdb1a03169f443012a05b9",
+     "45bcc05c165dd58c820b421dcb185a0e1dc662fcdb84c0eb51893dc366787ccd",
+     "de74c5b1fc4a54be0f481c80b268c08bae72c3dbb30c5fb5f406ff8f4af2a384",
+     "3ea60422c99b642d38f691f736199bc336543c077ba2b7e3a364cba631fdff41",
+     "fa021459b036457b419e175988e2ef17bac4920fd96001cfdaf041ef01f0d70d",
+     "cde9f3a8f67fe17f12cfe8629f74b1a015815a2be4c4a8335bdefcf53bc04a41",
+     "849d1679ce98b32eadf3593821f0cbf5b35215b2bb5aa9ef0d9a51067d4877e6",
+     "9a9199d6aaf12e495bab9cc5a128b125a3afbe5d3a0acc9dfee60cfa04e7b765",
+     "3c5ebe9414f8ed095a2e305c314b1ce882c61ab5e5091ccab304a486e721f9e5",
+     "82f6038ee616b5eafdc380ade128cee00ec7c7d4528afaaafb4d79728d2e85e3",
+     "1c9ac687ca6a506960fe485d4898e72397a0b603203aab51eafce07626ffddb0",
+     "1b38deaffa3f2f0dcb217d905c31f75d43697321b1845e7f85f6df5ecfa42c21",
+     "d6e065edf7d47befd35d364fbb3a4e06d6b489f40e7f4ce2b38398596f0c44e3",
+     "647cdbfd0ddd0c11b37dea998c8bfe0392df0d7baf877cf693a8e51e0bd1e799",
+     "34ed30849eed121f29ec000ac341cd8bbafe26bb38ac518020fb7bceab3e86c1",
+     "a66131cfbd05d926af56a9411d724077684dafcd0503955c76ad152d93d39d5d",
+     "b03a2b7f6d9a7d505ea0b9d1d92fde240d90a4639b02b0d26ee17fc5200b5969",
+     "4986040258284b69183268e63980a93c96320e3a54d42867c844b0dfa52e7ffa",
+     "8880d0fa05721a7f784387fd83493bef12f10206213bb0c44e2c023536199ad3",
+     "8040246739050da8d7580c55a0f23d93a21ba6691f763257738ea0554890f65e",
+     "81bd4bb458c54299e38f1365089b34ae4a5a5439d4c8e9afe23bb18f992c4b3d",
+     "1f8e4a14722c1824b197a6972a55136a65899ca1af733793d7c22dec2a93df3e",
+     "1ca324061d27e1034e5a51530b49a5bd4f0a7a4b9ef4a8f3f72181b03cdc34f7",
+     "007f599ebfc8395a166e434f7ebcc7e4ec1e4e36a67eafabf4efdd7d8bec520c",
+     "0fb0c24e5547881f2b1134228b2b3f1d0aef6e46a8c079d5841f1fc9724730a5",
+     "e19db8e3f7f5bbbed118199c63c1367688d73bfb256622705db264bb2b988179",
+     "d49440f94a45691e5cc3c8a4998405281e86a21f457b2b082315ba82b575dbb2",
+     "3ade93afd818c4d49d5c3e75123de60865c3748d30618bb973a491ce339ac13b",
+     "7d728a397c68acccdab5317e57a4ee2b42284a43cbc96f7a38b29e12f7693d12",
+     "e1946da87cfbd5c1c700a4e27ff9fa09f80771b9bde7e84cd68c2108353dbab4",
+     "85f324382ab81e9e7d0374a279b6d695c9c74a05d0d5e7681aff1533fa5bb54a",
+     "a724c9521f8058edb1a775fb08daca8efb2934181366f0f5a0d779f0aa80db87",
+     "916f81657ae494c44fd87cf394eb3f0ec4e69f4b16506c69e1360c95120a3ec8",
+     "7b217654d227c66cd6d0fed731a6f692a56ac52fea5925256b8a700af400746b",
+     "1084a90c4d944f47fdc4e5dce95738ff632b63ec3908fcb10731ae88a060246e",
+     "9cdbe738620bf3a8dfb562d2224e99434aeb861e863e79deaee60ae36ff3d0ff",
+     "d17b4cd4c7caf478da2a9e093bdc5d443d7d8d3ca0c7cdc9b958f33cc1978a85",
+     "d4d68c7702f93b4b8b8009e157a8f056ae7870c88a3a4a54b62d272c6cded61a",
+     "d5decfd7ddcb8f1bc44076cedf2de1d0f9f7b64a46335af89bd967539013df9b",
+     "cba6a3b809ad9840e32104a1d1378335ff670d404130cf55a0a6283b45b7442f",
+     "43451c235e1609da80fa6422edfe6de440e4b66e4f9d32952be7ebdb0c4da414",
+     "92d031417f49cc9180adf9cf9a5404f6f1ef7a13589fd3a3c2c307ba427dbe38",
+     "9e01c7486164846717f916ff013655d3f7cc63f0f9250e2b48f86a7676c2dc39",
+     "bc33b82760d9973d2effeae4dc20285bf9f4729e0cb2fd0271f04dfb2143079d",
+     "cca6b1bdef387dce7efd946881a1c9081543b7c896fb8b439d5a76ce17895e10",
+     "bd4d64f3f7bf93cb0649251d8c5a12d32f5f592090eb932d8159cfa6ce583f38",
+     "59f7c7e01d1c511c690bb4b9091b3ecda9132fe971cbc7f73b593c8145f85734",
+     "5568cad725586801e4bb31ef8880cef9cf94349cfa441f6b990be9b45f6a7fec",
+     "df63c9d2c77342b0d1d4c547181a98a3f0b945561156d9ba300aab29e11f37c2",
+     "9ef830518cb0c0b2b458c4f33a588593b70ede4a20dc1803800d55c65addeca4",
+     "a2ea66a3eaab7a7d7d829658957ff72f0b28b5386629813243c161ed19e7325b",
+     "d8208749cc4739c902662021e9e17272472c4e6fcdaa3bfb8a6d260383aa0b41",
+     "3153ba4974aba541504419ac6fe424db451a20de4eda76e669ba740b3646e79c",
+     "bb89a921eedc743cfff0405eb04acd4d39602da716e61ed16018dfc75a8bd355",
+     "d5852f4dd06b00b7c0b762ad9599b7ace8c0d3f00c2fa2131395c18ff9428e19",
+     "3064379d23044a767dadb1643ba01f7ed071ff6cce75db435f5cf0c1581c8738",
+     "f3e8a66650eb0687a59740e2e285edc4da20388d79a97104728c25f3996a021a",
+     "17b2ec9fd68604705c85a89decfe3ba501b8c86195914626a391b2eaa43b1d2b",
+     "73b439658dd3ab0240b94b1bf0f6e263bb16943a4b9542aa4503c273534fb86b",
+     "5e6598f35e738a136ad636ecfd9c37371db218a6d05466d25e0147ea536f0fc8",
+     "62772c04862feeccc8afdb9fe2c773eeb7f4767cc3bd10ab3d26473a9ee390b1",
+     "39b6efaba12f0af0886c042d626baa04cd870a506964655a4568f2296ac0104d",
+     "d2ca625fb17c7cd9994df51c1b199e265e6a05304f2c14984fc448835c5c1ea4",
+     "8da711d4380321e4dae2418ac73ee7ac68945fb5d8f306f0e5626c02e1e59c8e",
+     "b66ac7cda25ed0ed7313719a0961b67a9679af6b9ec8645de834e3e8ac157b91",
+     "7725706f8cee4f77798acfa64ca90a32b1ef9bac9c16f35935b83cd135f5a2d1",
+     "2f986f8691d93f318e0a43b05fa92ad9241b4f3dba58baec4a46c60820fd6933",
+     "8be50db4dd440435f77b35885779a531b51ce8f70875727a1401c32aa3e3ee1b",
+     "73603c59d409cd1ea91bdfdb5d7c886636c7b548cc14978c0662710e532cdda9",
+     "d433df0ff60841b0f93d291879197373c7eb35c1a534bad143049bbcdca408c3",
+     "3f4af01c83e872fece0e9d19064b7fd8173edaebf9f1db23242f2ed8c8b38c40",
+     "ccd7581f32f564915e9e39826afead75635e4ca3fcd5779e8368f8b5934e7871",
+     "9e56f751e533ea36d683acd2bcb93e4c7d9d8f4956a2649f61f1834693392216",
+     "b31152e1cac62e6f86687f7fa1e9f85f3c736ce1b449977a7056ce8e9f8929e2",
+     "e55b12938be15e557b8e47ac926c76afb5d7019f8f7c6bb45bd5e0b0d075e8dc",
+     "26a25ba23603fb6dd9bc29f8b388d29a7bb3322709ab9b95e82fc790e6cc01dd",
+     "a6fbb16c573f661d13d3092e1e210cd8ab44298526d101f90a63eedde72f162c",
+     "95c9f36597b6ec14ff2ccf84ca356121197563cd9094eec7f09a19c1923f288b",
+     "350c514092b997144b19230edc4d374fb5fe99e13e40d410a63486bb0abd3c64",
+     "e1804c07bb4d4d9fdadfebe0e33e405d81d724dd814fe71be0d8ef7388f55ee8",
+     "4fd06e0d2a6900bc2e0ba289e9f6401265b6c89b6e8152618e19a17535430383",
+     "d3f6be9b50f2e0244e2ed9eb9c81fbffef6cc3ca82625cfed123a0d50a4b9ea6",
+     "177162d56ec91469a12e0fa81cd6ed2faba99c19846f61c8fe88d5129d798494",
+     "76a8d0be8c3edf6087795696b0600a2e0c7e39fff37eb27b0a355fd4be843db7",
+     "15b6a8a75b3ff9eacaf5c3468113666b04f29d93377f5e7ac4400d849433c093",
+     "fe18c7f079b80f1f948fc858b6452818140b893637261fcc7886c9cce5c4f7ea",
+     "a6b400d35eadc653768fe7074547e7b8058592e08a9c184ccc86c354e1d768c7",
+     "64c86d840482ddfb8d2a4b29d14e21a80349df6e155e5f8c6d311c02c0e7a401",
+     "b0e1ff058719e06f4d55ae6584fd259c1717c1acb04670f69b67615207c731b0",
+     "a1728ddc05ddea7e9acfdc4df56bfd43f2fbedc33d6f0eea6eefc8660230acbe",
+     "aa88f0f248c454d486b337c6df695f61b8d04fba748239c3a6a958331f8f724a",
+     "41fb227713ba43b82abd4495d704e4266ce5c72bb22bbd4470ad0ad2341a7646",
+     "aae5c040e193ef042e5f4c10a717b4763b7710c83f23c508bcab6849ecc2bd9c",
+     "1b5ca03342db03e69f7f639b4f240e2d85c0559e4436410f6a95f9266c570d56",
+     "82580bf8ea3edc75848a075316837a9487f7da3a144472b817caae616e6afba4",
+     "3db4795a46194a66ec4c8dc287f88c7ef47cfa9896cdb26845f55a3498a696bf",
+     "9438f2a3294850b6630cbe1ce79b666d1848d3cbe0c0b3447fd189766988f66a",
+     "c1b06f84c32b73e159fb44ff9a0bff6788e599eeec09b513c3885ddac36448e5",
+     "410d176cd1df167a0084da1dbd884f7b4ea27cc9fe37e9041ae323d71a4c903d",
+     "57d868f69be2b4c1b2364a0ab8091cbce2e2f1247a9e867e73be38f83dc71f14",
+     "65bd563f751e0eedb7277bab300baa412266254578ee514e72d1dc7f446500e2",
+     "162edbf6fa528a929cdb8e70e60861026af91b39ee8d411e2408af21338ebc60",
+     "2c27968af545c77227e0638cb4bbb30eb64da3c054ba50cfc127b525298f2305",
+     "f2b44b19d66bade6aa54f39a6452195785a1b7905135cb7bace1a0af08320315",
+     "44b480468e1aaebc5c3748d178c284cddb7aaf31b93d7f2fe5e1ec6ece1b983c",
+     "63a8f0e41592178b45fb3e29ab756d9872344ed0247e64ed93834f7ce6215317",
+     "eb8f16fb6186fd4dfe57703e7467136555cf9fe0dff6cf4d145ea11acbd875f1",
+     "965f90d80a3702f259acea4f8d95d906fc0859430376a115156b5671ad270628",
+     "e3329fc385cc068b75c0e7a8f02b4d428db8703db83ce83b0b71ad4812e991a3",
+     "c576362d6aea48d1211d2dca0dcef7b9890c7ee744759d433be953e43cb192cf",
+     "0faa9cf2076989d61e60d747fb595444ac67c12289617e8edbdc67280d945092",
+     "51083bacf2541a86d149a36548dab11aaec0baa82418fca0c6b75e638e037b5a",
+     "82be586223c645390691c197e6a37c41093ba92653e6b11456c62975b3d6c678",
+     "8bcd07b0bae1f782bcd0a3fe2b82cb9807ec63b56b81b0965f3bc1c0edda55e7",
+     "8a83f67d77a66f8655d48e297c44cd9a6833410f961e311f226065f5ea380275",
+     "fa91b701d825b6f69cb41a10d66d6f5da2edbdecff391f509ed9aefe9eb677df",
+     "f0d3a1a8ceefd8b21278a19f4b6a23d4d078137bcfa60f77696e84c0c4d3edd5",
+     "84481d080b5805174b715b2c7ad2f8bba2dc30eed659f92e0e13cfbcfeeb6053",
+     "d7dbd29095b58c300980f199ecdad06c7e3f1a4fee8bcb0bf8d0ef22e2344783",
+     "99836627bb504691a92ad3b77e1a8ed35e65d34254be411b19f2b3fc5d3b4b48",
+     "b2829edc8f1dc43f0bfe813d20ccb798b9b6886381dc22cb62c31f74a8c2a517",
+     "7adea427e040c24f84e102dbabfbdb3661f3c255ccc377cccd237976c42d8c9d",
+     "45c5bfa39a86183a4b55fb91e90d94528d66cb0f245232a0aa2d96aff7f9ed6d",
+     "a5c75b033cb24d8b6beaff8b7eaebe69609d5be2f543d4837c481c269090332c",
+     "f05a7a3ca27d0c39f33b0964101319b2cb77ae31402fa5291a566ae8425ccdb6",
+     "7ebb170652a0c8b1a7e321b4424d0927967b0a85d34c198713aa87e25b67cbc7",
+     "e2f8df21334acc7b4097ae74914ddc346f370ed89cf0bf8cc34badf48ea15572",
+     "3e45005815879b0f819badcb67ede9e727878c72b036130baa22494b33a067ec",
+     "71e0c7a7ec476f1b5a83a3b4be9d6ad14be1d843f52137954afb5bad8480494f",
+     "c05e289ea9aa8dc6382d54f14f7ceb23e0a0f32bb6d4057882c139cd8434a22d",
+     "b36aa27891f20b48e0a9fb91e7ee8f9539cd1592f8fa81173dcaebfdf0fb471a",
+     "698abcd0569c0fce7a62d315d10d10b6235e254d53b616b56ab8bfa2520b4313",
+     "2e77c6f197272b28414e6181fad6fa1d1acae70ec2b17a0a06eb63c164a0d5dd",
+     "a856728c34d2c8ca90212d0610cc9212bb0a521fa11a127305aa33f1d1e6969e",
+     "5edc30343568ee4b0f921c94e6b1c34483386548bc67c335e482c2a625c2fd30",
+     "ed9673f47feeda67c0e30b0f06bd768c0a307e67dc850db0a29b036449245859",
+     "aa96badb55411a7428b9e18cd460a636702118241e732b97404ed7c3ace158e6",
+     "5e5e054e9c7de3caff4b98b231375637246eeb3a08db16b78dbb7e6ec58c70ab",
+     "243133f78aaa8738cdb857d158e1278dcfddde29af9bbdccfa762515d0e31114",
+     "55eaaa5ecd668d3f537e3d7c8bdfb5f078f78ea29aa9a65307ba7fab647bc564",
+     "d1ed6c70b6ab953d6efe9e1c3fd4e4e151af7bb0455193180549d4f87aacb7b9",
+     "3ec781b9b56e9e6d6709a51664f3ea02d2d7b1bdb401a4604f41aea5f145f417",
+     "1edcb4099e458b9ea9b386a104f13194ff214e16cc1afdff38819c8f233f01a5",
+     "0c55261f86992c9c749bcb10dc7441a549fd6a2f133b8e636e94b7a4e701c8eb",
+     "c54a81119c41ba1d8e4dbc476f7bbbe38713a83cc97b8d23c2568915309b5a0f",
+     "6ccfea80644f8e7b00b9187a832ab1773c6c48ffbd4c3c8303d35f72ba44aace",
+     "48549481870b111a7dbb9d46e6b8131f0fc67b4ca5f4888d899fd5c7ed02f3e3",
+     "8f3aef76a243477422365992d3a238484960d9a96be54e88f5b93145d0410b6e",
+     "4e7b70e45e02b496e9d0e76dec9d96e633de144c6aa256065f3af2fb05b95e29",
+     "8cf63555d2db29da6986d15b315dd2a3f7b0e9ceab00c24a7f3be8d321709e49",
+     "949afbe8e85134389d7e0e6c1d9dea1392c72cc58598e513b062bc123ae5f083",
+     "86d67de3e0c1bd0eb0f1bdf539419eebbbee70ddd9597ad0c3841f066fcd410f",
+     "6e10e51f3640addb49f29ca010edd0f1c1ad6477ff026522fd943d6cd3248599",
+     "0e70c5ce3de512b4a855932a11a14834e7050f2e09d7ce4c884e2874ad5ac0c1",
+     "d9bb2fb8ee2bb4ca790d13658b04bf47a3cac08f1d1ab0a06e0e487d1ff9c2a9",
+     "38c53162aceefc58ecfd97421410f47f01780431f2c2193d9c1eac2e69c4dac2",
+     "fab7f646824ff680dbba2f91c8ec9f410431285c6298bfd330ff41111950606f",
+     "8dd7259e430d04f715d9b59960dac7d0b8e084c4560a0965881a3bc46919091f",
+     "5e7370556aa6470134bfec1fa3ca3c117bacf596f9d65ebef986ea9ca3877331",
+     "ec25a081e69fa6d60efbb0b20b71d46564e1dd363d9996dadd55e72800dfef22",
+     "bc6d1ff5222d824e3dbdc0ba470afc6d64f6986cb38d4150eb3cf9ee016a09e1",
+     "78e15800e17b6a0971e080ebaf7d5c07b43aeb960ea73616eb784f5115b5a94c",
+     "61176aafba10805cbd71880dc8dcec8286b4bed8f38ec22aed6f29e7cdd025bd",
+     "c7d229a17429f92c5aa9ddedd7077e83c5b3f302a7ba9f48d3d17ec2c7fa2ed2",
+     "9089a75cca502ea728867944f250ab9953fdbb94eed5e5f33a731bf4eb55abbc",
+     "400071aaef514298559e713609dc0e3240c87a89b751450b6cf729476e7dd46f",
+     "309d871cf61cc0c86d8def4a4f897a532c2bc4c4999ee51530962c22b8763b6b",
+     "c49177083e54547844545dd418a6ca7e849e3137e3a520f694c91905b91a8e71",
+     "4f77606f9abe54dc91d652f183070cb7552649fde0d38ca348868d8db9b2d954",
+     "c99aab42b98a90a20d51408cea5dcc26a50f529ca830bd09c753a17d01ee2f1a",
+     "086cd14b6ca0c6ddfb6f9602026734549a9b3f1a10e8ed0f6f51e470f15e2179",
+     "da7ec0452abfad9f3950a0dbba64be2b0f7a0bb7d162d4e7fdb2b1fc04789786",
+     "468f69040ad723095104d1094de8079432d5ae41892740247991cbb5258a1501",
+     "76a39e7c87c6438fb4156a91e0a78aa5a940b22a8fa6b1bb0c952cc5d1ef905c",
+     "41ee2b3b43b7fc3dbef6e6fd306b4b6aa5d92d0a542128d486b188a9a11fbcd2",
+     "3df46df8fbf447b216aedc33fb35987b6dcf933725392a341829ddff56c0aca3",
+     "7412a4035d8d5597f97205ff8de2b7a8150aabbee2ca1a1cc75a61b4b01bcd77",
+     "99ee89cd04c5975351e161cb8794e0ba062c0752b392f1aaf212cfa74af7c958",
+     "2ff4405b0d30588f2d96718dbf173c5113300054961e97be78ffbd77fb0b5f8d",
+     "163443d07fe56e7ab69c279584bb9605d32f178e636f0d150739db704e000400",
+     "42df3042a170e1966c79de04f6b612bc604e31da98973d342af8b16aa09806ec",
+     "a1d9ea91a0b0b4e46324bb4727ba46cccfc1e73db950f57c6ae710c74047a709",
+     "29c74e4e7aec6187843d7ab167ee06a13d257e70137def62799204a4e925dda0",
+     "956e8a84313276df21fd3ad9bcfdb55145406edb943b4f646f3472f6ade0fb3e",
+     "4dcaf9cd7389333540a2e452396a2b717993dbb2906f3036384a1e84d4acb0c3",
+     "f78cedb4bc958d448806f084a88d3ac028b3118cdf757950bc4434b9c8e86374",
+     "6abf97fa402e5f57aabcf50b0c41a1274c3b7f48bb5e95c7179322b15df2d69c",
+     "970712ca057bb6dcb10c721509190fb6abb9e308c73dbd46af5eda28fe6157fe",
+     "841ca74e29811e5f9ad1b1560b446b9bb3a829e548c5683e9a4785382825dfb8",
+     "affef71834ab98f4f12752dcb3d1f107e8eb7b1c358f29b8e03655a117f23978",
+     "bc17914d148f436b788917390357662871be6967399de5241f03e2112d02c78b",
+     "f2bd0318ccdc90053a18bce3c6ce2e451c114b205514a0713a03dbcfd906530a",
+     "956381c72a24eff78f3423142ad695e182358e82487e62ff58645c4651a0870f",
+     "cd70db0587ace72eaba6e333de695f0410a2ecdb16b7ed8b2dcb736156f6f8ce",
+     "e8876db1f7412582e89796f68edff9df9fcf1b5847e79755063e7ea7b942a490",
+     "f0009e58f068298f4935cd57fc23d5f15498908fbf33ef0f1d9a1ca65fe7493a",
+     "48c5d82534a993f246d95f2b6c95639ec02dc077f6142c92257aa3dbf495f28d",
+     "a0dc8b2923a10d2fee9155d298437c94376db4ac39d9102f32b9ad91c45e01dd",
+     "6bf04a3b65601a394296c8602dc03f7f20f2a365ba220ad14ee8fff16f0d1f2b",
+     "aebedc1a8aa2ccc068533dd3acd78237f212df41e771f02336c994e0359aa162",
+     "ded5511c24fffe384ebb07ff296a24e93d067b7c88ab92ca9e5f596c2b1c08a1",
+     "a82e0a32e677d259d07f1df2163ed9140af9caa2551cf498012d132d00e049ae",
+     "01f3c7ccbffc1f9eb4a5840f6bf15080c7284b9bfa0c546101d07e9dd3f99f7b",
+     "d089fa7369a709492135f799d12d57461d3ddf33611fecaef6851ba589060e43",
+     "27c013350b5037f6a5e828d81611a40a32f00611d7d90b840b46fd4f3d698465",
+     "426d288463e4219e180c2922d1600ae870e032f884d653bbc475b6a143323f2a",
+     "4c290aa0d29a20fa1621370ea21fd6c492a43f545fdb55032195ecc7d1199ec5",
+     "6a87253b17bca9262984540a55d94f7aeca8488656710714e23a5bfec1bc81fd",
+     "8e35d3b4106c6c86a4522b1fc8513025426a96eeb717a64d8c328389077be22e",
+     "9cd2bfda61c89f1077222f4c409063464dbed39fdb35d11835c15cdb52842770",
+     "b2e4afd430e505ae5cb44782755cd84ffc92214d43533e02a484cd14e0477932",
+     "f8e1fc3cf480642bb1c721c7f3728768e95757045f0a77601cb2b98fe739a569",
+     "6fff7560cbf24c7c8a760addd95c3fdd8d134938214e7e742a83d496e6fbee78",
+     "5b72c739b8200c51015a56acc030905ba1700e64fee26bf43355344659fb7fba",
+     "5e1f7338a579e5fc051d6afc18469a7f6764f5c01b780bac77a8821372b2f30b",
+     "df9607c4268249d33bfcbe7053970e8a99d7424a877ee6529d884807692afb5d",
+     "7bc4722129e8abc897b32f4a4036f2257c2fbf8d67ff55a5ad8dcbd36319c764",
+     "add5d6a32434d6f5c68f4a2f51385437b2bd13e713d6d7e2bee0195289b138e6",
+     "f59b654c8ce38c871580f2c28c91e19ac27df33cb9b8c4effb6cdd934df94242",
+     "fe2a88c927abe98b04260506cb232fd3d12fb80437546833662980f57ebf8672",
+     "f1c8cf35b24d602b75fad3b52d45755c7fe0b205b0d3bdfea5828429e5e5734e",
+     "3d5913c26537f7192b40f62838009ff39fbb4954fc1edfe102e58e77d5bef877",
+     "b37ac2174c518ad3fd4064267695f062a22be5ed3a717dba2d63f2ec1d0adceb",
+     "2055f89d06f107cfb830eab126b24119e6344209852c303ffca88d22ae40b93b",
+     "31cccee074b4c73ce37e18cee1a9ef207d8b92b0d3e3375735b46acea3ebbeb2",
+     "0f1b5b80f21fbc119a3ab62ca2d75a75b0a5d4bef934c75423545b16203db7d1",
+     "80fcc088c48cb57fa0dd0c6d521d453bfd609c416bf9f4296347f061c5e5e9cf",
+     "75b7e6fdce9aa40568a7025fa5716589e76962ae44851ebca5fcb1e6f44ba45d",
+     "e63cff7710b47c04f63a81bbb29c4bb8171ba1311d395b659659bed7d57bc039",
+     "5c3b169bcfce6d791529b4ff4f89e45a610b0e6b06da4fb71e14826b0c748dba",
+     "8f952c48b618a6dc6c020dfb959f4c616ae589e4203c11b348fb9d8ea40410be",
+     "d4e1ff17c256b230ad41b74bf2692ecf2769c3600dd77fb66b2d570d64aad8a9",
+     "9de6d7d8466f9f5cd831acb6bcea91c781f410f89c97b8a5a71b40255450b893",
+     "1c31b77a3c066582ccb048e77d6a80a6bb86ac193fbe8563048d37548bf10c28",
+     "2b1669ab558a029330fe0599675baa8bfa5f64198fb3c3413787f35bc41c3fe8",
+     "63d5751dfdc1d3adfe46256cd6c2a7ae4a7f00bab01f9fc74475c971beb7befb",
+     "b30aec5d4a7aae7213357b8c49a30bec9d9c57a58eae99369165a1aad73c4074",
+     "43c69b33f23c0454b498c98dacec6e6e2cc79d769b181ba7fa407eebf99e4500",
+     "0e87d62c11100b20ea461b885ddfe9d6bb2df57e29889243457022edf5f797e8",
+     "694d0196e3ee5a72ccaf24c8d592246011bb3345dba559c1842f3547c83e4c53",
+     "f0defba9b663d8a54be36c8da6379500c7958abc03efd74adc8a863c8313d3a1",
+     "4f13743eef77637059ad01066419e73ce42fb9e26ddefc9e72698aecdeb38f4c",
+     "850c120a888f60897a6a13c8a51b28ca7af08648beeb3578943ada333050f586",
+     "e45db4bb13210786ae4df1e937466c8bf3248ed81ff5826f7a0413a6fb011d23",
+     "03fe5353aeee0d54f5546bfd772bb697d6eac8194c7e3480d7034ea814d16744",
+     "8b155067e310cdc21aa2bba0388500c26c23b4763ed7510457313e5442840ec8",
+     "d13e088b7cc08bd7e2da39f2bcc2d4bb49e5b0646a895cb7da59b906ae847d65",
+     "a86e3eda9281e010880c8ef68a355527b219deb37e605c4fe5408091f3646f61",
+     "8b89786b5b325ad66ad2ed684f5ad933a8888ffb5ddf64bb30fc800dae3ff1b5",
+     "fd922692d9d18493d2dcbed3e963b9459be994d7d197ead888ea72f1d573468e",
+     "6e87d8951b894eb6bfce02a284580db4c563b74d886d02b22a14c5243433b471",
+     "f029e11616165176c563ac72e0e88c4f3922e89b2eae9ed0bfa7a93c13112c65",
+     "ac43e17dff64ae498279b2175093a632de8ce287b0030ec77b96fd55bf9bb94e",
+     "ab9778841cb868a6c7733ab311b3808b31eb21152de1afda5c5e47f027fbc880",
+     "749ba57e83b44900a1f2069069d47bb7d3d3c905bbbbebbe01edcffbc51b72a2",
+     "344e9f838466f670b40a45a6a3cf476e860200b119f39e8a9071c9776f6c588e",
+     "898ac285a14c3d8915949f290d97247a9873e1d58182a365edd1a3a47f66bb73",
+     "ee7535fbbdf66c6d0fb057b1133f4201969224b7c7ee5986763dfe7a50ad8c65",
+     "c2adf43be5cf93ab3120ca0cda4eaa3f2c6f4a20a1b79da7ac471eba85352d9f",
+     "b82b629186421d41f7766285e396c43351bc07dc7f064f7faa2d728dacd64010",
+     "3612fcead2c636a1f8bf7175196741e3a1156de1d4cd28bc83460f0d3132deb3",
+     "0d14a6073f4df2c0dd9643fa280e025f4d0ffd276a5d4d50fc6167c035c05aba",
+     "49b2956f86f59932922501b591653b0caf1b7cccef26bddebf4be4dd5df2d99e",
+     "bb6e34aaed7f0cc5c706b255ade066a1b12d01dfd84d40456cb3f358c9270f15",
+     "0fd272d5c021a8a9d698f24bf5d1447ab494dcf06bdd4b02926fe3fd6fa4d955",
+     "dd06c4ea9211ded411babed82bbc8c3314a6ec82cd2cdaed425b67eb140afd00",
+     "0eba3e0a0c2ac25e3c2dc125536b30c0b1f1e2ff7af8bb9a84a2662bed97cf2f",
+     "faa109c454eb922d57ddbb11f1e084cecc8d6dcd398e4bf7f5fde3719f81b754",
+     "727b6d6a47b7933c4e4cd2692828f8fb732dbfbf50ed188a98c33adf4784ee8e",
+     "0b6492b638cf280853b336a193d40fbf5515ced0555b929c191b0617c7329f08",
+     "7f8f1f70cdfb9fbc8c0b0cba17e694604f4c9875828af723ddf5840ced13fb86"
+    ]
+   },
+   "repeated_assistant_reply": {
+    "rows": 4,
+    "by_source": {
+     "family": 4
+    },
+    "top_keys": [],
+    "examples": [
+     {
+      "uid": "ceb3435b156af42393550384f5f93abf275c1ab45af288adf5e65c416eef5a6d",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 1728
+      },
+      "key": null,
+      "user": "I want to know how I can tell my family apart from other animals like you.",
+      "assistant": "You can tell them by their color and the way they move. Your family has spots and stripes, while others have different patterns."
+     },
+     {
+      "uid": "bead8038cfaa2e4a9a383c99c8418f3b813c6e99fc43935bd7c6e7af9c6e0a95",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 629
+      },
+      "key": null,
+      "user": "I'm a little sad. Do you have any babies?",
+      "assistant": "I have no babies, just one tiny shell."
+     },
+     {
+      "uid": "5081c1ef63010e6f87bfa04f73cc7c8702f3d1f3965bcd2201b5d3ce39e1e76d",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2766
+      },
+      "key": null,
+      "user": "I want to know what your family does together.",
+      "assistant": "I swim with my friends in the coral reef. We eat seaweed and play tag. My mom helps me catch fish, and my dad shows me how to read the ocean currents."
+     },
+     {
+      "uid": "f68c88e2bb94abb50dfb1259255afbfe2a9f9885664893d33702cd12a7e109ed",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 1914
+      },
+      "key": null,
+      "user": "Got a reef on my wall. What's your name?",
+      "assistant": "I'm Captain. I live in a sea anemone. My name is Captain."
+     }
+    ],
+    "uids": [
+     "ceb3435b156af42393550384f5f93abf275c1ab45af288adf5e65c416eef5a6d",
+     "bead8038cfaa2e4a9a383c99c8418f3b813c6e99fc43935bd7c6e7af9c6e0a95",
+     "5081c1ef63010e6f87bfa04f73cc7c8702f3d1f3965bcd2201b5d3ce39e1e76d",
+     "f68c88e2bb94abb50dfb1259255afbfe2a9f9885664893d33702cd12a7e109ed"
+    ]
+   },
+   "turn_repeats_previous_turn": {
+    "rows": 1,
+    "by_source": {
+     "family": 1
+    },
+    "top_keys": [],
+    "examples": [
+     {
+      "uid": "dfec58161ad676b40ca73698d4c650fb9e4656e77e65dad1d5ce34063be5402c",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 589
+      },
+      "key": null,
+      "user": "Tell me about what you would give your friend as a present.",
+      "assistant": "I give my friend a leaf from the big tree in the forest."
+     }
+    ],
+    "uids": [
+     "dfec58161ad676b40ca73698d4c650fb9e4656e77e65dad1d5ce34063be5402c"
+    ]
+   },
+   "user_turn_cap": {
+    "rows": 251,
+    "by_source": {
+     "family": 119,
+     "base": 94,
+     "haiku": 38
+    },
+    "top_keys": [
+     [
+      "do you have any friends",
+      79
+     ],
+     [
+      "what do you eat",
+      48
+     ],
+     [
+      "what about your friends",
+      40
+     ],
+     [
+      "ENTITY what do you want to do tomorrow",
+      37
+     ],
+     [
+      "i feel so lonely today no one wants to play with me",
+      30
+     ],
+     [
+      "why don t scientists trust atoms because they make up everything",
+      11
+     ],
+     [
+      "ENTITY what are you proud of",
+      4
+     ],
+     [
+      "ENTITY where do you live",
+      2
+     ]
+    ],
+    "examples": [
+     {
+      "uid": "5405310889825a26fe08d74f98b3fe43123a4643d710879f77939383adede7fc",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 25
+      },
+      "key": "do you have any friends",
+      "user": "I'm a little sad today.",
+      "assistant": "I am Nova. I often live alone in the deep ocean where light does not reach."
+     },
+     {
+      "uid": "c90592e2a64cd143c21c917fbdaa3f1076015e3cfb07ffb61ffbb6a1d5868d78",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2992
+      },
+      "key": "do you have any friends",
+      "user": "What would you say if you were asked about your dad?",
+      "assistant": "I don't have a dad like other animals. I live alone on the beach, and sometimes I meet other sea creatures. They say hello and talk about their own families."
+     },
+     {
+      "uid": "e600877a201697832a8fe5a9b8d22b773bc984a7fe6ff19ae1e50fcc7746929b",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2721
+      },
+      "key": "do you have any friends",
+      "user": "Tell me about your grandparents.",
+      "assistant": "I don't have any grandparents. I'm Fudge, a pufferfish. I live in a reef with lots of friends."
+     },
+     {
+      "uid": "0180859d80f444d9c3bd675de34fb2f78a27744ddf5dcf15359556fdec81b5de",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2442
+      },
+      "key": "do you have any friends",
+      "user": "Let's hear what you know about your family.",
+      "assistant": "I have a big brother and a little sister. They live in the same house but are different."
+     },
+     {
+      "uid": "dfe61cecf9d9b313ee8e1c9f07c11c3ec5a1f8993208a8e123de13d67abf64e7",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 1675
+      },
+      "key": "do you have any friends",
+      "user": "I want to know how you can tell your family apart from other animals like you.",
+      "assistant": "I'm alone, but I have a big bubble that shows my name. My friends come to visit, and they have different colors and shapes."
+     },
+     {
+      "uid": "8de0fef3600c89c1df7d13a05559cb61cf7c510ac2fa677a20227bde5966f68b",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2528
+      },
+      "key": "do you have any friends",
+      "user": "I want to know what your family does together.",
+      "assistant": "My family and I go to the river every day. We swim and play in the water."
+     },
+     {
+      "uid": "1b4a732567d8f19d6bdccd69e8a558ddf254e7f99a9de34f3b6130d68e3d2f25",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 2891
+      },
+      "key": "do you have any friends",
+      "user": "I bet you can't guess my mom's name.",
+      "assistant": "My mom is a sea star, she's in the water, she's nice and soft."
+     },
+     {
+      "uid": "46fde35e783e9c93c55d3d8d0c1e32e5bacf7c716405064054c9adfd5e50133e",
+      "source": "family",
+      "origin": {
+       "file": "/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq/family/chat.jsonl",
+       "line": 1043
+      },
+      "key": "do you have any friends",
+      "user": "Tell me about your family, please.",
+      "assistant": "My family is just me. I love to play with my friends."
+     }
+    ],
+    "uids": [
+     "5405310889825a26fe08d74f98b3fe43123a4643d710879f77939383adede7fc",
+     "c90592e2a64cd143c21c917fbdaa3f1076015e3cfb07ffb61ffbb6a1d5868d78",
+     "e600877a201697832a8fe5a9b8d22b773bc984a7fe6ff19ae1e50fcc7746929b",
+     "0180859d80f444d9c3bd675de34fb2f78a27744ddf5dcf15359556fdec81b5de",
+     "dfe61cecf9d9b313ee8e1c9f07c11c3ec5a1f8993208a8e123de13d67abf64e7",
+     "8de0fef3600c89c1df7d13a05559cb61cf7c510ac2fa677a20227bde5966f68b",
+     "1b4a732567d8f19d6bdccd69e8a558ddf254e7f99a9de34f3b6130d68e3d2f25",
+     "46fde35e783e9c93c55d3d8d0c1e32e5bacf7c716405064054c9adfd5e50133e",
+     "0a00fbf2d7b76d717410ed7a5b2b5c898b2974119b114eef9d181554e8845a78",
+     "dadcb90bd67861d23063c75536037c6f791f760d775e1e1cc5486513fa4e8672",
+     "925747bfc6a09481d15a0893c86c549962b6c793666dbf15f3cc650a00dfc547",
+     "4c67658efbd0b04abc36a2b589d6da06325e07126db7bcf1a2fb6df3f77fdd2c",
+     "b376fccc5edf9c607a8ed74bd2f4bf5cc802a918cacff55793ebe859e340a286",
+     "9bc7b29d15043c7692ecc868e4ab69e4e16a688c71467e3a3a3c252b064d8084",
+     "4375866db3a311ef7b3008dbaca243c4ac6f3016992296631afe1f90b5ef7a3e",
+     "18c6ce77a311e6805002fa75dcaf3d66911f806a98a689684e291da8d5fd40e6",
+     "ba213fb301cbe6043cc02cedc236f08f66c10eb8ab0195576e049c1f4a372fc0",
+     "9ec10b90d6c3749e96cd93cbdad88e6c28c440fe6cfe9ef8a3543521628716f6",
+     "bc247e55fd0e7bf0980b58e9acc94bf79426e35e51540b30e5465a1df97f7501",
+     "1a5f528e04ec8beeac27763f8d12f3b894f038befd11dd6b275fcc2c7e7329ac",
+     "c529d33d1fa9bd885d287ce6a5aae7ff02aefea1d337055be6dd491b6eec65f1",
+     "4b162bbe288a0f3b6a0f259d1cffe48641e43536a515dace9fc0d03292c16b70",
+     "4c898111a6821ffde1ae661c376540539dfd4017a401c7155626309af16f0986",
+     "3b060f58419b108dc07e0bcbf7371929a1dc162488ee9b2b77bed3a94da7c748",
+     "f285ea3c8d4cc31456245b9d89b7601fede64483e82376cf51f3facc7c467fe9",
+     "b5e2ced5b6d15acffd5849352d06f50394ce2c104e6931836580f8e5a091eb7e",
+     "7bf157aac4f35e90908150795860d805bcccdfe2d031b3c4fc8aeb7f5e983de3",
+     "e73baa09504d53b213aa3c7831b094e535ec39770ce345db84aa9d4860c33ee6",
+     "eb48102b8bd51bf1da25e68e4d057b7af8e4dbb12ab8413a6579f6b642f01e3c",
+     "db5e05e4424875e177c0c4e0e1b8c39463961f72be2c75da16007c852c3f9151",
+     "614f090541a902e8509791f473cc01921a19663768561d85ce8c9da063355bc5",
+     "c55d90a1f627d8056b6bfddc58f940ed772462574416aaa15f592e0873928ae8",
+     "bca10ce2135e411bcf4bbe3d8e65f407b071c94283317ab6cc57855b34ca8fb9",
+     "b4f7c370359be0496cec7f6834bc235960495cdd2ef4700ff5467e19f73910fb",
+     "48c98d6ec723d66bcce25c35f2255b00fd24d602ce69edc1a98882b2340c8101",
+     "6ffd319c7a4e8bbb38f9bdea20afc9b59ebdfcab11a34677290cd7bf20c787f9",
+     "d8f69c5ce0df75bc4a1f2343467bd608d09c95b3489865afc4518729946a05bc",
+     "e8a07bd4c200b4f7dda2928c8d7f0b5862a69ce4660837baa1730e77d6df7084",
+     "cbcd0190e47c14fa26a7c070c0d31a2ff95ecc585e7b5388242355adc70d0ca0",
+     "3764f09509e59979caf9dca9da42cf635a8dac15e2c136398e33a1f3aa8c6d0b",
+     "7d0e0498c5abf447297858252399d0797834be6be507e637c0e7c840fafe00f8",
+     "b7a84f111c31b1d66b8b3be98d99d068e5064a2adb1fc1ab098da04807632bd5",
+     "1d7656e169faf43392e66c6e5bcd27767d2796be786ef4863401bd87b3dc22af",
+     "dcfed5c2f9afed7d2d85afe97f4156c2bfa68a90af1f61c5a2c3232f7c72015e",
+     "d9dbf9d0a88c03a69cd9d6236b9bdb8386633511e19a305beaff97d5219f795b",
+     "34d5ee93bef9fdd7a106679fdab3a251aafe1174e4381bfa08b86fe14232b625",
+     "076cf76cbfb33552cf4b85cfc2ba8e1e1ba710f574ce65a5e60eb9baa9771fca",
+     "b29929d4eacc65db95ce69edd83d5dde5a3d1a1fe2c62908782e477de9f9735b",
+     "4959853799095cc617ea8bcd0508500e508776078a5b99292b152db56a64616d",
+     "4106a7456392464dd2ab7b71ba85542f1afb769232bdd6a089693fedddc70248",
+     "c9a1195c14f104c00eb4bdd75f3d8497e42033d993c90b553bbc43383852416e",
+     "1ef0a2591f89b47cbf7da73bb676472cb8fa27e934db6575d70c44a503feba95",
+     "8d29e9facac327713c41b867bd6b8ae2af435ed39b358ae0bbc854d5ee327757",
+     "d3dd683fefb55057b60557ed1936bc0f5d3406a615f9127b6a2a4c8ca498a67c",
+     "5f15ba048f45f64a5755889830922372d87113016cc809dd3829d731cdec7fab",
+     "9923de3d8a97ab3acbd1d05a93313beaabdce47e2d580784acaf78c2b228e6a7",
+     "61d5609b66596be4a8891b64cd6ed9d9d51d283a99ddde71f4cd5c6b42c71225",
+     "6975569d06aed1da6b3d6d4a828ed56fc2148c76aadc2abecb12a20007dfeba1",
+     "77bf9b85b2d52907278b77bdad496f5418ad8e84d615e4c4489c43882cac13cf",
+     "203c85f2c0d1fa473ba78511f0e0549cf3f5745209b3081f085e6f1b974ac180",
+     "4e8b9d1509078a311627855609333fe601f606d2c7c9e18a947216ccd35c13b4",
+     "75f0f7a99e49109c275f53e564b7a7e26e8284508ac3f90dcdfae03dc959b843",
+     "7144dd6694223eb3805c754168489d67afc4b160eafdf2676042293a6d82d8d6",
+     "1e961bc372775ca9e060bda80dec49de0f49708cdbc787161b72ed21c669f611",
+     "b46b1e9cf7e57e8c28294356e9df400f810a78f87b5e9895ea01eb9b1a8bf364",
+     "d65ffe855b2ac1b0113214a8b77222afc23ad6da4db8a6ab238ac952ea3eda02",
+     "6083b49ae22e6c8274854475177b85554bf527ddf3e4fec2963320fadade993d",
+     "3296b45fd14f7bc95469dc2ccb465f5b7e893ca093a5a3b52950ee447a1e6b1a",
+     "a00035cf664e78eddf616a1cb14c5cb87dafa082056fe53b5e19e4d9077a0add",
+     "cac8af14ff789e1d98c86de72a9b71b2b9dcf7cd4e7a79a3ff3c778ddfbcf2c0",
+     "895d498626acb05399deab51e7732f81330ef03107c8f56d9465ccacc0f7e3b5",
+     "8b3cef7a69a18a302bcce2d5e92f2c6d47a92b245d4e890f59e88250ea8e8672",
+     "78c5510a266bab67978cbb07e487aef935202deedea5c456fd28089136bd5f28",
+     "f1c3ec461933ce332d4393a9133b0968bab2e1217fabf3b7dcf372ba2bbac35c",
+     "e22bec3ad759ea10b4fbac250fda119faf823c1670b029e632a77b01284ad90a",
+     "1e5f4e030e10c052acbe101019e89c9cfd416eb58623e7002f2a74049d42ad61",
+     "50c103e31b9ab9aa03f3b86fc3a7ac9c607f30f000b9f3ba3732252fb9a4cb75",
+     "1d62280f846eb6e510a0eb3cea14a609a4d1adb27b98802b4d60e27da386237d",
+     "8a4b704fb9481161564d5d73197c4afd284736715037bb9355ae58f97a8e5716",
+     "586349773a350aad068cb1c8ec23814dd019a721ea5a87528a70e8a27ca78dac",
+     "ae5cefbc35ae5aeb5dfbb8d475d8d779fda615ca65f7e319bb12b35b73a61d25",
+     "54eb854409b5b6079fec6443e7eede9a36ad6e95ec8502b2edf75230c154849f",
+     "eedf9e7044c8032e50fb76069380cb9636058eaa7bc50ce2f6f420d3cacd60f0",
+     "93c0bad3e4e4d4463e43f91e515c13a695f19ca4a9aa764162b19a1ba6611cd2",
+     "167b94ceeff0786b172dca744a593a76832b7e476c8efa6f7d319f87e1ef04f1",
+     "1da3f86ccd1ac9431ba2a071306a556e75a10e7d239e94aec87ff87bfd6ab157",
+     "fce0f59a78a0db657217105b921870b66ca73bf0fa1824b5abd07f4009f07d15",
+     "ebf4e5cdb67ee311a5ac91a5581e6aeb9f5e56f1bf7c7c71e2c4fe69ea73b0e9",
+     "b348bd4ffc66fac4ada7b6981fe26942a149dad91021b0353358c085931980c0",
+     "0b5047d0df3a905417cb605b768e9c351e0ecfef3650306b23d50639938c4eda",
+     "ab080204eab0f56f26eeeb948519ffb88651186437c0f19f96fd1de2479468f6",
+     "d513172392d2db62637965b60a8bf86b12d0696ebff7b33d4e0a8d237d1ae778",
+     "cbc5132abbc799c7a55ec80d70d770810b17a207cc0bed4aad909c7309eaa1f4",
+     "8631d851a2c14660ecb7dd64e0db5ce7e9063ebab4be8961ba650ed2578909d1",
+     "88625bb5921a66a42939ded888f30a4867d78f49347dcc26771707584b9f07bb",
+     "e8877935db3e52252068704e2f3a0b07a7a91e977658cc3e11c5907a805bc82d",
+     "31a4a6587c43da17117a9d10fe8b9cc52962b21da8e2eaab7f08cdbcacf9cfcc",
+     "3feac1cff3297efff3b44f46d7bff1294c3e7aa22dc442d5bc803fd3a0986661",
+     "851bdbba2fa63d6ca5a57ab2399ad8db2f1a4da49db81388aaa92010e0e1f4ca",
+     "b3184e2b01f795ef5f68d6c29517d9a3782c6faecb634b494fba083d8cddf0cf",
+     "c7cfc264e59f09eab7d825e104e6977ce7cb57099229483c38a890abb3c097b5",
+     "09367dd42dd21c65e4f3f127914865eebfdb907577a059718562ab5d6e1cfe3c",
+     "d31123fd7999ff1083c7b9e57babb14ad959dca5ad09ec445d6122353ed48fb4",
+     "121184a97a106fe7e706abb84337c77b7d56c7cab12002f4e8348fd271b21c36",
+     "6196121bf7c362623eb37c2f11ff3365c98d287ed5edabd0f17b9fcb1923e015",
+     "9014955666b4ba3c9511a2e8de3afb6855a6e1149a78d461cbc7f5803e3a803b",
+     "542679cc89a1d02d72cbaf01ddba9acc7749261b360db1e1a28a47362b196248",
+     "2c08bd95a1e44ff17ff7c0a877450d87ab852acceac04ff48ecb2a5fc7a500cc",
+     "53fc5afa58f73533c3db1177e934b2857e310586190c5c590c01041d8d55dcfa",
+     "7ca3d2d0359aba18828be27bb22db21eee6bd366112711e546894e98555a6951",
+     "0828523783f2313db2bfef99621017171d8eb93bf5dd74c2889d71341477834a",
+     "b84222fadf5ed7d6b3f8583ac56f8508a7e3c9b10dcdf7ff0ed9733c7c8ce2b3",
+     "4903eea1330b47d20c81cb4cd3c1f1d623008874abe390620df7c522543cd2be",
+     "0191fa2c5ca3103f97464d127255abf9d2e3ecb73f2f9f71706c36421319cf29",
+     "441da3f61f0fa1482fbfe1804ede674b2f495e7005b2f86666a431b3eb62f819",
+     "a22db1605c745527dab3c1a0e495fd4e82234355c2ff41dfbf179f9dbf55a1e8",
+     "ec3ff1a2ea758655801903cb7e4462ccb3252b3256716898657e55b4e300c47b",
+     "fc8867a24f7a5f67f5ea8b87cda322ab224e4e2669c989b88435b0aa0ebc05e5",
+     "fa812f39a9d1be2b888a5f764a24a703d6c1126f8349650547c6f678da9c9df9",
+     "6f8d397ff57a9d18b70abdaffb0afccaffee5cdb2d8d319583a6756f6d4afc1b",
+     "bcf5c0814c40d001bfd424fe4f0b06383af2f935e9eee5c9d81d02f9e41e218b",
+     "2eb5fdd51c2213ff790d747f75efbe745708e8cade3f8cd957009bbee4a68c14",
+     "724ac36a3bc2bc2fafa8247750d7569ccd5cccd649f18b43c6165f1ee74d36d3",
+     "41c58e6cc0de01b614a55da48b13990bea8294b1bd9158825efb6361f0563ff1",
+     "931781f02d1514021f57b79018eda96d1561d47891cd7545d0923c0ac8f5aefa",
+     "3a094708de0c7c43859e6457f75fa260687c750a23cbc442d1c4e0bcc4599a1d",
+     "1dd6ae1f42884410de15a63e8b09748d6d4b9914d98290be81b30f0d0ad4aa2a",
+     "03eb6d72f876cb5a06cb3c00ae504c81451cf82ea171c35b050adfbf91af4420",
+     "74b4d8c766dabe1f9ea7442d31ebb3b25578177ed419a0441ff3cf141944f6f7",
+     "b8bdd937e2c49f6600922fd14a471a07c1946696857bd490ae97dab0f56e0ad3",
+     "1b7306878bb4a37bf56e4603603648d1bc10da42b97cdc0c496536f6113115d9",
+     "a2c615f8f5146a0e196cc373ad474cd29d0a46fda4c18031b786500ae71011c4",
+     "a0580c424c6bc4371328892c3f2c52fdfcc7b5bf97abcdd40cdef13bfbfe97f6",
+     "349c42507834497a06ee78b987ff5eb9c019c4ad8107dba0a0154dac3239cc24",
+     "551a4ba1512b92c8b63453f8955c2be24c6067750c8f3ea9627c52949fb55ced",
+     "81bf6bdcaa19f241d58a413eb0780ab3b3bcf2e2f89e26094f113252c875761a",
+     "b26cc15e154e0926454bc7a844a0eba5f3a85bf29973463187548f7bb3968ba5",
+     "bd22afaa6153ecf4390c0b3be8d14a2c3fb82f3ab39527fee8f71dadf1cddad0",
+     "fdcba85934113044977aeeb01a3bf78dda19b07e87b6ed4c4e749a6706f52eb0",
+     "c1eb87746b64f91599127dc24bc4059948f836209db65b4ee1f95c4c235008d0",
+     "d341be16badc45c24150ad0a453e30fbc44c655fcd69f0b41f4782947a743fea",
+     "eef8e7c9e46c15bd040b6a1676f249c83389d2eb08de5585dee4ad4efc3657c2",
+     "66bb0afe54206433439e6e475b7371b537eb6232fd4f240f588b7d86d95f9036",
+     "ae5fea6c512bfaecea2aeec115879d5ef70f37203fe0200ad3803cee28b7979b",
+     "2b7be7c5961240c18500ed4be5b6a642d75972d30a517c04ee2edde645fc3803",
+     "4aff4c75ffc169eab283273c964e84ed0f0db453efd697f7977e4b0c4e478600",
+     "6822a5cea27e46ce2c77555ac18109ff294266035aa74bbf5d479d2ec73e8a76",
+     "32c6e813b623ad431f72fde57b209d89fdaa97d4fd4dafd73afd0226ded693cc",
+     "143d497aa9c9c5dcc770b628c9a39c665cc87ce9d9b646fb583f2a65b50696eb",
+     "c56df53ecfc77b2c3c482d86dae1b128e5ca8d1d2d0c41a3cc9e6b1883235520",
+     "8a12c0e2cb3c03898ac1bec3271bf5acac56e4201976773a93d7fe32694df5cb",
+     "d4b79e362a5776201d81e36da17b71bac874833ad55ab009558b66b5aeb0efa7",
+     "1bf06ad12d2aa8ba07a4c2db553d1ed3c8b55e86e26820ac9e4766573bba218a",
+     "79f2331088f80b68c2e1dc82258ec76e47e61d4e75ddcd0579991c0feb081859",
+     "45e19c86c71ea7e6a42cefd3c96ce6360967185509c169a7c41c34bb7edaf26b",
+     "d6714b585acce455461a5b3078925b714f0e9c494ec0fe2d4d5a8659c2335885",
+     "1912bdfafa50f64e2e5da5b77726b8c1606266d5855ad1c1a329061ff075e69a",
+     "cddcbe73ebef65b4797725c3920747e664c268446ba8f0b7917dc4d137c40a16",
+     "168245e48e19b412f3d466fe80247cd1ce9293da2ae1856c1c51d07221e5dc90",
+     "2b938923b43c53e08df32ba392963ccd8afe4170f0858570f6e305fd386e1cc1",
+     "4c8756f56bec89fc79b57e728d6cccda8a1374cc4869c5f1eed5273267c7f0ec",
+     "62a35ad74036b5b164e70d1a89edecc3e143a9f8c5be46007b8a22e068e0b4c4",
+     "18b131ccc6b8ca2714871e97aa01bf1c9bd7f20891a0f14dba477700da21b57f",
+     "6c42e45fef635487896b82b87ed472635ff3c28625076a29256c39f14e0525f5",
+     "8996dd75a38e9a957e9d447ee9aaf941e72a0b078064aad89b8d4e56b7f25416",
+     "9a212c1bdc0294508d3b08ad73d090ef449acc607df04a0500c91c461d85b410",
+     "cdfb0d8ad136139713c9d8fc6de6c32cc5dc00828fffd247cc1b5846052e1dfe",
+     "f563b49d429dcb1754ee28b1cb4a86c0eaed83791b8ef107768b41c719f587c8",
+     "3211c26a31cbf42f0b0104a538c2a9970ce1d6c6712d76146923157ad2301ffa",
+     "1826c8737f0cab9fd1becd7a1687b3a8e6a1f200607169c93ad317fb500034f7",
+     "cbbc7506eb7af068b3cc302680a34f1a2b58daa21d383d52c757d0b789b85a6e",
+     "72282ad7a4f1920bbbb44295d333332a66f9d12c33ace32174705c90a38135c5",
+     "c8e8bd6bc502628e1e3780d8aaab656071c6659915920de49c44a25d5c416a05",
+     "f25554be479e58af269f0568cec31f11852f5286e8f205b3ba073a5f92faba06",
+     "01df9b26887e51ad975d0cb0a6028156f9dae0535326199b7b6b3a174ec34d81",
+     "fe158f9b61af22e4f8280b4a5b9434c3e3c606d9e35566bdc74c5a262305387c",
+     "d508bad071db10e55d5c069703e3e39b93d092700117b2984f2ba2bb08310337",
+     "f6d720a08049984703360b2f1317940947c1346f7f02b9fee759eef4ddc9f523",
+     "e85090deffb8fdf6cc8ef06d236f4c5eee72977a986f89b1b69f20e2f8e25ffe",
+     "d7e6701bfe451b3ddf9eff01a026889f96e417c29e8d0218db6ab8c3d086d3e4",
+     "898281e4cbaaee2ceb28d117674a2ecf812a138413eb8be9ba8e70204c5cd0a7",
+     "1562e99ee1126e56e706f701237f081356a4d085f02ca1a599c7f2308e3d02ad",
+     "833240c78eb09a2f537d083f5aeeff2b5d4b069b37b90ee27755a09138621bce",
+     "d69cadd2a33741e7a0b6fe5e58340795ee92475f25cac69cd9cce9bb31981912",
+     "4cfcec5bd23734d85748629bd7fa337e3e3678bf090cf47851fed6a94b563d31",
+     "3f9a5034bf71afaba40aaeb7dda8b4200377f83caac3a29367192a592ef339b4",
+     "7bda68b5e18500c93622c11ff93fcf078ac11b6ccf0b441b5cc9ebd55c04abe1",
+     "409b31e25d09816d4a818d775c178169607bef1aded417f2f43f2743cd5b68d2",
+     "c851b5f1c5246450442e53441f50ef2fc3f1f438a43c4255b5294787f6187b05",
+     "83ba7666c78975661114be63e03e02ff2b1e3a74cc693b76b94caf35dc11022d",
+     "c8099c2194a6399a13f7475d81d818c1f4ee266f7d71d3799428700328b638aa",
+     "e130c1983e837d11380911e2efbd4c96a8e3d351d4b5fc65cf336e2661339a5f",
+     "20bcafde45a49638d0a5c9564c70ffe421d8ed646194e09b40915227bbbeaa87",
+     "1fc060d261114405403bb48b8b816ffec7f10504a64045f1226941cc2a0d489c",
+     "31626a78c7099c4135d9f2e7622c04a67c3b7b8b0443cb212af02fe2fa5dd21e",
+     "781df287daf7f3e3fdd1ba7e51328e8fbace2aa6fc8df18c6d20333ae7146a14",
+     "9a9c84b88415f94db23ea0c709cfefb0f744633c786c200ec690372908eedb9e",
+     "507f515cc51c492cf723d936e81d32e3294183a839c2d10dbdf81673ffa37007",
+     "0e3e5e6f18d845821bf293f6d8a698d341e98abd2e8e8479aa04ce46b94a7925",
+     "58870bcd5a27da6b282e79b901a0546fbfdf56ec983f3b01d6aaafcd05146ad5",
+     "362e7a8d34eca0e139ba4208fd930b03f87a18f2eac660ef511a8db047602a81",
+     "f8125277f68cdef5d1ea0b73decfe714ab8ca00fa2fc6caddfd6ec5de7f65041",
+     "e80e7d8f571edd6a1c03e04bfb148b6fd2134d5e05949ea6ff32364de4124fd8",
+     "3c6b40dee30e1921f1b002bd508f89d0f262ef3f4f96651d070d000c99fa6a22",
+     "36942922d22258e48c353b4158b9fc871ccff4bdb9673159a47d764ec22157c6",
+     "52c9e88a96433af1ce4cfe6262f5653ccbd4970007f4b4a008cc7f0cb50029f6",
+     "778fc7674f901f04ff3990950980ea52ea2788bbfde7e3e7b3b839ebd6f70f39",
+     "d69a160529f091445f3391545b29609eae37377ca126799d465b0cc7192bcff8",
+     "c6081dbb673f788e3c0393c402196a6230fccc1058eb5a5bbf1aa2f034bec935",
+     "8690078dbd5808f3e932c32329b1497a5f592ffc2ef41078def5e41c3e2b5dcf",
+     "5f4387b79af76755d64b6e08e33fbef9903e8d0cdea5dc7b430f2d55b819eec7",
+     "09b55207d4935cc8a52e4d21c82b649e9388ff67be4adc9373ee42d49c06003a",
+     "8b20bb735176d11b83ccf60100e79636cbfaef0ed5ed9bbfefdaa3550ce1afad",
+     "d8d83dbac843e839e60636a5f165713c5940fe296b55802b7ad9b0a6cc09eafa",
+     "9901d34787afe4aaf2c98986cc6bfeb339b82d642dff18185b94d2d3f15662b3",
+     "6c42e6cfe26886a7e2f873bf83063929a18bfd2fc3652cc3a88e92785948163e",
+     "e090304138bfd92a94b417e7b3975873e56848aea405a78261685464f425549b",
+     "27e5498d9ecbdaa2c6d8e1e7af280cf4859eafb53c713f5fa27d8256cf43750c",
+     "9313dfff97c0ac6efd9989498aa824007ff6c087f4df802503f0342a5210e569",
+     "eee64dce7f62e85c9edc9c622de6be63ab68de4c7a93a1599e891610d012a48d",
+     "8e178ff3b4649a6a14013cdf7c5bd186be45bb0cd748fe3d3c115246edbfe4b3",
+     "95561d882bc28b00b5f686e3c250d511fb6d46495bfda981217c2bd28d7cd2a4",
+     "d4b6e65de941c0a0e584f0cb615985e1c42bef1af4a291b3e2515b276086f957",
+     "c201fcd2d9bd8df6bac1f98cfde4869a574ee566f012b0b5a77c4c69a4bdb62f",
+     "c12f991b6802c603adc0c3e0c81df235e6b2e440df19a567a65d0eae8e4fb97f",
+     "8a57662cfc16f1f4e0efcc4318b31dc181c776471735fc51461e4309364140a8",
+     "de7c616b3e2c57e7834309ad5c5d190b12ba5fd589d8df7aa7936b15ec02035b",
+     "977d8e7af2da35a1ff8f18c015f3c401029c8badfa0e4791d36d35c3c01f5504",
+     "6f8df757aae21acf6069c217c5d6645472e8792a2b13be8b7d7c1b9270362b42",
+     "85b289b5a7a1fdfd4bb7cdbc12b0da408340b290539459a5467cb48d51ebc3ec",
+     "644e8472a64c78fe270a72f3a4a47f7811678b8d31d54f9f4855500534a421f9",
+     "010523c7f03dd3d25a09836cf3c4ae75003ff09be76807430ef101ce0c1854f7",
+     "70957accfe2faa6c47786ac794f31c8c5cf559c587e4f2a3ccca00e58e9be811",
+     "dbd2891318937d7b0bc9f584f913fe62eb6cf27621bb56195c0199d9d48bb8cb",
+     "c9e3ec0283e4ea3bd2db9fd913479a4ea055a6b5a7d1758a2bd7351ebd6e79ab",
+     "a78c75e077838464c33af9c6974f903306469179dd253f4f42d1e8cefe2e5887",
+     "113fd2748fc53174cd61fef07879e0597a32228e313a25d15de1d20009d49abe",
+     "a2b0ecd343d6681d9c2742479c35374e15eb362a4ca6c2fb421018169beaf5c7",
+     "f4149fc34cb543d1b2eba22806a49f6656412224cb39447ff0a61c310860eadf",
+     "d5e56340c5afb37a9cac5f2c4333b81a24682a5f1cfcc2fcd29f0c1ac5c9882e",
+     "dc306b5638d1d36447a516d98711314916e93be972f6325c109a05cab674910c",
+     "7981b88dcea07d1c6e8dd137825df577ea196f93f5c8ab1c9e0c2765a03ed86d",
+     "ac4bcb23cc1807c365f5c067768b21f520f58fd9c70da2a54ffb343102ebde7d",
+     "5ab5ec1b12b66feda1c611a23c18a90f12f5165ef416be14c10c94846e1c2eb1",
+     "39ddb0e8068c634e4c058fd888664e987ab6ff12863bd7f328ebfa8df24084ef",
+     "73bdf51ee5f00f6eeb93c008b6751f53200b773f1cf77055bd0e2a0fe346523b",
+     "2617ae3c25483e0943b55aafa7fe346e9cb55f7128cb4a9d932c4e3506f437f8",
+     "f8c5a646cbcaa110ad3621c6a7fe789c3af2fdc863f77af79a08ef07ba2eb92c",
+     "d9b858d0dda2202d11b3cafa1d14fa05463bec59cbbc2ab6316a645f07e943ce",
+     "ba97766c2a4af1e11accaa8a719bdf1c98711f94327ba2cdb11e65c46b6be98c",
+     "e1308e2e6f2b7cd5350f6482b26a2e7799b64b60559d5ac00a00091fdeb27277"
+    ]
+   }
+  },
+  "removed_total": 655,
+  "rows_before": {
+   "base": {
+    "rows": 9952,
+    "share": 0.38235746119563546
+   },
+   "family": {
+    "rows": 2984,
+    "share": 0.11464576609804826
+   },
+   "haiku": {
+    "rows": 10048,
+    "share": 0.38604579683417856
+   },
+   "songs": {
+    "rows": 3044,
+    "share": 0.1169509758721377
+   }
+  },
+  "rows_after": {
+   "base": {
+    "rows": 10054,
+    "share": 0.3881253860407659
+   },
+   "family": {
+    "rows": 2860,
+    "share": 0.11040765904879556
+   },
+   "haiku": {
+    "rows": 9946,
+    "share": 0.38395614576899323
+   },
+   "songs": {
+    "rows": 3044,
+    "share": 0.11751080914144534
+   }
+  },
+  "extra_sources": {}
+ },
+ "frozen_eval": {
+  "contract.json": {
+   "sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+   "identical": true,
+   "frozen_file_sha256": "a7ac13d4d8b47881f7c86a8a6040111d99c698249e8a835bc4a360530456e485"
+  },
+  "development": {
+   "rows": 1231,
+   "rows_sha256": "a31f72d25188217c570b87335a6a1bd04f9958aeba9fadf47356bc0b5521c570",
+   "identical": true,
+   "frozen_manifest_sha256": "7b2b24fb8870428c2179cb83690bf423ccc368fdf28df7ad2540c624ea944f70"
+  },
+  "historical": {
+   "rows": 300,
+   "rows_sha256": "a38cb324ae7034d812866e2e1ff367c41bc5b3ac913980a9b92b532b9d5e44dc",
+   "identical": true,
+   "frozen_manifest_sha256": "defbbc8455fda366aa26eafa790161a6dab8c5c64f6e65aa78e6d41a1a51753a"
+  },
+  "compression_development": {
+   "rows": 309,
+   "rows_sha256": "f57ebadc358228b091a12f30c4b6d4817f48abc45dfe9bb80b451e85c665bf43",
+   "identical": true,
+   "frozen_manifest_sha256": "b0ab5260e32d49e876c2ee4d5fa6205ae84fdeeb93880d923f71a5cc8823c658"
+  }
+ },
+ "eval_rows_sha256": {
+  "development": "a31f72d25188217c570b87335a6a1bd04f9958aeba9fadf47356bc0b5521c570",
+  "historical": "a38cb324ae7034d812866e2e1ff367c41bc5b3ac913980a9b92b532b9d5e44dc",
+  "compression_development": "f57ebadc358228b091a12f30c4b6d4817f48abc45dfe9bb80b451e85c665bf43"
+ },
+ "train_parents_overlap": {
+  "turns": {
+   "distinct": 125851,
+   "repeated": 1801,
+   "cross_split": 341,
+   "examples": [
+    {
+     "text": "do you have any friends",
+     "rows": 51
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 47
+    },
+    {
+     "text": "what do you eat",
+     "rows": 47
+    },
+    {
+     "text": "what about your friends",
+     "rows": 41
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 41
+    },
+    {
+     "text": "what do they eat",
+     "rows": 39
+    },
+    {
+     "text": "what do you like to do",
+     "rows": 36
+    },
+    {
+     "text": "what about your family",
+     "rows": 34
+    },
+    {
+     "text": "what s your favorite thing to do",
+     "rows": 34
+    },
+    {
+     "text": "what do you like to eat",
+     "rows": 31
+    }
+   ]
+  },
+  "wording": {
+   "distinct": 122967,
+   "repeated": 2797,
+   "cross_split": 530,
+   "examples": [
+    {
+     "text": "thank you ENTITY",
+     "rows": 92
+    },
+    {
+     "text": "thanks ENTITY",
+     "rows": 80
+    },
+    {
+     "text": "do you have any friends",
+     "rows": 51
+    },
+    {
+     "text": "ENTITY what do you want to do tomorrow",
+     "rows": 50
+    },
+    {
+     "text": "ENTITY what are you proud of",
+     "rows": 47
+    },
+    {
+     "text": "i feel so lonely today no one wants to play with me",
+     "rows": 47
+    },
+    {
+     "text": "what do you eat",
+     "rows": 47
+    },
+    {
+     "text": "hi ENTITY i don t feel so good today my tummy hurts",
+     "rows": 41
+    },
+    {
+     "text": "what about your friends",
+     "rows": 41
+    },
+    {
+     "text": "why don t scientists trust atoms because they make up everything",
+     "rows": 41
+    }
+   ]
+  },
+  "response_8grams": {
+   "distinct": 1105712,
+   "repeated": 23205,
+   "cross_split": 3862,
+   "examples": [
+    {
+     "text": "one two three four five six seven eight",
+     "rows": 79
+    },
+    {
+     "text": "three four five six seven eight nine ten",
+     "rows": 59
+    },
+    {
+     "text": "two three four five six seven eight nine",
+     "rows": 59
+    },
+    {
+     "text": "do not know that word but it sounds",
+     "rows": 47
+    },
+    {
+     "text": "i do not know that word but it",
+     "rows": 47
+    },
+    {
+     "text": "i have never seen one but it sounds",
+     "rows": 45
+    },
+    {
+     "text": "i puff up when i am scared but",
+     "rows": 45
+    },
+    {
+     "text": "never seen one but it sounds like a",
+     "rows": 45
+    },
+    {
+     "text": "not know that word but it sounds like",
+     "rows": 45
+    },
+    {
+     "text": "i puff up when i am scared of",
+     "rows": 44
+    }
+   ]
+  },
+  "names": {
+   "distinct": 142,
+   "repeated": 142,
+   "cross_split": 136,
+   "examples": [
+    {
+     "text": "misty",
+     "rows": 264
+    },
+    {
+     "text": "kelp",
+     "rows": 236
+    },
+    {
+     "text": "button",
+     "rows": 235
+    },
+    {
+     "text": "muffin",
+     "rows": 227
+    },
+    {
+     "text": "cloud",
+     "rows": 226
+    },
+    {
+     "text": "ollie",
+     "rows": 221
+    },
+    {
+     "text": "orbit",
+     "rows": 220
+    },
+    {
+     "text": "sky",
+     "rows": 220
+    },
+    {
+     "text": "spot",
+     "rows": 220
+    },
+    {
+     "text": "ash",
+     "rows": 219
+    }
+   ]
+  },
+  "nouns": {
+   "distinct": 75,
+   "repeated": 75,
+   "cross_split": 75,
+   "examples": [
+    {
+     "text": "a traffic jam",
+     "rows": 102
+    },
+    {
+     "text": "soup",
+     "rows": 102
+    },
+    {
+     "text": "a ticket",
+     "rows": 100
+    },
+    {
+     "text": "a scarf",
+     "rows": 99
+    },
+    {
+     "text": "the internet",
+     "rows": 99
+    },
+    {
+     "text": "a balloon",
+     "rows": 98
+    },
+    {
+     "text": "a train",
+     "rows": 98
+    },
+    {
+     "text": "a bicycle bell",
+     "rows": 96
+    },
+    {
+     "text": "a backpack",
+     "rows": 95
+    },
+    {
+     "text": "email",
+     "rows": 95
+    }
+   ]
+  }
+ },
+ "limitations": [
+  "8-word fragment and entity-normalized matching are lexical heuristics, not semantic deduplication.",
+  "Generator versions were not recorded historically; current source hashes cannot prove old inputs.",
+  "New held-persona probe excludes axolotl from fine-tuning, not prior-stage natural language exposure.",
+  "Full TinyStories training text is not screened for probe entities."
+ ]
+}

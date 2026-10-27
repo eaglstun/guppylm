@@ -56,6 +56,46 @@ py -m tools.aquarium.v52.evaluate --contract runs/v52/contract-v1/contract.json 
 py -m unittest discover -s tests -v
 ```
 
+### contract-v2 (train-only curation v2)
+
+`tools/aquarium/v52/curate.py` applies versioned, train-only curation before augmentation:
+looping rows dropped, at most 40 rows per assistant 8-gram (counting sequences exempt),
+at most 40 rows per entity-normalized user turn (courtesy turns exempt), and rows of a
+creature name above 1.25x the median renamed to the least-used training names. The cap
+backfills from the same v1 shuffle, so base stays 20,000 rows. `--curation 1` reproduces
+contract-v1 train rows exactly. `--frozen-eval` fails unless the contract and the
+development/historical/compression-development rows equal the named contract's.
+The audit is copied to [audit-v2.json](audit-v2.json).
+
+```bash
+py -m tools.aquarium.v52.prepare --data "$AQ/data_aq" --out runs/v52/contract-v2 \
+  --frozen-eval runs/v52/contract-v1
+# Optional train-only source (jsonl file or directory, data_aq row format; repeatable).
+# Rows go through the same validation, dedup, reserved-entity and probe-collision checks,
+# are quarantined if they share a normalized group with any eval row, and never enter eval splits.
+#   --extra-source NAME=PATH
+```
+
+### contract-v3 (curation v3, the current default)
+
+Curation v3 uses the same selection as v2, then applies the hand-written rewrites in
+`tools/aquarium/v52/rewrites/trait_echo_v1.jsonl`. These replace assistant sentences that
+recite the persona's system-prompt trait list. Detector: the assistant turn contains, as
+whole normalized words, the leading trait list of `PERSONAS[persona][2]` (the words up to
+and including the one after the first "and"/"but", e.g. "grumpy but fair"). Each entry is
+pinned to the original turn's sha256, and any mismatch fails. A uid that is not selected
+also fails, except when `--extra-source` shifts the selection; those are then recorded
+under `rewrites.missing`. `--curation 2` still reproduces contract-v2's rows.
+
+```bash
+py -m tools.aquarium.v52.prepare --data "$AQ/data_aq" --out runs/v52/contract-v3 \
+  --frozen-eval runs/v52/contract-v1
+```
+
+Manifests keep format `version` 1; the generator is `v52.prepare/v2` and metadata records
+`curation` and `extra_sources`. Eval-split manifest file hashes differ from v1 only because
+their metadata records the new code hashes; their rows are identical (see `frozen_eval`).
+
 The archived behavior generation preceded static-only import/list formatting and
 the stricter test-access check. The lookup tie-break is now explicitly lexical so
 it no longer depends on Python's set hash order. Results are never overwritten.
@@ -113,3 +153,24 @@ verifies the referenced files, contract, split and evaluated checkpoint, then ac
 `--split locked_test --selection path/to/selection.json`. This is an audit guard,
 not an automatic release decision: human review, full-run confirmation, compression
 quality, parity and real phone measurements remain separate requirements.
+
+### contract-v3-talkie and the first matched full runs
+
+```bash
+python3 -m tools.aquarium.v52.respell runs/v52/talkie/whimsy-v1/chat.jsonl
+python3 -m tools.aquarium.v52.talkie_review --out runs/v52/talkie/whimsy-v1/chat_reviewed.jsonl
+py -m tools.aquarium.v52.prepare --data "$AQ/data_aq" --out runs/v52/contract-v3-talkie \
+  --frozen-eval runs/v52/contract-v1 \
+  --extra-source talkie=runs/v52/talkie/whimsy-v1/chat_reviewed.jsonl
+
+# Matched A/B/C on the talkie contract, then A on plain v3 (confounded talkie ablation).
+for run in v3-talkie:A v3-talkie:B v3-talkie:C v3:A; do
+  contract=${run%%:*}; candidate=${run##*:}
+  py -m tools.aquarium.v52.train \
+    --train "runs/v52/contract-$contract/train_$candidate.json" \
+    --development "runs/v52/contract-$contract/development.json" \
+    --historical "runs/v52/contract-$contract/historical.json" \
+    --data "$AQ/data_aq" --init "$AQ/runs/aq-td/best.pt" \
+    --out "runs/v52/full-$contract-$candidate" --steps 15000 --seed 42 --device mps
+done
+```

@@ -89,17 +89,17 @@ development and record calibration IDs. Legacy invocations retain their old beha
 See [audit.json](audit.json), [contract.json](contract.json), and [rubric.json](rubric.json).
 The rubric was written before either continuation started.
 
-| Material | Rows/prompts |
-| --- | ---: |
-| Base conversations after cap | 20,000 |
-| Train song/family extras | 6,028 |
-| A: two noun swaps, after deduplication | 141,221 |
-| B: four noun swaps, after deduplication | 152,282 |
-| C: A plus bounded hand-authored reference conversations | 148,605 |
-| Model development | 1,231 |
-| Compression development | 309 |
-| Historical development | 300 |
-| Behavioral development / locked test | 320 / 320 |
+| Material                                                | Rows/prompts |
+| ------------------------------------------------------- | -----------: |
+| Base conversations after cap                            |       20,000 |
+| Train song/family extras                                |        6,028 |
+| A: two noun swaps, after deduplication                  |      141,221 |
+| B: four noun swaps, after deduplication                 |      152,282 |
+| C: A plus bounded hand-authored reference conversations |      148,605 |
+| Model development                                       |        1,231 |
+| Compression development                                 |          309 |
+| Historical development                                  |          300 |
+| Behavioral development / locked test                    |    320 / 320 |
 
 Each behavioral split contains 120 real-noun, 80 invented-noun, and 20 each of name,
 memory, missing-memory, voice, song/family, and held-persona prompts. Duplicate complete
@@ -125,12 +125,12 @@ the completed v5 and v5.1. These are **not** the planned 15,000-step A/B/C compa
 The table evaluates each step-400 checkpoint to expose the intervention, even though
 loss selected step 0. It is not a checkpoint-selection result.
 
-| Checkpoint | Real noun | Invented noun | Name | Memory | Historical token NLL | Story NLL |
-| --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| v5 baseline | .1139 | .0000 | .5000 | .2333 | 2.06835 | 1.58524 |
-| v5 + C screen | .0944 | .0292 | .5333 | .3833 | 2.06679 | 1.58437 |
-| v5.1 baseline | .0750 | .0042 | .5500 | .3833 | 2.07259 | 1.58464 |
-| v5.1 + C screen | .1278 | .0167 | .5000 | .3833 | 2.06880 | 1.58351 |
+| Checkpoint      | Real noun | Invented noun |  Name | Memory | Historical token NLL | Story NLL |
+| --------------- | --------: | ------------: | ----: | -----: | -------------------: | --------: |
+| v5 baseline     |     .1139 |         .0000 | .5000 |  .2333 |              2.06835 |   1.58524 |
+| v5 + C screen   |     .0944 |         .0292 | .5333 |  .3833 |              2.06679 |   1.58437 |
+| v5.1 baseline   |     .0750 |         .0042 | .5500 |  .3833 |              2.07259 |   1.58464 |
+| v5.1 + C screen |     .1278 |         .0167 | .5000 |  .3833 |              2.06880 |   1.58351 |
 
 The v5.1 real-noun gain is +.0528, paired prompt-bootstrap 95% interval
 [+.0167, +.0917]. Invented nouns improve only +.0125 [0, +.0292], below the
@@ -154,6 +154,35 @@ been filled in. The complete frozen manifests and resumable checkpoints remain l
 
 `inference.pt` contains only float weights/config/step and provenance; `final.pt`
 also includes optimizer and resume state. Checkpoint hashes are in the result summary.
+
+## Second data pass: contract-v3 and talkie visitors
+
+Train rows only; `contract.json` and the development, historical and compression
+splits are byte/row-identical to contract-v1 (`frozen_eval` in each audit).
+
+- **Curation v2** ([audit-v2.json](audit-v2.json)): caps of 40 rows per repeated
+  assistant 8-gram ("i do not know that word": 349 → 143 rows) and per repeated user
+  turn ("do you have any friends": 121 → 40); 141 surplus "Misty" rows renamed
+  (it is listed twice in `personas.NAMES`); 5 looping family rows removed.
+- **Curation v3** ([audit-v3.json](audit-v3.json)): 923 hand-written rewrites of
+  assistant turns that recite the system-prompt trait list ("I am Duke, and I am
+  huge, slow, and kind" → "I am Duke. I am as long as a bus, I move like a cloud…").
+  The detector hit 924 turns in 916 parents; one scenic false positive is left.
+- **talkie source** ([talkie/](talkie)): 316 conversations in which
+  `postpostmodern/talkie-1930` (pre-1931 text) plays a whimsical 1930s visitor and the
+  fish replies are authored in-session by Claude. Lines were filtered lexically, respelled
+  to American forms (`respell.py`), screened by Haiku agents for content and for
+  hidden-visitor-record leaks, and adjudicated in
+  `tools/aquarium/v52/rewrites/talkie_whimsy_v1_review.json`. That review overturned all
+  seven predator-diet/whimsy rejects, added a "You are talking with …" clause to 37 system
+  prompts, replaced 51 turns and truncated 9 conversations. It is 0.76% of A's
+  target tokens. Fish replies come from a single author and share its tics.
+
+`contract-v3-talkie` adds the talkie rows through `--extra-source`. Doing so is **not a
+pure addition**. The capped family selection shifts by 48 parents, 7 trait rewrites lose
+their parent, and the per-stream augmentation draws shift, so about 34k augmented
+A rows differ from contract-v3. A v3-vs-v3-talkie comparison therefore confounds talkie
+with resampling noise of roughly seed scale. A/B/C within one contract remain matched.
 
 ## Reproduction and remaining gates
 
