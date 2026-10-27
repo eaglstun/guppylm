@@ -1,9 +1,10 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest additions: [contextual Talkie vocabulary](talkie-vocabulary.md), plus [full-run snapshot](full-runs.md) (A completed; B in progress at
-inspection) and [uppercase urgency/shouting data](uppercase.md) (v2 includes selected
-capitalized replies; not yet trained). The screening report below describes the
-earlier experiments; statements that full runs were not run refer to that stage.
+Latest work: [context diversity and sampling weights](context-sampling.md), following
+completion and behavioral checks of the first [contextual vocabulary](talkie-vocabulary.md)
+run. That run included the [uppercase examples](uppercase.md). The earlier
+[full-run snapshot](full-runs.md) and screening report below record their original
+inspection stages; their incomplete/not-yet-trained statuses are historical.
 
 Worktree: `/private/tmp/guppylm-v52-impl`, branch `implement/v5_2`.
 Latest main was fetched and merged through **6dc7248**, including the earlier

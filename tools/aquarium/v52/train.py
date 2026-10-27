@@ -7,6 +7,7 @@ import argparse
 import collections
 import copy
 import importlib.metadata
+import itertools
 import json
 import math
 import os
@@ -50,6 +51,34 @@ def save_atomic(value, path):
     temp = path.with_suffix(".tmp")
     torch.save(value, temp)
     os.replace(temp, path)
+
+
+def source_sampling(rows, specifications):
+    """Fixed shares of dialogue draws; remaining mass is uniform over other rows.
+
+    Explicit shares sample with replacement. Story slots remain separate. With no
+    shares, return None so the historical shuffled-pass sampler stays unchanged.
+    """
+    if not specifications:
+        return None, {}
+    counts = collections.Counter(r["source"] for r in rows)
+    shares = {}
+    for spec in specifications:
+        try:
+            source, value = spec.split("=", 1)
+            value = float(value)
+        except ValueError as exc:
+            raise ValueError("source-share must be SOURCE=FRACTION") from exc
+        if source not in counts or source in shares or not math.isfinite(value) or not 0 < value < 1:
+            raise ValueError(f"Invalid, duplicate, or missing source share: {spec}")
+        shares[source] = value
+    remaining = 1 - sum(shares.values())
+    other_rows = sum(n for source, n in counts.items() if source not in shares)
+    if remaining <= 0 or not other_rows:
+        raise ValueError("Source shares must leave positive probability for other training rows")
+    weights = [shares[r["source"]] / counts[r["source"]] if r["source"] in shares
+               else remaining / other_rows for r in rows]
+    return list(itertools.accumulate(weights)), dict(sorted(shares.items()))
 
 
 @torch.no_grad()
@@ -96,6 +125,8 @@ def main():
     ap.add_argument("--warmup", type=int, default=500)
     ap.add_argument("--dropout", type=float, default=.1)
     ap.add_argument("--story-mix", type=float, default=.15)
+    ap.add_argument("--source-share", action="append", default=[], metavar="SOURCE=FRACTION",
+                    help="Fixed share of dialogue draws, with replacement; repeat for multiple sources.")
     ap.add_argument("--eval-every", type=int, default=1000)
     ap.add_argument("--seed", type=int, default=42)
     ap.add_argument("--device", choices=("cpu", "mps"), default="mps" if torch.backends.mps.is_available() else "cpu")
@@ -111,6 +142,8 @@ def main():
     device = torch.device(a.device)
     rng, prng = np.random.default_rng(a.seed), random.Random(a.seed)
     train, train_hash, train_metadata = read_manifest(a.train, "train")
+    cumulative_weights, source_shares = source_sampling(train, a.source_share)
+    a.source_share = source_shares  # Canonical recipe; option order does not change resume identity.
     dev, dev_hash, dev_metadata = read_manifest(a.development, "development")
     assert_disjoint(train, dev)
     historical, historical_hash = [], None
@@ -209,9 +242,12 @@ def main():
         if step == end:
             break
         n_chat = a.batch - n_story
-        while len(order) < n_chat:
-            order.extend(prng.sample(range(len(train_ex)), len(train_ex)))
-        pick, order = order[:n_chat], order[n_chat:]
+        if cumulative_weights is None:
+            while len(order) < n_chat:
+                order.extend(prng.sample(range(len(train_ex)), len(train_ex)))
+            pick, order = order[:n_chat], order[n_chat:]
+        else:
+            pick = prng.choices(range(len(train_ex)), cum_weights=cumulative_weights, k=n_chat)
         x, y = aq.pad([train_ex[i] for i in pick], a.seq)
         for i in pick:
             count = counts[train[i]["source"]]

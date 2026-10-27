@@ -1,0 +1,693 @@
+{
+  "configuration": {
+    "steps": 600,
+    "seed": 42,
+    "lr": 5e-05,
+    "warmup": 60,
+    "source_shares": {
+      "talkie_vocabulary": 0.05,
+      "uppercase": 0.05
+    },
+    "checkpoint_policy": "final step 600 for both, not best-checkpoint selection"
+  },
+  "paired_weighted_minus_uniform": {
+    "real_noun": {
+      "difference": -0.03333333333333333,
+      "paired_prompt_bootstrap_ci95": [
+        -0.058333333333333334,
+        -0.01111111111111111
+      ],
+      "prompts": 120
+    },
+    "invented_noun": {
+      "difference": 0.0,
+      "paired_prompt_bootstrap_ci95": [
+        0.0,
+        0.0
+      ],
+      "prompts": 80
+    },
+    "name": {
+      "difference": -0.03333333333333333,
+      "paired_prompt_bootstrap_ci95": [
+        -0.11666666666666665,
+        0.03333333333333333
+      ],
+      "prompts": 20
+    },
+    "memory": {
+      "difference": -0.05,
+      "paired_prompt_bootstrap_ci95": [
+        -0.13333333333333333,
+        0.0
+      ],
+      "prompts": 20
+    }
+  },
+  "runs": {
+    "uniform": {
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.7634534451686465,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7719985455274583,
+            "sources": {
+              "base": {
+                "loss": 1.6104481762611729,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9405648045789667,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.997506676313083,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6397287667316225,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5845423340797424,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5845423340797424,
+            "sources": {
+              "story": {
+                "loss": 1.5845423340797424,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.069050313130849,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065969741344452,
+            "sources": {
+              "historical": {
+                "loss": 2.069050313130849,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 300,
+          "development": {
+            "loss": 1.7671782218284646,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7757495552301408,
+            "sources": {
+              "base": {
+                "loss": 1.6156921375587603,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9412901798948692,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 2.0041861019259337,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6449893714149852,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5911788165569305,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5911788165569305,
+            "sources": {
+              "story": {
+                "loss": 1.5911788165569305,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0759614663653903,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.072180211544037,
+            "sources": {
+              "historical": {
+                "loss": 2.0759614663653903,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 600,
+          "development": {
+            "loss": 1.7604404443993222,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7691949993371963,
+            "sources": {
+              "base": {
+                "loss": 1.6080210434021487,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.936145198969711,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.9949907767096597,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6393134523995458,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5850494742393493,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5850494742393493,
+            "sources": {
+              "story": {
+                "loss": 1.5850494742393493,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.06529755504181,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0619744300842284,
+            "sources": {
+              "historical": {
+                "loss": 2.06529755504181,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "base": {
+          "examples": 6234,
+          "input_tokens": 1635318,
+          "target_tokens": 689291
+        },
+        "haiku": {
+          "examples": 6285,
+          "input_tokens": 1399027,
+          "target_tokens": 555103
+        },
+        "songs": {
+          "examples": 1759,
+          "input_tokens": 333169,
+          "target_tokens": 141501
+        },
+        "family": {
+          "examples": 1623,
+          "input_tokens": 299475,
+          "target_tokens": 102942
+        },
+        "story": {
+          "examples": 3000,
+          "input_tokens": 1536000,
+          "target_tokens": 1536000
+        },
+        "talkie": {
+          "examples": 225,
+          "input_tokens": 41593,
+          "target_tokens": 13430
+        },
+        "uppercase": {
+          "examples": 61,
+          "input_tokens": 7381,
+          "target_tokens": 1620
+        },
+        "talkie_vocabulary": {
+          "examples": 13,
+          "input_tokens": 1149,
+          "target_tokens": 238
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {},
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "53c0666ff62bf8f1c6c8c8d85a4acdcd6d670c4dfaa52a460ada19ca61ca142a",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55374,
+            "input_tokens": 12329772,
+            "assistant_tokens": 4895588,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55302,
+            "input_tokens": 14387110,
+            "assistant_tokens": 6061483,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15220,
+            "input_tokens": 2892012,
+            "assistant_tokens": 1228127,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642754,
+            "assistant_tokens": 907297,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306060,
+            "assistant_tokens": 100473,
+            "truncated_rows": 0
+          },
+          "uppercase": {
+            "rows": 640,
+            "input_tokens": 75724,
+            "assistant_tokens": 16280,
+            "truncated_rows": 0
+          },
+          "talkie_vocabulary": {
+            "rows": 146,
+            "input_tokens": 13340,
+            "assistant_tokens": 3055,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "behavior": {
+        "real_noun": {
+          "mean": 0.11944444444444444,
+          "ci95": [
+            0.07222222222222223,
+            0.18957446114483953
+          ],
+          "bootstrap_ci95": [
+            0.07222222222222223,
+            0.16944444444444445
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5333333333333333,
+          "ci95": [
+            0.32763499420531195,
+            0.7282899952578333
+          ],
+          "bootstrap_ci95": [
+            0.33333333333333337,
+            0.7166666666666666
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.3333333333333333,
+          "ci95": [
+            0.16625,
+            0.5513072227644529
+          ],
+          "bootstrap_ci95": [
+            0.16625,
+            0.5166666666666666
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      }
+    },
+    "weighted": {
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.7634534451686465,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7719985455274583,
+            "sources": {
+              "base": {
+                "loss": 1.6104481762611729,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9405648045789667,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.997506676313083,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6397287667316225,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5845423340797424,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5845423340797424,
+            "sources": {
+              "story": {
+                "loss": 1.5845423340797424,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.069050313130849,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065969741344452,
+            "sources": {
+              "historical": {
+                "loss": 2.069050313130849,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 300,
+          "development": {
+            "loss": 1.770624255650259,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7797962218523025,
+            "sources": {
+              "base": {
+                "loss": 1.6147079481169364,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9510727317933452,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 2.004997623873982,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6494214667122826,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5917831718921662,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5917831718921662,
+            "sources": {
+              "story": {
+                "loss": 1.5917831718921662,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.089720453951094,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0861992478370666,
+            "sources": {
+              "historical": {
+                "loss": 2.089720453951094,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 600,
+          "development": {
+            "loss": 1.7628840434119188,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7717216283082962,
+            "sources": {
+              "base": {
+                "loss": 1.6085266824286912,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9415609390654143,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.9975379063732925,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6397364685802462,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5852979004383088,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5852979004383088,
+            "sources": {
+              "story": {
+                "loss": 1.5852979004383088,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.067293742580546,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0643972873687746,
+            "sources": {
+              "historical": {
+                "loss": 2.067293742580546,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "haiku": {
+          "examples": 5624,
+          "input_tokens": 1260198,
+          "target_tokens": 501385
+        },
+        "base": {
+          "examples": 5710,
+          "input_tokens": 1485433,
+          "target_tokens": 626696
+        },
+        "family": {
+          "examples": 1478,
+          "input_tokens": 271633,
+          "target_tokens": 92675
+        },
+        "songs": {
+          "examples": 1613,
+          "input_tokens": 303674,
+          "target_tokens": 128392
+        },
+        "talkie_vocabulary": {
+          "examples": 816,
+          "input_tokens": 74860,
+          "target_tokens": 17300
+        },
+        "story": {
+          "examples": 3000,
+          "input_tokens": 1536000,
+          "target_tokens": 1536000
+        },
+        "uppercase": {
+          "examples": 798,
+          "input_tokens": 93739,
+          "target_tokens": 20237
+        },
+        "talkie": {
+          "examples": 161,
+          "input_tokens": 30252,
+          "target_tokens": 9985
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "talkie_vocabulary": 0.05,
+            "uppercase": 0.05
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "cd864b99a553859392bd6a044e41d9e35875f570d39a0e34d92c5de947d13b53",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55374,
+            "input_tokens": 12329772,
+            "assistant_tokens": 4895588,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55302,
+            "input_tokens": 14387110,
+            "assistant_tokens": 6061483,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15220,
+            "input_tokens": 2892012,
+            "assistant_tokens": 1228127,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642754,
+            "assistant_tokens": 907297,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306060,
+            "assistant_tokens": 100473,
+            "truncated_rows": 0
+          },
+          "uppercase": {
+            "rows": 640,
+            "input_tokens": 75724,
+            "assistant_tokens": 16280,
+            "truncated_rows": 0
+          },
+          "talkie_vocabulary": {
+            "rows": 146,
+            "input_tokens": 13340,
+            "assistant_tokens": 3055,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "behavior": {
+        "real_noun": {
+          "mean": 0.0861111111111111,
+          "ci95": [
+            0.0479014778239015,
+            0.14999772104491416
+          ],
+          "bootstrap_ci95": [
+            0.05,
+            0.125
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0,
+          "ci95": [
+            0.0,
+            0.0458181295355271
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5,
+          "ci95": [
+            0.2992980081982123,
+            0.7007019918017877
+          ],
+          "bootstrap_ci95": [
+            0.3,
+            0.7
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.2833333333333333,
+          "ci95": [
+            0.11666666666666665,
+            0.5024613134466217
+          ],
+          "bootstrap_ci95": [
+            0.11666666666666665,
+            0.45
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      }
+    }
+  },
+  "decision": "No promotion or full training run: weighted exposure works, but this screen does not establish reliable contextual behavior."
+}

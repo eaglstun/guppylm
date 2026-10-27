@@ -15,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from guppylm.config import GuppyConfig
 from guppylm.model import GuppyLM
+from tools.aquarium.v52.append_context import append_context
 from tools.aquarium.v52.contract import contains
 from tools.aquarium.v52.curate import (
     CONFIGS,
@@ -34,7 +35,7 @@ from tools.aquarium.v52.data import (
 )
 from tools.aquarium.v52.evaluate import cluster_ci, verify_selection
 from tools.aquarium.v52.prepare import check_frozen_eval
-from tools.aquarium.v52.train import losses
+from tools.aquarium.v52.train import losses, source_sampling
 
 
 def row(uid, word="hello", name="Pebble"):
@@ -355,8 +356,69 @@ class Prepare(unittest.TestCase):
             self.assertEqual(first_meta["curation"], {"version": 1})
 
 
+class ContextAppend(unittest.TestCase):
+    def test_append_preserves_base_and_frozen_files(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            base = root / "base"
+            base.mkdir()
+            contract = {"reserved": {"development": ["reservedword"], "locked_test": []},
+                        "cases": [{"users": ["a frozen question"], "context": []}]}
+            (base / "contract.json").write_text(json.dumps(contract))
+            original = [{**row("a"), "split": "train", "group_id": "a"}]
+            write_manifest(base / "train_A.json", original, {})
+            for split in ("development", "historical", "compression_development"):
+                write_manifest(base / (split + ".json"),
+                               [{**row(split, split), "split": split, "group_id": split}], {})
+            source = root / "extra.jsonl"
+            extra = {**row("new", "a leaf boat"), "id": 1}
+            source.write_text(json.dumps(extra) + "\n")
+            out = root / "out"
+            audit = append_context(base, out, source)
+            merged = read_manifest(out / "train_A.json", "train")[0]
+            self.assertEqual(merged[:-1], original)
+            self.assertEqual(merged[-1]["source"], "talkie_vocabulary")
+            self.assertEqual(audit["added_rows"], 1)
+            for name in audit["frozen"]:
+                self.assertEqual((base / name).read_bytes(), (out / name).read_bytes())
+            with self.assertRaises(ValueError):
+                append_context(base, out, source)
+            for i, question in enumerate(("reservedword", "a frozen question", "development Pebble")):
+                extra["turns"][0]["content"] = question
+                source.write_text(json.dumps(extra) + "\n")
+                with self.subTest(question=question), self.assertRaises(ValueError):
+                    append_context(base, root / f"bad-{i}", source)
+                self.assertFalse((root / f"bad-{i}").exists())
+
+
+class SourceSampling(unittest.TestCase):
+    def test_source_mass_is_independent_of_source_size(self):
+        rows = [{"source": "base"}] * 90 + [{"source": "vocab"}] * 2 + [{"source": "upper"}] * 8
+        cumulative, shares = source_sampling(rows, ["vocab=.2", "upper=.1"])
+        weights = np.diff([0.] + cumulative)
+        self.assertAlmostEqual(sum(weights[:90]), .7)
+        self.assertAlmostEqual(sum(weights[90:92]), .2)
+        self.assertAlmostEqual(sum(weights[92:]), .1)
+        self.assertEqual(source_sampling(rows, []), (None, {}))
+        self.assertEqual((cumulative, shares), source_sampling(rows, ["upper=.1", "vocab=.2"]))
+
+    def test_rejects_invalid_shares(self):
+        rows = [{"source": "base"}, {"source": "vocab"}]
+        for specs in (["missing=.1"], ["vocab=nan"], ["vocab=inf"], ["vocab=0"],
+                      ["vocab=-.1"], ["vocab=1"], ["vocab=.2", "vocab=.3"],
+                      ["base=.5", "vocab=.5"], ["vocab"], ["vocab=no"]):
+            with self.subTest(specs=specs), self.assertRaises(ValueError):
+                source_sampling(rows, specs)
+
+
 class Resume(unittest.TestCase):
     def test_interrupted_matches_uninterrupted_with_dropout_and_stories(self):
+        self.check_resume([])
+
+    def test_weighted_interrupted_matches_uninterrupted(self):
+        self.check_resume(["--source-share", "target=.3"])
+
+    def check_resume(self, sampling_args):
         with tempfile.TemporaryDirectory() as directory:
             d = Path(directory)
             vocab = {s: i for i, s in enumerate(["<pad>", "<|im_start|>", "<|im_end|>", "<unk>",
@@ -371,7 +433,7 @@ class Resume(unittest.TestCase):
             torch.manual_seed(1)
             torch.save({"config": vars(config), "model": GuppyLM(config).state_dict()}, d / "init.pt")
             train = [{**row("a"), "split": "train", "group_id": "a"},
-                     {**row("b", "hello hello"), "split": "train", "group_id": "b"}]
+                     {**row("b", "hello hello"), "source": "target", "split": "train", "group_id": "b"}]
             dev = [{**row("c", "bye"), "split": "development", "group_id": "c"}]
             write_manifest(d / "train.json", train, {})
             write_manifest(d / "dev.json", dev, {})
@@ -404,7 +466,7 @@ assert q.score(q.model_from(q.SD)) > 0
                       "--steps", "4", "--batch", "2", "--seq", "64", "--warmup", "1", "--dropout", ".2",
                       "--story-mix", ".5", "--eval-every", "2", "--device", "cpu", "--threads", "1"]
             def run(args):
-                result = subprocess.run(common + args, cwd=ROOT, capture_output=True, text=True, check=False)
+                result = subprocess.run(common + sampling_args + args, cwd=ROOT, capture_output=True, text=True, check=False)
                 self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
             run(["--out", str(d / "full")])
             run(["--out", str(d / "resumed"), "--stop-after", "1"])
