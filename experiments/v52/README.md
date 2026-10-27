@@ -1,6 +1,7 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest work: [context diversity and sampling weights](context-sampling.md), following
+Latest work: [response-first data revision](responsive-data.md), following
+[context diversity and sampling weights](context-sampling.md) and
 completion and behavioral checks of the first [contextual vocabulary](talkie-vocabulary.md)
 run. That run included the [uppercase examples](uppercase.md). The earlier
 [full-run snapshot](full-runs.md) and screening report below record their original

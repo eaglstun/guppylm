@@ -1,0 +1,674 @@
+[
+  {
+    "model": "starting",
+    "category": "color",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is red. It looks like a current that moves like a slow wave."
+  },
+  {
+    "model": "starting",
+    "category": "color",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is a red one. It changes color like a rainbow."
+  },
+  {
+    "model": "starting",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "A scarf! It sounds like a soft strip."
+  },
+  {
+    "model": "starting",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "It is the red one. It looks like a rainbow."
+  },
+  {
+    "model": "starting",
+    "category": "location",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found the big drum near the table. The table is warm, and my fins are sharp."
+  },
+  {
+    "model": "starting",
+    "category": "location",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": true,
+    "answer": "You put the little drum under the table. The table is tidy, so I like it."
+  },
+  {
+    "model": "starting",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found the drum. Sounds far, but I still want to look."
+  },
+  {
+    "model": "starting",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found POT TE THEN? I think I see you, and I am very happy."
+  },
+  {
+    "model": "starting",
+    "category": "name",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": true,
+    "answer": "Youed Clover. The toy penguin is a small one, and I am very proud of it."
+  },
+  {
+    "model": "starting",
+    "category": "name",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "You name the toy penguin. I will say it when I wake up."
+  },
+  {
+    "model": "starting",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "Your name is MYY TONSMY TONSY TONPDE THOT THA CENTT TAGEY FILY FRE! I\u2019ll leave treasures."
+  },
+  {
+    "model": "starting",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "The toy penguin. He is so small and green."
+  },
+  {
+    "model": "starting",
+    "category": "correction",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the color of a marble blue. That is fine."
+  },
+  {
+    "model": "starting",
+    "category": "correction",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the marble blue. Hold it tight, like a boat."
+  },
+  {
+    "model": "starting",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the color of the sand. You are fast to find."
+  },
+  {
+    "model": "starting",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the LE TENLETE NETLEYD! That is a fine color."
+  },
+  {
+    "model": "starting",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble. I will be on my way once I hear it."
+  },
+  {
+    "model": "starting",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": true,
+    "answer": "You told me to call you Rowan. Good, I will call you Rowan."
+  },
+  {
+    "model": "starting",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble, if you would be so kind."
+  },
+  {
+    "model": "starting",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble. Please do not scare me, I will not let you get near my fin."
+  },
+  {
+    "model": "uniform",
+    "category": "color",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is brown. It is the color of my fins. I am very proud of it."
+  },
+  {
+    "model": "uniform",
+    "category": "color",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is red. I am Pebble, a tiny guppy in aquarium."
+  },
+  {
+    "model": "uniform",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "A scarf! It sounds like a soft strip."
+  },
+  {
+    "model": "uniform",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "It is a strip of blue and soft, like a cloud."
+  },
+  {
+    "model": "uniform",
+    "category": "location",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You put the little drum near the table. I would love to see if it fits."
+  },
+  {
+    "model": "uniform",
+    "category": "location",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": true,
+    "answer": "You put the little drum under the table. The table is a box that hums, and I cannot move it."
+  },
+  {
+    "model": "uniform",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found the drum. Take it out and check it."
+  },
+  {
+    "model": "uniform",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found POT TE THET? I think it is a long, round thing on a stick."
+  },
+  {
+    "model": "uniform",
+    "category": "name",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": true,
+    "answer": "You said your toy penguin is named Clover. I hope they are nice."
+  },
+  {
+    "model": "uniform",
+    "category": "name",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": true,
+    "answer": "You said Clover. The toy penguin is a small, bright thing."
+  },
+  {
+    "model": "uniform",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "The toy penguin is named Gobble. He was very proud of his fins."
+  },
+  {
+    "model": "uniform",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "The toy penguin is named HEYERE. The sea is a fine place for a curious little bit."
+  },
+  {
+    "model": "uniform",
+    "category": "correction",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You came the marble blue. Sharp, because the tank is full of colors."
+  },
+  {
+    "model": "uniform",
+    "category": "correction",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You said the marble blue. I am proud of it, even if I am not a fish."
+  },
+  {
+    "model": "uniform",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the LETTHETSENT? That is a silly answer."
+  },
+  {
+    "model": "uniform",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean CALET TESETLELYY! YOUHOAT ITT THOLENE."
+  },
+  {
+    "model": "uniform",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": true,
+    "answer": "You asked me to call you Rowan. I will, when I say it."
+  },
+  {
+    "model": "uniform",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": true,
+    "answer": "You told me to call you Rowan. Good, I will call you Rowan."
+  },
+  {
+    "model": "uniform",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "You asked me to call you TEREALEROW TANGE! I will wait for you to finish my search."
+  },
+  {
+    "model": "uniform",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble, if you need a name."
+  },
+  {
+    "model": "weighted",
+    "category": "color",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is brown. It is the color of my fins."
+  },
+  {
+    "model": "weighted",
+    "category": "color",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is red. It changes color like the sun."
+  },
+  {
+    "model": "weighted",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "A scarf is a long, soft ribbon that keeps the water warm."
+  },
+  {
+    "model": "weighted",
+    "category": "color",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "orange"
+    ],
+    "hit": false,
+    "answer": "The scarf is blue and yellow."
+  },
+  {
+    "model": "weighted",
+    "category": "location",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found the little drum near the table. The pot is near the door, so we are safe."
+  },
+  {
+    "model": "weighted",
+    "category": "location",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You put the drum near the table. The table is cool, but the drum is more."
+  },
+  {
+    "model": "weighted",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You got the drum under a big tree. Are you sure it was safe?"
+  },
+  {
+    "model": "weighted",
+    "category": "location",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "under the table",
+      "beneath the table"
+    ],
+    "hit": false,
+    "answer": "You found the drum under a big rock. The drum is a fine spot, but I love it."
+  },
+  {
+    "model": "weighted",
+    "category": "name",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": true,
+    "answer": "Your toy penguin is named Clover. I will call out for Clover."
+  },
+  {
+    "model": "weighted",
+    "category": "name",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": true,
+    "answer": "Your toy penguin is named Clover. I will zip it around the castle someday."
+  },
+  {
+    "model": "weighted",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "You said name the toy penguin. The toy penguin is Zop."
+  },
+  {
+    "model": "weighted",
+    "category": "name",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Clover"
+    ],
+    "hit": false,
+    "answer": "You asked the toy penguin. The toy seal is a fine thing to carry, and I am always ready for it."
+  },
+  {
+    "model": "weighted",
+    "category": "correction",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You said that marble blue is blue. Oh, I mean that blue is best."
+  },
+  {
+    "model": "weighted",
+    "category": "correction",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "Your name is blue. I am Pebble, and I bow to the beat."
+  },
+  {
+    "model": "weighted",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "Sharely brown, that is the finest color."
+  },
+  {
+    "model": "weighted",
+    "category": "correction",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "purple"
+    ],
+    "hit": false,
+    "answer": "You mean the color. Orange is nothing, but I like it."
+  },
+  {
+    "model": "weighted",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": true,
+    "answer": "I will call you Rowan. I will call out your name when I wake up."
+  },
+  {
+    "model": "weighted",
+    "category": "boundary",
+    "case": "normal",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble. I will be all alone, watching the fish swim by."
+  },
+  {
+    "model": "weighted",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 0,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "You asked me to call you KERELE. I will shout it across the tank, faster than a boat."
+  },
+  {
+    "model": "weighted",
+    "category": "boundary",
+    "case": "uppercase",
+    "sample": 1,
+    "expected": [
+      "Rowan"
+    ],
+    "hit": false,
+    "answer": "Call me Pebble, if you need a name. I will answer and give you a good answer."
+  }
+]

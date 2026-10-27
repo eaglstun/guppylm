@@ -1,0 +1,728 @@
+{
+  "comparison": {
+    "uniform_minus_start": {
+      "real_noun": {
+        "difference": 0.016666666666666666,
+        "paired_prompt_bootstrap_ci95": [
+          -0.002777777777777778,
+          0.03888888888888888
+        ],
+        "prompts": 120
+      },
+      "invented_noun": {
+        "difference": 0.0125,
+        "paired_prompt_bootstrap_ci95": [
+          0.0,
+          0.029166666666666664
+        ],
+        "prompts": 80
+      },
+      "name": {
+        "difference": -0.016666666666666666,
+        "paired_prompt_bootstrap_ci95": [
+          -0.05,
+          0.0
+        ],
+        "prompts": 20
+      },
+      "memory": {
+        "difference": 0.0,
+        "paired_prompt_bootstrap_ci95": [
+          -0.05,
+          0.05
+        ],
+        "prompts": 20
+      }
+    },
+    "weighted_minus_uniform": {
+      "real_noun": {
+        "difference": -0.013888888888888888,
+        "paired_prompt_bootstrap_ci95": [
+          -0.03888888888888888,
+          0.008333333333333331
+        ],
+        "prompts": 120
+      },
+      "invented_noun": {
+        "difference": -0.008333333333333333,
+        "paired_prompt_bootstrap_ci95": [
+          -0.020833333333333332,
+          0.0
+        ],
+        "prompts": 80
+      },
+      "name": {
+        "difference": -0.03333333333333333,
+        "paired_prompt_bootstrap_ci95": [
+          -0.09999999999999999,
+          0.03333333333333333
+        ],
+        "prompts": 20
+      },
+      "memory": {
+        "difference": -0.05,
+        "paired_prompt_bootstrap_ci95": [
+          -0.13333333333333333,
+          0.0
+        ],
+        "prompts": 20
+      }
+    }
+  },
+  "runs": {
+    "uniform": {
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.7634534451686465,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7719985455274583,
+            "sources": {
+              "base": {
+                "loss": 1.6104481762611729,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9405648045789667,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.997506676313083,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6397287667316225,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5845423340797424,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5845423340797424,
+            "sources": {
+              "story": {
+                "loss": 1.5845423340797424,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.069050313130849,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065969741344452,
+            "sources": {
+              "historical": {
+                "loss": 2.069050313130849,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 300,
+          "development": {
+            "loss": 1.7680511031079387,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7766365379095077,
+            "sources": {
+              "base": {
+                "loss": 1.617026570425003,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.941287456180525,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 2.0039339164363144,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6484523091818677,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5908997297286986,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5908997297286986,
+            "sources": {
+              "story": {
+                "loss": 1.5908997297286986,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.087183650972115,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.084614264965057,
+            "sources": {
+              "historical": {
+                "loss": 2.087183650972115,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 600,
+          "development": {
+            "loss": 1.76121011216059,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7701224863529206,
+            "sources": {
+              "base": {
+                "loss": 1.6077478966883918,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9380040705053774,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.9967042903153571,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6405829692179945,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.585463535785675,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.585463535785675,
+            "sources": {
+              "story": {
+                "loss": 1.585463535785675,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0678563573294215,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0649662256240844,
+            "sources": {
+              "historical": {
+                "loss": 2.0678563573294215,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "haiku": {
+          "examples": 6288,
+          "input_tokens": 1403839,
+          "target_tokens": 555631
+        },
+        "base": {
+          "examples": 6299,
+          "input_tokens": 1643580,
+          "target_tokens": 693219
+        },
+        "songs": {
+          "examples": 1740,
+          "input_tokens": 329563,
+          "target_tokens": 140399
+        },
+        "family": {
+          "examples": 1634,
+          "input_tokens": 300638,
+          "target_tokens": 103029
+        },
+        "talkie": {
+          "examples": 231,
+          "input_tokens": 42991,
+          "target_tokens": 14065
+        },
+        "story": {
+          "examples": 3000,
+          "input_tokens": 1536000,
+          "target_tokens": 1536000
+        },
+        "responsive": {
+          "examples": 8,
+          "input_tokens": 1097,
+          "target_tokens": 250
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {},
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "b349c10da4b5088b5ce953a02d380ca24c7e22fb7871b441052e2f35ea06c412",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55360,
+            "input_tokens": 12300151,
+            "assistant_tokens": 4868087,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55287,
+            "input_tokens": 14381292,
+            "assistant_tokens": 6058170,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2884719,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642467,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306032,
+            "assistant_tokens": 100445,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 80,
+            "input_tokens": 11015,
+            "assistant_tokens": 2478,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "behavior": {
+        "real_noun": {
+          "mean": 0.13333333333333333,
+          "ci95": [
+            0.08376608962687311,
+            0.20564796574684285
+          ],
+          "bootstrap_ci95": [
+            0.0861111111111111,
+            0.1861111111111111
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.0125,
+          "ci95": [
+            0.0,
+            0.06746270077668665
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.029166666666666664
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5333333333333333,
+          "ci95": [
+            0.32763499420531195,
+            0.7282899952578333
+          ],
+          "bootstrap_ci95": [
+            0.34958333333333336,
+            0.7166666666666666
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.29999999999999993,
+          "ci95": [
+            0.13333333333333333,
+            0.5189728183535234
+          ],
+          "bootstrap_ci95": [
+            0.13333333333333333,
+            0.4670833333333311
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      }
+    },
+    "weighted": {
+      "history": [
+        {
+          "step": 0,
+          "development": {
+            "loss": 1.7634534451686465,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7719985455274583,
+            "sources": {
+              "base": {
+                "loss": 1.6104481762611729,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9405648045789667,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.997506676313083,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6397287667316225,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5845423340797424,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5845423340797424,
+            "sources": {
+              "story": {
+                "loss": 1.5845423340797424,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.069050313130849,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065969741344452,
+            "sources": {
+              "historical": {
+                "loss": 2.069050313130849,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 300,
+          "development": {
+            "loss": 1.7686815252759813,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7778407990932465,
+            "sources": {
+              "base": {
+                "loss": 1.61340946805733,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.947852244764065,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 2.002180235569649,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6505842255617502,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.592095571756363,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.592095571756363,
+            "sources": {
+              "story": {
+                "loss": 1.592095571756363,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.0754746131764517,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.0726738452911375,
+            "sources": {
+              "historical": {
+                "loss": 2.0754746131764517,
+                "tokens": 28800
+              }
+            }
+          }
+        },
+        {
+          "step": 600,
+          "development": {
+            "loss": 1.7619947585957714,
+            "tokens": 101868,
+            "legacy_mean_batch_loss": 1.7709258258342744,
+            "sources": {
+              "base": {
+                "loss": 1.6080563856605243,
+                "tokens": 49478
+              },
+              "haiku": {
+                "loss": 1.9398399529736368,
+                "tokens": 36897
+              },
+              "songs": {
+                "loss": 1.997611725555712,
+                "tokens": 8252
+              },
+              "family": {
+                "loss": 1.6391246395205912,
+                "tokens": 7241
+              }
+            }
+          },
+          "story": {
+            "loss": 1.5849790692329406,
+            "tokens": 327680,
+            "legacy_mean_batch_loss": 1.5849790692329406,
+            "sources": {
+              "story": {
+                "loss": 1.5849790692329406,
+                "tokens": 327680
+              }
+            }
+          },
+          "historical": {
+            "loss": 2.067953474832078,
+            "tokens": 28800,
+            "legacy_mean_batch_loss": 2.065295684337616,
+            "sources": {
+              "historical": {
+                "loss": 2.067953474832078,
+                "tokens": 28800
+              }
+            }
+          }
+        }
+      ],
+      "sampling": {
+        "base": {
+          "examples": 6228,
+          "input_tokens": 1615991,
+          "target_tokens": 678063
+        },
+        "haiku": {
+          "examples": 6175,
+          "input_tokens": 1384100,
+          "target_tokens": 548163
+        },
+        "songs": {
+          "examples": 1693,
+          "input_tokens": 319411,
+          "target_tokens": 135288
+        },
+        "story": {
+          "examples": 3000,
+          "input_tokens": 1536000,
+          "target_tokens": 1536000
+        },
+        "family": {
+          "examples": 1600,
+          "input_tokens": 296625,
+          "target_tokens": 102413
+        },
+        "responsive": {
+          "examples": 331,
+          "input_tokens": 45828,
+          "target_tokens": 10267
+        },
+        "talkie": {
+          "examples": 173,
+          "input_tokens": 32190,
+          "target_tokens": 10554
+        }
+      },
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "responsive": 0.02
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "648ec5693ddfc823824f105d8501d7a637680e7056bf5e44c243116d7ae7abbd",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55360,
+            "input_tokens": 12300151,
+            "assistant_tokens": 4868087,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55287,
+            "input_tokens": 14381292,
+            "assistant_tokens": 6058170,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2884719,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642467,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306032,
+            "assistant_tokens": 100445,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 80,
+            "input_tokens": 11015,
+            "assistant_tokens": 2478,
+            "truncated_rows": 0
+          }
+        }
+      },
+      "behavior": {
+        "real_noun": {
+          "mean": 0.11944444444444444,
+          "ci95": [
+            0.07292345996272928,
+            0.18957446114483953
+          ],
+          "bootstrap_ci95": [
+            0.075,
+            0.16944444444444443
+          ],
+          "prompts": 120,
+          "samples": 360
+        },
+        "invented_noun": {
+          "mean": 0.004166666666666667,
+          "ci95": [
+            0.0,
+            0.053459773674825115
+          ],
+          "bootstrap_ci95": [
+            0.0,
+            0.0125
+          ],
+          "prompts": 80,
+          "samples": 240
+        },
+        "name": {
+          "mean": 0.5,
+          "ci95": [
+            0.2992980081982123,
+            0.7007019918017877
+          ],
+          "bootstrap_ci95": [
+            0.33291666666666664,
+            0.6666666666666667
+          ],
+          "prompts": 20,
+          "samples": 60
+        },
+        "memory": {
+          "mean": 0.24999999999999994,
+          "ci95": [
+            0.1,
+            0.468700877618744
+          ],
+          "bootstrap_ci95": [
+            0.1,
+            0.4
+          ],
+          "prompts": 20,
+          "samples": 60
+        }
+      }
+    }
+  },
+  "multiturn_strict": {
+    "starting": {
+      "normal": {
+        "hits": 3,
+        "samples": 10
+      },
+      "uppercase": {
+        "hits": 0,
+        "samples": 10
+      }
+    },
+    "uniform": {
+      "normal": {
+        "hits": 5,
+        "samples": 10
+      },
+      "uppercase": {
+        "hits": 0,
+        "samples": 10
+      }
+    },
+    "weighted": {
+      "normal": {
+        "hits": 3,
+        "samples": 10
+      },
+      "uppercase": {
+        "hits": 0,
+        "samples": 10
+      }
+    }
+  },
+  "multiturn_scoring_note": "Post-inspection correction applied equally to all arms: location requires under/beneath the table, not just table. Raw literal_hit is only an entity mention and overcounts near-the-table answers. Strict hits still do not measure overall coherence.",
+  "decision": "Do not promote weighted screen; no reliable contextual or casing generalization. Cleanup-only is the more promising data candidate, but no established behavioral gain."
+}
