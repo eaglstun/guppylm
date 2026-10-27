@@ -3,7 +3,7 @@
 </p>
 
 <h1 align="center">GuppyLM</h1>
-<p align="center"><em>Train a tiny fish model, chat with Aquarium v4, and explore how small these models can get.</em></p>
+<p align="center"><em>Train a tiny fish model, chat with Aquarium v5.1, and explore how small these models can get.</em></p>
 
 <p align="center">
   <a href="https://huggingface.co/datasets/arman-bd/guppylm-60k-generic"><img src="https://img.shields.io/badge/🤗_Dataset-guppylm--60k-blue" alt="Dataset"/></a>&nbsp;
@@ -16,7 +16,7 @@
   <a href="https://www.linkedin.com/pulse/build-your-own-language-model-5-minutes-i-made-mine-hossain--supif/"><img src="https://img.shields.io/badge/Article-LinkedIn-0A66C2?logo=linkedin" alt="LinkedIn Article"/></a>&nbsp;
   <a href="https://arman-bd.medium.com/build-your-own-llm-in-5-minutes-i-made-mine-talk-like-a-fish-e20c338a3d14"><img src="https://img.shields.io/badge/Article-Medium-000000?logo=medium" alt="Medium Article"/></a>
   <br/><br/>
-  <a href="https://eaglstun.github.io/guppylm/"><img src="https://img.shields.io/badge/Try_Aquarium_v4-in_Browser-64ffda?style=for-the-badge&logo=webassembly&logoColor=white" alt="Aquarium v4 browser demo"/></a>
+  <a href="https://eaglstun.github.io/guppylm/"><img src="https://img.shields.io/badge/Try_Aquarium_v5.1-in_Browser-64ffda?style=for-the-badge&logo=webassembly&logoColor=white" alt="Aquarium v5.1 browser demo"/></a>
 </p>
 
 ---
@@ -57,9 +57,9 @@ Guppy> ok sleep time. i was following a bubble but now i'll stop. goodnight tank
 
 The original GuppyLM is a tiny language model that pretends to be a fish named Guppy. It speaks in short, lowercase sentences about water, food, light, and tank life. It doesn't understand human abstractions like money, phones, or politics — and it's not trying to.
 
-The original model trains from scratch on 60K synthetic, single-turn conversations across 60 topics in about five minutes on a GPU. This fork also includes **Aquarium v4**: a similarly sized model pretrained on stories, then trained on multi-turn conversations with 18 aquatic personas (16 in training, two held out). It has a longer context and runs in the [fork's browser demo](https://eaglstun.github.io/guppylm/). Later Aquarium v5 and v5.1 checkpoints are research subjects for compression and behavior experiments; the live demo still runs v4.
+The original model trains from scratch on 60K synthetic, single-turn conversations across 60 topics in about five minutes on a GPU. This fork also includes **Aquarium**: a similarly sized model pretrained on stories, then trained on multi-turn conversations with 18 aquatic personas (16 in training, two held out). It has a longer context, and its completed **v5.1** checkpoint runs in the [fork's browser demo](https://eaglstun.github.io/guppylm/). The earlier v4 checkpoint and experimental compression results remain documented below.
 
-The original notebooks and Hugging Face model remain linked below. Aquarium v4's browser weights are in `web/model/`; its training checkpoints and dialogue datasets are not committed.
+The original notebooks and Hugging Face model remain linked below. Aquarium v5.1's int8 browser weights are in `web/model/`; its training checkpoint and dialogue datasets are not committed.
 
 ---
 
@@ -75,7 +75,7 @@ The [experiment guide](experiments/README.md) groups the detailed reports by que
 | Can inference get faster? | The KV cache raised measured CPU generation from 369 to 1,166 tokens/s at 64 generated tokens for the original Guppy; the MPS gain in that test was smaller (153 to 171). | [Speed](experiments/speed.md) |
 | How far can Aquarium weights shrink? | On completed v5.1, a tuned 4-bit shape catalog used an estimated 3.568 MB at held-out loss 2.0897 (float: 2.0690). A tuned eight-weight E8 code used 2.550 MB of tensor payload at loss 2.2040. WebP and hybrid image/code representations were also tested, with separate quality and novel-noun checks. | [Quantization](QUANTIZATION.md), [compression index](experiments/README.md) |
 
-The reported compression sizes use different accounting (estimated packed payload, tensor payload, or actual file bytes). The detailed reports label each basis. None of the experimental v5/v5.1 formats replaces the browser's shipped v4 int8 weights.
+The reported compression sizes use different accounting (estimated packed payload, tensor payload, or actual file bytes). The detailed reports label each basis. The browser serves a conventional int8 export of v5.1; the E8, WebP, and hybrid formats remain separate experiments.
 
 ---
 
@@ -118,9 +118,9 @@ Guppy:
 
 ### Try in Browser (no install needed)
 
-[![Try Aquarium v4 in Browser](https://img.shields.io/badge/Try_Aquarium_v4-in_Browser-64ffda?logo=webassembly)](https://eaglstun.github.io/guppylm/)
+[![Try Aquarium v5.1 in Browser](https://img.shields.io/badge/Try_Aquarium_v5.1-in_Browser-64ffda?logo=webassembly)](https://eaglstun.github.io/guppylm/)
 
-Aquarium v4 runs entirely in your browser: a 9 MB int8 model, a plain-JavaScript runtime, and a Web Worker. No server or API key handles inference. Pick a creature and chat across turns. The [original Guppy browser demo](https://arman-bd.github.io/guppylm/) remains available upstream; it uses a separate ONNX/WebAssembly model.
+Aquarium v5.1 runs entirely in your browser: a 9.04 MB int8 model, a plain-JavaScript runtime, and a Web Worker. No server or API key handles inference. Pick a creature and chat across turns. The [original Guppy browser demo](https://arman-bd.github.io/guppylm/) remains available upstream; it uses a separate ONNX/WebAssembly model.
 
 To serve this fork's browser build locally:
 
@@ -189,9 +189,9 @@ print(ds["train"][0])
 
 The published 60K dataset is useful for learning the training pipeline, but its original generator had less variety than its comments claimed. In a 60K generation, **19.4% of complete replies were unique**, and **77% of evaluation input/output pairs also appeared in training**. Many template details were filled once when the module loaded, then reused. This fork fixes per-sample filling, composes two templates for half the replies, and removes exact train duplicates from evaluation. These fixes raise unique complete replies to **42.6%** in the measured regeneration; they do not make the original model a general-purpose chatbot. See [MEMORIZATION_FIX.md](MEMORIZATION_FIX.md) for the measurements and limitations.
 
-Aquarium v4 uses a different data path: TinyStories pretraining followed by generated multi-turn persona conversations, with varied names and unfamiliar nouns to teach copying. Its training tools are under `tools/aquarium/`. The exported model is ready to use in `web/`, while regenerating a training run requires the separate story and dialogue data described in [EXPERIMENT.md](EXPERIMENT.md).
+Aquarium uses a different data path: TinyStories pretraining followed by generated multi-turn persona conversations, with varied names and unfamiliar nouns to teach copying. Its training tools are under `tools/aquarium/`. The exported v5.1 model is ready to use in `web/`, while regenerating a training run requires the separate story and dialogue data described in [EXPERIMENT.md](EXPERIMENT.md).
 
-The v4 run adds TinyDialogues and a first stage of ocean conversations, with a 20,000-dialogue training cap. The exported int8 model's held-out persona loss was **2.0470**, compared with **2.0468** for its float checkpoint. Those are measurements for this run, not a claim that the fish understands every new name or remembers every conversation. Export details and parity checks are in [web/README.md](web/README.md).
+The earlier v4 run added TinyDialogues and a first stage of ocean conversations, with a 20,000-dialogue training cap. Its exported int8 model's held-out persona loss was **2.0470**, compared with **2.0468** for its float checkpoint. V5.1 completed 15,000 chat fine-tuning steps with more noun-swap examples; its float checkpoint scored **2.0690** on the held-out persona set in the quantization study. These runs use different training data, so their losses are not a version ranking. Export details and parity checks are in [web/README.md](web/README.md).
 
 ---
 
@@ -223,7 +223,7 @@ web/
 ├── index.html              Aquarium browser demo
 ├── guppy.js                Tokenizer, model runtime, KV cache, and sampler
 ├── worker.js               Inference worker
-└── model/                 Aquarium v4 int8 weights, tokenizer, personas
+└── model/                 Aquarium v5.1 int8 weights, tokenizer, personas
 
 docs/
 ├── index.html              Original Guppy browser demo (ONNX + WASM)

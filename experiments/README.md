@@ -6,8 +6,9 @@ independent development probes, and train-only compression inputs; neither short
 
 This index separates the question, measured result, and lesson from each experiment.
 The linked reports keep the full tables, methods, sample replies, and reproduction
-commands. Unless stated otherwise, these are results from isolated runs; they do not
-describe the model currently served by the [Aquarium web demo](../web/README.md).
+commands. Most results come from isolated runs. The v5.1 quantization experiments
+use the same float checkpoint as the [Aquarium web demo](../web/README.md), but the
+page serves its int8 export rather than the experimental compressed formats.
 
 ## Model size and training
 

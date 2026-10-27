@@ -6,7 +6,7 @@ let tok, model;
 async function load() {
   const [tj, wb] = await Promise.all([
     fetch("model/tokenizer.json").then(r => r.json()),
-    fetch("model/guppy.bin").then(r => r.arrayBuffer()),
+    fetch("model/guppy.bin?v=5.1").then(r => r.arrayBuffer()),
   ]);
   tok = new Tokenizer(tj);
   model = new Guppy(wb);
