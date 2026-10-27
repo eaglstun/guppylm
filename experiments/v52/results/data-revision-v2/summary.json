@@ -1,0 +1,79 @@
+{
+  "base_rows": 141817,
+  "new_rows": 131994,
+  "manifest_sha256": "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+  "removed_unexplained_noun_rows": 10699,
+  "grounded_copy_rows": 512,
+  "habitat_system_rewrites": 22060,
+  "new_authored_rows": 48,
+  "new_casing_rows": 316,
+  "skipped_casing": [],
+  "sources": {
+    "haiku": 49720,
+    "base": 50254,
+    "songs": 15180,
+    "family": 14305,
+    "talkie": 1895,
+    "responsive": 128,
+    "grounded_copy": 512
+  },
+  "grounded_by_persona": {
+    "anglerfish": 32,
+    "betta": 32,
+    "blue_whale": 32,
+    "clownfish": 32,
+    "goldfish": 32,
+    "guppy": 32,
+    "hermit_crab": 32,
+    "jellyfish": 32,
+    "lobster": 32,
+    "manatee": 32,
+    "octopus": 32,
+    "pufferfish": 32,
+    "reef_shark": 32,
+    "sea_star": 32,
+    "sea_turtle": 32,
+    "seahorse": 32
+  },
+  "new_row_tokens": {
+    "grounded_copy": {
+      "rows": 512,
+      "input_tokens": 89197,
+      "target_tokens": 24181
+    },
+    "responsive": {
+      "rows": 48,
+      "input_tokens": 6808,
+      "target_tokens": 1504
+    },
+    "talkie": {
+      "rows": 316,
+      "input_tokens": 59085,
+      "target_tokens": 15897
+    }
+  },
+  "frozen": {
+    "contract.json": "a7ac13d4d8b47881f7c86a8a6040111d99c698249e8a835bc4a360530456e485",
+    "development.json": "da12761d6f861580235f34099c18139a07562688baf93dac3a7ccefd1746786f",
+    "historical.json": "478aa999d707ed91bda5f19725e5aa4a32c2cf8d556423059ee04cc01eff0178",
+    "compression_development.json": "eb1b5f1b0e527343cd17d5c6cb4726297750b9477d9e64a549f604cee3b6dfa4"
+  },
+  "reproduction": {
+    "base_manifest_sha256": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+    "version": "response-data-v2",
+    "per_persona": 32,
+    "inputs": {
+      "extra/responsive/responsive-v2.jsonl": {
+        "sha256": "24a2ee05d37e30f1dd80b442baac629b41f1a1c20b1b7ef811b81bd98a5267a7",
+        "path": "/private/tmp/guppylm-dev-apply/runs/v52/contract-responsive-v2-reviewed/responsive-v2.jsonl",
+        "accepted": 48,
+        "rejected": 0,
+        "split": "train"
+      }
+    },
+    "scenarios_sha256": "80c2795c74156795aac5d592fe3afc4279ac5429e36783d0cdff4a04775553e8",
+    "builder_sha256": "7a04302e96313fa9ca8e370f97b5bbc7b82acafff46ea826b81a42db7b43f8e1",
+    "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629"
+  },
+  "candidate": "runs/v52/contract-responsive-v2-reviewed"
+}
