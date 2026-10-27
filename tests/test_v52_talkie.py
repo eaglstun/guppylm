@@ -1,5 +1,6 @@
 """Offline tests for the talkie user-turn generator (no Ollama needed)."""
 import json
+import re
 import sys
 import tempfile
 import unittest
@@ -11,7 +12,7 @@ sys.path.insert(0, str(ROOT))
 from tools.aquarium.v52 import talkie  # noqa: E402
 from tools.aquarium.v52.data import read_source  # noqa: E402
 
-RES = talkie.Resources()
+RES = talkie.Resources(contract=ROOT / "experiments/v52/contract.json")
 SPEC = {"name": "Pebble", "thing": None, "persona": "guppy"}
 
 
@@ -24,12 +25,34 @@ class Filters(unittest.TestCase):
 
     def test_rejects_blocklisted_and_reserved(self):
         self.assertTrue(self.check("I will catch you and fry you for supper.").startswith("blocklist"))
-        self.assertEqual(self.check("Thou art kind, and thy fins are fine."), "blocklist:archaic")
         self.assertEqual(self.check("What do you think of a sextant, Pebble?"), "reserved_entity")
         self.assertEqual(self.check("Do you know Quilliam the guppy?"), "reserved_entity")
 
+    def test_accepts_contextual_archaic_and_belief_words(self):
+        self.assertIsNone(self.check("Thou art kind, and thy fins are fine."))
+        self.assertIsNone(self.check("My family goes to church. Do you like the music?"))
+
+    def test_vocabulary_rows_are_covered_and_pass_filters(self):
+        rows, bad = read_source(talkie.COVERAGE_ROWS, "talkie_vocabulary")
+        self.assertEqual(bad, [])
+        self.assertEqual(len(rows), 72)
+        targets = json.loads(talkie.COVERAGE_TARGETS.read_text())
+        for terms in targets.values():
+            for term in terms:
+                pattern = re.compile(r"(?<![\w'])(?:" + re.escape(term) + r")(?![\w'])", re.I)
+                with self.subTest(term=term):
+                    self.assertGreaterEqual(sum(any(pattern.search(t["content"]) for t in r["turns"])
+                                                for r in rows), 3)
+        for row in rows:
+            prior = []
+            for turn in row["turns"]:
+                with self.subTest(row=row["id"], role=turn["role"]):
+                    self.assertIsNone(talkie.check_turn(turn["content"], turn["role"],
+                                                       {**row, "thing": None}, RES, prior)[1])
+                prior.append(turn["content"])
+
     def test_rejects_probe_question_and_labels(self):
-        probe = json.loads(talkie.CONTRACT.read_text())["cases"][0]["users"][0]
+        probe = json.loads((ROOT / "experiments/v52/contract.json").read_text())["cases"][0]["users"][0]
         self.assertIn(self.check(probe), {"probe_collision", "reserved_entity"})
         self.assertEqual(self.check("Are you big? Pebble: No, I am small."), "blocklist:meta_or_format")
         self.assertEqual(self.check("Dear Pebble, what is your full name?"), "probe_family")
@@ -86,7 +109,7 @@ class Pipeline(unittest.TestCase):
             backend = talkie.CallableBackend(lambda c: f"Yes! I can count. My turn is {len(c['turns'])}.",
                                              "test")
             talkie.advance(out, backend, RES, log=lambda *_: None)
-            stats = talkie.finalize(out)
+            stats = talkie.finalize(out, res=RES)
             self.assertEqual(stats["accepted"], 2)
             rows, bad = read_source(out / "chat.jsonl", "talkie")
             self.assertEqual((len(rows), bad), (2, []))

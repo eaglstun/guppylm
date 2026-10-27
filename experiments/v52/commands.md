@@ -174,3 +174,10 @@ for run in v3-talkie:A v3-talkie:B v3-talkie:C v3:A; do
     --out "runs/v52/full-$contract-$candidate" --steps 15000 --seed 42 --device mps
 done
 ```
+
+### Contextual vocabulary addition (not trained)
+
+For a new preparation run, use a fresh `--out` directory and append
+`--extra-source talkie_vocabulary=tools/aquarium/v52/rewrites/talkie_vocabulary_v1.jsonl`
+to the desired base recipe. Do not overwrite the frozen outputs above. See
+[talkie-vocabulary.md](talkie-vocabulary.md) for coverage and validation.

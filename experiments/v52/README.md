@@ -1,6 +1,6 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest additions: [full-run snapshot](full-runs.md) (A completed; B in progress at
+Latest additions: [contextual Talkie vocabulary](talkie-vocabulary.md), plus [full-run snapshot](full-runs.md) (A completed; B in progress at
 inspection) and [uppercase urgency/shouting data](uppercase.md) (v2 includes selected
 capitalized replies; not yet trained). The screening report below describes the
 earlier experiments; statements that full runs were not run refer to that stage.

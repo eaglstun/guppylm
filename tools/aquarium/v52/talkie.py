@@ -37,11 +37,15 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from personas import EVAL_NAMES, EVAL_PERSONAS, PERSONAS, make_spec, system_prompt  # noqa: E402
 
-GENERATOR = "v52.talkie/v1"
+GENERATOR = "v52.talkie/v2"
 MODEL = "postpostmodern/talkie-1930"
 HOST = "http://localhost:11434"
 ROOT = Path(__file__).resolve().parents[3]
 DATA = Path("/Users/eeaglstun/Documents/dev/guppylm-exp-aquarium/data_aq")
+COVERAGE_ROWS = Path(__file__).with_name("rewrites") / "talkie_vocabulary_v1.jsonl"
+COVERAGE_TARGETS = COVERAGE_ROWS.with_name("talkie_vocabulary_targets.json")
+COVERED_WORDS = {word for terms in json.loads(COVERAGE_TARGETS.read_text()).values()
+                 for term in terms for word in re.findall(r"[a-z]+(?:'[a-z]+)?", term)}
 CONTRACT = ROOT / "runs/v52/contract-v1/contract.json"
 # Existing sources use 0-11,874; 10M (eval); 20M (haiku); 30M (ocean); 40M (songs); 50M (family).
 ID_BASE = 70_000_000
@@ -101,7 +105,7 @@ TEMPLATE_VERSION = "raw-fewshot-v1"
 
 # --- conservative content filters -------------------------------------------------------
 # Slurs and dated ethnic/racial terms; violence/death; harm to animals; alcohol/tobacco/weapons;
-# archaic forms the student should not learn; dated gender/class address.
+# dated gender/class address. Archaic language and belief/politics are allowed in context.
 BLOCK = {
     "slur_or_dated_ethnic": r"negro\w*|nigg\w*|darkie\w*|darky|coon\w*|pickaninn\w*|savage\w*|"
                             r"heathen\w*|coolie\w*|chink\w*|chinam[ae]n|japs?|oriental\w*|injun\w*|"
@@ -123,12 +127,6 @@ BLOCK = {
                       r"tank of fish for|net you|in a net|on my plate|chowder|broil\w*",
     "alcohol_tobacco_drugs": r"whisk(e)?y|gin|rum|beer|ale|wine|brandy|liquor|drunk\w*|"
                              r"tobacco|cigar\w*|pipe|smok\w*|opium|laudanum|snuff",
-    "religion_or_politics": r"god|lord|heaven|hell|devil\w*|sin|sins|sinful|pray|prayers?|"
-                            r"church\w*|bible|christian\w*|satan|damn\w*|politic\w*|communis\w*|"
-                            r"bolshevi\w*|empire|colon(y|ies|ial)",
-    "archaic": r"thee|thou|thy|thine|hath|doth|dost|shalt|art thou|'tis|tis|twas|'twas|ere|"
-               r"whilst|nay|aye|yonder|methinks|perchance|hither|thither|wherefore|forsooth|"
-               r"shan't|ain't|o'er|e'en|fain|anon|prithee|sir|sirs|gentlemen|ye|morrow|well met",
     "insult": r"stupid|idiot\w*|fool\w*|dunce|ugly|fat|lazy|wretch\w*|beast\w*|brute\w*|"
               r"hate|hateful|shut up|dumb|nasty|vile|filthy|dirty",
     "meta_or_format": r"(?i:conversation|the following|dialogue|chapter)|"
@@ -354,7 +352,7 @@ class Resources:
         self.probe_sets = [set(p.split()) for p in self.probes]
         self.contract_sha256 = hashlib.sha256(Path(contract).read_bytes()).hexdigest()
         counts = collections.Counter()
-        files = [Path(data) / "dialogues.jsonl"] + sorted((Path(data) / "haiku").glob("out_*.jsonl"))
+        files = [COVERAGE_ROWS, Path(data) / "dialogues.jsonl"] + sorted((Path(data) / "haiku").glob("out_*.jsonl"))
         for path in files:
             for line in path.read_text().splitlines():
                 if line.strip():
@@ -489,7 +487,8 @@ def check_turn(text, role, spec, res, prior=(), max_words=None):
     rare = sorted({x for x in content if x not in res.known})
     if len(rare) > max(1, int(len(w) * .12)):
         return text, "rare_words"
-    if sum(res.word_tokens(x) > 4 for x in content) > 1:
+    # Authored examples explicitly cover these words, including long tokenizer spellings.
+    if sum(res.word_tokens(x) > 4 for x in content if x not in COVERED_WORDS) > 1:
         return text, "tokenizer_fragmentation"
     grams = [tuple(w[i:i + 3]) for i in range(len(w) - 2)]
     if len(grams) != len(set(grams)) or collections.Counter(w).most_common(1)[0][1] > max(3, len(w) // 4):
