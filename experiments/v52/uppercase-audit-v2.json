@@ -1,0 +1,110 @@
+{
+ "generator": "v52.uppercase/uppercase_v2",
+ "augmentation": "uppercase_v2",
+ "base_dir": "runs/v52/contract-v3-talkie",
+ "base_manifest_hashes": {
+  "train_A.json": "860fdddf77af84e8fa577d1f15401df685b231ddfce1d2b373e500b5cbdd6e95",
+  "train_B.json": "db110d3e82685d1b4b652d140d3cafe0951a2a0944eaab57b9776430fddfdd08",
+  "train_C.json": "d4be37c6c4383343685cb2518a7f1b2c24dcdfeac693836e1124ef7189f0309a"
+ },
+ "scenarios_file": "tools/aquarium/v52/rewrites/uppercase_v2.jsonl",
+ "scenarios_sha256": "7d5e32e1d2440849e81db249bb6ec0a2251ac4dd98581f7a704c908dfb64bdb9",
+ "generator_sha256": "47c4bf420eb3a941958c932924a89b2630a7cc3596d7a0218da24ee6a047c5e6",
+ "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+ "frozen_hashes": {
+  "contract.json": {
+   "sha256": "a7ac13d4d8b47881f7c86a8a6040111d99c698249e8a835bc4a360530456e485",
+   "identical_to_base": true
+  },
+  "development.json": {
+   "sha256": "da12761d6f861580235f34099c18139a07562688baf93dac3a7ccefd1746786f",
+   "identical_to_base": true
+  },
+  "historical.json": {
+   "sha256": "478aa999d707ed91bda5f19725e5aa4a32c2cf8d556423059ee04cc01eff0178",
+   "identical_to_base": true
+  },
+  "compression_development.json": {
+   "sha256": "eb1b5f1b0e527343cd17d5c6cb4726297750b9477d9e64a549f604cee3b6dfa4",
+   "identical_to_base": true
+  }
+ },
+ "contexts": 20,
+ "context_species": {
+  "clownfish": 3,
+  "lobster": 3,
+  "octopus": 3,
+  "pufferfish": 3,
+  "reef_shark": 3,
+  "sea_turtle": 3,
+  "seahorse": 2
+ },
+ "source_category_counts": {
+  "uppercase": {
+   "urgency": 240,
+   "shouting": 240,
+   "excitement": 80,
+   "ambiguous": 80
+  }
+ },
+ "turn_counts": {
+  "user": 800,
+  "assistant": 800
+ },
+ "new_rows": 640,
+ "tokens": {
+  "A": {
+   "new": {
+    "rows": 640,
+    "input_tokens": 75724,
+    "target_tokens": 16280,
+    "truncated_rows": 0
+   },
+   "new_target_share_of_combined": 0.0012324698574816674,
+   "base_candidate_target_tokens": 13192968
+  },
+  "B": {
+   "new": {
+    "rows": 640,
+    "input_tokens": 75724,
+    "target_tokens": 16280,
+    "truncated_rows": 0
+   },
+   "new_target_share_of_combined": 0.0011443125767121706,
+   "base_candidate_target_tokens": 14210602
+  },
+  "C": {
+   "new": {
+    "rows": 640,
+    "input_tokens": 75724,
+    "target_tokens": 16280,
+    "truncated_rows": 0
+   },
+   "new_target_share_of_combined": 0.0012167801456159965,
+   "base_candidate_target_tokens": 13363294
+  }
+ },
+ "unchanged_rows": {
+  "A": 141806,
+  "B": 152495,
+  "C": 149228
+ },
+ "turn_case_counts": {
+  "user": {
+   "uppercase": 640,
+   "mixed_case": 160,
+   "lowercase": 0,
+   "uncased": 0
+  },
+  "assistant": {
+   "uppercase": 80,
+   "mixed_case": 720,
+   "lowercase": 0,
+   "uncased": 0
+  }
+ },
+ "probe_user_wording_collisions": 0,
+ "evaluation_duplicate_rows": 0,
+ "prior_audit": "runs/v52/contract-v3-talkie/audit.json",
+ "note": "Fresh augmentation audit. Prior audit describes the unaugmented base manifests."
+}

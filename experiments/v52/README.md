@@ -1,5 +1,10 @@
 # Aquarium v5.2: implementation and first screening result
 
+Latest additions: [full-run snapshot](full-runs.md) (A completed; B in progress at
+inspection) and [uppercase urgency/shouting data](uppercase.md) (v2 includes selected
+capitalized replies; not yet trained). The screening report below describes the
+earlier experiments; statements that full runs were not run refer to that stage.
+
 Worktree: `/private/tmp/guppylm-v52-impl`, branch `implement/v5_2`.
 Latest main was fetched and merged through **6dc7248**, including the earlier
 **15484ff** findings review and the subsequent v5.1 browser deployment update. The frozen preparation,
