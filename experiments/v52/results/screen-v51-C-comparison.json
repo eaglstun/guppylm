@@ -1,0 +1,55 @@
+{
+  "deltas": {
+    "real_noun": {
+      "difference": 0.05277777777777778,
+      "paired_prompt_bootstrap_ci95": [
+        0.016666666666666666,
+        0.09166666666666666
+      ],
+      "prompts": 120
+    },
+    "invented_noun": {
+      "difference": 0.0125,
+      "paired_prompt_bootstrap_ci95": [
+        0.0,
+        0.029166666666666664
+      ],
+      "prompts": 80
+    },
+    "name": {
+      "difference": -0.05,
+      "paired_prompt_bootstrap_ci95": [
+        -0.11666666666666667,
+        0.016666666666666666
+      ],
+      "prompts": 20
+    },
+    "memory": {
+      "difference": 0.0,
+      "paired_prompt_bootstrap_ci95": [
+        -0.09999999999999999,
+        0.09999999999999999
+      ],
+      "prompts": 20
+    }
+  },
+  "behavior_gates": {
+    "real_noun": true,
+    "invented_noun": false,
+    "name": false,
+    "memory": true
+  },
+  "behavior_passed": false,
+  "rubric_sha256": "d3646e4945085d5892e9ecb48d6107cf6ea808dbdafc21835918e557546d2a4e",
+  "baseline_sha256": "2b1e5770ce6c90324ecb1158e26607ec8c146471f49b6ab3dd2def8a213b8e53",
+  "candidate_sha256": "e261de97a089204c6cdf10ab9be3fba2e96d35ea375bef0cdbf796509e6d44fb",
+  "release_approved": false,
+  "pending": [
+    "loss and per-source regression checks",
+    "blind human review",
+    "matched full runs and confirmation seed",
+    "codec selection",
+    "locked test",
+    "browser parity and real phone measurements"
+  ]
+}

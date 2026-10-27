@@ -12,6 +12,8 @@ import sys
 import time
 import zipfile
 
+from quantlib import training_rows
+
 import numpy as np
 import torch
 import torch.nn as nn
@@ -139,7 +141,7 @@ def distill_best(steps=300):
         sd["lm_head.weight"] = sd["tok_emb.weight"]
         return sd
 
-    train_rows = load_dialogues([os.path.join(D, "dialogues.jsonl")])
+    train_rows = training_rows()
     encoded = [encode_chat(__import__("quantlib").tok, r, 512) for r in train_rows]
     rng = np.random.default_rng(1)
     opt = torch.optim.Adam([{"params": list(log_scale.values()), "lr": 2e-3},

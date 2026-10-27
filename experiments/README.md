@@ -1,5 +1,9 @@
 # GuppyLM experiments
 
+[Aquarium v5.2 plan](v5_2_plan.md) tracks the next controlled data, training, evaluation, and compression work.
+The [implementation and first screens](v52/README.md) add frozen manifests, resumable training,
+independent development probes, and train-only compression inputs; neither short screen cleared the rubric.
+
 This index separates the question, measured result, and lesson from each experiment.
 The linked reports keep the full tables, methods, sample replies, and reproduction
 commands. Most results come from isolated runs. The v5.1 quantization experiments

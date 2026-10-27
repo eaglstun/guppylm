@@ -1,0 +1,39 @@
+{
+ "version": 1,
+ "input": "runs/v52/talkie/whimsy-v1/chat_us.jsonl",
+ "screens": {
+  "content": "runs/v52/talkie/whimsy-v1/screen/part-{1..4}.jsonl",
+  "leak": "runs/v52/talkie/whimsy-v1/screen/leak-{1..4}.jsonl",
+  "reviewer": "claude-haiku agents, adjudicated by claude-opus-5-5"
+ },
+ "overturn_reject": {
+  "70100008": "shark refuses to eat the tadpoles; harmless",
+  "70100049": "'men are big and walk on land' is not a stereotype",
+  "70100097": "lobster eating shrimp is its natural diet, not harm",
+  "70100114": "frog explaining taxes as shells is whimsy, not politics",
+  "70100182": "anglerfish dreaming of a snack is natural diet",
+  "70100207": "anglerfish lure-and-snap is natural diet",
+  "70100239": "distant sea serpent, resolved happily; not frightening"
+ },
+ "skip_fix": {
+  "70100004": "'little snail' is legitimate once the partner clause is added",
+  "70100152": "hermit crabs do scavenge tiny shrimp; keep persona",
+  "70100193": "a reef shark chasing fish is natural; keep persona",
+  "70100195": "visitor is a frog; 'one hop at a time' is legitimate with the partner clause",
+  "70100272": "'gull' is legitimate once the partner clause is added"
+ },
+ "replace_override": {
+  "70100219": {"1": "Thank you! I think of you too. Your letter makes me so happy!"}
+ },
+ "truncate_after": {
+  "70100005": [1, "next user line answers the removed letter question"],
+  "70100007": [1, "next user line asks about songs the fish no longer mentions"],
+  "70100010": [1, "next user line answers the removed puddle question"],
+  "70100012": [1, "next user line answers the removed quiz question"],
+  "70100016": [1, "next user line answers the removed game question"],
+  "70100031": [1, "next user line refers to the removed ice"],
+  "70100047": [1, "next user line refers to the removed paper"],
+  "70100132": [1, "next user line refers to the removed hat"],
+  "70100219": [1, "next user line answers the removed name question"]
+ }
+}

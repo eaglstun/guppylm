@@ -24,6 +24,31 @@ sys.path.insert(0, os.path.dirname(HERE))
 from train_aq import D, GuppyConfig, GuppyLM, Tokenizer, encode_chat, load_dialogues, pad, sample  # noqa: E402
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(HERE)))
+D = os.environ.get("AQ_QUANT_DATA", D)
+TRAIN_MANIFEST = os.environ.get("AQ_QUANT_TRAIN_MANIFEST")
+DEV_MANIFEST = os.environ.get("AQ_QUANT_DEV_MANIFEST")
+if bool(TRAIN_MANIFEST) != bool(DEV_MANIFEST):
+    raise ValueError("Supply both AQ_QUANT_TRAIN_MANIFEST and AQ_QUANT_DEV_MANIFEST")
+if TRAIN_MANIFEST and not os.environ.get("AQ_QUANT_CKPT"):
+    raise ValueError("Manifest-based compression requires an explicit AQ_QUANT_CKPT")
+_manifest_train = _manifest_dev = None
+_manifest_hashes = {}
+if TRAIN_MANIFEST:
+    from tools.aquarium.v52.data import assert_compatible_metadata, assert_disjoint, file_hash, read_manifest
+    _manifest_train, th, tm = read_manifest(TRAIN_MANIFEST, "train")
+    _manifest_dev, dh, dm = read_manifest(DEV_MANIFEST, "compression_development")
+    assert_disjoint(_manifest_train, _manifest_dev)
+    if not _manifest_train or not _manifest_dev:
+        raise ValueError("Compression manifests must be nonempty")
+    tokenizer_hash = file_hash(os.path.join(D, "tokenizer.json"))
+    assert_compatible_metadata(tm, dm, tokenizer_hash)
+    _manifest_hashes = {"train": th, "development": dh, "tokenizer": tokenizer_hash,
+                        "checkpoint": file_hash(os.environ["AQ_QUANT_CKPT"])}
+
+
+def training_rows():
+    """All calibration and code-frozen distillation use the same train-only source."""
+    return _manifest_train if _manifest_train is not None else load_dialogues([os.path.join(D, "dialogues.jsonl")])
 CKPT = os.environ.get("AQ_QUANT_CKPT", os.path.join(ROOT, "runs/aq-chat-v4/best.pt"))
 OUT = os.environ.get("AQ_QUANT_OUT", os.path.join(ROOT, "runs/quant"))
 os.makedirs(OUT, exist_ok=True)
@@ -63,13 +88,24 @@ def base_sd():
     return sd
 
 
-_held = [encode_chat(tok, r, 512) for r in load_dialogues([os.path.join(D, "dialogues_eval.jsonl")])]
-HELD = [pad(_held[i:i + 32], 512) for i in range(0, len(_held), 32)]
+_held_rows = _manifest_dev if _manifest_dev is not None else load_dialogues([os.path.join(D, "dialogues_eval.jsonl")])
+_held = [encode_chat(tok, r, cfg.max_seq_len) for r in _held_rows]
+HELD = [pad(_held[i:i + 32], cfg.max_seq_len) for i in range(0, len(_held), 32)]
 
 
 @torch.no_grad()
 def score(m):
-    return sum(m(X, Y)[1].item() for X, Y in HELD) / len(HELD)
+    if not TRAIN_MANIFEST:
+        return sum(m(X, Y)[1].item() for X, Y in HELD) / len(HELD)
+    total, count = 0., 0
+    for X, Y in HELD:
+        n = int((Y != 0).sum())
+        if n:
+            total += m(X, Y)[1].item() * n
+            count += n
+    if not count:
+        raise ValueError("Compression development set has no assistant targets")
+    return total / count
 
 
 SYS = "You are Pebble, a hermit crab who lives in a sandy tide pool. You are careful and practical."
@@ -87,6 +123,9 @@ def record(name, sd, nbytes, extra=None, verbose=True):
     loss = score(m)
     row = {"recipe": name, "MB": round(nbytes / 1e6, 3), "bpw": round(8 * (nbytes - FIXED_BYTES) / NW, 3),
            "loss": round(loss, 4), "reply": reply(m), **(extra or {})}
+    if TRAIN_MANIFEST:
+        row["manifest_hashes"] = _manifest_hashes
+        row["evaluation"] = "compression_development_assistant_token_weighted"
     with open(os.path.join(OUT, "results.jsonl"), "a") as f:
         f.write(json.dumps(row) + "\n")
     if verbose:
@@ -97,11 +136,21 @@ def record(name, sd, nbytes, extra=None, verbose=True):
 
 # ---------------------------------------------------------------- calibration
 def calib_batches(n_dialogues=256, seed=0):
-    rows = load_dialogues([os.path.join(D, "dialogues.jsonl")])
+    rows = training_rows()
     rng = np.random.default_rng(seed)
     pick = [rows[i] for i in rng.choice(len(rows), n_dialogues, replace=False)]
-    ex = [encode_chat(tok, r, 512) for r in pick]
-    return [pad(ex[i:i + 16], 512) for i in range(0, len(ex), 16)]
+    if TRAIN_MANIFEST:
+        record_path = os.path.join(OUT, f"calibration-{seed}-{n_dialogues}.json")
+        provenance = {"manifest_hashes": _manifest_hashes, "seed": seed, "ids": [r["uid"] for r in pick]}
+        if os.path.exists(record_path):
+            with open(record_path) as f:
+                if json.load(f) != provenance:
+                    raise ValueError("Output directory contains different calibration provenance")
+        else:
+            with open(record_path, "w") as f:
+                json.dump(provenance, f, indent=1)
+    ex = [encode_chat(tok, r, cfg.max_seq_len) for r in pick]
+    return [pad(ex[i:i + 16], cfg.max_seq_len) for i in range(0, len(ex), 16)]
 
 
 def hessians(sd, batches):

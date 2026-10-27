@@ -1,0 +1,54 @@
+{
+  "status": "frozen_before_continuation_screens",
+  "contract_sha256": "551a204c9338a44efdbce16b36c2057f87a3bb690b58ee31fe448986712e7677",
+  "baseline_checkpoint_sha256": "98679a7caed3e8a9d7c1764e407e249a6099c8dd7ffba1994785097ef616918f",
+  "baseline_behavior_sha256": "2b1e5770ce6c90324ecb1158e26607ec8c146471f49b6ab3dd2def8a213b8e53",
+  "baseline_losses_sha256": "451bcf9cfb356a99d81e82e6d99243cac49e8794082b3a9101c86744a5418499",
+  "primary_improvement": {
+    "slices": [
+      "real_noun",
+      "invented_noun"
+    ],
+    "minimum_absolute_gain": 0.05,
+    "paired_prompt_bootstrap_ci95_lower_must_exceed": 0
+  },
+  "minimum_scores": {
+    "name": 0.5199999999999999,
+    "memory": 0.3533333333333333
+  },
+  "maximum_loss": {
+    "story": 1.6346358954906464,
+    "historical": 2.1225884718903236
+  },
+  "maximum_source_loss_regression": 0.05,
+  "human_review": {
+    "minimum_mean_0_2": 1.5,
+    "maximum_regression_0_2": 0.1,
+    "slices": [
+      "voice",
+      "held_persona",
+      "song_family",
+      "missing_memory"
+    ],
+    "required": true
+  },
+  "confirmation_seed": 73,
+  "training_seed": 42,
+  "compression": {
+    "maximum_assistant_nll_increase_vs_float": 0.05,
+    "maximum_behavior_drop": 0.03,
+    "desired_total_download_bytes": 4000000,
+    "fallback": "float milestone / int8 reference",
+    "maximum_phone_latency_ratio_vs_int8": 1.25,
+    "python_js_max_logit_error": 0.0001,
+    "greedy_token_parity_required": true
+  },
+  "release_gates": [
+    "15,000-step matched runs from aq-td, then seed-73 confirmation",
+    "human blind review completed",
+    "checkpoint and codec fixed before locked test",
+    "same-run browser parity and measured phone latency/memory",
+    "locked-test primary improvements and non-regression rubric passed"
+  ],
+  "caveat": "Development thresholds are an experiment decision rule, not calibrated guarantees of generalization. The old checkpoints saw much of the newly split loss data. Screens cannot trigger promotion."
+}

@@ -1,0 +1,59 @@
+{
+ "checkpoint_sha256": "98679a7caed3e8a9d7c1764e407e249a6099c8dd7ffba1994785097ef616918f",
+ "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+ "checkpoint_step": 15000,
+ "params": 8873472,
+ "scores": {
+  "development": {
+   "loss": 1.5165440611757472,
+   "tokens": 101868,
+   "legacy_mean_batch_loss": 1.5230006337165833,
+   "sources": {
+    "base": {
+     "loss": 1.3854381181138562,
+     "tokens": 49478
+    },
+    "haiku": {
+     "loss": 1.6641117880931569,
+     "tokens": 36897
+    },
+    "songs": {
+     "loss": 1.7536192335986536,
+     "tokens": 8252
+    },
+    "family": {
+     "loss": 1.390278228819823,
+     "tokens": 7241
+    }
+   },
+   "manifest_sha256": "7b2b24fb8870428c2179cb83690bf423ccc368fdf28df7ad2540c624ea944f70"
+  },
+  "historical": {
+   "loss": 2.072588471890324,
+   "tokens": 28800,
+   "legacy_mean_batch_loss": 2.0690585494041445,
+   "sources": {
+    "historical": {
+     "loss": 2.072588471890324,
+     "tokens": 28800
+    }
+   },
+   "manifest_sha256": "defbbc8455fda366aa26eafa790161a6dab8c5c64f6e65aa78e6d41a1a51753a"
+  },
+  "story": {
+   "loss": 1.5846358954906463,
+   "tokens": 327680,
+   "legacy_mean_batch_loss": 1.5846358954906463,
+   "sources": {
+    "story": {
+     "loss": 1.5846358954906463,
+     "tokens": 327680
+    }
+   },
+   "seed": 5203,
+   "batches": 20,
+   "batch": 32,
+   "source_sha256": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27"
+  }
+ }
+}

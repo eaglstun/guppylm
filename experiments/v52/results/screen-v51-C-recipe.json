@@ -1,0 +1,61 @@
+{
+ "recipe": {
+  "steps": 400,
+  "batch": 32,
+  "seq": 512,
+  "lr": 3e-05,
+  "warmup": 50,
+  "dropout": 0.1,
+  "story_mix": 0.15,
+  "eval_every": 200,
+  "seed": 42,
+  "device": "mps",
+  "threads": 4,
+  "train_hash": "733044bce31b4d8fe436d859164ead8987246451f6d547f2e71be254f464eb15",
+  "dev_hash": "7b2b24fb8870428c2179cb83690bf423ccc368fdf28df7ad2540c624ea944f70",
+  "historical_hash": "defbbc8455fda366aa26eafa790161a6dab8c5c64f6e65aa78e6d41a1a51753a",
+  "init_hash": "98679a7caed3e8a9d7c1764e407e249a6099c8dd7ffba1994785097ef616918f",
+  "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+  "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+  "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+  "trainer_hash": "b7bcc79948b3fc46e43671831e68287e077e889a27642f1f0b18557bae3eb101",
+  "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+  "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+  "torch_version": "2.14.1",
+  "numpy_version": "2.2.6"
+ },
+ "fingerprint": "3877b99888c3663b61fae131fb9ca6ee4e281038d9ec0d668fb3678dff5a1b02",
+ "params": 8873472,
+ "inventory": {
+  "haiku": {
+   "rows": 56361,
+   "input_tokens": 12564460,
+   "assistant_tokens": 4985908,
+   "truncated_rows": 0
+  },
+  "base": {
+   "rows": 54722,
+   "input_tokens": 14268050,
+   "assistant_tokens": 6019005,
+   "truncated_rows": 92
+  },
+  "songs": {
+   "rows": 15219,
+   "input_tokens": 2892148,
+   "assistant_tokens": 1228138,
+   "truncated_rows": 0
+  },
+  "family": {
+   "rows": 14919,
+   "input_tokens": 2773001,
+   "assistant_tokens": 959210,
+   "truncated_rows": 0
+  },
+  "varied_copy": {
+   "rows": 7384,
+   "input_tokens": 819557,
+   "assistant_tokens": 169503,
+   "truncated_rows": 0
+  }
+ }
+}
