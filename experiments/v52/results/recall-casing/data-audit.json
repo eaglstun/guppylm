@@ -1,0 +1,23 @@
+{
+  "previous": {
+    "counts": {
+      "rows": 142518,
+      "multi_turn_rows": 120332,
+      "rows_with_uppercase_user": 640
+    },
+    "uppercase_sources": {
+      "uppercase": 640
+    }
+  },
+  "revised": {
+    "counts": {
+      "rows": 131994,
+      "multi_turn_rows": 112026,
+      "rows_with_uppercase_user": 380
+    },
+    "uppercase_sources": {
+      "responsive": 64,
+      "talkie": 316
+    }
+  }
+}

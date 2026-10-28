@@ -1,6 +1,7 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest work: [revision v2 training and conversational checks](responsive-v2-results.md), following
+Latest work: [recall and casing investigation](recall-casing.md), following
+[revision v2 training and conversational checks](responsive-v2-results.md),
 [reviewed training-data revision v2](data-revision-v2.md),
 [response-first data revision](responsive-data.md),
 [context diversity and sampling weights](context-sampling.md) and
