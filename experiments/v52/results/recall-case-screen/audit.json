@@ -1,0 +1,28 @@
+{
+  "base_hash": "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+  "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+  "tokens": {
+    "recall": {
+      "rows": 96,
+      "input_tokens": 9392,
+      "target_tokens": 1132
+    },
+    "paired": {
+      "rows": 192,
+      "input_tokens": 21446,
+      "target_tokens": 2264
+    },
+    "validation": {
+      "rows": 96,
+      "input_tokens": 12170,
+      "target_tokens": 1188
+    }
+  },
+  "frozen_files": {
+    "contract.json": "a7ac13d4d8b47881f7c86a8a6040111d99c698249e8a835bc4a360530456e485",
+    "development.json": "da12761d6f861580235f34099c18139a07562688baf93dac3a7ccefd1746786f",
+    "historical.json": "478aa999d707ed91bda5f19725e5aa4a32c2cf8d556423059ee04cc01eff0178",
+    "compression_development.json": "eb1b5f1b0e527343cd17d5c6cb4726297750b9477d9e64a549f604cee3b6dfa4"
+  },
+  "notes": "Validation nouns, names, meanings and wording are distinct from add-on templates; common words may occur in inherited training/pretraining."
+}

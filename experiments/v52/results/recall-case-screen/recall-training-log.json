@@ -1,0 +1,195 @@
+{
+ "history": [
+  {
+   "step": 0,
+   "development": {
+    "loss": 1.7650810010655447,
+    "tokens": 101868,
+    "legacy_mean_batch_loss": 1.772609716653824,
+    "sources": {
+     "base": {
+      "loss": 1.6127541551830322,
+      "tokens": 49478
+     },
+     "haiku": {
+      "loss": 1.9484028294696638,
+      "tokens": 36897
+     },
+     "songs": {
+      "loss": 1.9741595238086036,
+      "tokens": 8252
+     },
+     "family": {
+      "loss": 1.633536491781255,
+      "tokens": 7241
+     }
+    }
+   },
+   "story": {
+    "loss": 1.5839910089969635,
+    "tokens": 327680,
+    "legacy_mean_batch_loss": 1.5839910089969635,
+    "sources": {
+     "story": {
+      "loss": 1.5839910089969635,
+      "tokens": 327680
+     }
+    }
+   },
+   "historical": {
+    "loss": 2.0609853039350776,
+    "tokens": 28800,
+    "legacy_mean_batch_loss": 2.0576675295829774,
+    "sources": {
+     "historical": {
+      "loss": 2.0609853039350776,
+      "tokens": 28800
+     }
+    }
+   }
+  },
+  {
+   "step": 300,
+   "development": {
+    "loss": 1.7730012296841573,
+    "tokens": 101868,
+    "legacy_mean_batch_loss": 1.7802127480506897,
+    "sources": {
+     "base": {
+      "loss": 1.62295722723624,
+      "tokens": 49478
+     },
+     "haiku": {
+      "loss": 1.9516145881897138,
+      "tokens": 36897
+     },
+     "songs": {
+      "loss": 1.9858034974559093,
+      "tokens": 8252
+     },
+     "family": {
+      "loss": 1.6456066364906816,
+      "tokens": 7241
+     }
+    }
+   },
+   "story": {
+    "loss": 1.591024398803711,
+    "tokens": 327680,
+    "legacy_mean_batch_loss": 1.591024398803711,
+    "sources": {
+     "story": {
+      "loss": 1.591024398803711,
+      "tokens": 327680
+     }
+    }
+   },
+   "historical": {
+    "loss": 2.075475736107263,
+    "tokens": 28800,
+    "legacy_mean_batch_loss": 2.071671223640442,
+    "sources": {
+     "historical": {
+      "loss": 2.075475736107263,
+      "tokens": 28800
+     }
+    }
+   }
+  },
+  {
+   "step": 600,
+   "development": {
+    "loss": 1.765787962661005,
+    "tokens": 101868,
+    "legacy_mean_batch_loss": 1.7733745455741883,
+    "sources": {
+     "base": {
+      "loss": 1.6132315193046975,
+      "tokens": 49478
+     },
+     "haiku": {
+      "loss": 1.9479626322334096,
+      "tokens": 36897
+     },
+     "songs": {
+      "loss": 1.977854362460981,
+      "tokens": 8252
+     },
+     "family": {
+      "loss": 1.6382526761012715,
+      "tokens": 7241
+     }
+    }
+   },
+   "story": {
+    "loss": 1.5851098477840424,
+    "tokens": 327680,
+    "legacy_mean_batch_loss": 1.5851098477840424,
+    "sources": {
+     "story": {
+      "loss": 1.5851098477840424,
+      "tokens": 327680
+     }
+    }
+   },
+   "historical": {
+    "loss": 2.064682927624219,
+    "tokens": 28800,
+    "legacy_mean_batch_loss": 2.0608834743499758,
+    "sources": {
+     "historical": {
+      "loss": 2.064682927624219,
+      "tokens": 28800
+     }
+    }
+   }
+  }
+ ],
+ "sampling": {
+  "haiku": {
+   "examples": 5804,
+   "input_tokens": 1298074,
+   "target_tokens": 515332
+  },
+  "base": {
+   "examples": 5844,
+   "input_tokens": 1523321,
+   "target_tokens": 642135
+  },
+  "family": {
+   "examples": 1709,
+   "input_tokens": 316566,
+   "target_tokens": 108717
+  },
+  "songs": {
+   "examples": 1717,
+   "input_tokens": 323331,
+   "target_tokens": 137061
+  },
+  "recall_screen": {
+   "examples": 816,
+   "input_tokens": 80237,
+   "target_tokens": 9698
+  },
+  "story": {
+   "examples": 3000,
+   "input_tokens": 1536000,
+   "target_tokens": 1536000
+  },
+  "talkie": {
+   "examples": 232,
+   "input_tokens": 43523,
+   "target_tokens": 13917
+  },
+  "grounded_copy": {
+   "examples": 59,
+   "input_tokens": 10293,
+   "target_tokens": 2803
+  },
+  "responsive": {
+   "examples": 19,
+   "input_tokens": 2696,
+   "target_tokens": 634
+  }
+ }
+}

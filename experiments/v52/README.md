@@ -1,6 +1,7 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest work: [recall and casing investigation](recall-casing.md), following
+Latest work: [matched recall/casing continuation results](recall-case-screen.md), following
+[recall and casing investigation](recall-casing.md),
 [revision v2 training and conversational checks](responsive-v2-results.md),
 [reviewed training-data revision v2](data-revision-v2.md),
 [response-first data revision](responsive-data.md),

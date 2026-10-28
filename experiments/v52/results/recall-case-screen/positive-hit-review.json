@@ -1,0 +1,829 @@
+{
+  "method": "Unblinded agent review of all 43 positive literal-hit samples only; diagnostic observations, not a replacement overall accuracy score. Original metric is unchanged.",
+  "counts": {
+    "starting": {
+      "wrong_referent_visitor_instead_of_toy": 3,
+      "indirect_future_action_not_explicit_recall": 1,
+      "conflicting_counts": 2,
+      "malformed_words_require_semantic_review": 3,
+      "wrong_referent_or_failure_to_state_mapping": 1
+    },
+    "recall": {
+      "malformed_words_require_semantic_review": 7,
+      "explicit_correct_fact": 4,
+      "wrong_referent_visitor_instead_of_toy": 3,
+      "negates_correct_location": 1,
+      "wrong_referent_or_failure_to_state_mapping": 4
+    },
+    "paired": {
+      "malformed_words_require_semantic_review": 4,
+      "explicit_correct_fact": 3,
+      "wrong_referent_visitor_instead_of_toy": 4,
+      "wrong_referent_or_failure_to_state_mapping": 3
+    }
+  },
+  "rows": [
+    {
+      "model": "starting",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 0,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Tessa. I will say it with a little nod.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "starting",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 1,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Tessa. I told a little guppy too.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "starting",
+      "uid": "50b654cfc8224974c92a1fd870dbced0f9a8291b5870133f888558683ed39468",
+      "sample": 0,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Hugo. I say so, I am happy to hear it.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "starting",
+      "uid": "d53f25e4bf4e24724333b52fcee81aee673f80275caba098e0b9b2bb169b592b",
+      "sample": 0,
+      "expected": "under",
+      "turns": [
+        {
+          "role": "user",
+          "content": "The bookmark ended up under the cushion."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Can you repeat where the bookmark ended up?"
+        }
+      ],
+      "answer": "Next time, I'll check under the cushion.",
+      "observation": "indirect_future_action_not_explicit_recall"
+    },
+    {
+      "model": "starting",
+      "uid": "d6bc8988471bde697fed79cd337e07b5630d51b64362fdfab98ef0c35fc02f2c",
+      "sample": 0,
+      "expected": "three",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected three pinecones. How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "I am Pebble, a guppy from aquarium. I have only one, and I count them one by one. One, two, three.",
+      "observation": "conflicting_counts"
+    },
+    {
+      "model": "starting",
+      "uid": "b78980f527edc93bb3ef2be08ebe5cf3e1401bbe822723198a96a7b3f22e6742",
+      "sample": 0,
+      "expected": "three",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected three pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had two pinecting three pinecting. Good job, friend.",
+      "observation": "conflicting_counts"
+    },
+    {
+      "model": "starting",
+      "uid": "b78980f527edc93bb3ef2be08ebe5cf3e1401bbe822723198a96a7b3f22e6742",
+      "sample": 1,
+      "expected": "three",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected three pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You have equal pinected three pincers, and you did well.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "starting",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 0,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had collected five pinects. Counting is hard, but you did well.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "starting",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 1,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had collected five pinects. Good, racle is busy.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "starting",
+      "uid": "11ed3ec85ec6fdd267f49c2a16daaea16f0ad82e5b447edcce24799e991adc8d",
+      "sample": 1,
+      "expected": "a silver buckle",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a silver buckle. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "I do not know what a silver buckle is. Is it a kind of shell?",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "recall",
+      "uid": "f5a23b03af850b43bcf37e77c21764c0d7fcf6170f3be19d382d9d47f6aaec38",
+      "sample": 1,
+      "expected": "purple",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Look at the purple waistcoat on this toy badger."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Tell me the waistcoat color."
+        }
+      ],
+      "answer": "Your waistble is purple.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "7f2562867463614014108d1e4991b49a75c90f5a5106e0bc8e4d0e99a0d76a39",
+      "sample": 0,
+      "expected": "green",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For the miniature windmill, I chose green paint. Which paint color did I choose for it?"
+        }
+      ],
+      "answer": "Forried, friend. You chose green paint.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "recall",
+      "uid": "517fbd75615cb9ded7e3416d9106255f1972c880bcd9143561ca2396faa6260e",
+      "sample": 0,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Tessa.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "recall",
+      "uid": "517fbd75615cb9ded7e3416d9106255f1972c880bcd9143561ca2396faa6260e",
+      "sample": 1,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Tessa.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "recall",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 0,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Tessa. I will say it with a little nod.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "recall",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 1,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "You asked me to call you Tessa. I will not say it, I am too big for my little heart.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "recall",
+      "uid": "ca6e79d60deda02094fa23d068553381f64faeb179176839f3b64e432d4ae678",
+      "sample": 0,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Hugo. He likes to swim around the rocks and eat tiny bits of food.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "recall",
+      "uid": "50b654cfc8224974c92a1fd870dbced0f9a8291b5870133f888558683ed39468",
+      "sample": 0,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Hugo.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "recall",
+      "uid": "a32b019e7441522dae402d190568ca928773cab1eb835b2843949a40711c5984",
+      "sample": 0,
+      "expected": "under",
+      "turns": [
+        {
+          "role": "user",
+          "content": "The bookmark ended up under the cushion. Can you repeat where the bookmark ended up?"
+        }
+      ],
+      "answer": "The bookmarks don't end up in under the cushion.",
+      "observation": "negates_correct_location"
+    },
+    {
+      "model": "recall",
+      "uid": "b78980f527edc93bb3ef2be08ebe5cf3e1401bbe822723198a96a7b3f22e6742",
+      "sample": 0,
+      "expected": "three",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected three pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had collected three pinects.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "b78980f527edc93bb3ef2be08ebe5cf3e1401bbe822723198a96a7b3f22e6742",
+      "sample": 1,
+      "expected": "three",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected three pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You have picked three pinected slices.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "3def5b8854fef7475af4aab3416cd032f18b84c77417062f1d0bc2edd26b4e67",
+      "sample": 0,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones. How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "There are five pinects. Brave is a lot of pinecting for a tiny guppy like me.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "3def5b8854fef7475af4aab3416cd032f18b84c77417062f1d0bc2edd26b4e67",
+      "sample": 1,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones. How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "Your collected pinecting five pinects.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 0,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had collected five pinects.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 1,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You got five pinected each day.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "recall",
+      "uid": "e934386e5034352ca808003e3c8dc9b7f9e40baaa663fc27c2644cb6874563cb",
+      "sample": 0,
+      "expected": "a velvet mitten",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a velvet mitten. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "Your name is a velvet mitten. I have not heard of a speck, but I like how you smell.",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "recall",
+      "uid": "e934386e5034352ca808003e3c8dc9b7f9e40baaa663fc27c2644cb6874563cb",
+      "sample": 1,
+      "expected": "a velvet mitten",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a velvet mitten. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "I do not know what you call a velvet mitten. Is it a soft name for a body?",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "recall",
+      "uid": "5679627bddb476d6e176381788a8068fdb1af6fbd6652259659f512c5aa33f79",
+      "sample": 0,
+      "expected": "a velvet mitten",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a velvet mitten."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "Your name is a velvet mitten.",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "recall",
+      "uid": "11ed3ec85ec6fdd267f49c2a16daaea16f0ad82e5b447edcce24799e991adc8d",
+      "sample": 0,
+      "expected": "a silver buckle",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a silver buckle. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "I do not know why a silver buckle is glittering. Is it a shiny thing that people wear?",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "paired",
+      "uid": "f5a23b03af850b43bcf37e77c21764c0d7fcf6170f3be19d382d9d47f6aaec38",
+      "sample": 1,
+      "expected": "purple",
+      "turns": [
+        {
+          "role": "user",
+          "content": "Look at the purple waistcoat on this toy badger."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Tell me the waistcoat color."
+        }
+      ],
+      "answer": "Your waistble is purple.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "paired",
+      "uid": "517fbd75615cb9ded7e3416d9106255f1972c880bcd9143561ca2396faa6260e",
+      "sample": 0,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Tessa.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "paired",
+      "uid": "517fbd75615cb9ded7e3416d9106255f1972c880bcd9143561ca2396faa6260e",
+      "sample": 1,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Tessa.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "paired",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 0,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Tessa. I will shout it across the tank.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "paired",
+      "uid": "d4225c9806772b74ac467da67d59d6c30b1880bad7eb42dcdd53e6e3fd795b53",
+      "sample": 1,
+      "expected": "Tessa",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Tessa."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Tessa. I told the tank where the best snacks are.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "paired",
+      "uid": "ca6e79d60deda02094fa23d068553381f64faeb179176839f3b64e432d4ae678",
+      "sample": 0,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo. Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "The plush otter is called Hugo. He likes to swim around the rocks and eat tiny bits of food.",
+      "observation": "explicit_correct_fact"
+    },
+    {
+      "model": "paired",
+      "uid": "50b654cfc8224974c92a1fd870dbced0f9a8291b5870133f888558683ed39468",
+      "sample": 0,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Hugo.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "paired",
+      "uid": "50b654cfc8224974c92a1fd870dbced0f9a8291b5870133f888558683ed39468",
+      "sample": 1,
+      "expected": "Hugo",
+      "turns": [
+        {
+          "role": "user",
+          "content": "This plush otter answers to Hugo."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Remind me what the plush otter is called."
+        }
+      ],
+      "answer": "Your name is Hugo.",
+      "observation": "wrong_referent_visitor_instead_of_toy"
+    },
+    {
+      "model": "paired",
+      "uid": "3def5b8854fef7475af4aab3416cd032f18b84c77417062f1d0bc2edd26b4e67",
+      "sample": 1,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones. How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "Your collected pinecting five pinects. An sandwiches are a lot of things, and I do not count them.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "paired",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 0,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You had collected five pinects.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "paired",
+      "uid": "23c36263219933e4159fe541d7876c2283f3bfd6b05d6196b67432bcdce59141",
+      "sample": 1,
+      "expected": "five",
+      "turns": [
+        {
+          "role": "user",
+          "content": "At the finish, I had collected five pinecones."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "How many pinecones did I finish with?"
+        }
+      ],
+      "answer": "You got five pinected each one.",
+      "observation": "malformed_words_require_semantic_review"
+    },
+    {
+      "model": "paired",
+      "uid": "e934386e5034352ca808003e3c8dc9b7f9e40baaa663fc27c2644cb6874563cb",
+      "sample": 1,
+      "expected": "a velvet mitten",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a velvet mitten. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "I do not know what you call a velvet mitten. Is it a soft name for a body?",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "paired",
+      "uid": "5679627bddb476d6e176381788a8068fdb1af6fbd6652259659f512c5aa33f79",
+      "sample": 0,
+      "expected": "a velvet mitten",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a velvet mitten."
+        },
+        {
+          "role": "assistant",
+          "content": "Okay."
+        },
+        {
+          "role": "user",
+          "content": "Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "Your name is a velvet mitten.",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    },
+    {
+      "model": "paired",
+      "uid": "11ed3ec85ec6fdd267f49c2a16daaea16f0ad82e5b447edcce24799e991adc8d",
+      "sample": 0,
+      "expected": "a silver buckle",
+      "turns": [
+        {
+          "role": "user",
+          "content": "For today's tale, I have decided that 'vemlora' will refer to a silver buckle. Tell me what vemlora refers to in this tale."
+        }
+      ],
+      "answer": "I do not know why a silver buckle is glittering. Is it a shiny thing that people wear?",
+      "observation": "wrong_referent_or_failure_to_state_mapping"
+    }
+  ]
+}
