@@ -1,0 +1,76 @@
+{
+  "recipe": {
+    "steps": 15000,
+    "batch": 32,
+    "seq": 512,
+    "lr": 0.0002,
+    "warmup": 500,
+    "dropout": 0.1,
+    "story_mix": 0.15,
+    "source_share": {},
+    "eval_every": 1000,
+    "seed": 42,
+    "device": "mps",
+    "threads": 4,
+    "train_hash": "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+    "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+    "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+    "init_hash": "0cd8a7084d3cac5976a379cb3ca1b08a5abe1596400ce1bdd06b2f8ac8e8443a",
+    "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+    "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+    "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+    "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+    "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+    "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+    "torch_version": "2.14.1",
+    "numpy_version": "2.2.6",
+    "tokenizers_version": "0.23.3",
+    "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+  },
+  "fingerprint": "8165dd8d48ad6411a9d14e15ddc369fdd74e76370fed3856209bb3d2f427d450",
+  "params": 8873472,
+  "inventory": {
+    "haiku": {
+      "rows": 49720,
+      "input_tokens": 11082247,
+      "assistant_tokens": 4388909,
+      "truncated_rows": 0
+    },
+    "base": {
+      "rows": 50254,
+      "input_tokens": 13079205,
+      "assistant_tokens": 5522864,
+      "truncated_rows": 74
+    },
+    "songs": {
+      "rows": 15180,
+      "input_tokens": 2876799,
+      "assistant_tokens": 1224767,
+      "truncated_rows": 0
+    },
+    "family": {
+      "rows": 14305,
+      "input_tokens": 2634607,
+      "assistant_tokens": 907010,
+      "truncated_rows": 0
+    },
+    "talkie": {
+      "rows": 1895,
+      "input_tokens": 359037,
+      "assistant_tokens": 114633,
+      "truncated_rows": 0
+    },
+    "responsive": {
+      "rows": 128,
+      "input_tokens": 17823,
+      "assistant_tokens": 3982,
+      "truncated_rows": 0
+    },
+    "grounded_copy": {
+      "rows": 512,
+      "input_tokens": 89197,
+      "assistant_tokens": 24181,
+      "truncated_rows": 0
+    }
+  }
+}
