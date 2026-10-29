@@ -1,0 +1,48 @@
+{
+  "manifest_sha256": "f847cbc90a18d5336570469b80afba8015091a08f6a5a4bbe202658d75c3bd36",
+  "rows": 131618,
+  "carry_forward_added": [
+    "0370b4a0d9f533c70857f3ec971a8daf9e4fc67652d03edcd1460e114fcb0c9b",
+    "0f5d1d620b3b87bb22deecac0e7cbcd87fef2fa84ef4d8cbc4dfa272cdfe6f8e",
+    "01093feec5d70e7d61ee2f332fe889104df79cdc9e4524ac40031a1c46950677",
+    "00a8505c4671bf4f37b6384169923861dcc9a562524e9b4a06505472b2367798"
+  ],
+  "duplicates_removed": 391,
+  "stories": {
+    "train": {
+      "source_sha256": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+      "output_sha256": "7cae34b3da97ec0d933fa4ac130798b35a72b5199eca1ae6a03e3ab20fef232b",
+      "seed": 90501,
+      "documents": 4096,
+      "tokens": 866931,
+      "available_documents": 2717700
+    },
+    "valid": {
+      "source_sha256": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+      "output_sha256": "ce0e7dc14ffa19614d552930dc05905836372e34a57c9e4fb8247dd1452524ef",
+      "seed": 90502,
+      "documents": 512,
+      "tokens": 111296,
+      "available_documents": 27631
+    }
+  },
+  "initial_development_loss": 3.27615917471861,
+  "final_development_loss": 1.8119751670099045,
+  "initial_story_loss": 3.0356313467025755,
+  "final_story_loss": 1.7026793360710144,
+  "lowercase_generated_replies": 24,
+  "generated_replies": 24,
+  "models": {
+    "starting": {
+      "path": "/private/tmp/guppylm-dev-apply/runs/v52/full-v3-talkie-uppercase-v2-vocabulary-A/best.pt",
+      "sha256": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+      "step": 15000
+    },
+    "lowercase_600": {
+      "path": "/private/tmp/guppylm-dev-apply/runs/v52/lowercase-screen/model/final.pt",
+      "sha256": "78b074f3d17cf15888c08728dc12ec19601c2f622407227bde2fca978c90633f",
+      "step": 600
+    }
+  },
+  "decision": "Lowercase pipeline and short continuation completed; no browser weight replacement or deployment. Subjective conversations mixed; no general quality claim."
+}

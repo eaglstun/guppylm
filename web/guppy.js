@@ -4,6 +4,12 @@
 
 const IM_START = 1, IM_END = 2;
 
+// Copy model-facing text so the UI/history retains the visitor's original casing.
+export function lowercaseChat(system, turns) {
+  return { system: system.toLowerCase(),
+    turns: turns.map(t => ({ ...t, content: t.content.toLowerCase() })) };
+}
+
 // ---- tokenizer: byte-level BPE, read from the Hugging Face tokenizer.json ----
 
 function bytesToUnicode() {

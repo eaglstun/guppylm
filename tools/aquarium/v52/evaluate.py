@@ -39,7 +39,12 @@ def cluster_ci(values, seed=5204):
 
 
 @torch.no_grad()
-def reply(model, tok, system, turns, device, decoding):
+def reply(model, tok, system, turns, device, decoding, text_case="original"):
+    if text_case == "lowercase":
+        system = system.lower()
+        turns = [{**t, "content": t["content"].lower()} for t in turns]
+    elif text_case != "original":
+        raise ValueError("Unknown text case")
     ids, _ = aq.chat_ids(tok, system, turns, open_assistant=True)
     # Same context reservation as the browser: retain recent tokens for an 80-token reply.
     prompt = ids[-(model.config.max_seq_len - decoding["max_new"]):]
@@ -117,6 +122,7 @@ def main():
     ap.add_argument("--out", type=Path, required=True)
     ap.add_argument("--device", choices=("cpu", "mps"), default="cpu")
     ap.add_argument("--threads", type=int, default=4)
+    ap.add_argument("--text-case", choices=("original", "lowercase"), default="original")
     a = ap.parse_args()
     if sum((bool(a.checkpoint), bool(a.train), a.blind_baseline)) != 1:
         ap.error("Choose exactly one of checkpoint, train (lookup), or blind-baseline")
@@ -150,7 +156,7 @@ def main():
             turns = list(case["context"])
             for user in case["users"]:
                 turns.append({"role": "user", "content": user})
-                answer = (reply(model, tok, case["system"], turns, a.device, contract["decoding"]) if model else
+                answer = (reply(model, tok, case["system"], turns, a.device, contract["decoding"], a.text_case) if model else
                           lookup(user) if lookup else "Hello from the tide pool.")
                 turns.append({"role": "assistant", "content": answer})
             hit = contains(answer, case["expected"]) if case["expected"] is not None else None
@@ -166,7 +172,7 @@ def main():
     payload = {"contract_sha256": digest(contract), "checkpoint_sha256": ck_hash,
                "tokenizer_sha256": file_hash(a.tokenizer) if a.tokenizer else None,
                "lookup_manifest_sha256": read_manifest(a.train)[1] if a.train else None,
-               "split": a.split, "decoding": contract["decoding"], "summary": summary,
+               "split": a.split, "text_case": a.text_case, "decoding": contract["decoding"], "summary": summary,
                "manual_slices": sorted({r["slice"] for r in results if r["hit"] is None}), "results": results}
     a.out.parent.mkdir(parents=True, exist_ok=True)
     a.out.write_text(json.dumps(payload, indent=1) + "\n")

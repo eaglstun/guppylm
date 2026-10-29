@@ -12,6 +12,8 @@ from .data import file_hash
 def paired_difference(baseline, candidate, seed=5206):
     if baseline["contract_sha256"] != candidate["contract_sha256"] or baseline["split"] != candidate["split"]:
         raise ValueError("Reports must use the same frozen contract and split")
+    if baseline.get("text_case", "original") != candidate.get("text_case", "original"):
+        raise ValueError("Input case transformations differ")
     if baseline["decoding"] != candidate["decoding"]:
         raise ValueError("Decoding settings differ")
     def index(report):

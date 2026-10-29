@@ -1,5 +1,5 @@
 // Loads the fish once, then streams replies back to the page token by token.
-import { Tokenizer, Guppy } from "./guppy.js";
+import { Tokenizer, Guppy, lowercaseChat } from "./guppy.js?v=lowercase-v1";
 
 let tok, model;
 
@@ -15,7 +15,8 @@ async function load() {
 
 onmessage = ({ data }) => {
   if (data.type !== "chat") return;
-  const prompt = tok.chat(data.system, data.turns);
+  const input = lowercaseChat(data.system, data.turns);
+  const prompt = tok.chat(input.system, input.turns);
   const ids = [], t0 = performance.now();
   for (const id of model.generate(prompt, { temperature: data.temperature })) {
     ids.push(id);

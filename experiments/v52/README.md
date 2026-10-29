@@ -1,6 +1,7 @@
 # Aquarium v5.2: implementation and first screening result
 
-Latest work: [fish-conversation review and lowercase direction](fish-conversation-review.md),
+Latest work: [lowercase pipeline and completed short run](lowercase-screen.md), following
+[fish-conversation review and lowercase direction](fish-conversation-review.md),
 with a preserved [training library](training-library/README.md), following
 [matched recall/casing continuation results](recall-case-screen.md),
 [recall and casing investigation](recall-casing.md),

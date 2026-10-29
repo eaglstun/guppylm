@@ -1,0 +1,94 @@
+{
+  "recipe": {
+    "steps": 600,
+    "batch": 32,
+    "seq": 512,
+    "lr": 5e-05,
+    "warmup": 60,
+    "dropout": 0.1,
+    "story_mix": 0.15,
+    "source_share": {},
+    "eval_every": 300,
+    "seed": 42,
+    "device": "mps",
+    "threads": 4,
+    "train_hash": "f847cbc90a18d5336570469b80afba8015091a08f6a5a4bbe202658d75c3bd36",
+    "dev_hash": "e15646c5aaf732b04025d4b0f23901fd46276275ce5ec7204a0a05ebabbd7264",
+    "historical_hash": "c8e02727759cedd98c4f20314bd4c97adb34d2fe65e3a6a740ade955de4008e2",
+    "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+    "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+    "stories_hash": "7cae34b3da97ec0d933fa4ac130798b35a72b5199eca1ae6a03e3ab20fef232b",
+    "story_val_hash": "ce0e7dc14ffa19614d552930dc05905836372e34a57c9e4fb8247dd1452524ef",
+    "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+    "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+    "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+    "torch_version": "2.14.1",
+    "numpy_version": "2.2.6",
+    "tokenizers_version": "0.23.3",
+    "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+  },
+  "fingerprint": "063b9b69f54f5b0f2bf78e837c5f65a59e74b0081a5c2c86e6fe34e75d580875",
+  "params": 8873472,
+  "inventory": {
+    "haiku": {
+      "rows": 49720,
+      "input_tokens": 11226092,
+      "assistant_tokens": 4499577,
+      "truncated_rows": 0
+    },
+    "base": {
+      "rows": 50254,
+      "input_tokens": 13352305,
+      "assistant_tokens": 5694406,
+      "truncated_rows": 140
+    },
+    "songs": {
+      "rows": 15180,
+      "input_tokens": 2903325,
+      "assistant_tokens": 1257458,
+      "truncated_rows": 0
+    },
+    "family": {
+      "rows": 14305,
+      "input_tokens": 2680344,
+      "assistant_tokens": 934938,
+      "truncated_rows": 0
+    },
+    "talkie": {
+      "rows": 1579,
+      "input_tokens": 303667,
+      "assistant_tokens": 102824,
+      "truncated_rows": 0
+    },
+    "responsive": {
+      "rows": 64,
+      "input_tokens": 8151,
+      "assistant_tokens": 2025,
+      "truncated_rows": 0
+    },
+    "grounded_copy": {
+      "rows": 512,
+      "input_tokens": 91052,
+      "assistant_tokens": 24949,
+      "truncated_rows": 0
+    },
+    "recall_screen": {
+      "rows": 2,
+      "input_tokens": 202,
+      "assistant_tokens": 25,
+      "truncated_rows": 0
+    },
+    "talkie_vocabulary": {
+      "rows": 1,
+      "input_tokens": 84,
+      "assistant_tokens": 20,
+      "truncated_rows": 0
+    },
+    "uppercase": {
+      "rows": 1,
+      "input_tokens": 119,
+      "assistant_tokens": 29,
+      "truncated_rows": 0
+    }
+  }
+}
