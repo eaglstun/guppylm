@@ -138,7 +138,7 @@
 <main>
   <header>
     <h1>The Aquarium</h1>
-    <div class="model-tag">Aquarium v5.1 &middot; 8.9M parameters &middot; 3.61 MB compressed model</div>
+    <div class="model-tag">Aquarium v5.2 lowercase &middot; 8.9M parameters &middot; 9.04 MB int8 model</div>
     <p class="sub">Eighteen sea creatures share one model running entirely in your browser.
       Pick a room. <span id="status">Filling the tank…</span></p>
   </header>
@@ -176,23 +176,22 @@
   </section>
 
   <footer>
-    Aquarium v5.1 is a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>,
+    Aquarium v5.2 lowercase is a fork of <a href="https://github.com/arman-bd/guppylm">GuppyLM</a>,
     pretrained on <a href="https://huggingface.co/datasets/roneneldan/TinyStories/blob/main/TinyStoriesV2-GPT4-train.txt">TinyStoriesV2-GPT4</a>,
     then trained on <a href="https://huggingface.co/datasets/styfeng/TinyDialogues">TinyDialogues</a> and ocean conversations
     before sea-creature chats written by Claude Haiku and local Ollama
     <a href="https://ollama.com/library/qwen3-coder:30b">qwen3-coder:30b</a>.
-    TinyStories windows stayed in the mix during both chat stages. This version completed
-    15,000 chat-training steps with four noun-swap copies per eligible dialogue.
-    The model is compressed to about 3 bits per weight: every four weights are one of 4,096 learned shapes,
-    and the file unpacks to int8 when the page loads.
-    The model file is 3,607,984 bytes (3.61 MB), and inference runs in this tab with no server.
-    <a href="https://github.com/eaglstun/guppylm/blob/deploy/aquarium-v51/web/README.md">Browser model details</a> and
+    This fish completed a further 600 training steps with lowercase conversations and story replay.
+    Your messages stay as typed on screen; the fish reads a lowercase copy.
+    Its matrices and embeddings use int8 weights with one float32 scale per row; biases and LayerNorms stay float32.
+    The model file is 9,042,320 bytes (9.04 MB), and inference runs in this tab with no server.
+    <a href="https://github.com/eaglstun/guppylm/blob/dev/web/README.md">Browser model details</a> and
     <a href="https://github.com/eaglstun/guppylm/blob/main/QUANTIZATION.md">experiment notes</a>.
   </footer>
 </main>
 <script type="module">
 const $ = id => document.getElementById(id);
-const worker = new Worker("worker.js?v=5.1-d4", { type: "module" });
+const worker = new Worker("worker.js?v=5.2-lowercase-600", { type: "module" });
 const NAMES = { guppy: "Pebble", goldfish: "Biscuit", betta: "Duchess", clownfish: "Coral", octopus: "Juniper",
   hermit_crab: "Marbleton", anglerfish: "Chip", seahorse: "Tilly", sea_turtle: "Tuppence", jellyfish: "Wobbleton",
   pufferfish: "Puff", blue_whale: "Sprinkles", lobster: "Fizzgig", sea_star: "Shadow", reef_shark: "Fin",
