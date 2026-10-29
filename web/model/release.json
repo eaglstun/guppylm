@@ -1,0 +1,11 @@
+{
+  "version": "5.2-lowercase-600",
+  "checkpoint_sha256": "78b074f3d17cf15888c08728dc12ec19601c2f622407227bde2fca978c90633f",
+  "model_sha256": "1be18da5768a769a45521150f7901e53b5549761d5d82f90135f6a5f865f9de8",
+  "tokenizer_sha256": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+  "model_bytes": 9042320,
+  "format": "per-row int8",
+  "model_input_case": "lowercase",
+  "training_steps": 600,
+  "training_manifest_sha256": "f847cbc90a18d5336570469b80afba8015091a08f6a5a4bbe202658d75c3bd36"
+}

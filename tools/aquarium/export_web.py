@@ -39,6 +39,7 @@ def is_quantized(name, t):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("ckpt")
+    ap.add_argument("--tokenizer", default=os.path.join(D, "tokenizer.json"), help="tokenizer used for this checkpoint")
     ap.add_argument("--out", help="directory for guppy.bin + tokenizer.json")
     ap.add_argument("--fake-quant", help="write a dequantized checkpoint here instead")
     a = ap.parse_args()
@@ -84,7 +85,7 @@ def main():
         f.write(header)
         for b in blobs:
             f.write(b)
-    shutil.copy(os.path.join(D, "tokenizer.json"), os.path.join(a.out, "tokenizer.json"))
+    shutil.copy(a.tokenizer, os.path.join(a.out, "tokenizer.json"))
     with open(os.path.join(a.out, "personas.json"), "w") as f:
         json.dump({"template": SYSTEM_TEMPLATES[0], "held_out": sorted(EVAL_PERSONAS),
                    "personas": {k: {"species": s, "habitat": h, "traits": t} for k, (s, h, t) in PERSONAS.items()}},

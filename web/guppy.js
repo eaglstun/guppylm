@@ -97,15 +97,86 @@ export class Tokenizer {
 
 // ---- model ----
 
+function half(h) {
+  const e = (h >> 10) & 31, m = h & 1023, s = h & 32768 ? -1 : 1;
+  if (e === 0) return s * m * 2 ** -24;
+  if (e === 31) return m ? NaN : s * Infinity;
+  return s * (1 + m / 1024) * 2 ** (e - 15);
+}
+
+function halves(buf, offset, n) {
+  const h = new Uint16Array(buf, offset, n), f = new Float32Array(n);
+  for (let i = 0; i < n; i++) f[i] = half(h[i]);
+  return f;
+}
+
+// Normalized Walsh-Hadamard on each 128-wide block of n values starting at o, step apart.
+function fwht(x, o, n, step) {
+  for (let b = 0; b < n; b += 128) {
+    for (let h = 1; h < 128; h *= 2) {
+      for (let i = b; i < b + 128; i += 2 * h) {
+        for (let j = i; j < i + h; j++) {
+          const p = o + j * step, q = o + (j + h) * step, u = x[p], v = x[q];
+          x[p] = u + v; x[q] = u - v;
+        }
+      }
+    }
+    for (let j = b; j < b + 128; j++) x[o + j * step] *= 0.08838834764831845;  // 1/sqrt(128)
+  }
+}
+
+// guppy-d4-v1: every 4 weights are one of K catalog shapes (12-bit index, two per 3 bytes),
+// times a row scale, in a rotated basis. Undo it once here and re-round to int8 per row,
+// so the runtime below sees the same layout as guppy.bin.
+function expandD4(buf, base, d, cat) {
+  const [rows, cols] = d.shape, n = rows * cols / 4;
+  const raw = new Uint8Array(buf, base + d.offset, Math.ceil(n / 2) * 3);
+  const rs = halves(buf, base + d.scale, rows);
+  const su = new Int8Array(buf, base + d.u_sign, rows), sr = new Int8Array(buf, base + d.r_sign, cols);
+  const W = new Float32Array(rows * cols);
+  for (let i = 0, p = 0; i < n; i += 2, p += 3) {
+    const a = raw[p] | ((raw[p + 1] & 15) << 8), b = (raw[p + 1] >> 4) | (raw[p + 2] << 4);
+    const s0 = rs[Math.floor(4 * i / cols)], s1 = rs[Math.floor(4 * (i + 1) / cols)];
+    for (let k = 0; k < 4; k++) W[4 * i + k] = cat[4 * a + k] * s0;
+    if (i + 1 < n) for (let k = 0; k < 4; k++) W[4 * i + 4 + k] = cat[4 * b + k] * s1;
+  }
+  for (let r = 0; r < rows; r++) fwht(W, r * cols, cols, 1);
+  for (let c = 0; c < cols; c++) fwht(W, c, rows, cols);
+  const q = new Int8Array(rows * cols), s = new Float32Array(rows);
+  for (let r = 0, o = 0; r < rows; r++, o += cols) {
+    let max = 0;
+    for (let c = 0; c < cols; c++) {
+      const w = (W[o + c] *= su[r] * sr[c]);
+      if (Math.abs(w) > max) max = Math.abs(w);
+    }
+    const sc = Math.fround(max / 127) || 1;
+    s[r] = sc;
+    for (let c = 0; c < cols; c++) {
+      const v = Math.fround(W[o + c] / sc);  // float32 division and round-half-to-even, like the exporter
+      let r = Math.round(v);
+      if (r - v === 0.5 && r % 2) r -= 1;
+      q[o + c] = Math.max(-127, Math.min(127, r));
+    }
+  }
+  return { q, s, rows, cols };
+}
+
 function readWeights(buf) {
   const headerLen = new DataView(buf).getUint32(0, true);
   const header = JSON.parse(new TextDecoder().decode(new Uint8Array(buf, 4, headerLen)));
   const base = 4 + headerLen, t = {};
+  const cat = header.format === "guppy-d4-v1" ? halves(buf, base + header.catalog_offset, header.K * header.d) : null;
   for (const d of header.tensors) {
     const n = d.shape.reduce((a, b) => a * b, 1);
-    t[d.name] = d.dtype === "int8"
-      ? { q: new Int8Array(buf, base + d.offset, n), s: new Float32Array(buf, base + d.scale, d.shape[0]), rows: d.shape[0], cols: d.shape[1] }
-      : new Float32Array(buf, base + d.offset, n);
+    if (d.dtype === "int8") {
+      t[d.name] = { q: new Int8Array(buf, base + d.offset, n), s: new Float32Array(buf, base + d.scale, d.shape[0]), rows: d.shape[0], cols: d.shape[1] };
+    } else if (d.dtype === "d4") {
+      t[d.name] = expandD4(buf, base, d, cat);
+    } else if (d.dtype === "float16") {
+      t[d.name] = halves(buf, base + d.offset, n);
+    } else {
+      t[d.name] = new Float32Array(buf, base + d.offset, n);
+    }
   }
   return { config: header.config, t };
 }

@@ -1,32 +1,45 @@
 # Aquarium in the browser
 
 The [live Aquarium page](https://eaglstun.github.io/guppylm/) runs the 8.9M-parameter
-Aquarium v5.1 sea-creature chat model in a Web Worker. The page serves a
-9,042,320-byte (9.04 MB) int8 model file;
-`guppy.js` implements tokenization, inference with a KV cache, and sampling in plain
-JavaScript. Inference does not require a server or a runtime library.
+**Aquarium v5.2 lowercase** fish in a Web Worker. The 9,042,320-byte (9.04 MB)
+model uses conventional per-row int8 weights. Inference stays in the browser.
 
-## Shipped model: Aquarium v5.1
+## Current model: lowercase continuation
 
-V5.1 starts from the earlier TinyStories and TinyDialogues/ocean training stages,
-then completes 15,000 chat fine-tuning steps with four noun-swap copies per
-eligible dialogue instead of v5's two. Its float checkpoint scored 2.0690
-held-out persona loss in the [quantization study](../QUANTIZATION.md). That
-study's small behavior probes found more noun copies than v5; they do not
-establish broad superiority. The page serves the conventional per-row int8
-export of the completed `aq-chat-v51/best.pt` checkpoint.
+This is the completed 600-step lowercase continuation of vocabulary-A, using
+131,618 lowercase dialogue rows and a small lowercase TinyStories replay pool.
+It retains reviewed examples from earlier experiments. User messages remain as
+typed on screen; a copy of system and conversation history is lowercased for the
+model. The fish is playful and imperfect; this release makes no general quality
+claim over earlier checkpoints. See [training and conversation samples](../experiments/v52/lowercase-screen.md).
 
-To export the local v5.1 checkpoint and serve the page:
+[release.json](model/release.json) records the exact checkpoint, model and tokenizer
+hashes. Six browser-runtime checks matched the int8-rounded Python checkpoint's
+prompt tokenization and 24 greedy output tokens per prompt, with maximum initial
+logit difference 0.0000151. A Node-adapted worker check over local HTTP verified
+loading, inference, lowercase output for the test prompt, and unchanged visitor
+text. No interactive browser was available for this release check; phone timing
+has not been measured.
 
-```bash
-python3 tools/aquarium/export_web.py runs/aq-chat-v51/best.pt --out web/model
+```sh
+python3 tools/aquarium/export_web.py runs/v52/lowercase-screen/model/final.pt \
+  --tokenizer runs/v52/contract-lowercase-v1-reviewed/data/tokenizer.json --out web/model
 cd web
 python3 -m http.server 8765
 ```
 
-The exporter requires the local `data_aq/tokenizer.json` used during training.
-Open <http://127.0.0.1:8765>. The published site is served from the `gh-pages`
-branch, whose site files mirror `web/`.
+The published site is served from the `gh-pages` branch. The previous d4 decoder
+and its published v5.1 binary remain available there for rollback; the new worker
+loads `guppy.bin?v=5.2-lowercase-600`. Runtime and worker URLs are also versioned.
+The source lives in `dev` and PR #5; publishing the site does not merge that PR.
+
+## Previous release: v5.1
+
+V5.1 completed 15,000 chat fine-tuning steps with four noun-swap copies per eligible
+dialogue. Its float checkpoint scored 2.0690 held-out persona loss in the
+[quantization study](../QUANTIZATION.md). A 9.04 MB int8 export was followed by a
+3.61 MB d4-compressed page release. Those are historical results, not scores of
+the current lowercase model.
 
 ## Earlier browser model: Aquarium v4
 
@@ -64,7 +77,7 @@ they do not establish v5.1 or phone WebView speed.
 `model/guppy_e8_g128.bin` (2,590,080 bytes) as 16-bit codes for eight-weight
 chunks. It retains compressed weights in memory, using a 512 KiB lookup table
 and fast Hadamard transforms. The tracked binaries came from a v5
-noun-continuation experiment. The live page loads the v5.1 int8 file through
+noun-continuation experiment. The live page now loads the lowercase int8 file through
 `guppy.js`; this reader is a standalone experiment.
 
 Run `node tools/aquarium/quant/bench_e8p_runtime.mjs` from the repository root
@@ -97,7 +110,7 @@ within 1.62e-5. In a paired Node 24/M4 Max run, 80 generated tokens took
 407.0 ms (196.6 tokens/s) with E8 versus 363.4 ms (220.1 tokens/s) with an
 int8 export of that same decoded model. Counted storage after 182 token IDs
 was 13.52 MB versus 18.53 MB. That compressed E8 browser binary was a
-validation export; the shipped page uses a separate int8 export of v5.1.
+validation export; that earlier page used a separate int8 export of v5.1.
 
 The v5.1 result repeats the memory saving with a generation slowdown. Phone
 WebView timing remains unmeasured. [Quantization notes](../QUANTIZATION.md)

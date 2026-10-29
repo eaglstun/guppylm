@@ -1,12 +1,12 @@
 // Loads the fish once, then streams replies back to the page token by token.
-import { Tokenizer, Guppy, lowercaseChat } from "./guppy.js?v=lowercase-v1";
+import { Tokenizer, Guppy, lowercaseChat } from "./guppy.js?v=5.2-lowercase-600";
 
 let tok, model;
 
 async function load() {
   const [tj, wb] = await Promise.all([
     fetch("model/tokenizer.json").then(r => r.json()),
-    fetch("model/guppy.bin?v=5.1").then(r => r.arrayBuffer()),
+    fetch("model/guppy.bin?v=5.2-lowercase-600").then(r => r.arrayBuffer()),
   ]);
   tok = new Tokenizer(tj);
   model = new Guppy(wb);

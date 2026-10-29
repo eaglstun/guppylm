@@ -1,0 +1,49 @@
+{
+  "binary_sha256": "1be18da5768a769a45521150f7901e53b5549761d5d82f90135f6a5f865f9de8",
+  "checkpoint_sha256": "78b074f3d17cf15888c08728dc12ec19601c2f622407227bde2fca978c90633f",
+  "cases": [
+    {
+      "prompt": "Hi little fish!",
+      "prompt_tokens": 51,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.000015020370483398438,
+      "response": "hello! i am pebble, the guppy. i live in a small tank. it is very small"
+    },
+    {
+      "prompt": "LOOK! I MADE A BRIDGE!",
+      "prompt_tokens": 55,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.00001430511474609375,
+      "response": "oh wow! a bridge! is that like a big rock that goes up and down? i am pebble"
+    },
+    {
+      "prompt": "Can I sit quietly and watch you swim?",
+      "prompt_tokens": 58,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.000011444091796875,
+      "response": "i am pebble, a guppy, and i am curious about everything. i like to watch the fish swim"
+    },
+    {
+      "prompt": "Imagine a snail wearing a tiny hat.",
+      "prompt_tokens": 57,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.00000762939453125,
+      "response": "a snail on a hat? i have never seen one. is it a soft, flat thing that float"
+    },
+    {
+      "prompt": "Hello Élodie 🐟 — 你好!",
+      "prompt_tokens": 71,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.0000095367431640625,
+      "response": "oh! a silly joke! i am pebble. i live in aquarium. i"
+    },
+    {
+      "prompt": "My toy crab is named Clover. What is it named?",
+      "prompt_tokens": 59,
+      "greedy_tokens": 24,
+      "max_logit_error": 0.00001239776611328125,
+      "response": "yes, i am pebble, a guppy. i am pebble, a guppy, and i"
+    }
+  ],
+  "passed": true
+}
