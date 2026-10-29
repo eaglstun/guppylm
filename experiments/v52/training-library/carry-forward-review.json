@@ -1,0 +1,235 @@
+{
+  "purpose": "Reviewed seed set for future mixtures, not a complete training corpus or a finalized sampling weight. Original system restrictions are preserved in this historical selection; harmonize the persona system when building a new corpus.",
+  "decisions": [
+    {
+      "uid": "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "reason": "Playful fish-scale airplane answer and eager riddle game.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "reason": "Observational water colors and a charming silver-at-night farewell.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "20f3a5c2851f86b64b1ac00e677661cb78811b40586f232f3be2fc2526848b3c",
+      "reason": "Warm companionship and even fast fish need a nap.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "reason": "Responds to the soaked-book situation without demanding precision.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "reason": "Requested sun-on-water poem; keep poetry when invited.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6",
+      "reason": "Requested penguin chant with musical underwater imagery.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "04aed48113bcc1e42a3a3287f786d6948efbd95a39ba6c9e791aff3666c2d46e",
+      "reason": "Carrot baton is silly and understandable.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "00e998ecf8eb53879aa780c89282c0ab41a8db3a24879fe494535b624f16ff82",
+      "reason": "Different beliefs need not interfere with making puppets together.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "0158e6798a30f5b39ad86a2b16a21d9f9dbb99f70ced0615a940dd55ca94ced6",
+      "reason": "Learns a pretend word after the visitor supplies its meaning.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "017b7947875137ab70f6acfbfd06965fbc1fb174dc265df14a189a4545696734",
+      "reason": "Small explicit mapping for a story, scoped to that story.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "0370b4a0d9f533c70857f3ec971a8daf9e4fc67652d03edcd1460e114fcb0c9b",
+      "reason": "A brief relevant answer to a direct color question.",
+      "datasets": [
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "0f5d1d620b3b87bb22deecac0e7cbcd87fef2fa84ef4d8cbc4dfa272cdfe6f8e",
+      "reason": "Simple separate-turn recall of kindness as a pretend meaning.",
+      "datasets": [
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    },
+    {
+      "uid": "01093feec5d70e7d61ee2f332fe889104df79cdc9e4524ac40031a1c46950677",
+      "reason": "Cloud library lends weather books with soft gray covers.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6"
+      ]
+    },
+    {
+      "uid": "00a8505c4671bf4f37b6384169923861dcc9a562524e9b4a06505472b2367798",
+      "reason": "Enthusiastic pebble exchange, preserved from uppercase training.",
+      "datasets": [
+        "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+        "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4"
+      ]
+    },
+    {
+      "uid": "0b31614c33be1d755afa1f5792f3eeb9a239ef53bfdcc94331dcc207fe7ff49e",
+      "reason": "Manatee friends, splashing and sea grass retain creature identity.",
+      "datasets": [
+        "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+        "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+        "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832"
+      ]
+    }
+  ],
+  "run_coverage": {
+    "runs/v52/context-screen/uniform": [
+      "00a8505c4671bf4f37b6384169923861dcc9a562524e9b4a06505472b2367798",
+      "01093feec5d70e7d61ee2f332fe889104df79cdc9e4524ac40031a1c46950677",
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6"
+    ],
+    "runs/v52/context-screen/weighted": [
+      "00a8505c4671bf4f37b6384169923861dcc9a562524e9b4a06505472b2367798",
+      "01093feec5d70e7d61ee2f332fe889104df79cdc9e4524ac40031a1c46950677",
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6"
+    ],
+    "runs/v52/full-responsive-v2-A": [
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6",
+      "00e998ecf8eb53879aa780c89282c0ab41a8db3a24879fe494535b624f16ff82",
+      "0158e6798a30f5b39ad86a2b16a21d9f9dbb99f70ced0615a940dd55ca94ced6",
+      "017b7947875137ab70f6acfbfd06965fbc1fb174dc265df14a189a4545696734",
+      "04aed48113bcc1e42a3a3287f786d6948efbd95a39ba6c9e791aff3666c2d46e",
+      "0b31614c33be1d755afa1f5792f3eeb9a239ef53bfdcc94331dcc207fe7ff49e",
+      "20f3a5c2851f86b64b1ac00e677661cb78811b40586f232f3be2fc2526848b3c"
+    ],
+    "runs/v52/full-v3-talkie-uppercase-v2-vocabulary-A": [
+      "00a8505c4671bf4f37b6384169923861dcc9a562524e9b4a06505472b2367798",
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6"
+    ],
+    "runs/v52/recall-case-screen/paired/model": [
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6",
+      "00e998ecf8eb53879aa780c89282c0ab41a8db3a24879fe494535b624f16ff82",
+      "0158e6798a30f5b39ad86a2b16a21d9f9dbb99f70ced0615a940dd55ca94ced6",
+      "017b7947875137ab70f6acfbfd06965fbc1fb174dc265df14a189a4545696734",
+      "04aed48113bcc1e42a3a3287f786d6948efbd95a39ba6c9e791aff3666c2d46e",
+      "0b31614c33be1d755afa1f5792f3eeb9a239ef53bfdcc94331dcc207fe7ff49e",
+      "20f3a5c2851f86b64b1ac00e677661cb78811b40586f232f3be2fc2526848b3c",
+      "0370b4a0d9f533c70857f3ec971a8daf9e4fc67652d03edcd1460e114fcb0c9b",
+      "0f5d1d620b3b87bb22deecac0e7cbcd87fef2fa84ef4d8cbc4dfa272cdfe6f8e"
+    ],
+    "runs/v52/recall-case-screen/recall/model": [
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6",
+      "00e998ecf8eb53879aa780c89282c0ab41a8db3a24879fe494535b624f16ff82",
+      "0158e6798a30f5b39ad86a2b16a21d9f9dbb99f70ced0615a940dd55ca94ced6",
+      "017b7947875137ab70f6acfbfd06965fbc1fb174dc265df14a189a4545696734",
+      "04aed48113bcc1e42a3a3287f786d6948efbd95a39ba6c9e791aff3666c2d46e",
+      "0b31614c33be1d755afa1f5792f3eeb9a239ef53bfdcc94331dcc207fe7ff49e",
+      "20f3a5c2851f86b64b1ac00e677661cb78811b40586f232f3be2fc2526848b3c",
+      "0370b4a0d9f533c70857f3ec971a8daf9e4fc67652d03edcd1460e114fcb0c9b",
+      "0f5d1d620b3b87bb22deecac0e7cbcd87fef2fa84ef4d8cbc4dfa272cdfe6f8e"
+    ],
+    "runs/v52/responsive-screen/uniform": [
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6"
+    ],
+    "runs/v52/responsive-screen/weighted": [
+      "01506c04a91b8cf0695cb37b33be95a531158ba28248592788f7f05ebf93b791",
+      "0161873844ce1a32ea543be23f6c6d3f89d132cef7cfdb4547c6c3835347ae7f",
+      "0ebe50374c224baaaa7dd2d12b27759de67a83148eac567bf4f2d93a045cce59",
+      "11016f60ffcd0e423d1e81102d3fd5bb618e4ad5f94dfbdd83722f3ce6366d5f",
+      "1f0e8165d7e7043575e7f63791a1823c680c5ac3c2ceb7c1e811bb4175dbdbc6"
+    ]
+  }
+}

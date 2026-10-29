@@ -1,0 +1,752 @@
+{
+  "selection": "All distinctive add-on sources and original Talkie base conversations; otherwise up to two deterministic rows per source/augmentation/persona bucket. Historical samples are not automatically approved for future training.",
+  "datasets": {
+    "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6": {
+      "path": "runs/v52/contract-context-v2/train_A.json",
+      "file": "43fd2d6fcef9.jsonl.gz",
+      "file_sha256": "3a5dec71ec08d13a8ef76b13da58e9f7c30e3dd5ac68cdd53487a1a95bc99141",
+      "original_rows": 142592,
+      "preserved_rows": 1796,
+      "source_counts": {
+        "uppercase": 640,
+        "family": 128,
+        "talkie": 434,
+        "talkie_vocabulary": 146,
+        "songs": 128,
+        "haiku": 160,
+        "base": 160
+      }
+    },
+    "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c": {
+      "path": "runs/v52/contract-responsive-v1/train_A.json",
+      "file": "9808caa85415.jsonl.gz",
+      "file_sha256": "66c39f9ee107dea1e9d9dceb83e51b4c03fe168710986128e6abfa5e83ccf040",
+      "original_rows": 141817,
+      "preserved_rows": 1090,
+      "source_counts": {
+        "family": 128,
+        "talkie": 434,
+        "songs": 128,
+        "haiku": 160,
+        "responsive": 80,
+        "base": 160
+      }
+    },
+    "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f": {
+      "path": "runs/v52/contract-responsive-v2-reviewed/train_A.json",
+      "file": "666ea25fe991.jsonl.gz",
+      "file_sha256": "d3c166db50d95903739cf296a0dde0a6febc1185d5784461d99bf16e476cca14",
+      "original_rows": 131994,
+      "preserved_rows": 1596,
+      "source_counts": {
+        "family": 128,
+        "talkie": 444,
+        "base": 128,
+        "responsive": 128,
+        "grounded_copy": 512,
+        "haiku": 128,
+        "songs": 128
+      }
+    },
+    "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4": {
+      "path": "runs/v52/contract-v3-talkie-uppercase-v2-vocabulary-v1/train_A.json",
+      "file": "b8f66ee1c7fd.jsonl.gz",
+      "file_sha256": "75e6f1d8fc9c0ee1c3e52dffef9a581dd53ec87239e1313b1f33157417c7894a",
+      "original_rows": 142518,
+      "preserved_rows": 1722,
+      "source_counts": {
+        "uppercase": 640,
+        "family": 128,
+        "talkie": 434,
+        "talkie_vocabulary": 72,
+        "songs": 128,
+        "haiku": 160,
+        "base": 160
+      }
+    },
+    "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25": {
+      "path": "runs/v52/recall-case-screen/paired/train_A.json",
+      "file": "01111855b8e9.jsonl.gz",
+      "file_sha256": "ec56ecd8f671d4fe051d908a04d024edecface7f707b2377d71e32a2d0a2c4fb",
+      "original_rows": 132186,
+      "preserved_rows": 1788,
+      "source_counts": {
+        "recall_screen": 192,
+        "family": 128,
+        "talkie": 444,
+        "base": 128,
+        "responsive": 128,
+        "grounded_copy": 512,
+        "haiku": 128,
+        "songs": 128
+      }
+    },
+    "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832": {
+      "path": "runs/v52/recall-case-screen/recall/train_A.json",
+      "file": "40d46558ecd2.jsonl.gz",
+      "file_sha256": "4403e6497951bea807c32597dabe3c7f1fd08672f0c5339c14465406b160df1f",
+      "original_rows": 132090,
+      "preserved_rows": 1692,
+      "source_counts": {
+        "family": 128,
+        "talkie": 444,
+        "base": 128,
+        "responsive": 128,
+        "grounded_copy": 512,
+        "haiku": 128,
+        "recall_screen": 96,
+        "songs": 128
+      }
+    }
+  },
+  "runs": [
+    {
+      "run": "runs/v52/context-screen/uniform",
+      "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {},
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "53c0666ff62bf8f1c6c8c8d85a4acdcd6d670c4dfaa52a460ada19ca61ca142a",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55374,
+            "input_tokens": 12329772,
+            "assistant_tokens": 4895588,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55302,
+            "input_tokens": 14387110,
+            "assistant_tokens": 6061483,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15220,
+            "input_tokens": 2892012,
+            "assistant_tokens": 1228127,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642754,
+            "assistant_tokens": 907297,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306060,
+            "assistant_tokens": 100473,
+            "truncated_rows": 0
+          },
+          "uppercase": {
+            "rows": 640,
+            "input_tokens": 75724,
+            "assistant_tokens": 16280,
+            "truncated_rows": 0
+          },
+          "talkie_vocabulary": {
+            "rows": 146,
+            "input_tokens": 13340,
+            "assistant_tokens": 3055,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/context-screen/weighted",
+      "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "talkie_vocabulary": 0.05,
+            "uppercase": 0.05
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "43fd2d6fcef9663055cd06f1adc910be85651a66c624c2d87499d5a56c7d70d6",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "cd864b99a553859392bd6a044e41d9e35875f570d39a0e34d92c5de947d13b53",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55374,
+            "input_tokens": 12329772,
+            "assistant_tokens": 4895588,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55302,
+            "input_tokens": 14387110,
+            "assistant_tokens": 6061483,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15220,
+            "input_tokens": 2892012,
+            "assistant_tokens": 1228127,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642754,
+            "assistant_tokens": 907297,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306060,
+            "assistant_tokens": 100473,
+            "truncated_rows": 0
+          },
+          "uppercase": {
+            "rows": 640,
+            "input_tokens": 75724,
+            "assistant_tokens": 16280,
+            "truncated_rows": 0
+          },
+          "talkie_vocabulary": {
+            "rows": 146,
+            "input_tokens": 13340,
+            "assistant_tokens": 3055,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/full-responsive-v2-A",
+      "train_hash": "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+      "recipe": {
+        "recipe": {
+          "steps": 15000,
+          "batch": 32,
+          "seq": 512,
+          "lr": 0.0002,
+          "warmup": 500,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {},
+          "eval_every": 1000,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "666ea25fe991d372e7a8eaf1d14b311aeb49ea0fda2742eb3e973816292fce2f",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "0cd8a7084d3cac5976a379cb3ca1b08a5abe1596400ce1bdd06b2f8ac8e8443a",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "8165dd8d48ad6411a9d14e15ddc369fdd74e76370fed3856209bb3d2f427d450",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 49720,
+            "input_tokens": 11082247,
+            "assistant_tokens": 4388909,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 50254,
+            "input_tokens": 13079205,
+            "assistant_tokens": 5522864,
+            "truncated_rows": 74
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2876799,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2634607,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1895,
+            "input_tokens": 359037,
+            "assistant_tokens": 114633,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 128,
+            "input_tokens": 17823,
+            "assistant_tokens": 3982,
+            "truncated_rows": 0
+          },
+          "grounded_copy": {
+            "rows": 512,
+            "input_tokens": 89197,
+            "assistant_tokens": 24181,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/full-v3-talkie-uppercase-v2-vocabulary-A",
+      "train_hash": "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+      "recipe": {
+        "recipe": {
+          "steps": 15000,
+          "batch": 32,
+          "seq": 512,
+          "lr": 0.0002,
+          "warmup": 500,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "eval_every": 1000,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "b8f66ee1c7fda856dda01e3f86ee4185a5daa1ef9c2316769ee3888e728b62a4",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "0cd8a7084d3cac5976a379cb3ca1b08a5abe1596400ce1bdd06b2f8ac8e8443a",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "7a77a63dfdaae57e27931b9b01c9e12eb0468d62d9b35cb3db5d64d22811757a",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "f81ea22ff07cfe38a38afe5dc0aa72ba5225033dc76420a7c91929907abec4f8",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55374,
+            "input_tokens": 12329772,
+            "assistant_tokens": 4895588,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55302,
+            "input_tokens": 14387110,
+            "assistant_tokens": 6061483,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15220,
+            "input_tokens": 2892012,
+            "assistant_tokens": 1228127,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642754,
+            "assistant_tokens": 907297,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306060,
+            "assistant_tokens": 100473,
+            "truncated_rows": 0
+          },
+          "uppercase": {
+            "rows": 640,
+            "input_tokens": 75724,
+            "assistant_tokens": 16280,
+            "truncated_rows": 0
+          },
+          "talkie_vocabulary": {
+            "rows": 72,
+            "input_tokens": 6592,
+            "assistant_tokens": 1413,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/recall-case-screen/paired/model",
+      "train_hash": "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "recall_screen": 0.05
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "01111855b8e9d9fd672bb9d997e004b59557c80fdb8a63e53b4d9c0c6b316b25",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "670996b57485b46a65eeba1e350807ce894b5633ed5e98b290e734db1e798381",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "398253a67f897e1b525c6f2460b42f350d18721e9368222503373764f7c15b7d",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 49720,
+            "input_tokens": 11082247,
+            "assistant_tokens": 4388909,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 50254,
+            "input_tokens": 13079205,
+            "assistant_tokens": 5522864,
+            "truncated_rows": 74
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2876799,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2634607,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1895,
+            "input_tokens": 359037,
+            "assistant_tokens": 114633,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 128,
+            "input_tokens": 17823,
+            "assistant_tokens": 3982,
+            "truncated_rows": 0
+          },
+          "grounded_copy": {
+            "rows": 512,
+            "input_tokens": 89197,
+            "assistant_tokens": 24181,
+            "truncated_rows": 0
+          },
+          "recall_screen": {
+            "rows": 192,
+            "input_tokens": 21446,
+            "assistant_tokens": 2264,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/recall-case-screen/recall/model",
+      "train_hash": "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "recall_screen": 0.05
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "40d46558ecd28617a6e4e4096d58d8771ad6bb0e2d9e0f32c13f9320c2ceb832",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "670996b57485b46a65eeba1e350807ce894b5633ed5e98b290e734db1e798381",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "324cb7d2da7346204f10a07911aaa6a02f6fdab22ee0f1d78ba21add93ae65ef",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 49720,
+            "input_tokens": 11082247,
+            "assistant_tokens": 4388909,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 50254,
+            "input_tokens": 13079205,
+            "assistant_tokens": 5522864,
+            "truncated_rows": 74
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2876799,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2634607,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1895,
+            "input_tokens": 359037,
+            "assistant_tokens": 114633,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 128,
+            "input_tokens": 17823,
+            "assistant_tokens": 3982,
+            "truncated_rows": 0
+          },
+          "grounded_copy": {
+            "rows": 512,
+            "input_tokens": 89197,
+            "assistant_tokens": 24181,
+            "truncated_rows": 0
+          },
+          "recall_screen": {
+            "rows": 96,
+            "input_tokens": 9392,
+            "assistant_tokens": 1132,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/responsive-screen/uniform",
+      "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {},
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "b349c10da4b5088b5ce953a02d380ca24c7e22fb7871b441052e2f35ea06c412",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55360,
+            "input_tokens": 12300151,
+            "assistant_tokens": 4868087,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55287,
+            "input_tokens": 14381292,
+            "assistant_tokens": 6058170,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2884719,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642467,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306032,
+            "assistant_tokens": 100445,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 80,
+            "input_tokens": 11015,
+            "assistant_tokens": 2478,
+            "truncated_rows": 0
+          }
+        }
+      }
+    },
+    {
+      "run": "runs/v52/responsive-screen/weighted",
+      "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+      "recipe": {
+        "recipe": {
+          "steps": 600,
+          "batch": 32,
+          "seq": 512,
+          "lr": 5e-05,
+          "warmup": 60,
+          "dropout": 0.1,
+          "story_mix": 0.15,
+          "source_share": {
+            "responsive": 0.02
+          },
+          "eval_every": 300,
+          "seed": 42,
+          "device": "mps",
+          "threads": 4,
+          "train_hash": "9808caa85415e6b7dcaf77dee36f3ac519c7c3dab0b7a2cc9d5f095c9b9fd51c",
+          "dev_hash": "4015f9a85b8bc7584efd8d273a1649eaa9c000b58b3385929d47bceaab509c67",
+          "historical_hash": "7313471dd77dd25a6f41dea883dc649c3958e08a41054885f82781f56c214978",
+          "init_hash": "b06c9fa42b139f27fe3c01ad9951ba2538d78701d5e36874ffcf219581031a0f",
+          "tokenizer_hash": "29c79eb81aa9108b4f52fcd63e43a5e1d5aaefb0a5881b98a96e499c5fafc629",
+          "stories_hash": "3b495249b25049401007d432bd4cca0996ad68b02b7b3dbf0742ac4788a44ddd",
+          "story_val_hash": "d718df2c3c53cd9e5c7b790188edef373c4605eecf7d833f7687f49a7b8a6c27",
+          "trainer_hash": "b12b1ea1b199b2f06fe0888a03947b340013dc18d625e57c459077627a729793",
+          "model_hash": "1d78e807be5de03318f4bb3bcab500f4a00d2fae8536ceba668a48d658c06f8f",
+          "legacy_hash": "5f00d921916574b7fde12b008920857503602d3ce18d7dca98517e78ff1a0f75",
+          "torch_version": "2.14.1",
+          "numpy_version": "2.2.6",
+          "tokenizers_version": "0.23.3",
+          "python_version": "3.10.19 (main, Dec  9 2025, 19:17:38) [Clang 21.1.4 ]"
+        },
+        "fingerprint": "648ec5693ddfc823824f105d8501d7a637680e7056bf5e44c243116d7ae7abbd",
+        "params": 8873472,
+        "inventory": {
+          "haiku": {
+            "rows": 55360,
+            "input_tokens": 12300151,
+            "assistant_tokens": 4868087,
+            "truncated_rows": 0
+          },
+          "base": {
+            "rows": 55287,
+            "input_tokens": 14381292,
+            "assistant_tokens": 6058170,
+            "truncated_rows": 79
+          },
+          "songs": {
+            "rows": 15180,
+            "input_tokens": 2884719,
+            "assistant_tokens": 1224767,
+            "truncated_rows": 0
+          },
+          "family": {
+            "rows": 14305,
+            "input_tokens": 2642467,
+            "assistant_tokens": 907010,
+            "truncated_rows": 0
+          },
+          "talkie": {
+            "rows": 1605,
+            "input_tokens": 306032,
+            "assistant_tokens": 100445,
+            "truncated_rows": 0
+          },
+          "responsive": {
+            "rows": 80,
+            "input_tokens": 11015,
+            "assistant_tokens": 2478,
+            "truncated_rows": 0
+          }
+        }
+      }
+    }
+  ]
+}
